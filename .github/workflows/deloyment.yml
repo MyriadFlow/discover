@@ -46,7 +46,7 @@ jobs:
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
             pwd
-            sudo docker discover || true && sudo docker image rm ghcr.io/p-shubh/discover:main
+            sudo docker discover || true && sudo docker image rm ghcr.io/myriadflow/discover:main
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
-            sudo docker pull ghcr.io/p-shubh/sui_overflow_hack:main
-            sudo docker run --name="discover" --rm -p 4040:6060 --net=bridge -d ghcr.io/p-shubh/discover:main
+            sudo docker pull ghcr.io/myriadflow/sui_overflow_hack:main
+            sudo docker run --name="discover" --rm -p 4040:6060 --net=bridge -d ghcr.io/myriadflow/discover:main
