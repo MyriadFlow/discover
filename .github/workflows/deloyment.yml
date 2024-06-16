@@ -4,7 +4,6 @@ on:
   push:
     branches: 
       - main
-      # - backend
 
 jobs:
   Deploy:
@@ -25,14 +24,12 @@ jobs:
         env:
           DEV_ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
-          echo "$ENV_FILE" > .env
-          export CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
+          echo "$DEV_ENV_FILE" > .env
+          export CURRENT_BRANCH=$(echo ${GITHUB_REF#refs/heads/} | tr '[:upper:]' '[:lower:]')
           export TAG=$([[ $CURRENT_BRANCH == $(basename ${{ github.ref }}) ]] && echo $CURRENT_BRANCH || echo "latest")
           echo $TAG
-          export GITHUB_REF_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
-          export GITHUB_BRANCH_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$TAG
-          # export GITHUB_REF_IMAGE=$(echo $GITHUB_REF_IMAGE | tr '[:upper:]' '[:lower:]')
-          # export GITHUB_BRANCH_IMAGE=$(echo $GITHUB_BRANCH_IMAGE | tr '[:upper:]' '[:lower:]')
+          export GITHUB_REF_IMAGE=$(echo ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA | tr '[:upper:]' '[:lower:]')
+          export GITHUB_BRANCH_IMAGE=$(echo ghcr.io/$GITHUB_REPOSITORY:$TAG | tr '[:upper:]' '[:lower:]')
           docker build --build-arg version=$GITHUB_SHA -t $GITHUB_REF_IMAGE -t $GITHUB_BRANCH_IMAGE .
           echo "Pushing Frontend Image to GitHub Container Registry"
           docker push $GITHUB_REF_IMAGE
