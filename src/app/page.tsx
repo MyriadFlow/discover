@@ -2,6 +2,8 @@ import Image from "next/image";
 import MostLoved from "../components/mostLoved";
 import MostRecently from "../components/mostRecently";
 import LeaderBoard from "../components/leaderboard";
+import HotNFTs from "../components/hotNFTs";
+import Brand from "../components/brand";
 
 export default function Home() {
   const exploreButtonStyle = {
@@ -228,6 +230,14 @@ export default function Home() {
 
       <div className="pt-40 bg-white">
       <LeaderBoard />
+      </div>
+
+      <div className="pt-40 bg-white px-10">
+      <HotNFTs />
+      </div>
+
+      <div className="pt-40 bg-white px-10">
+      <Brand />
       </div>
 
     </div>
