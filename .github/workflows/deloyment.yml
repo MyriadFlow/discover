@@ -36,17 +36,17 @@ jobs:
           docker push $GITHUB_BRANCH_IMAGE
           rm -rf .env
 
-      - name: Deploy on Frontend Dev server 
-        if: github.ref == 'refs/heads/main' 
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.DEV_REMOTE_SERVER_ADDRESS }}
-          username: ${{ secrets.DEV_SERVER_USERNAME }}
-          key: ${{ secrets.DEV_REMOTE_SERVER_KEY }}
-          port: ${{ secrets.DEV_SSH_PORT }}
-          script: |
-            pwd
-            echo ${{ secrets.GHCR_TOKEN }} |  docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
-            docker stop discover && docker rm discover && docker rmi ghcr.io/myriadflow/discover:main
-            docker pull ghcr.io/myriadflow/discover:main
-            docker run --name="discover" --rm -p 3000:6060 -d ghcr.io/myriadflow/discover:main
+      # - name: Deploy on Frontend Dev server 
+      #   if: github.ref == 'refs/heads/main' 
+      #   uses: appleboy/ssh-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.DEV_REMOTE_SERVER_ADDRESS }}
+      #     username: ${{ secrets.DEV_SERVER_USERNAME }}
+      #     key: ${{ secrets.DEV_REMOTE_SERVER_KEY }}
+      #     port: ${{ secrets.DEV_SSH_PORT }}
+      #     script: |
+      #       pwd
+      #       echo ${{ secrets.GHCR_TOKEN }} |  docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
+      #       docker stop discover && docker rm discover && docker rmi ghcr.io/myriadflow/discover:main
+      #       docker pull ghcr.io/myriadflow/discover:main
+      #       docker run --name="discover" --rm -p 3000:6060 -d ghcr.io/myriadflow/discover:main
