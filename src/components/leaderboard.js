@@ -19,7 +19,7 @@ const leaderboard = () => {
       <div className="flex px-10" style={{justifyContent: 'center', marginTop:'200px', marginBottom:'200px'}}>
         <div className="flex flex-col justify-center items-center">
           <img
-            src="/image 7.png"
+            src="./image 7.png"
             style={{
               width: "60%",
               display: "block",
@@ -29,7 +29,7 @@ const leaderboard = () => {
           />
           <div style={{ position: 'relative' }}>
           <img
-            src="/silver.png"
+            src="./silver.png"
             style={{
               width: "60%",
               display: "block",
@@ -79,7 +79,7 @@ const leaderboard = () => {
 
         <div className="flex flex-col justify-center items-center" style={{marginTop:'-200px'}}>
           <img
-            src="/f41.png"
+            src="./f41.png"
             style={{
               width: "60%",
               display: "block",
@@ -89,7 +89,7 @@ const leaderboard = () => {
           />
           <div style={{ position: 'relative' }}>
           <img
-            src="/gold.png"
+            src="./gold.png"
             style={{
               width: "60%",
               display: "block",
@@ -140,7 +140,7 @@ const leaderboard = () => {
 
         <div className="flex flex-col justify-center items-center">
           <img
-            src="/f43.png"
+            src="./f43.png"
             style={{
               width: "60%",
               display: "block",
@@ -149,7 +149,7 @@ const leaderboard = () => {
             }}
           />
           <img
-            src="/bronze.png"
+            src="./bronze.png"
             style={{
               width: "60%",
               display: "block",
@@ -195,7 +195,7 @@ const leaderboard = () => {
       >
         {/* Left Image */}
         <img
-          src="/trophy1.png"
+          src="./trophy1.png"
           alt="Left"
           style={{
             position: "absolute",
@@ -209,7 +209,7 @@ const leaderboard = () => {
 
         {/* Right Image */}
         <img
-          src="/trophy2.png"
+          src="./trophy2.png"
           alt="Right"
           style={{
             position: "absolute",
