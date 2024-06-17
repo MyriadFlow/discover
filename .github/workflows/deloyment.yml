@@ -46,7 +46,6 @@ jobs:
           port: ${{ secrets.DEV_SSH_PORT }}
           script: |
             pwd
-            # docker discover || true &&  docker image rm ghcr.io/myriadflow/discover:main
             echo ${{ secrets.GHCR_TOKEN }} |  docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
             docker stop discover && docker rm discover && docker rmi ghcr.io/myriadflow/discover:main
             docker pull ghcr.io/myriadflow/discover:main
