@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Build and Push for Frontend Dev server
+      - name: Build and Push for Frontend Github Registry
         if: github.ref == 'refs/heads/main' 
         env:
           DEV_ENV_FILE: ${{ secrets.ENV_FILE }}
@@ -50,4 +50,4 @@ jobs:
             echo ${{ secrets.GHCR_TOKEN }} |  docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
             docker stop discover && docker rm discover && docker rmi ghcr.io/myriadflow/discover:main
             docker pull ghcr.io/myriadflow/discover:main
-            docker run --name="discover" --rm -p 3000:6060 --net=bridge -d ghcr.io/myriadflow/discover:main
+            docker run --name="discover" --rm -p 3000:6060 -d ghcr.io/myriadflow/discover:main
