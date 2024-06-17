@@ -11,7 +11,7 @@ const mostRecentlyCard = () => {
           }}
         >
           <img
-            src="/Gold vibes headphones 1.png"
+            src="./Gold vibes headphones 1.png"
             className="rounded"
             style={{ padding: "20px" }}
           />

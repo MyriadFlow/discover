@@ -47,7 +47,7 @@ export default function Home() {
           }}
         >
           <img
-            src="/image 4.png"
+            src="./image 4.png"
             alt="Top Left"
             style={{
               position: "absolute",
@@ -58,7 +58,7 @@ export default function Home() {
             }}
           />
           <img
-            src="/image 6.png"
+            src="./image 6.png"
             alt="Top Right"
             style={{
               position: "absolute",
@@ -69,7 +69,7 @@ export default function Home() {
             }}
           />
           <img
-            src="/image 8.png"
+            src="./image 8.png"
             alt="Bottom Left"
             style={{
               position: "absolute",
@@ -81,7 +81,7 @@ export default function Home() {
           />
 
           <img
-            src="/image 7.png"
+            src="./image 7.png"
             alt="Overlay"
             style={{
               position: "absolute",
@@ -94,7 +94,7 @@ export default function Home() {
           />
 
           <img
-            src="/image 5.png"
+            src="./image 5.png"
             alt="Bottom Right"
             style={{
               position: "absolute",
@@ -131,7 +131,7 @@ export default function Home() {
         }}
       >
         <img
-          src="/image 41.png"
+          src="./image 41.png"
           style={{
             position: "absolute",
             left: "40px",
@@ -142,7 +142,7 @@ export default function Home() {
           }}
         />
         <img
-          src="/image 51.png"
+          src="./image 51.png"
           style={{
             position: "absolute",
             left: "calc(0px + 180px + 2px)",
@@ -153,7 +153,7 @@ export default function Home() {
           }}
         />
         <img
-          src="/2_small 1.png"
+          src="./2_small 1.png"
           style={{
             position: "absolute",
             left: "calc(0px + 360px - 30px)",
@@ -164,7 +164,7 @@ export default function Home() {
           }}
         />
         <img
-          src="/image 9.png"
+          src="./image 9.png"
           style={{
             position: "absolute",
             left: "calc(0px + 540px - 60px)",
@@ -175,7 +175,7 @@ export default function Home() {
           }}
         />
         <img
-          src="/image 10.png"
+          src="./image 10.png"
           style={{
             position: "absolute",
             left: "calc(0px + 720px - 80px)",
@@ -186,7 +186,7 @@ export default function Home() {
           }}
         />
         <img
-          src="/image 13.png"
+          src="./image 13.png"
           style={{
             position: "absolute",
             left: "calc(0px + 900px - 100px)",
@@ -197,7 +197,7 @@ export default function Home() {
           }}
         />
         <img
-          src="/image 11.png"
+          src="./image 11.png"
           style={{
             position: "absolute",
             left: "calc(0px + 1080px - 120px)",
@@ -208,7 +208,7 @@ export default function Home() {
           }}
         />
         <img
-          src="/image 14.png"
+          src="./image 14.png"
           style={{
             position: "absolute",
             left: "calc(0px + 1260px - 140px)",

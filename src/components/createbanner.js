@@ -13,7 +13,7 @@ const createbanner = () => {
           }}
         >
           <img
-            src="/image 4.png"
+            src="./image 4.png"
             alt="Top Left"
             style={{
               position: "absolute",
@@ -24,7 +24,7 @@ const createbanner = () => {
             }}
           />
           <img
-            src="/image 6.png"
+            src="./image 6.png"
             alt="Top Right"
             style={{
               position: "absolute",
@@ -35,7 +35,7 @@ const createbanner = () => {
             }}
           />
           <img
-            src="/image 8.png"
+            src="./image 8.png"
             alt="Bottom Left"
             style={{
               position: "absolute",
@@ -47,7 +47,7 @@ const createbanner = () => {
           />
 
           <img
-            src="/image 7.png"
+            src="./image 7.png"
             alt="Overlay"
             style={{
               position: "absolute",
@@ -60,7 +60,7 @@ const createbanner = () => {
           />
 
           <img
-            src="/image 5.png"
+            src="./image 5.png"
             alt="Bottom Right"
             style={{
               position: "absolute",

@@ -11,7 +11,7 @@ const mostLovedCard = () => {
           }}
         >
           <img
-            src="/slider3 metallic suit small 2.png"
+            src="./slider3 metallic suit small 2.png"
             className="rounded"
             style={{ padding: "20px" }}
           />
