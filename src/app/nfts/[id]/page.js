@@ -1,13 +1,48 @@
-import React from "react";
+"use client"
+import React, {useState} from "react";
 
 const NFTPage = ({ params }) => {
   const id = params?.id;
 
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div>
       <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
-        <div className='mt-4'>
-            <img src="../logo2.png" style={{width:'200px'}}/>
+        <div
+          className='mt-4'
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          style={{ position: 'relative' }}
+        >
+          <img src="../logo2.png" style={{ width: '200px' }} alt="Logo" />
+
+          {/* Pop-up Div */}
+          {isHovered && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '110%', // Adjust position based on your design
+                left: '80%',
+                transform: 'translateX(-50%)',
+                backgroundColor: '#D9D8D8',
+                color: 'black',
+                padding: '20px',
+                border: '1px solid #ddd',
+                borderRadius: '15px',
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                zIndex: 20,
+                width: '300px',
+                // textAlign: 'center'
+              }}
+            >
+            <div style={{display: 'flex', gap:'20px'}}>
+                <img src="../slider3 metallic suit small 2.png" style={{width: '80px', borderRadius:'100px'}}/>
+              <div className="font-bold mt-6">Brand Name</div>
+              </div>
+              <div className="mt-4" style={{fontSize: '13px'}}>Brand Description here. Brand Description here. Brand Description here. Brand Description here. Brand Description here. Brand Description here.</div>
+            </div>
+          )}
         </div>
         <div style={{display:'flex', gap:'40px', fontSize:'20px', color:'white'}} className="font-bold mt-6">
 <div>Explore</div>
