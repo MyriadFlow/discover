@@ -5,6 +5,20 @@ const NFTPage = ({ params }) => {
 
   return (
     <div>
+      <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
+        <div className='mt-4'>
+            <img src="../logo2.png" style={{width:'200px'}}/>
+        </div>
+        <div style={{display:'flex', gap:'40px', fontSize:'20px', color:'white'}} className="font-bold mt-6">
+<div>Explore</div>
+<div>Collections</div>
+<div>Brand</div>
+<div>Dashboard</div>
+        </div>
+        <div>
+            <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button>
+        </div>
+    </div>
       <div className="flex gap-10 mt-10 px-10">
         <div className="w-1/3">
           <img
