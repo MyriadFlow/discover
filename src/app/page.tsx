@@ -5,6 +5,7 @@ import LeaderBoard from "../components/leaderboard";
 import HotNFTs from "../components/hotNFTs";
 import Brand from "../components/brand";
 import CreateBanner from "../components/createbanner";
+import Header1 from "../components/header1";
 
 export default function Home() {
   const exploreButtonStyle = {
@@ -23,6 +24,7 @@ export default function Home() {
 
   return (
     <div className="bg-black">
+        <div className="" style={{ zIndex: 10, position: 'fixed', left :0 , right:0}}><Header1 /></div>
       <div className="flex h-screen bg-white">
         <div className="w-1/2 h-full px-16 flex flex-col justify-center">
           <div className="text-7xl font-bold">Discover</div>
