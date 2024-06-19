@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import Link from 'next/link';
 
 const mostLovedCard = () => {
   return (
-    <div>
+    <Link href="/nfts/123">
         <div
           style={{
             width: "330px",
@@ -47,7 +48,7 @@ const mostLovedCard = () => {
             </div>
           </div>
         </div>
-    </div>
+    </Link>
   )
 }
 
