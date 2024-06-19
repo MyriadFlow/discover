@@ -4,6 +4,7 @@ import MostRecently from "../components/mostRecently";
 import LeaderBoard from "../components/leaderboard";
 import HotNFTs from "../components/hotNFTs";
 import Brand from "../components/brand";
+import CreateBanner from "../components/createbanner";
 
 export default function Home() {
   const exploreButtonStyle = {
@@ -14,7 +15,7 @@ export default function Home() {
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
-    backgroundImage: 'url("/Rectangle 12.png")',
+    backgroundImage: 'url("./Rectangle 12.png")',
     backgroundSize: "cover",
     backgroundPosition: "center",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Optional: Add box-shadow for a better visual effect
@@ -40,7 +41,7 @@ export default function Home() {
         <div
           className="w-1/2"
           style={{
-            backgroundImage: 'url("/landing.png")',
+            backgroundImage: 'url("./landing.png")',
             backgroundSize: "cover",
             backgroundPosition: "center",
             position: "relative",
@@ -238,6 +239,10 @@ export default function Home() {
 
       <div className="pt-40 bg-white px-10">
       <Brand />
+      </div>
+
+      <div className="bg-white">
+      <CreateBanner />
       </div>
 
     </div>

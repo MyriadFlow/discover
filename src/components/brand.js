@@ -16,7 +16,7 @@ const brand = () => {
         <button className="border py-3 px-10">View All</button>
       </div>
 
-      <div className="flex px-10" style={{justifyContent: 'center', marginTop:'200px', marginBottom:'200px'}}>
+      <div className="flex px-10" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px'}}>
         <div className="flex flex-col justify-center items-center">
           <img
             src="./image 7.png"
