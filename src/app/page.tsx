@@ -54,7 +54,7 @@ export default function Home() {
             alt="Top Left"
             style={{
               position: "absolute",
-              top: "40px",
+              top: "100px",
               left: "40px",
               width: "280px",
               height: "280px",
@@ -65,7 +65,7 @@ export default function Home() {
             alt="Top Right"
             style={{
               position: "absolute",
-              top: "40px",
+              top: "100px",
               right: "40px",
               width: "280px",
               height: "280px",
