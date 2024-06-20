@@ -1,8 +1,22 @@
 "use client"
 import React, {useState} from "react";
 
-const NFTPage = ({ params }) => {
-  const id = params?.id;
+export async function generateStaticParams() {
+
+}
+
+export async function getStaticProps({ params }) {
+  const nftData = params.id; // Fetch data for a specific NFT ID
+  
+  return {
+    props: {
+      nft: nftData,
+    },
+  };
+}
+
+const NFTPage = ({ nft }) => {
+  // const id = params?.id;
 
   const [isHovered, setIsHovered] = useState(false);
 
