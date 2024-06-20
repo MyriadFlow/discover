@@ -6,6 +6,14 @@ const NFTPage = ({ params }) => {
   const id = params?.id;
 
   const [isHovered, setIsHovered] = useState(false);
+  const [showPopover, setShowPopover] = useState(false);
+
+  const handleClaimClick = () => {
+    setShowPopover(true);
+    setTimeout(() => {
+      setShowPopover(false);
+    }, 6000); // Pop-over will disappear after 3 seconds
+  };
 
   return (
     <div>
@@ -77,7 +85,12 @@ const NFTPage = ({ params }) => {
           <div className="text-lg mt-10 font-bold">Base Network</div>
           <div className="mt-6">Owned by wallet address</div>
           <div className="mt-4">Created by brand name</div>
-          <div className="mt-10 text-2xl font-bold">Price Amount</div>
+
+
+
+          {/* --------------------------------------- user perspective --------------------------------------------------------- */}
+
+          {/* <div className="mt-10 text-2xl font-bold">Price Amount</div>
           <div
             className="mt-10"
             style={{ justifyContent: "space-between", display: "flex" }}
@@ -89,7 +102,7 @@ const NFTPage = ({ params }) => {
 
           <div className="mt-10" style={{ display: "flex", gap: "20px" }}>
             <button
-              className=""
+              className="w-1/2"
               style={{
                 backgroundColor: "#30D8FF",
                 paddingTop: "10px",
@@ -101,6 +114,30 @@ const NFTPage = ({ params }) => {
               MINT NOW
             </button>
             <button
+             className="w-1/2"
+              style={{
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                paddingLeft: "70px",
+                paddingRight: "70px",
+                border: "2px solid black",
+              }}
+            >
+              SHARE
+            </button>
+          </div> */}
+
+
+
+          {/* ------------------------------------------------- owner perspective------------------------------------- */}
+
+          <div style={{ display: "flex", justifyContent:'end' , marginTop:'100px', gap:'20px'}}>
+            <div 
+          className="w-1/2"
+          >
+            </div>
+          <button
+             className="w-1/2"
               style={{
                 paddingTop: "10px",
                 paddingBottom: "10px",
@@ -112,6 +149,54 @@ const NFTPage = ({ params }) => {
               SHARE
             </button>
           </div>
+
+          <div className="mt-10" style={{ display: "flex", gap: "20px" }}>
+            <button
+              className="w-1/2"
+              style={{
+                backgroundColor: "#30D8FF",
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                paddingLeft: "70px",
+                paddingRight: "70px",
+                position:'relative'
+              }}
+              onClick={handleClaimClick}
+            >
+              CLAIM NOW
+              {showPopover && (
+          <div className="w-full"
+            style={{
+              position: 'absolute',
+              bottom: '80px', // Adjust based on button height
+              // left: '50%',
+              transform: 'translateX(-15%)',
+              color: 'black',
+              padding: '10px 10px',
+              borderRadius: '10px',
+              zIndex: 1,
+              border: '1px solid black'
+            }}
+          >
+            To claim this phygital, scan the NFC tag on your product
+          </div>
+        )}
+            </button>
+            <button
+             className="w-1/2"
+              style={{
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                paddingLeft: "70px",
+                paddingRight: "70px",
+                border: "2px solid black",
+              }}
+            >
+              VIEW ON SHOPIFY
+            </button>
+          </div>
+
+
         </div>
       </div>
 
