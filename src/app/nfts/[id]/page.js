@@ -1,6 +1,6 @@
 "use client"
 import React, {useState} from "react";
-
+import Link from "next/link";
 
 const NFTPage = ({ params }) => {
   const id = params?.id;
@@ -94,7 +94,7 @@ const NFTPage = ({ params }) => {
 
           {/* --------------------------------------- user perspective --------------------------------------------------------- */}
 
-          {/* <div className="mt-10 text-2xl font-bold">Price Amount</div>
+          <div className="mt-10 text-2xl font-bold">Price Amount</div>
           <div
             className="mt-10"
             style={{ justifyContent: "space-between", display: "flex" }}
@@ -105,8 +105,8 @@ const NFTPage = ({ params }) => {
           </div>
 
           <div className="mt-10" style={{ display: "flex", gap: "20px" }}>
-            <button
-              className="w-1/2"
+            <Link href={`/confirm/${id}`}
+              className="w-1/2 justify-center flex"
               style={{
                 backgroundColor: "#30D8FF",
                 paddingTop: "10px",
@@ -116,7 +116,7 @@ const NFTPage = ({ params }) => {
               }}
             >
               MINT NOW
-            </button>
+            </Link>
             <button
              className="w-1/2"
               style={{
@@ -129,13 +129,13 @@ const NFTPage = ({ params }) => {
             >
               SHARE
             </button>
-          </div> */}
+          </div>
 
 
 
           {/* ------------------------------------------------- owner perspective------------------------------------- */}
 
-          <div style={{ display: "flex", justifyContent:'end' , marginTop:'100px', gap:'20px'}}>
+          {/* <div style={{ display: "flex", justifyContent:'end' , marginTop:'100px', gap:'20px'}}>
             <div 
           className="w-1/2"
           >
@@ -198,7 +198,7 @@ const NFTPage = ({ params }) => {
             >
               VIEW ON SHOPIFY
             </button>
-          </div>
+          </div> */}
 
 
         </div>
