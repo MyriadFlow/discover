@@ -8,6 +8,10 @@ const NFTPage = ({ params }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
 
+  const [activeTab, setActiveTab] = useState('Color'); // Default tab
+
+  const tabs = ['Color', 'Size', 'Weight', 'Material', 'Usage', 'Unique Qualities', 'Manufacturer', 'Made In'];
+
   const handleClaimClick = () => {
     setShowPopover(true);
     setTimeout(() => {
@@ -329,16 +333,34 @@ const NFTPage = ({ params }) => {
             }}
           >
             <div className="text-2xl font-bold">Additional Product details</div>
-            <div style={{display:'flex', gap:'40px'}} className="mt-10">
-<div>Color</div>
-<div>Size</div>
-<div>Weight</div>
-<div>Material</div>
-<div>Usage</div>
-<div>Unique Qualities</div>
-<div>Manufacturer</div>
-<div>Made In</div>
-            </div>
+            <div style={{ display: 'flex', gap: '30px', marginTop: '20px' }}>
+        {tabs.map(tab => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            style={{
+              padding: '10px 4px',
+              borderRight:  activeTab === tab ? '1px solid black': '',
+              cursor: 'pointer',
+            }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      <div style={{ paddingTop: '10px', borderTop: '1px solid black'}}>
+        {activeTab === 'Color' && <p>Phygital Color</p>}
+        {activeTab === 'Size' && <p>Content for Size</p>}
+        {activeTab === 'Weight' && <p>Content for Weight</p>}
+        {activeTab === 'Material' && <p>Content for Material</p>}
+        {activeTab === 'Usage' && <p>Content for Usage</p>}
+        {activeTab === 'Unique Qualities' && <p>Content for Unique Qualities</p>}
+        {activeTab === 'Manufacturer' && <p>Content for Manufacturer</p>}
+        {activeTab === 'Made In' && <p>Content for Made In</p>}
+      </div>
+
+      
           </div>
         </div>
       </div>
