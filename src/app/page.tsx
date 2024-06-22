@@ -6,6 +6,7 @@ import HotNFTs from "../components/hotNFTs";
 import Brand from "../components/brand";
 import CreateBanner from "../components/createbanner";
 import Header1 from "../components/header1";
+import Footer from "../components/footer";
 
 export default function Home() {
   const exploreButtonStyle = {
@@ -245,6 +246,10 @@ export default function Home() {
 
       <div className="bg-white">
       <CreateBanner />
+      </div>
+
+      <div className="bg-white pt-20">
+      <Footer />
       </div>
 
     </div>
