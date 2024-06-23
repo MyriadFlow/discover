@@ -18,9 +18,9 @@ const hotNFTs = () => {
 
           const supabase = createClient(projectlink, anonkey);
 
-          const { data: selectdata } = await supabase.from("manager").select();
+          const { data: selectdata } = await supabase.from("Phygital").select();
 
-          console.log("inseted data", selectdata);
+          console.log("selected data", selectdata);
 
           // setCreatedGames(selectdata);
           } catch (error) {

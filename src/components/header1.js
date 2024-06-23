@@ -41,11 +41,12 @@ const Header1 = () => {
 <div>Brand</div>
 <div>Dashboard</div>
         </div>
-        <div>
-            <button className="px-10 mt-10" style={{paddingTop:'5px', paddingBottom:'5px', borderRadius:'5px',
+        <div className="mt-10">
+            {/* <button className="px-10 mt-10" style={{paddingTop:'5px', paddingBottom:'5px', borderRadius:'5px',
               background: isScrolled ? 'white' : 'black',
               color: isScrolled ? 'black' : 'white',
-            }}>Connect</button>
+            }}>Connect</button> */}
+            <w3m-button />
         </div>
     </div>
   )

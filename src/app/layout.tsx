@@ -4,12 +4,19 @@ import './globals.css'
 
 import { cn } from '@/lib/utils'
 
+import { headers } from 'next/headers'
+
+import { cookieToInitialState } from 'wagmi'
+import Providers from '@/lib/providers'
+import Web3ModalProvider from '@/lib/providers'
+import { config } from '@/lib/wagmi'
+
+
 const fontSans = FontSans({
 	subsets: ['latin'],
 	weight: ['400', '700'],
 	variable: '--font-sans',
 })
-
 export const metadata: Metadata = {
 	title: 'Myriadflow Discover',
 	description: 'Discover Phygital NFTs',
@@ -20,16 +27,19 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
+	const initialState = cookieToInitialState(config, headers().get('cookie'))
 	return (
 		<html lang='en' suppressHydrationWarning>
-			<body
-				className={cn(
-					'min-h-screen bg-background font-sans antialiased',
-					fontSans.variable
-				)}
-			>
-				{children}
-			</body>
+			<Providers>
+				<body
+					className={cn(
+						'min-h-screen bg-[#FAF9F6] font-sans antialiased',
+						fontSans.variable
+					)}
+				>
+				<Web3ModalProvider initialState={initialState}>{children}</Web3ModalProvider>
+				</body>
+			</Providers>
 		</html>
 	)
 }
