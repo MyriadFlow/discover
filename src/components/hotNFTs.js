@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 import MostRecentlyCard from "./mostRecentlyCard";
 import { createClient } from "@supabase/supabase-js";
 
-const hotNFTs = () => {
+const HotNFTs = () => {
 
   const [loading, setLoading] = useState(false)
 
@@ -69,4 +69,4 @@ const hotNFTs = () => {
   );
 };
 
-export default hotNFTs;
+export default HotNFTs;
