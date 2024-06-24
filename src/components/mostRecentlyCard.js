@@ -21,7 +21,7 @@ const MostRecentlyCard = ({ nft }) => {
           />
           {/* New Image and Text at the top ends */}
           <img
-            src="./concrete.png"
+            src="./Concrete.png"
             alt="New Icon"
             style={{
               position: "absolute",
