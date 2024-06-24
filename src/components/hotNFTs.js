@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import MostRecentlyCard from './mostRecentlyCard'
+import HotNftCard from './hotNftCard'
 import { createClient } from '@supabase/supabase-js'
 
 const HotNFTs = ({ hotnftdata }) => {
@@ -53,8 +53,8 @@ const HotNFTs = ({ hotnftdata }) => {
 			</div>
 
 			<div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
-        {hotnftdata.map((nft, index) => (
-          <MostRecentlyCard key={index} nft={nft} />
+        {hotnftdata?.map((nft, index) => (
+          <HotNftCard key={index} nft={nft} />
         ))}
       </div>
 
