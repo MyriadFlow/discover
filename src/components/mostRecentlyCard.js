@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MostRecentlyCard = () => {
+const MostRecentlyCard = ({ nft }) => {
   return (
     <div>
       <div
@@ -14,7 +14,7 @@ const MostRecentlyCard = () => {
       >
         <div style={{ position: 'relative' }}>
           <img
-            src="./Gold vibes headphones 1.png"
+            src={nft?.image}
             className="rounded"
             style={{ padding: "20px", borderRadius: '30px' }}
             alt="Gold Headphones"
@@ -49,7 +49,7 @@ const MostRecentlyCard = () => {
           className="flex justify-between"
           style={{ paddingLeft: "20px", paddingRight: "20px", justifyContent: 'space-between' }}
         >
-          <div className="font-bold text-lg">Gold Headphones</div>
+          <div className="font-bold text-lg">{nft?.phygitalName}</div>
           <div>...</div>
         </div>
         <div
@@ -62,7 +62,7 @@ const MostRecentlyCard = () => {
           }}
         >
           <div>
-            <div className="text-xl">0.89 ETH</div>
+            <div className="text-xl">{nft?.price} ETH</div>
             <div>195 USD</div>
           </div>
           <div

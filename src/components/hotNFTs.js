@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import MostRecentlyCard from './mostRecentlyCard'
 import { createClient } from '@supabase/supabase-js'
 
-const HotNFTs = () => {
+const HotNFTs = ({ hotnftdata }) => {
 
   const [loading, setLoading] = useState(false)
 
@@ -52,19 +52,12 @@ const HotNFTs = () => {
 				<button className='border py-3 px-10'>View All</button>
 			</div>
 
-			<div className='mt-10 flex' style={{ gap: '40px' }}>
-				<MostRecentlyCard />
-				<MostRecentlyCard />
-				<MostRecentlyCard />
-				<MostRecentlyCard />
-			</div>
+			<div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
+        {hotnftdata.map((nft, index) => (
+          <MostRecentlyCard key={index} nft={nft} />
+        ))}
+      </div>
 
-			<div className='mt-10 flex' style={{ gap: '40px' }}>
-				<MostRecentlyCard />
-				<MostRecentlyCard />
-				<MostRecentlyCard />
-				<MostRecentlyCard />
-			</div>
 		</div>
 	)
 }

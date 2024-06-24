@@ -17,15 +17,23 @@ export default function Home() {
 		? 'http://localhost:3000' // Local development URL
 		: 'https://discover.myriadflow.com' // Production URL
 
-	const [brands, setBrands] = useState([])
+	const [brands, setBrands] = useState([]);
+	const [phygitals, setPhygitals] = useState<any>([]);
 
 	const getBrands = async () => {
 		const res = await fetch(`${apiUrl}/api/brands`)
 
-		// const res = await fetch(`${apiUrl}/api/phygital/${id}`)
+		// const phyres = await fetch(`${apiUrl}/api/phygital/${id}`)
+
+		const phyres = await fetch(`${apiUrl}/api/phygitals`)
 
 		const result = await res.json()
-		console.log(result)
+
+		const phyresult = await phyres.json()
+
+		console.log(result, phyresult);
+		setBrands(result);
+		setPhygitals(phyresult);
 	}
 
 	useEffect(() => {
@@ -265,11 +273,11 @@ export default function Home() {
 			</div>
 
 			<div className='pt-40 bg-white px-10'>
-				<HotNFTs />
+				<HotNFTs hotnftdata={phygitals}/>
 			</div>
 
 			<div className='pt-40 bg-white px-10'>
-				<Brand />
+				{/* <Brand brandsdata={brands}/> */}
 			</div>
 
 			<div className='bg-white'>
