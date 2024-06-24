@@ -10,7 +10,7 @@ export const GET = async (
 	try {
 		const phygitalDetail = await prisma.phygital.findUnique({
 			where: {
-				phygitalName: id,
+				id: id,
 			},
 		})
 

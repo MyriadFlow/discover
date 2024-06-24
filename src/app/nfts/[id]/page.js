@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Link from "next/link";
 
 const NFTPage = ({ params }) => {
@@ -18,6 +18,29 @@ const NFTPage = ({ params }) => {
       setShowPopover(false);
     }, 6000); // Pop-over will disappear after 3 seconds
   };
+
+
+  const isDevelopment = process.env.NEXT_PUBLIC_NODE_ENV === 'development'
+
+	const apiUrl = isDevelopment
+		? 'http://localhost:3000' // Local development URL
+		: 'https://discover-two.vercel.app' // Production URL
+
+	const [onephygital, setonePhygital] = useState([]);
+
+	const getBrands = async () => {
+
+		const phyres = await fetch(`${apiUrl}/api/phygitals/${id}`)
+
+		const phyresult = await phyres.json()
+
+		console.log(phyresult);
+		setonePhygital(phyresult);
+	}
+
+	useEffect(() => {
+		getBrands()
+	}, [])
 
   return (
     <div>
@@ -63,14 +86,15 @@ const NFTPage = ({ params }) => {
 <div>Brand</div>
 <div>Dashboard</div>
         </div>
-        <div>
-            <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button>
+        <div className="mt-6">
+            {/* <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button> */}
+            <w3m-button />
         </div>
     </div>
       <div className="flex gap-10 mt-10 px-10">
         <div className="w-1/3">
           <img
-            src="../slider3 metallic suit small 2.png"
+            src={onephygital?.image}
             style={{ width: "70vh", height: "70vh" }}
           />
         </div>
@@ -85,7 +109,7 @@ const NFTPage = ({ params }) => {
           }}
           className="w-2/3"
         >
-          <div className="text-4xl font-bold">Phygital Name</div>
+          <div className="text-4xl font-bold">{onephygital?.phygitalName}</div>
           <div className="text-lg mt-10 font-bold">Base Network</div>
           <div className="mt-6">Owned by wallet address</div>
           <div className="mt-4">Created by brand name</div>
@@ -99,7 +123,7 @@ const NFTPage = ({ params }) => {
             className="mt-10"
             style={{ justifyContent: "space-between", display: "flex" }}
           >
-            <div className="text-2xl font-bold">price ETH</div>
+            <div className="text-2xl font-bold">{onephygital?.price} ETH</div>
             <div>current price USD</div>
             <div>Phygital & Unique avatar </div>
           </div>
@@ -217,9 +241,7 @@ const NFTPage = ({ params }) => {
           >
             <div className="text-4xl font-bold">Description</div>
             <div className="mt-10">
-              Phygital descrition here. Phygital descrition here. Phygital
-              descrition here. Phygital descrition here. Phygital descrition
-              here. Phygital descrition here.
+              {onephygital?.description}
             </div>
           </div>
           <div
@@ -238,7 +260,7 @@ const NFTPage = ({ params }) => {
               className="mt-10"
             >
               <div>Contact Address</div>
-              <div>address</div>
+              <div>{onephygital?.contractAddress}</div>
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Token ID</div>
@@ -266,7 +288,7 @@ const NFTPage = ({ params }) => {
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Creator Earnings</div>
-              <div>Royalty %</div>
+              <div>{onephygital?.royalty} %</div>
             </div>
           </div>
         </div>
@@ -350,14 +372,14 @@ const NFTPage = ({ params }) => {
       </div>
 
       <div style={{ paddingTop: '10px', borderTop: '1px solid black'}}>
-        {activeTab === 'Color' && <p>Phygital Color</p>}
-        {activeTab === 'Size' && <p>Content for Size</p>}
-        {activeTab === 'Weight' && <p>Content for Weight</p>}
-        {activeTab === 'Material' && <p>Content for Material</p>}
-        {activeTab === 'Usage' && <p>Content for Usage</p>}
-        {activeTab === 'Unique Qualities' && <p>Content for Unique Qualities</p>}
-        {activeTab === 'Manufacturer' && <p>Content for Manufacturer</p>}
-        {activeTab === 'Made In' && <p>Content for Made In</p>}
+        {activeTab === 'Color' && <p>{onephygital?.colours}</p>}
+        {activeTab === 'Size' && <p>{onephygital?.size}</p>}
+        {activeTab === 'Weight' && <p>{onephygital?.weight}</p>}
+        {activeTab === 'Material' && <p>{onephygital?.material}</p>}
+        {activeTab === 'Usage' && <p>{onephygital?.usage}</p>}
+        {activeTab === 'Unique Qualities' && <p>{onephygital?.uniqueQuality}</p>}
+        {activeTab === 'Manufacturer' && <p>{onephygital?.manufacturer}</p>}
+        {activeTab === 'Made In' && <p>{onephygital?.madeIn}</p>}
       </div>
 
       
