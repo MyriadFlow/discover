@@ -277,7 +277,7 @@ export default function Home() {
 			</div>
 
 			<div className='pt-40 bg-white px-10'>
-				{/* <Brand brandsdata={brands}/> */}
+				<Brand brandsdata={brands}/>
 			</div>
 
 			<div className='bg-white'>
