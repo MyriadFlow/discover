@@ -11,11 +11,11 @@ import Footer from '../components/footer'
 import { useEffect, useState } from 'react'
 
 export default function Home() {
-	const isDevelopment = process.env.NODE_ENV === 'development'
+	const isDevelopment = process.env.NEXT_PUBLIC_NODE_ENV === 'development'
 
 	const apiUrl = isDevelopment
 		? 'http://localhost:3000' // Local development URL
-		: 'https://discover.myriadflow.com' // Production URL
+		: 'https://discover-two.vercel.app' // Production URL
 
 	const [brands, setBrands] = useState([]);
 	const [phygitals, setPhygitals] = useState<any>([]);
