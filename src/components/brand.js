@@ -2,7 +2,7 @@ import React from "react";
 
 const brand = ({brandsdata}) => {
 
-  const recentBrands = brandsdata.slice(-3).reverse();
+  // const recentBrands = brandsdata.slice(-3).reverse();
 
   return (
     <div>
@@ -21,7 +21,7 @@ const brand = ({brandsdata}) => {
 
       <div className="flex px-10 text-2xl" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px'}}>
       
-      {recentBrands.map((brand, index) => (
+      {brandsdata?.map((brand, index) => (
           <div key={index} className="flex flex-col justify-center items-center">
             <img
               src={brand.logoImage}

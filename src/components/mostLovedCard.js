@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-const mostLovedCard = () => {
+const mostLovedCard = ({nft}) => {
   return (
     <Link href="/nfts/123">
         <div
@@ -49,7 +49,7 @@ const mostLovedCard = () => {
           className="flex justify-between"
           style={{ paddingLeft: "20px", paddingRight: "20px", justifyContent: 'space-between' }}
         >
-          <div className="font-bold text-lg">Metallic Suit</div>
+          <div className="font-bold text-lg">{nft?.collectionName}</div>
           <div>...</div>
         </div>
         <div

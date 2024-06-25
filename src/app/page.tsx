@@ -19,22 +19,29 @@ export default function Home() {
 
 	const [brands, setBrands] = useState([]);
 	const [phygitals, setPhygitals] = useState<any>([]);
+	const [collections, setCollections] = useState<any>([]);
 
 	const getBrands = async () => {
-		const res = await fetch(`${apiUrl}/api/brands`)
-
-		// const phyres = await fetch(`${apiUrl}/api/phygital/${id}`)
-
-		const phyres = await fetch(`${apiUrl}/api/phygitals`)
-
-		const result = await res.json()
-
-		const phyresult = await phyres.json()
-
-		console.log(result, phyresult);
-		setBrands(result);
-		setPhygitals(phyresult);
-	}
+		try {
+		  const res = await fetch(`${apiUrl}/api/brands`);
+		  const phyres = await fetch(`${apiUrl}/api/phygitals`);
+		  const collres = await fetch(`${apiUrl}/api/collections`);
+	  
+		  if (!res.ok || !phyres.ok || !collres.ok) {
+			throw new Error('Failed to fetch data');
+		  }
+	  
+		  const result = await res.json();
+		  const phyresult = await phyres.json();
+		  const collresult = await collres.json();
+	  
+		  setBrands(result);
+		  setPhygitals(phyresult);
+		  setCollections(collresult);
+		} catch (error) {
+		  console.error('Error fetching data:', error);
+		}
+	  };
 
 	useEffect(() => {
 		getBrands()
@@ -261,7 +268,7 @@ export default function Home() {
 			</div>
 
 			<div className='pt-60 bg-white px-10'>
-				<MostLoved />
+				<MostLoved collectionsdata={collections}/>
 			</div>
 
 			<div className='pt-40 bg-white px-10'>

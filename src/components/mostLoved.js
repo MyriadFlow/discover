@@ -1,7 +1,7 @@
 import React from "react";
 import MostLovedCard from "./mostLovedCard";
 
-const mostLoved = () => {
+const mostLoved = ({collectionsdata}) => {
   return (
     <div>
       <div className="font-semibold" style={{ color: "#DF1FDD" }}>
@@ -18,18 +18,10 @@ const mostLoved = () => {
         <button className="border py-3 px-10">View All</button>
       </div>
 
-      <div className="mt-10 flex" style={{gap:'40px'}}>
-        <MostLovedCard />
-        <MostLovedCard />
-        <MostLovedCard />
-        <MostLovedCard />
-      </div>
-
-      <div className="mt-10 flex" style={{gap:'40px'}}>
-        <MostLovedCard />
-        <MostLovedCard />
-        <MostLovedCard />
-        <MostLovedCard />
+      <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
+        {collectionsdata?.map((nft, index) => (
+          <MostLovedCard key={index} nft={nft} />
+        ))}
       </div>
       
     </div>
