@@ -17,6 +17,8 @@ export default function Home() {
 		? 'http://localhost:3000' // Local development URL
 		: 'https://discover-two.vercel.app' // Production URL
 
+	console.log("api url", apiUrl);
+
 	const [brands, setBrands] = useState([]);
 	const [phygitals, setPhygitals] = useState<any>([]);
 	const [collections, setCollections] = useState<any>([]);
