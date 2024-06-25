@@ -269,7 +269,7 @@ export default function Home() {
 				/>
 			</div>
 
-			<div className='pt-60 bg-white px-10'>
+			<div className='pt-10 bg-white px-10'>
 				<MostLoved collectionsdata={collections}/>
 			</div>
 

@@ -6,11 +6,11 @@ const brand = ({brandsdata}) => {
 
   return (
     <div>
-      <div className="font-bold text-black text-6xl px-10">
+      <div className="font-bold text-black text-6xl">
       Brand Champions{" "}
       </div>
       <div
-        className="flex justify-between text-2xl px-10"
+        className="flex justify-between text-2xl"
         style={{ justifyContent: "space-between" }}
       >
         <div className="mt-4">
@@ -19,15 +19,14 @@ const brand = ({brandsdata}) => {
         <button className="border py-3 px-10">View All</button>
       </div>
 
-      <div className="flex px-10 text-2xl" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px'}}>
-      
+      <div className="flex text-2xl" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px',gap:'20px', flexWrap: 'wrap'}}>
       {brandsdata?.map((brand, index) => (
           <div key={index} className="flex flex-col justify-center items-center">
             <img
               src={brand.logoImage}
               alt={brand.brandName}
               style={{
-                width: "60%",
+                width: "250px",
                 display: "block",
                 marginLeft: "auto",
                 marginRight: "auto",
