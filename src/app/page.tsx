@@ -173,7 +173,7 @@ export default function Home() {
 			<div
 				className='flex bg-white p-20'
 				style={{
-					position: 'relative',
+					// position: 'relative',
 					width: '100%',
 					height: 'auto',
 					justifyContent: 'center',
@@ -182,8 +182,8 @@ export default function Home() {
 				<img
 					src='./image 41.png'
 					style={{
-						position: 'absolute',
-						left: '40px',
+						// position: 'absolute',
+						// left: '40px',
 						zIndex: '1',
 						width: '180px',
 						height: 'auto',
@@ -193,8 +193,8 @@ export default function Home() {
 				<img
 					src='./image 51.png'
 					style={{
-						position: 'absolute',
-						left: 'calc(0px + 180px + 2px)',
+						// position: 'absolute',
+						// left: 'calc(0px + 180px + 2px)',
 						zIndex: '2',
 						width: '180px',
 						height: 'auto',
@@ -204,8 +204,8 @@ export default function Home() {
 				<img
 					src='./2_small 1.png'
 					style={{
-						position: 'absolute',
-						left: 'calc(0px + 360px - 30px)',
+						// position: 'absolute',
+						// left: 'calc(0px + 360px - 30px)',
 						zIndex: '3',
 						width: '180px',
 						height: 'auto',
@@ -215,8 +215,8 @@ export default function Home() {
 				<img
 					src='./image 9.png'
 					style={{
-						position: 'absolute',
-						left: 'calc(0px + 540px - 60px)',
+						// position: 'absolute',
+						// left: 'calc(0px + 540px - 60px)',
 						zIndex: '4',
 						width: '180px',
 						height: 'auto',
@@ -226,8 +226,8 @@ export default function Home() {
 				<img
 					src='./image 10.png'
 					style={{
-						position: 'absolute',
-						left: 'calc(0px + 720px - 80px)',
+						// position: 'absolute',
+						// left: 'calc(0px + 720px - 80px)',
 						zIndex: '5',
 						width: '180px',
 						height: 'auto',
@@ -237,8 +237,8 @@ export default function Home() {
 				<img
 					src='./image 13.png'
 					style={{
-						position: 'absolute',
-						left: 'calc(0px + 900px - 100px)',
+						// position: 'absolute',
+						// left: 'calc(0px + 900px - 100px)',
 						zIndex: '6',
 						width: '180px',
 						height: 'auto',
@@ -248,8 +248,8 @@ export default function Home() {
 				<img
 					src='./image 11.png'
 					style={{
-						position: 'absolute',
-						left: 'calc(0px + 1080px - 120px)',
+						// position: 'absolute',
+						// left: 'calc(0px + 1080px - 120px)',
 						zIndex: '7',
 						width: '180px',
 						height: 'auto',
@@ -259,8 +259,8 @@ export default function Home() {
 				<img
 					src='./image 14.png'
 					style={{
-						position: 'absolute',
-						left: 'calc(0px + 1260px - 140px)',
+						// position: 'absolute',
+						// left: 'calc(0px + 1260px - 140px)',
 						zIndex: '8',
 						width: '180px',
 						height: 'auto',
