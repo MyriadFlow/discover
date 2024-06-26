@@ -167,7 +167,7 @@ export default function Home() {
 					color: 'transparent',
 				}}
 			>
-				Real World Assets.
+				Beyond Real World Assets.
 			</div>
 
 			<div
