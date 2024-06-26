@@ -139,7 +139,7 @@ const NFTPage = ({ params }) => {
                 paddingRight: "70px",
               }}
             >
-              MINT NOW
+              BUY NOW
             </Link>
             <button
              className="w-1/2"

@@ -77,7 +77,7 @@ const mostLovedCard = ({nft}) => {
               borderRadius: "5px",
             }}
           >
-            Mint
+            Buy
           </div>
         </div>
       </div>
