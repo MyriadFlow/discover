@@ -1,7 +1,7 @@
 import React from "react";
 import MostRecentlyCard from "./mostRecentlyCard";
 
-const mostRecently = () => {
+const mostRecently = ({collectionsdata}) => {
   return (
     <div>
       <div className="font-semibold" style={{ color: "#DF1FDD" }}>
@@ -17,18 +17,10 @@ const mostRecently = () => {
         <button className="border py-3 px-10">View All</button>
       </div>
 
-      <div className="mt-10 flex" style={{gap:'40px'}}>
-        <MostRecentlyCard />
-        <MostRecentlyCard />
-        <MostRecentlyCard />
-        <MostRecentlyCard />
-      </div>
-
-      <div className="mt-10 flex" style={{gap:'40px'}}>
-        <MostRecentlyCard />
-        <MostRecentlyCard />
-        <MostRecentlyCard />
-        <MostRecentlyCard />
+      <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
+        {collectionsdata?.map((nft, index) => (
+          <MostRecentlyCard key={index} nft={nft} />
+        ))}
       </div>
       
     </div>

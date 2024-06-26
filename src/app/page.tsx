@@ -25,9 +25,34 @@ export default function Home() {
 
 	const getBrands = async () => {
 		try {
-		  const res = await fetch(`${apiUrl}/api/brands`);
-		  const phyres = await fetch(`${apiUrl}/api/phygitals`);
-		  const collres = await fetch(`${apiUrl}/api/collections`);
+		 //   const res = await fetch(`${apiUrl}/api/brands`);
+		 //   const phyres = await fetch(`${apiUrl}/api/phygitals`);
+		 //   const collres = await fetch(`${apiUrl}/api/collections`);
+
+		  const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+		  const res = await fetch(`${baseUri}/brands/all`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			});
+
+			const phyres = await fetch(`${baseUri}/phygitals/all`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+				});
+
+				const collres = await fetch(`${baseUri}/collections/all`, {
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json'
+					}
+					});
+
+		  
 	  
 		  if (!res.ok || !phyres.ok || !collres.ok) {
 			throw new Error('Failed to fetch data');
@@ -40,6 +65,8 @@ export default function Home() {
 		  setBrands(result);
 		  setPhygitals(phyresult);
 		  setCollections(collresult);
+
+		  console.log("new database output", result, phyresult, collresult);
 		} catch (error) {
 		  console.error('Error fetching data:', error);
 		}
@@ -274,7 +301,7 @@ export default function Home() {
 			</div>
 
 			<div className='pt-40 bg-white px-10'>
-				<MostRecently />
+				<MostRecently collectionsdata={collections}/>
 			</div>
 
 			<div className='pt-40 bg-white'>

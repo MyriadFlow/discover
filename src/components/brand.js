@@ -4,6 +4,8 @@ const brand = ({brandsdata}) => {
 
   // const recentBrands = brandsdata.slice(-3).reverse();
 
+  console.log("brands", brandsdata)
+
   return (
     <div>
       <div className="font-bold text-black text-6xl">
@@ -23,8 +25,10 @@ const brand = ({brandsdata}) => {
       {brandsdata?.map((brand, index) => (
           <div key={index} className="flex flex-col justify-center items-center">
             <img
-              src={brand.logoImage}
-              alt={brand.brandName}
+              src={`${
+                "https://nftstorage.link/ipfs"
+              }/${brand.logo_image.slice(7)}`}
+              alt={brand.name}
               style={{
                 width: "250px",
                 display: "block",
@@ -40,7 +44,7 @@ const brand = ({brandsdata}) => {
                 marginBottom: "20px",
               }}
             >
-              {brand.brandName}
+              {brand.name}
             </div>
           </div>
         ))}
