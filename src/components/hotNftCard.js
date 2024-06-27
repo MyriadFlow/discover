@@ -16,7 +16,9 @@ const HotNftCard = ({ nft }) => {
       >
         <div style={{ position: 'relative' }}>
           <img
-            src={nft?.image}
+            src={`${
+              "https://nftstorage.link/ipfs"
+            }/${nft?.image.slice(7)}`}
             className="rounded"
             style={{ padding: "20px", borderRadius: '30px' }}
             alt="Gold Headphones"

@@ -18,7 +18,7 @@ const mostRecently = ({collectionsdata}) => {
       </div>
 
       <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
-        {collectionsdata?.map((nft, index) => (
+        {collectionsdata?.slice().reverse().map((nft, index) => (
           <MostRecentlyCard key={index} nft={nft} />
         ))}
       </div>

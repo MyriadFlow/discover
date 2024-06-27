@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const mostLovedCard = ({nft}) => {
   return (
-    <Link href="/nfts/123">
+    <Link href={`/nfts/${nft.id}`}>
         <div
         style={{
           width: "330px",
@@ -15,7 +15,9 @@ const mostLovedCard = ({nft}) => {
       >
         <div style={{ position: 'relative' }}>
           <img
-            src="./slider3 metallic suit small 2.png"
+            src={`${
+              "https://nftstorage.link/ipfs"
+            }/${nft?.cover_image.slice(7)}`}
             className="rounded"
             style={{ padding: "20px", borderRadius: '30px' }}
           />
