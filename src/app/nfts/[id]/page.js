@@ -30,11 +30,20 @@ const NFTPage = ({ params }) => {
 
 	const getBrands = async () => {
 
-		const phyres = await fetch(`${apiUrl}/api/phygitals/${id}`)
+		// const phyres = await fetch(`${apiUrl}/api/phygitals/${id}`)
+
+    const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+		  const phyres = await fetch(`${baseUri}/phygitals/${id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			});
 
 		const phyresult = await phyres.json()
 
-		console.log(phyresult);
+		console.log("phyresult", phyresult);
 		setonePhygital(phyresult);
 	}
 
@@ -94,7 +103,9 @@ const NFTPage = ({ params }) => {
       <div className="flex gap-10 mt-10 px-10">
         <div className="w-1/3">
           <img
-            src={onephygital?.image}
+            src={`${
+              "https://nftstorage.link/ipfs"
+            }/${onephygital?.image?.slice(7)}`}
             style={{ width: "70vh", height: "70vh" }}
           />
         </div>
@@ -109,9 +120,9 @@ const NFTPage = ({ params }) => {
           }}
           className="w-2/3"
         >
-          <div className="text-4xl font-bold">{onephygital?.phygitalName}</div>
+          <div className="text-4xl font-bold">{onephygital?.name}</div>
           <div className="text-lg mt-10 font-bold">Base Network</div>
-          <div className="mt-6">Owned by wallet address</div>
+          <div className="mt-6">Owned by {onephygital?.deployer_address}</div>
           <div className="mt-4">Created by brand name</div>
 
 
@@ -260,7 +271,7 @@ const NFTPage = ({ params }) => {
               className="mt-10"
             >
               <div>Contact Address</div>
-              <div>{onephygital?.contractAddress}</div>
+              <div>{onephygital?.contract_address}</div>
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Token ID</div>
@@ -288,7 +299,7 @@ const NFTPage = ({ params }) => {
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Creator Earnings</div>
-              <div>{onephygital?.royalty} %</div>
+              <div>{onephygital?.royality} %</div>
             </div>
           </div>
         </div>
@@ -372,14 +383,14 @@ const NFTPage = ({ params }) => {
       </div>
 
       <div style={{ paddingTop: '10px', borderTop: '1px solid black'}}>
-        {activeTab === 'Color' && <p>{onephygital?.colours}</p>}
+        {activeTab === 'Color' && <p>{onephygital?.color}</p>}
         {activeTab === 'Size' && <p>{onephygital?.size}</p>}
         {activeTab === 'Weight' && <p>{onephygital?.weight}</p>}
         {activeTab === 'Material' && <p>{onephygital?.material}</p>}
         {activeTab === 'Usage' && <p>{onephygital?.usage}</p>}
-        {activeTab === 'Unique Qualities' && <p>{onephygital?.uniqueQuality}</p>}
+        {activeTab === 'Unique Qualities' && <p>{onephygital?.quality}</p>}
         {activeTab === 'Manufacturer' && <p>{onephygital?.manufacturer}</p>}
-        {activeTab === 'Made In' && <p>{onephygital?.madeIn}</p>}
+        {activeTab === 'Made In' && <p>{onephygital?.origin_country}</p>}
       </div>
 
       
