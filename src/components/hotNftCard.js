@@ -1,7 +1,58 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 const HotNftCard = ({ nft }) => {
+
+  const [logo , setLogos] = useState("")
+
+  useEffect(() => {
+   const brandmatch = async() => {
+    const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+try {
+  const res = await fetch(`${baseUri}/brands/all`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const phyres = await fetch(`${baseUri}/phygitals/all`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!res.ok || !phyres.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const result = await res.json();
+  const phyresult = await phyres.json();
+
+  // Extract logo_image based on the condition
+  const logo = phyresult.map(phy => {
+    const matchedBrand = result.find(brand => brand.name === phy.brand_name);
+    return matchedBrand ? matchedBrand.logo_image : null;
+  });
+
+  // Assuming you want to store logos in state
+  setLogos(logo[0]);
+
+  console.log("logo", logo, result, phyresult);
+
+} catch (error) {
+  console.error('Error fetching data:', error);
+}
+   }
+
+   brandmatch();
+  }, [])
+  
+
+
   return (
     <Link href={`/nfts/${nft.id}`}>
     <div>
@@ -25,7 +76,9 @@ const HotNftCard = ({ nft }) => {
           />
           {/* New Image and Text at the top ends */}
           <img
-            src="./Concrete.png"
+            src={`${
+              "https://nftstorage.link/ipfs"
+            }/${logo?.slice(7)}`}
             alt="New Icon"
             style={{
               position: "absolute",
@@ -33,6 +86,7 @@ const HotNftCard = ({ nft }) => {
               left: "10px",
               width: "50px",
               height: "50px",
+              borderRadius:'50px'
             }}
           />
           <div

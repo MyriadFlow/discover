@@ -1,9 +1,59 @@
-import React from 'react';
+"use client"
+import React , {useEffect, useState} from 'react';
 import Link from 'next/link';
 
 const mostLovedCard = ({nft}) => {
+
+  const [logo , setLogos] = useState("")
+
+  useEffect(() => {
+   const brandmatch = async() => {
+    const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+try {
+  const res = await fetch(`${baseUri}/brands/all`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  const collres = await fetch(`${baseUri}/collections/all`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+
+  if (!res.ok || !collres.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const result = await res.json();
+  const collresult = await collres.json();
+
+  // Extract logo_image based on the condition
+  const logo = collresult.map(coll => {
+    const matchedBrand = result.find(brand => brand.id === coll.brand_id);
+    return matchedBrand ? matchedBrand.logo_image : null;
+  });
+
+  // Assuming you want to store logos in state
+  setLogos(logo[0]);
+
+  console.log("logo", logo, result, collresult);
+
+} catch (error) {
+  console.error('Error fetching data:', error);
+}
+   }
+
+   brandmatch();
+  }, [])
+
+
   return (
-    <Link href={`/nfts/${nft.id}`}>
+    // <Link href={`/nfts/${nft.id}`}>
         <div
         style={{
           width: "330px",
@@ -23,7 +73,9 @@ const mostLovedCard = ({nft}) => {
           />
           {/* New Image and Text at the top ends */}
           <img
-            src="./Concrete.png"
+            src={`${
+              "https://nftstorage.link/ipfs"
+            }/${logo?.slice(7)}`}
             alt="New Icon"
             style={{
               position: "absolute",
@@ -31,6 +83,7 @@ const mostLovedCard = ({nft}) => {
               left: "10px",
               width: "50px",
               height: "50px",
+              borderRadius:'50px'
             }}
           />
           <div
@@ -83,7 +136,7 @@ const mostLovedCard = ({nft}) => {
           </div>
         </div>
       </div>
-    </Link>
+    // </Link>
   )
 }
 
