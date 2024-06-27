@@ -32,14 +32,16 @@ try {
   const result = await res.json();
   const collresult = await collres.json();
 
-  // Extract logo_image based on the condition
-  const logo = collresult.map(coll => {
-    const matchedBrand = result.find(brand => brand.id === coll.brand_id);
-    return matchedBrand ? matchedBrand.logo_image : null;
-  });
+  const matchingColl = collresult.find(col => col.id === nft?.id);
 
-  // Assuming you want to store logos in state
-  setLogos(logo[0]);
+  
+  if (matchingColl) {
+    // Find the corresponding brand in result
+    const matchedBrand = result.find(brand => brand.id === matchingColl.brand_id);
+    if (matchedBrand) {
+      setLogos(matchedBrand.logo_image);
+    }
+  }
 
   console.log("logo", logo, result, collresult);
 
