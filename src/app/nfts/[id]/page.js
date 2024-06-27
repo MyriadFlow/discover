@@ -43,7 +43,7 @@ const NFTPage = ({ params }) => {
 
 		const phyresult = await phyres.json()
 
-		console.log("phyresult", phyresult);
+		// console.log("phyresult", phyresult);
 		setonePhygital(phyresult);
 	}
 

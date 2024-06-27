@@ -17,7 +17,7 @@ export default function Home() {
 		? 'http://localhost:3000' // Local development URL
 		: 'https://discover-two.vercel.app' // Production URL
 
-	console.log("api url", apiUrl);
+	// console.log("api url", apiUrl);
 
 	const [brands, setBrands] = useState([]);
 	const [phygitals, setPhygitals] = useState<any>([]);
@@ -66,7 +66,7 @@ export default function Home() {
 		  setPhygitals(phyresult);
 		  setCollections(collresult);
 
-		  console.log("new database output", result, phyresult, collresult);
+		//   console.log("new database output", result, phyresult, collresult);
 		} catch (error) {
 		  console.error('Error fetching data:', error);
 		}

@@ -32,14 +32,16 @@ try {
   const result = await res.json();
   const phyresult = await phyres.json();
 
-  // Extract logo_image based on the condition
-  const logo = phyresult.map(phy => {
-    const matchedBrand = result.find(brand => brand.name === phy.brand_name);
-    return matchedBrand ? matchedBrand.logo_image : null;
-  });
+  // Find the phyresult item matching the targetId
+  const matchingPhy = phyresult.find(phy => phy.id === nft?.id);
 
-  // Assuming you want to store logos in state
-  setLogos(logo[0]);
+  if (matchingPhy) {
+    // Find the corresponding brand in result
+    const matchedBrand = result.find(brand => brand.name === matchingPhy.brand_name);
+    if (matchedBrand) {
+      setLogos(matchedBrand.logo_image);
+    }
+  }
 
   console.log("logo", logo, result, phyresult);
 

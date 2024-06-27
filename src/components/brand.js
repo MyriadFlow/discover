@@ -4,7 +4,7 @@ const brand = ({brandsdata}) => {
 
   // const recentBrands = brandsdata.slice(-3).reverse();
 
-  console.log("brands", brandsdata)
+  // console.log("brands", brandsdata)
 
   return (
     <div>
