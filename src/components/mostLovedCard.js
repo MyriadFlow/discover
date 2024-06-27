@@ -2,7 +2,7 @@
 import React , {useEffect, useState} from 'react';
 import Link from 'next/link';
 
-const mostLovedCard = ({nft}) => {
+const MostLovedCard = ({nft}) => {
 
   const [logo , setLogos] = useState("")
 
@@ -142,4 +142,4 @@ try {
   )
 }
 
-export default mostLovedCard;
+export default MostLovedCard;
