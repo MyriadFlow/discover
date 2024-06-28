@@ -1,6 +1,7 @@
 "use client"
 import React, {useState, useEffect} from "react";
 import Link from "next/link";
+import { Avatar } from '@readyplayerme/visage'
 
 const NFTPage = ({ params }) => {
   const id = params?.id;
@@ -8,6 +9,7 @@ const NFTPage = ({ params }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
   const [priceUSD, setPriceUSD] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState('');
 
   const [activeTab, setActiveTab] = useState('Color'); // Default tab
 
@@ -43,9 +45,25 @@ const NFTPage = ({ params }) => {
 			});
 
 		const phyresult = await phyres.json()
-
-		// console.log("phyresult", phyresult);
 		setonePhygital(phyresult);
+
+    const avatar = await fetch(`${baseUri}/avatars/all`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			});
+
+		const avatardata = await avatar.json();
+
+		console.log("avatar", avatardata);
+
+    const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === id);
+
+    // If found, update the state with the avatar URL
+    if (selectedAvatar) {
+      setAvatarUrl(selectedAvatar.url);
+    }
 	}
 
 	useEffect(() => {
@@ -378,10 +396,18 @@ const NFTPage = ({ params }) => {
               </div>
               <div style={{margin:'0 auto', display: "block"}}>
                 <div className="text-center">Avatar Image</div>
-                <img
+                {/* <img
                   src="../slider3 metallic suit small 2.png"
                   style={{ width: "200px", marginTop:'10px' }}
+                /> */}
+                { avatarUrl && (
+                  <div style={{ width: "200px", marginTop:'0px' }}>
+                  <Avatar
+                  modelSrc={avatarUrl}
+                  cameraInitialDistance={1.2}
                 />
+                </div>
+                )}
               </div>
             </div>
           </div>
