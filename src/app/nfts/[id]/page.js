@@ -10,6 +10,8 @@ const NFTPage = ({ params }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [priceUSD, setPriceUSD] = useState("");
   const [avatarUrl, setAvatarUrl] = useState('');
+  const [logos, setLogos] = useState("");
+  const [brandDesc, setbrandDesc] = useState("");
 
   const [activeTab, setActiveTab] = useState('Color'); // Default tab
 
@@ -99,43 +101,53 @@ const NFTPage = ({ params }) => {
    pricetoUSD();
   }, [onephygital])
 
+
+
+
+
+
+  useEffect(() => {
+    const brandmatch = async() => {
+     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+ 
+ try {
+   const res = await fetch(`${baseUri}/brands/all`, {
+     method: 'GET',
+     headers: {
+       'Content-Type': 'application/json'
+     }
+   });
+ 
+   if (!res.ok) {
+     throw new Error('Failed to fetch data');
+   }
+ 
+   const result = await res.json();
+ 
+     const matchedBrand = result.find(brand => brand.name === onephygital.brand_name);
+     if (matchedBrand) {
+       setLogos(matchedBrand.logo_image);
+       setbrandDesc(matchedBrand.description);
+     }
+  
+ } catch (error) {
+   console.error('Error fetching data:', error);
+ }
+    }
+ 
+    brandmatch();
+   }, [onephygital])
+
+
+
   return (
     <div>
       <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
         <div
           className='mt-4'
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          style={{ position: 'relative' }}
         >
           <img src="../logo2.png" style={{ width: '200px' }} alt="Logo" />
 
-          {/* Pop-up Div */}
-          {isHovered && (
-            <div
-              style={{
-                position: 'absolute',
-                top: '110%', // Adjust position based on your design
-                left: '80%',
-                transform: 'translateX(-50%)',
-                backgroundColor: '#D9D8D8',
-                color: 'black',
-                padding: '20px',
-                border: '1px solid #ddd',
-                borderRadius: '15px',
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                zIndex: 20,
-                width: '300px',
-                // textAlign: 'center'
-              }}
-            >
-            <div style={{display: 'flex', gap:'20px'}}>
-                <img src="../slider3 metallic suit small 2.png" style={{width: '80px', borderRadius:'100px'}}/>
-              <div className="font-bold mt-6">Brand Name</div>
-              </div>
-              <div className="mt-4" style={{fontSize: '13px'}}>Brand Description here. Brand Description here. Brand Description here. Brand Description here. Brand Description here. Brand Description here.</div>
-            </div>
-          )}
         </div>
         <div style={{display:'flex', gap:'40px', fontSize:'20px', color:'white'}} className="font-bold mt-6">
 <div>Explore</div>
@@ -171,7 +183,45 @@ const NFTPage = ({ params }) => {
           <div className="text-4xl font-bold">{onephygital?.name}</div>
           <div className="text-lg mt-10 font-bold">Base Network</div>
           <div className="mt-6">Owned by {onephygital?.deployer_address}</div>
-          <div className="mt-4">Created by {onephygital?.brand_name}</div>
+          <div className="mt-4" 
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    style={{position: 'relative'}}>
+            
+            <div>Created by <span className="font-bold" style={{cursor:'pointer'}}>{onephygital?.brand_name}</span></div>
+
+            
+          {/* Pop-up Div */}
+          {isHovered && (
+            <div
+              style={{
+                position: 'absolute',
+                top: '10%', // Adjust position based on your design
+                left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: '#D9D8D8',
+                color: 'black',
+                padding: '20px',
+                border: '1px solid #ddd',
+                borderRadius: '15px',
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                zIndex: 20,
+                width: '300px',
+                // textAlign: 'center'
+              }}
+            >
+            <div style={{display: 'flex', gap:'20px'}}>
+                <img 
+                src={`${"https://nftstorage.link/ipfs"}/${logos?.slice(7)}`}
+            
+            style={{width: '80px', borderRadius:'100px'}}/>
+              <div className="font-bold mt-6">{onephygital?.brand_name}</div>
+              </div>
+              <div className="mt-4" style={{fontSize: '13px'}}>{brandDesc}</div>
+            </div>
+          )}
+
+          </div>
 
 
 
