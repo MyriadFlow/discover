@@ -529,7 +529,7 @@ const NFTPage = ({ params }) => {
       <div style={{ position: "relative", borderRadius: "0.5rem", boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
           <img
-            src="https://discover.fiverr.com/wp-content/uploads/ezgif.com-gif-maker-3.gif"
+            src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
             alt="Loading icon"
           />
         </div>
