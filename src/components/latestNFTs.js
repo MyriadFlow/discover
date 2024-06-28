@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import HotNftCard from './hotNftCard'
 import { createClient } from '@supabase/supabase-js'
 
-const HotNFTs = ({ hotnftdata }) => {
+const LatestNFTs = ({ hotnftdata }) => {
 
   const [loading, setLoading] = useState(false)
 
@@ -38,22 +38,21 @@ const HotNFTs = ({ hotnftdata }) => {
 	return (
 		<div>
 			<div className='font-semibold' style={{ color: '#DF1FDD' }}>
-				Most Loved NFTs Now
+            Most Recently Launched
 			</div>
-			<div className='font-bold text-black text-6xl mt-10'>Hot NFTs</div>
+			<div className='font-bold text-black text-6xl mt-10'>New on Discover</div>
 			<div
 				className='flex justify-between text-2xl'
 				style={{ justifyContent: 'space-between' }}
 			>
 				<div className='mt-4'>
-					Trending Treasures: Get in on the Action with These Phygitals Making Waves
-					and Potentially Shaping the Future.
+                New Frontier: Be Among the First to Discover the Newest Phygitals Making Their Debut!
 				</div>
 				<button className='border py-3 px-10'>View All</button>
 			</div>
 
 			<div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
-        {hotnftdata?.slice(0, 8).map((nft, index) => (
+        {hotnftdata?.slice(-8).reverse().map((nft, index) => (
           <HotNftCard key={index} nft={nft} />
         ))}
       </div>
@@ -62,4 +61,4 @@ const HotNFTs = ({ hotnftdata }) => {
 	)
 }
 
-export default HotNFTs;
+export default LatestNFTs;

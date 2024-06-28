@@ -12,7 +12,7 @@ const mostRecently = ({collectionsdata}) => {
       </div>
       <div className="flex justify-between text-2xl" style={{justifyContent: 'space-between'}}>
         <div className="mt-4">
-        New Frontier: Be Among the First to Discover the Newest NFTs Making Their Debut!
+        New Frontier: Be Among the First to Discover the Newest Phygitals Making Their Debut!
         </div>
         <button className="border py-3 px-10">View All</button>
       </div>

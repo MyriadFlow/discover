@@ -4,6 +4,7 @@ import MostLoved from '../components/mostLoved'
 import MostRecently from '../components/mostRecently'
 import LeaderBoard from '../components/leaderboard'
 import HotNFTs from '../components/hotNFTs'
+import LatestNFTs from '../components/latestNFTs'
 import Brand from '../components/brand'
 import CreateBanner from '../components/createbanner'
 import Header1 from '../components/header1'
@@ -301,7 +302,8 @@ export default function Home() {
 			</div>
 
 			<div className='pt-40 bg-white px-10'>
-				<MostRecently collectionsdata={collections}/>
+				{/* <MostRecently collectionsdata={collections}/> */}
+				<LatestNFTs hotnftdata={phygitals}/>
 			</div>
 
 			<div className='pt-40 bg-white'>

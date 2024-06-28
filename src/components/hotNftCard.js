@@ -109,7 +109,7 @@ try {
           className="flex justify-between"
           style={{ paddingLeft: "20px", paddingRight: "20px", justifyContent: 'space-between' }}
         >
-          <div className="font-bold text-lg">{nft?.phygitalName}</div>
+          <div className="font-bold text-lg">{nft?.name}</div>
           <div>...</div>
         </div>
         <div

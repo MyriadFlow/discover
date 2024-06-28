@@ -12,7 +12,7 @@ const mostLoved = ({collectionsdata}) => {
       </div>
       <div className="flex justify-between text-2xl" style={{justifyContent: 'space-between'}}>
         <div className="mt-4">
-          Must-Have Mints: Don&apos;t Miss Out on These Top-Selling NFTs Before
+          Must-Have Mints: Don&apos;t Miss Out on These Top-Selling Phygitals Before
           They&apos;re Gone!
         </div>
         <button className="border py-3 px-10">View All</button>
