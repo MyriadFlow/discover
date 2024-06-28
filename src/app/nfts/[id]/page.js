@@ -1,7 +1,9 @@
 "use client"
 import React, {useState, useEffect} from "react";
 import Link from "next/link";
-import { Avatar } from '@readyplayerme/visage'
+import { Avatar } from '@readyplayerme/visage';
+import { ethers } from 'ethers';
+import { abi } from "../../../components/abi/abi";
 
 const NFTPage = ({ params }) => {
   const id = params?.id;
@@ -144,6 +146,40 @@ const NFTPage = ({ params }) => {
 
 
 
+   const buyasset = async () => {
+    setLoading(true);
+
+    try {
+
+      console.log("ethers", ethers);
+
+      if (typeof window !== "undefined" && window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+  
+        // Create a JavaScript object from the Contract ABI, to interact
+        // with the HelloWorld contract.
+        const contract = new ethers.Contract(
+          '0xaf5793324C9de8e164E822652278AB8FC174C78e',
+          abi ,
+          provider.getSigner()
+        )
+  
+        const tx = await contract.buyItem(address, onephygital.item_id,onephygital.quantity);
+        const result = await tx.wait();
+        const integerValue = parseInt(result.logs[1].data, 16);
+        console.log("Result:", result, integerValue);
+        setLoading(false);
+        setmintdone(true);
+      }
+
+    } catch (error) {
+      console.error("Error handling buy asset:", error);
+      setLoading(false); // Set loading state to false in case of error
+    }
+  };
+
+
+
   return (
     <div>
       <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
@@ -242,7 +278,8 @@ const NFTPage = ({ params }) => {
           </div>
 
           <div className="mt-10" style={{ display: "flex", gap: "20px" }}>
-            <Link href={`/confirm/${id}`}
+            <button
+            //  href={`/confirm/${id}`}
               className="w-1/2 justify-center flex"
               style={{
                 backgroundColor: "#30D8FF",
@@ -251,9 +288,10 @@ const NFTPage = ({ params }) => {
                 paddingLeft: "70px",
                 paddingRight: "70px",
               }}
+              onClick={buyasset}
             >
               BUY NOW
-            </Link>
+            </button>
             <button
              className="w-1/2"
               style={{

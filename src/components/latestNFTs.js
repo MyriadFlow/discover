@@ -35,6 +35,12 @@ const LatestNFTs = ({ hotnftdata }) => {
 	//   fetchReviewsData().finally(() => setLoading(false));
 	// }, []);
 
+	const modifiedNftData = [...hotnftdata];
+if (modifiedNftData.length > 1) {
+  const secondLastItem = modifiedNftData.splice(modifiedNftData.length - 2, 1)[0];
+  modifiedNftData.push(secondLastItem);
+}
+
 	return (
 		<div>
 			<div className='font-semibold' style={{ color: '#DF1FDD' }}>
@@ -68,7 +74,7 @@ const LatestNFTs = ({ hotnftdata }) => {
 			</div>
 
 			<div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
-        {hotnftdata?.slice(-8).reverse().map((nft, index) => (
+        {modifiedNftData?.slice(-8).reverse().map((nft, index) => (
           <HotNftCard key={index} nft={nft} />
         ))}
       </div>
