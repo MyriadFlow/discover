@@ -23,9 +23,11 @@ export default function Home() {
 	const [brands, setBrands] = useState([]);
 	const [phygitals, setPhygitals] = useState<any>([]);
 	const [collections, setCollections] = useState<any>([]);
+	const [loading, setLoading] = useState(false);
 
 	const getBrands = async () => {
 		try {
+			setLoading(true);
 		 //   const res = await fetch(`${apiUrl}/api/brands`);
 		 //   const phyres = await fetch(`${apiUrl}/api/phygitals`);
 		 //   const collres = await fetch(`${apiUrl}/api/collections`);
@@ -67,9 +69,12 @@ export default function Home() {
 		  setPhygitals(phyresult);
 		  setCollections(collresult);
 
+		  setLoading(false);
+
 		//   console.log("new database output", result, phyresult, collresult);
 		} catch (error) {
 		  console.error('Error fetching data:', error);
+		  setLoading(false);
 		}
 	  };
 
@@ -325,6 +330,38 @@ export default function Home() {
 			<div className='bg-white pt-20'>
 				<Footer />
 			</div>
+
+
+			{loading && (
+  <div
+    style={{
+      backgroundColor: "#222944E5",
+      display: "flex",
+      overflowY: "auto",
+      overflowX: "hidden",
+      position: "fixed",
+      inset: 0,
+      zIndex: 50,
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      maxHeight: "100%",
+    }}
+    id="popupmodal"
+  >
+    <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
+      <div style={{ position: "relative"}}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
+          <img
+            src="https://discover.fiverr.com/wp-content/uploads/ezgif.com-gif-maker-3.gif"
+            alt="Loading icon"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
 		</div>
 	)
 }

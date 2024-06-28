@@ -12,6 +12,7 @@ const NFTPage = ({ params }) => {
   const [avatarUrl, setAvatarUrl] = useState('');
   const [logos, setLogos] = useState("");
   const [brandDesc, setbrandDesc] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [activeTab, setActiveTab] = useState('Color'); // Default tab
 
@@ -34,6 +35,8 @@ const NFTPage = ({ params }) => {
 	const [onephygital, setonePhygital] = useState([]);
 
 	const getBrands = async () => {
+
+    setLoading(true);
 
 		// const phyres = await fetch(`${apiUrl}/api/phygitals/${id}`)
 
@@ -66,6 +69,7 @@ const NFTPage = ({ params }) => {
     if (selectedAvatar) {
       setAvatarUrl(selectedAvatar.url);
     }
+    setLoading(false);
 	}
 
 	useEffect(() => {
@@ -503,6 +507,36 @@ const NFTPage = ({ params }) => {
           </div>
         </div>
       </div>
+
+      {loading && (
+  <div
+    style={{
+      backgroundColor: "#222944E5",
+      display: "flex",
+      overflowY: "auto",
+      overflowX: "hidden",
+      position: "fixed",
+      inset: 0,
+      zIndex: 50,
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      maxHeight: "100%",
+    }}
+    id="popupmodal"
+  >
+    <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
+      <div style={{ position: "relative", borderRadius: "0.5rem", boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
+          <img
+            src="https://discover.fiverr.com/wp-content/uploads/ezgif.com-gif-maker-3.gif"
+            alt="Loading icon"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 };
