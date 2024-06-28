@@ -7,6 +7,7 @@ const NFTPage = ({ params }) => {
 
   const [isHovered, setIsHovered] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
+  const [priceUSD, setPriceUSD] = useState("");
 
   const [activeTab, setActiveTab] = useState('Color'); // Default tab
 
@@ -55,6 +56,30 @@ const NFTPage = ({ params }) => {
     const date = new Date(isoDate);
     return date.toLocaleString(); // You can customize the format further if needed
   };
+
+
+  useEffect(() => {
+    const pricetoUSD = async() => {
+       // Fetch the current ETH to USD conversion rate
+  const conversionRateRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+    
+  if (!conversionRateRes.ok) {
+    throw new Error('Failed to fetch ETH to USD conversion rate');
+  }
+  
+  const conversionRateResult = await conversionRateRes.json();
+  const ethToUsdRate = conversionRateResult.ethereum.usd;
+  
+  console.log("Current ETH to USD rate:", ethToUsdRate);
+ 
+  // Convert the lowest price from ETH to USD
+  const lowestPriceInUSD = onephygital?.price * ethToUsdRate;
+  console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
+  setPriceUSD(lowestPriceInUSD.toFixed(2));
+    }
+  
+   pricetoUSD();
+  }, [onephygital])
 
   return (
     <div>
@@ -140,7 +165,7 @@ const NFTPage = ({ params }) => {
             style={{ justifyContent: "space-between", display: "flex" }}
           >
             <div className="text-2xl font-bold">{onephygital?.price} ETH</div>
-            <div>current price USD</div>
+            <div>{priceUSD} USD</div>
             <div>Phygital & Unique avatar </div>
           </div>
 
