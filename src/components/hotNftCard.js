@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 const HotNftCard = ({ nft }) => {
 
-  const [logo , setLogos] = useState("")
+  const [logo , setLogos] = useState("");
+  const [priceUSD, setPriceUSD] = useState("")
 
   useEffect(() => {
    const brandmatch = async() => {
@@ -52,6 +53,32 @@ try {
 
    brandmatch();
   }, [])
+
+
+
+  useEffect(() => {
+    const pricetoUSD = async() => {
+       // Fetch the current ETH to USD conversion rate
+  const conversionRateRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+    
+  if (!conversionRateRes.ok) {
+    throw new Error('Failed to fetch ETH to USD conversion rate');
+  }
+  
+  const conversionRateResult = await conversionRateRes.json();
+  const ethToUsdRate = conversionRateResult.ethereum.usd;
+  
+  console.log("Current ETH to USD rate:", ethToUsdRate);
+ 
+  // Convert the lowest price from ETH to USD
+  const lowestPriceInUSD = nft?.price * ethToUsdRate;
+  console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
+  setPriceUSD(lowestPriceInUSD.toFixed(2));
+    }
+  
+   pricetoUSD();
+  }, [])
+  
   
 
 
@@ -123,7 +150,7 @@ try {
         >
           <div>
             <div className="text-xl">{nft?.price} ETH</div>
-            <div>195 USD</div>
+            <div>{priceUSD} USD</div>
           </div>
           <div
             className="px-10 text-lg"
