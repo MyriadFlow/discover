@@ -385,7 +385,7 @@ const NFTPage = ({ params }) => {
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Chain</div>
-              <div>Base Chain</div>
+              <div>{}</div>
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Date Created</div>
@@ -448,21 +448,17 @@ const NFTPage = ({ params }) => {
                   the product, and more!{" "}
                 </div>
               </div>
-              <div style={{margin:'0 auto', display: "block"}}>
-                <div className="text-center">Avatar Image</div>
-                {/* <img
-                  src="../slider3 metallic suit small 2.png"
-                  style={{ width: "200px", marginTop:'10px' }}
-                /> */}
-                { avatarUrl && (
-                  <div style={{ width: "200px", marginTop:'0px' }}>
-                  <Avatar
-                  modelSrc={avatarUrl}
-                  cameraInitialDistance={1.2}
-                />
-                </div>
-                )}
-              </div>
+              <div style={{margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+  <div style={{textAlign: 'center', fontSize:'25px'}}>Avatar</div>
+  {avatarUrl && (
+    <div style={{ width: '200px' }}>
+      <Avatar
+        modelSrc={avatarUrl}
+        cameraInitialDistance={1.2}
+      />
+    </div>
+  )}
+</div>
             </div>
           </div>
           <div
@@ -511,7 +507,7 @@ const NFTPage = ({ params }) => {
       {loading && (
   <div
     style={{
-      backgroundColor: "#222944E5",
+      // backgroundColor: "#222944E5",
       display: "flex",
       overflowY: "auto",
       overflowX: "hidden",

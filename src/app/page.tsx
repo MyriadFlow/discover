@@ -335,7 +335,7 @@ export default function Home() {
 			{loading && (
   <div
     style={{
-      backgroundColor: "#222944E5",
+    //   backgroundColor: "#222944E5",
       display: "flex",
       overflowY: "auto",
       overflowX: "hidden",
