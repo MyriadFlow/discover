@@ -153,23 +153,29 @@ const NFTPage = ({ params }) => {
 
       console.log("ethers", ethers);
 
+      // const contract = await writeContract(config, {
+      //   abi,
+      //   address: '0xaf5793324C9de8e164E822652278AB8FC174C78e',
+      //   functionName: 'buyItem',
+      //   args: [
+      //     "36u906", 1,onephygital.quantity
+      //   ],
+      // })
+
       if (typeof window !== "undefined" && window.ethereum) {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
-  
-        // Create a JavaScript object from the Contract ABI, to interact
-        // with the HelloWorld contract.
+
         const contract = new ethers.Contract(
-          '0xaf5793324C9de8e164E822652278AB8FC174C78e',
+          '0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d',
           abi ,
           provider.getSigner()
         )
   
-        const tx = await contract.buyItem(address, onephygital.item_id,onephygital.quantity);
+        const tx = await contract.mint("1");
         const result = await tx.wait();
-        const integerValue = parseInt(result.logs[1].data, 16);
-        console.log("Result:", result, integerValue);
+  
+        console.log("Result:", result);
         setLoading(false);
-        setmintdone(true);
       }
 
     } catch (error) {
