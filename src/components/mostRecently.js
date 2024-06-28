@@ -14,7 +14,23 @@ const mostRecently = ({collectionsdata}) => {
         <div className="mt-4">
         New Frontier: Be Among the First to Discover the Newest Phygitals Making Their Debut!
         </div>
-        <button className="border py-3 px-10">View All</button>
+        <button className="border"
+        style={{
+          background: "transparent",
+          border: "6px solid transparent",
+          borderRadius: "8px",
+          backgroundImage: `
+    linear-gradient(white, white),
+    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+  `,
+          backgroundOrigin: "border-box",
+          backgroundClip: "content-box, border-box",
+          WebkitBackgroundClip: "content-box, border-box", // For Safari
+          display: "block",
+          width: "180px",
+          height: "50px",
+        }}
+        >View All</button>
       </div>
 
       <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>

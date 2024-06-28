@@ -18,7 +18,23 @@ const brand = ({brandsdata}) => {
         <div className="mt-4">
         Pushing the Boundaries of Innovation.
         </div>
-        <button className="border py-3 px-10">View All</button>
+        <button className="border"
+        style={{
+          background: "transparent",
+          border: "6px solid transparent",
+          borderRadius: "8px",
+          backgroundImage: `
+    linear-gradient(white, white),
+    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+  `,
+          backgroundOrigin: "border-box",
+          backgroundClip: "content-box, border-box",
+          WebkitBackgroundClip: "content-box, border-box", // For Safari
+          display: "block",
+          width: "180px",
+          height: "50px",
+        }}
+        >View All</button>
       </div>
 
       <div className="flex text-2xl" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px',gap:'20px', flexWrap: 'wrap'}}>
