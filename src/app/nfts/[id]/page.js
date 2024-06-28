@@ -51,6 +51,11 @@ const NFTPage = ({ params }) => {
 		getBrands()
 	}, [])
 
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleString(); // You can customize the format further if needed
+  };
+
   return (
     <div>
       <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
@@ -123,7 +128,7 @@ const NFTPage = ({ params }) => {
           <div className="text-4xl font-bold">{onephygital?.name}</div>
           <div className="text-lg mt-10 font-bold">Base Network</div>
           <div className="mt-6">Owned by {onephygital?.deployer_address}</div>
-          <div className="mt-4">Created by brand name</div>
+          <div className="mt-4">Created by {onephygital?.brand_name}</div>
 
 
 
@@ -270,7 +275,7 @@ const NFTPage = ({ params }) => {
               style={{ justifyContent: "space-between", display: "flex" }}
               className="mt-10"
             >
-              <div>Contact Address</div>
+              <div>Contract Address</div>
               <div>{onephygital?.contract_address}</div>
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
@@ -287,7 +292,7 @@ const NFTPage = ({ params }) => {
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Date Created</div>
-              <div>date</div>
+              <div>{formatDate(onephygital?.created_at)}</div>
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Last Sale</div>
@@ -295,7 +300,7 @@ const NFTPage = ({ params }) => {
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Last Updated</div>
-              <div>update date (avatar also)</div>
+              <div>{formatDate(onephygital?.updated_at)}</div>
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Creator Earnings</div>
