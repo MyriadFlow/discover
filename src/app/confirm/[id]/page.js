@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Link from "next/link";
 
 const ConfirmAddr = ({ params }) => {
@@ -7,6 +7,33 @@ const ConfirmAddr = ({ params }) => {
 
   const [isHovered, setIsHovered] = useState(false);
   const [confirmClicked, setconfirmClicked] = useState(false);
+
+  const [onephygital, setonePhygital] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+	const getBrands = async () => {
+
+    setLoading(true);
+
+		// const phyres = await fetch(`${apiUrl}/api/phygitals/${id}`)
+
+    const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+		  const phyres = await fetch(`${baseUri}/phygitals/${id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			});
+
+		const phyresult = await phyres.json()
+		setonePhygital(phyresult);
+    setLoading(false);
+	}
+
+	useEffect(() => {
+		getBrands()
+	}, [])
 
   return (
     <div>
@@ -22,8 +49,9 @@ const ConfirmAddr = ({ params }) => {
 <div>Brand</div>
 <div>Dashboard</div>
         </div>
-        <div>
-            <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button>
+        <div className="mt-6">
+            {/* <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button> */}
+            <w3m-button />
         </div>
     </div>
       <div className="mt-10 px-10">
@@ -42,7 +70,7 @@ const ConfirmAddr = ({ params }) => {
           backgroundClip: "text",
           color: "transparent",
           paddingBottom: "10px"}}>Congratulations!</div>
-          <div className="text-2xl mt-10">You have successfully minted phygital name phygital NFT!</div>
+          <div className="text-2xl mt-10">You have successfully minted {onephygital?.name} phygital NFT!</div>
 
 
 
@@ -50,7 +78,7 @@ const ConfirmAddr = ({ params }) => {
 
           <div className="mt-10 text-2xl font-bold">IMPORTANT!</div>
 
-          <div className="mt-10" style={{fontSize:'20px'}}>Fill in your address, so brand name can ship your product.</div>
+          <div className="mt-10" style={{fontSize:'20px'}}>Fill in your address, so {onephygital?.brand_name} can ship your product.</div>
           <div
             className="mt-10"
             style={{ justifyContent: "space-between", display: "flex" }}
@@ -205,6 +233,37 @@ const ConfirmAddr = ({ params }) => {
   </div>
 )}
 
+
+
+{loading && (
+  <div
+    style={{
+      // backgroundColor: "#222944E5",
+      display: "flex",
+      overflowY: "auto",
+      overflowX: "hidden",
+      position: "fixed",
+      inset: 0,
+      zIndex: 50,
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      maxHeight: "100%",
+    }}
+    id="popupmodal"
+  >
+    <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
+      <div style={{ position: "relative", borderRadius: "0.5rem", boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
+          <img
+            src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
+            alt="Loading icon"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
     
     </div>

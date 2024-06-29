@@ -153,15 +153,6 @@ const NFTPage = ({ params }) => {
 
       console.log("ethers", ethers);
 
-      // const contract = await writeContract(config, {
-      //   abi,
-      //   address: '0xaf5793324C9de8e164E822652278AB8FC174C78e',
-      //   functionName: 'buyItem',
-      //   args: [
-      //     "36u906", 1,onephygital.quantity
-      //   ],
-      // })
-
       if (typeof window !== "undefined" && window.ethereum) {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
 
@@ -176,6 +167,7 @@ const NFTPage = ({ params }) => {
   
         console.log("Result:", result);
         setLoading(false);
+        window.location.href = `/confirm/${id}`;
       }
 
     } catch (error) {
