@@ -35,7 +35,7 @@ const mostLoved = ({collectionsdata}) => {
       </div>
 
       <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
-        {collectionsdata?.map((nft, index) => (
+        {collectionsdata?.slice(-8).map((nft, index) => (
           <MostLovedCard key={index} nft={nft} />
         ))}
       </div>

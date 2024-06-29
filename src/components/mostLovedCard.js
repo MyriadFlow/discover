@@ -7,6 +7,7 @@ const MostLovedCard = ({nft}) => {
   const [logo , setLogos] = useState("");
   const [lowestPrice, setlowestPrice] = useState("");
   const [lowestPriceUSD, setLowestPriceUSD] = useState("");
+  const [productURL, setProductURL] = useState("");
 
   useEffect(() => {
    const brandmatch = async() => {
@@ -111,6 +112,9 @@ try {
   console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
   setLowestPriceUSD(lowestPriceInUSD.toFixed(2));
 
+  const productURL = filteredData[0].product_url;
+  setProductURL(productURL);
+
 } catch (error) {
   console.error('Error fetching data:', error);
 }
@@ -177,7 +181,7 @@ try {
           <div>...</div>
         </div>
         <div
-          className="flex justify-between"
+          className="flex justify-between mt-4"
           style={{
             paddingLeft: "20px",
             paddingRight: "20px",
@@ -185,10 +189,32 @@ try {
             justifyContent: 'space-between'
           }}
         >
+          { productURL ? (
+            <div
+            className="text-lg"
+            style={{
+              border: "1px solid black",
+              height: "30px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "5px",
+              gap:'4px',
+              paddingLeft:'25px',
+              paddingRight:'25px',
+              marginBottom:'25px'
+            }}
+          >
+            <div>View</div>
+            <img style={{width:'25px'}} src="/shopify.png"/>
+          </div>
+          ) 
+          :
+          (
           <div>
             <div className="text-xl">Starts from {lowestPrice} ETH</div>
             <div>{lowestPriceUSD} USD</div>
-          </div>
+          </div>)}
           <div
             className="px-10 text-lg"
             style={{
