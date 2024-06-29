@@ -265,7 +265,9 @@ const NFTPage = ({ params }) => {
 
           {/* --------------------------------------- user perspective --------------------------------------------------------- */}
 
-          <div className="mt-10 text-2xl font-bold">Price Amount</div>
+          { !onephygital?.product_url ? (
+            <>
+            <div className="mt-10 text-2xl font-bold">Price Amount</div>
           <div
             className="mt-10"
             style={{ justifyContent: "space-between", display: "flex" }}
@@ -303,12 +305,11 @@ const NFTPage = ({ params }) => {
               SHARE
             </button>
           </div>
+          </>)
+          :(
 
-
-
-          {/* ------------------------------------------------- owner perspective------------------------------------- */}
-
-          {/* <div style={{ display: "flex", justifyContent:'end' , marginTop:'100px', gap:'20px'}}>
+<>
+          <div style={{ display: "flex", justifyContent:'end' , marginTop:'100px', gap:'20px'}}>
             <div 
           className="w-1/2"
           >
@@ -367,11 +368,17 @@ const NFTPage = ({ params }) => {
                 paddingLeft: "70px",
                 paddingRight: "70px",
                 border: "2px solid black",
+                display: 'flex',
+                justifyContent: "center",
+                gap:'4px'
               }}
             >
-              VIEW ON SHOPIFY
+              <div>VIEW ON SHOPIFY</div>
+              <img style={{width:'30px', marginTop:'-4px'}} src="/shopify.png"/>
             </button>
-          </div> */}
+          </div>
+          </>
+          )}
 
 
         </div>
