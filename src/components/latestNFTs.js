@@ -74,7 +74,7 @@ if (modifiedNftData.length > 1) {
 			</div>
 
 			<div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
-        {modifiedNftData?.slice(-8).reverse().map((nft, index) => (
+        {hotnftdata?.slice(-8).reverse().map((nft, index) => (
           <HotNftCard key={index} nft={nft} />
         ))}
       </div>
