@@ -361,7 +361,7 @@ const NFTPage = ({ params }) => {
           </div>
         )}
             </button>
-            <button
+            <Link href={`${onephygital?.product_url}`} target="_blank"
              className="w-1/2"
               style={{
                 paddingTop: "10px",
@@ -376,7 +376,7 @@ const NFTPage = ({ params }) => {
             >
               <div>VIEW ON SHOPIFY</div>
               <img style={{width:'30px', marginTop:'-4px'}} src="/shopify.png"/>
-            </button>
+            </Link>
           </div>
           </>
           )}
@@ -429,7 +429,7 @@ const NFTPage = ({ params }) => {
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Chain</div>
-              <div>{}</div>
+              <div>Base Network</div>
             </div>
             <div style={{ justifyContent: "space-between", display: "flex" }}>
               <div>Date Created</div>

@@ -161,7 +161,8 @@ try {
               borderRadius: "5px",
               gap:'4px',
               paddingLeft:'25px',
-              paddingRight:'25px'
+              paddingRight:'25px',
+              marginBottom:'25px'
             }}
           >
             <div>Buy</div>
