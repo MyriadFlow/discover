@@ -161,8 +161,9 @@ const NFTPage = ({ params }) => {
           abi ,
           provider.getSigner()
         )
+
   
-        const tx = await contract.mint("1");
+        const tx = await contract.mint(1,{value: "40000000000000000" });
         const result = await tx.wait();
   
         console.log("Result:", result);
