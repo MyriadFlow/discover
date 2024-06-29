@@ -140,7 +140,7 @@ try {
           <div>...</div>
         </div>
         <div
-          className="flex justify-between"
+          className="flex justify-between mt-4"
           style={{
             paddingLeft: "20px",
             paddingRight: "20px",
@@ -148,11 +148,50 @@ try {
             justifyContent: 'space-between'
           }}
         >
-          <div>
-            <div className="text-xl">{nft?.price} ETH</div>
+          { nft?.product_url ? 
+          (
+            <div
+            className="text-lg"
+            style={{
+              border: "1px solid black",
+              height: "30px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "5px",
+              gap:'4px',
+              paddingLeft:'25px',
+              paddingRight:'25px'
+            }}
+          >
+            <div>Buy</div>
+            <img style={{width:'25px'}} src="/shopify.png"/>
+          </div>
+          ):
+          (
+            <div>
+            <div className="text-2xl">{nft?.price} ETH</div>
             <div>{priceUSD} USD</div>
           </div>
-          <div
+          )}
+          { nft?.product_url ? 
+          (
+<div
+            className="px-10 text-lg"
+            style={{
+              backgroundColor: "#DF1FDD36",
+              border: "1px solid black",
+              height: "30px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "5px",
+            }}
+          >
+            Claim
+          </div>
+          ):
+          (<div
             className="px-10 text-lg"
             style={{
               backgroundColor: "#DF1FDD36",
@@ -165,7 +204,7 @@ try {
             }}
           >
             Buy
-          </div>
+          </div>)}
         </div>
       </div>
     </div>
