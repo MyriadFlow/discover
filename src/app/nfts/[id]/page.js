@@ -463,7 +463,7 @@ const NFTPage = ({ params }) => {
             <div className="text-4xl font-bold">WebXR</div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div className="w-1/2">
-                <button
+                <Link href="https://webxr.myriadflow.com/" target="_blank"
                   className="rounded"
                   style={{
                     background: "transparent",
@@ -483,10 +483,13 @@ const NFTPage = ({ params }) => {
                     height: "50px", // Set fixed width for the button
                     display: "block",
                     marginTop: "40px", // Center the button
+                    display: "flex", // Use Flexbox
+                    alignItems: "center", // Center vertically
+                    justifyContent: "center", // Center horizontally
                   }}
                 >
                   Experience
-                </button>
+                </Link>
                 <div className="mt-10">
                   Access the WebXR experience to ask questions about the brand,
                   the product, and more!{" "}
