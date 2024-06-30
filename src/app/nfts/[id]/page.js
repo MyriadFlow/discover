@@ -463,7 +463,7 @@ const NFTPage = ({ params }) => {
             <div className="text-4xl font-bold">WebXR</div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div className="w-1/2">
-                <Link href="https://webxr.myriadflow.com/" target="_blank"
+                <Link href={`https://webxr.myriadflow.com/${onephygital?.id}`} target="_blank"
                   className="rounded"
                   style={{
                     background: "transparent",

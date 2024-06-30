@@ -83,134 +83,132 @@ try {
 
 
   return (
-    <Link href={`/nfts/${nft.id}`}>
-    <div>
-      <div
-        style={{
-          width: "330px",
-          borderRadius: "30px",
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div style={{ position: 'relative' }}>
-          <img
-            src={`${
-              "https://nftstorage.link/ipfs"
-            }/${nft?.image.slice(7)}`}
-            className="rounded"
-            style={{ padding: "20px", borderRadius: '30px' }}
-            alt="Gold Headphones"
-          />
-          {/* New Image and Text at the top ends */}
-          <img
-            src={`${
-              "https://nftstorage.link/ipfs"
-            }/${logo?.slice(7)}`}
-            alt="New Icon"
-            style={{
-              position: "absolute",
-              top: "10px",
-              left: "10px",
-              width: "50px",
-              height: "50px",
-              borderRadius:'50px'
-            }}
-          />
+      <div style={{ position: "relative", display: "inline-block" }}>
+        <Link href={`/nfts/${nft.id}`}>
           <div
             style={{
-              position: "absolute",
-              top: "10px",
-              right: "10px",
-              padding: "5px 20px",
-              borderRadius: "10px",
-              border: '1px solid black',
-              background:'white'
+              width: "330px",
+              borderRadius: "30px",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
+              overflow: "hidden",
+              cursor: "pointer",
             }}
           >
-            Web XR
+            <div style={{ position: 'relative' }}>
+              <img
+                src={`https://nftstorage.link/ipfs/${nft?.image.slice(7)}`}
+                className="rounded"
+                style={{ padding: "20px", borderRadius: '30px' }}
+                alt="Gold Headphones"
+              />
+              <img
+                src={`https://nftstorage.link/ipfs/${logo?.slice(7)}`}
+                alt="New Icon"
+                style={{
+                  position: "absolute",
+                  top: "10px",
+                  left: "10px",
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: '50px'
+                }}
+              />
+            </div>
+            <div
+              className="flex justify-between"
+              style={{ paddingLeft: "20px", paddingRight: "20px", justifyContent: 'space-between' }}
+            >
+              <div className="font-bold text-lg">{nft?.name}</div>
+              <div>...</div>
+            </div>
+            <div
+              className="flex justify-between mt-4"
+              style={{
+                paddingLeft: "20px",
+                paddingRight: "20px",
+                paddingBottom: "20px",
+                justifyContent: 'space-between'
+              }}
+            >
+              {nft?.product_url ?
+                (
+                  <div
+                    className="text-lg"
+                    style={{
+                      border: "1px solid black",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: "5px",
+                      gap: '4px',
+                      paddingLeft: '25px',
+                      paddingRight: '25px',
+                      marginBottom: '25px'
+                    }}
+                  >
+                    <div>Buy</div>
+                    <img style={{ width: '25px' }} src="/shopify.png" alt="Buy Icon"/>
+                  </div>
+                ) :
+                (
+                  <div>
+                    <div className="text-2xl">{nft?.price} ETH</div>
+                    <div>{priceUSD} USD</div>
+                  </div>
+                )}
+              {nft?.product_url ?
+                (
+                  <div
+                    className="px-10 text-lg"
+                    style={{
+                      backgroundColor: "#DF1FDD36",
+                      border: "1px solid black",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    Claim
+                  </div>
+                ) :
+                (
+                  <div
+                    className="px-10 text-lg"
+                    style={{
+                      backgroundColor: "#DF1FDD36",
+                      border: "1px solid black",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: "5px",
+                    }}
+                  >
+                    Buy
+                  </div>
+                )}
+            </div>
           </div>
-        </div>
-        <div
-          className="flex justify-between"
-          style={{ paddingLeft: "20px", paddingRight: "20px", justifyContent: 'space-between' }}
-        >
-          <div className="font-bold text-lg">{nft?.name}</div>
-          <div>...</div>
-        </div>
-        <div
-          className="flex justify-between mt-4"
+        </Link>
+        <Link href={`https://webxr.myriadflow.com/${nft?.id}`} target="_blank"
           style={{
-            paddingLeft: "20px",
-            paddingRight: "20px",
-            paddingBottom: "20px",
-            justifyContent: 'space-between'
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            padding: "5px 20px",
+            borderRadius: "10px",
+            border: '1px solid black',
+            background: 'white',
+            zIndex: 1 // Ensure it's on top of the card
           }}
         >
-          { nft?.product_url ? 
-          (
-            <div
-            className="text-lg"
-            style={{
-              border: "1px solid black",
-              height: "30px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "5px",
-              gap:'4px',
-              paddingLeft:'25px',
-              paddingRight:'25px',
-              marginBottom:'25px'
-            }}
-          >
-            <div>Buy</div>
-            <img style={{width:'25px'}} src="/shopify.png"/>
-          </div>
-          ):
-          (
-            <div>
-            <div className="text-2xl">{nft?.price} ETH</div>
-            <div>{priceUSD} USD</div>
-          </div>
-          )}
-          { nft?.product_url ? 
-          (
-<div
-            className="px-10 text-lg"
-            style={{
-              backgroundColor: "#DF1FDD36",
-              border: "1px solid black",
-              height: "30px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "5px",
-            }}
-          >
-            Claim
-          </div>
-          ):
-          (<div
-            className="px-10 text-lg"
-            style={{
-              backgroundColor: "#DF1FDD36",
-              border: "1px solid black",
-              height: "30px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "5px",
-            }}
-          >
-            Buy
-          </div>)}
-        </div>
+          Web XR
+        </Link>
       </div>
-    </div>
-    </Link>
-  );
+    );
 }
 
 export default HotNftCard;
