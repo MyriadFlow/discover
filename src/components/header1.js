@@ -1,5 +1,6 @@
 "use client"
 import React, {useState, useEffect} from 'react'
+import Link from 'next/link';
 
 const Header1 = () => {
 
@@ -36,10 +37,10 @@ const Header1 = () => {
             style={{width:'200px'}}/>
         </div>
         <div style={{display:'flex', gap:'40px', fontSize:'20px'}} className="font-bold mt-10">
-<div>Explore</div>
-<div>Collections</div>
-<div>Brand</div>
-<div>Dashboard</div>
+<Link href="">Explore</Link>
+<Link href="">Collections</Link>
+<Link href="">Brand</Link>
+<Link href="">Dashboard</Link>
         </div>
         <div className="mt-10">
             {/* <button className="px-10 mt-10" style={{paddingTop:'5px', paddingBottom:'5px', borderRadius:'5px',
