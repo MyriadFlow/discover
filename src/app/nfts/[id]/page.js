@@ -163,7 +163,7 @@ const NFTPage = ({ params }) => {
         )
 
   
-        const tx = await contract.mint(1,{value: "40000000000000000" });
+        const tx = await contract.mint(1 , {value: ethers.utils.parseEther(onephygital?.price.toString()) });
         const result = await tx.wait();
   
         console.log("Result:", result);
