@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-const HotNftCard = ({ nft }) => {
+const HotNftCard = ({ nft, sold }) => {
 
   const [logo , setLogos] = useState("");
-  const [priceUSD, setPriceUSD] = useState("")
+  const [priceUSD, setPriceUSD] = useState("");
 
   useEffect(() => {
    const brandmatch = async() => {
@@ -78,9 +78,9 @@ try {
   
    pricetoUSD();
   }, [])
-  
-  
 
+
+  
 
   return (
       <div style={{ position: "relative", display: "inline-block" }}>
@@ -175,6 +175,21 @@ try {
                   </div>
                 ) :
                 (
+                  <div>
+
+                    <div
+                    className="px-10 text-lg"
+                    style={{
+                      color: "#DF1FDD",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {sold} Sold
+                  </div>
+
                   <div
                     className="px-10 text-lg"
                     style={{
@@ -188,6 +203,7 @@ try {
                     }}
                   >
                     Buy
+                  </div>
                   </div>
                 )}
             </div>
