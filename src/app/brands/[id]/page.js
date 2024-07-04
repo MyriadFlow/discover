@@ -2,7 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import MostLovedCard from "../../../components/mostLovedCard";
 
-const page = ({params}) => {
+const Brand = ({params}) => {
 
     const id = params?.id;
 
@@ -129,4 +129,4 @@ const page = ({params}) => {
   )
 }
 
-export default page;
+export default Brand;
