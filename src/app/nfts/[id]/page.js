@@ -162,8 +162,14 @@ const NFTPage = ({ params }) => {
           provider.getSigner()
         )
 
+        const blockchainPrice = await contract.nftPrice();
+        const priceInDecimal = parseInt(blockchainPrice._hex, 16);
+console.log("blockchainPrice in decimal", priceInDecimal);
+
   
-        const tx = await contract.mint(1 , {value: ethers.utils.parseEther(onephygital?.price.toString()) });
+        // const tx = await contract.mint(1 , {value: ethers.utils.parseEther(onephygital?.price.toString()) });
+        const tx = await contract.mint(1 , {value: `${priceInDecimal}` });
+
         const result = await tx.wait();
   
         console.log("Result:", result);
