@@ -68,7 +68,7 @@ const NFTPage = ({ params }) => {
 
 		const avatardata = await avatar.json();
 
-		console.log("avatar", avatardata);
+		console.log("avatar", avatardata, phyresult);
 
     const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === id);
 
@@ -151,7 +151,7 @@ const NFTPage = ({ params }) => {
           "chain": chainId,
           "order": "DESC",
           "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
-          "address": "0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d",
+          "address": `${onephygital?.contract_address}`,
           "abi": {
           "anonymous": false,
           "inputs": [
@@ -227,6 +227,8 @@ const NFTPage = ({ params }) => {
   
         const tx = await contract.mint(1 , {value: ethers.utils.parseEther(onephygital?.price.toString()) });
         // const tx = await contract.mint(1 , {value: `${priceInDecimal}` });
+
+        // const tx = await contract.mint(1 , {value: "1000000000000000" });
 
         const result = await tx.wait();
   
@@ -403,19 +405,16 @@ const NFTPage = ({ params }) => {
           </div>
 
           <div
-                    className="px-10 text-lg"
+                    className="text-lg mt-4"
                     style={{
                       color: "#DF1FDD",
                       height: "30px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
                     }}
                   >
                     {sold}/{onephygital?.quantity} Sold
                   </div>
 
-          <div className="mt-10" style={{ display: "flex", gap: "20px" }}>
+          <div className="mt-0" style={{ display: "flex", gap: "20px" }}>
             <button
             //  href={`/confirm/${id}`}
               className="w-1/2 justify-center flex"
