@@ -40,7 +40,7 @@ const brand = ({brandsdata}) => {
 
       <div className="flex text-2xl" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px',gap:'20px', flexWrap: 'wrap'}}>
       {brandsdata?.map((brand, index) => (
-          <Link href={`/brands/${brand.id}`}>
+          <Link href={`/brands/${brand.id}`} key={index}>
           <div key={index} className="flex flex-col justify-center items-center">
             <img
               src={`${
