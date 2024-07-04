@@ -181,7 +181,10 @@ const NFTPage = ({ params }) => {
         
         
           // console.log("response", response.raw, response.raw.result[0].data.currentIndex);
+          if(response.raw.result[0])
+          {
           setsold(response.raw.result[0].data.currentIndex);
+          }
         } catch (e) {
           console.error(e);
         }
@@ -215,7 +218,7 @@ const NFTPage = ({ params }) => {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
 
         const contract = new ethers.Contract(
-          '0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d',
+          `${onephygital?.contract_address}`,
           abi ,
           provider.getSigner()
         )
