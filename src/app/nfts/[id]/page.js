@@ -68,7 +68,7 @@ const NFTPage = ({ params }) => {
 
 		const avatardata = await avatar.json();
 
-		// console.log("avatar", avatardata);
+		console.log("avatar", avatardata);
 
     const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === id);
 
@@ -139,7 +139,60 @@ const NFTPage = ({ params }) => {
      if (matchedBrand) {
        setLogos(matchedBrand.logo_image);
        setbrandDesc(matchedBrand.description);
+
+       const fetch = async() => {
+
+        try {
+          await Moralis.start({
+          apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY
+          });
+      
+          const response = await Moralis.EvmApi.events.getContractEvents({
+          "chain": chainId,
+          "order": "DESC",
+          "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
+          "address": "0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d",
+          "abi": {
+          "anonymous": false,
+          "inputs": [
+          {
+            "indexed": false,
+            "name": "currentIndex",
+            "type": "uint256",
+            "internal_type": "uint256"
+          },
+          {
+            "indexed": false,
+            "name": "quantity",
+            "type": "uint256",
+            "internal_type": "uint256"
+          },
+          {
+            "indexed": true,
+            "name": "creator",
+            "type": "address",
+            "internal_type": "address"
+          }
+          ],
+          "name": "PhygitalAAssetCreated",
+          "type": "event"
+        }
+          });
+        
+        
+          // console.log("response", response.raw, response.raw.result[0].data.currentIndex);
+          setsold(response.raw.result[0].data.currentIndex);
+        } catch (e) {
+          console.error(e);
+        }
+      
+      
+        }
+
+        fetch();
      }
+
+      
   
  } catch (error) {
    console.error('Error fetching data:', error);
@@ -192,57 +245,57 @@ const NFTPage = ({ params }) => {
   	  // ------------------------------------ how many items sold --------------------------------------------------------------
 
 
-      const fetch = async() => {
+      // const fetch = async() => {
 
-        try {
-          await Moralis.start({
-          apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY
-          });
+      //   try {
+      //     await Moralis.start({
+      //     apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY
+      //     });
       
-          const response = await Moralis.EvmApi.events.getContractEvents({
-          "chain": chainId,
-          "order": "DESC",
-          "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
-          "address": "0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d",
-          "abi": {
-          "anonymous": false,
-          "inputs": [
-          {
-            "indexed": false,
-            "name": "currentIndex",
-            "type": "uint256",
-            "internal_type": "uint256"
-          },
-          {
-            "indexed": false,
-            "name": "quantity",
-            "type": "uint256",
-            "internal_type": "uint256"
-          },
-          {
-            "indexed": true,
-            "name": "creator",
-            "type": "address",
-            "internal_type": "address"
-          }
-          ],
-          "name": "PhygitalAAssetCreated",
-          "type": "event"
-        }
-          });
+      //     const response = await Moralis.EvmApi.events.getContractEvents({
+      //     "chain": chainId,
+      //     "order": "DESC",
+      //     "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
+      //     "address": "0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d",
+      //     "abi": {
+      //     "anonymous": false,
+      //     "inputs": [
+      //     {
+      //       "indexed": false,
+      //       "name": "currentIndex",
+      //       "type": "uint256",
+      //       "internal_type": "uint256"
+      //     },
+      //     {
+      //       "indexed": false,
+      //       "name": "quantity",
+      //       "type": "uint256",
+      //       "internal_type": "uint256"
+      //     },
+      //     {
+      //       "indexed": true,
+      //       "name": "creator",
+      //       "type": "address",
+      //       "internal_type": "address"
+      //     }
+      //     ],
+      //     "name": "PhygitalAAssetCreated",
+      //     "type": "event"
+      //   }
+      //     });
         
         
-          // console.log("response", response.raw, response.raw.result[0].data.currentIndex);
-          setsold(response.raw.result[0].data.currentIndex);
-        } catch (e) {
-          console.error(e);
-        }
+      //     // console.log("response", response.raw, response.raw.result[0].data.currentIndex);
+      //     setsold(response.raw.result[0].data.currentIndex);
+      //   } catch (e) {
+      //     console.error(e);
+      //   }
       
       
-        }
+      //   }
       
         useEffect(() => {
-        fetch();
+        // fetch();
         }, [])
         
       
