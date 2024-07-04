@@ -46,7 +46,7 @@ const page = ({params}) => {
 
   setcollections(matchedCollections);
      
-       console.log("brand", matchedBrand, matchedCollections);
+      //  console.log("brand", matchedBrand, matchedCollections);
      
      } catch (error) {
        console.error('Error fetching data:', error);

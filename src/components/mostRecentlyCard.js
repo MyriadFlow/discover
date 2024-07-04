@@ -44,7 +44,7 @@ try {
     }
   }
 
-  console.log("logo", logo, result, collresult);
+  // console.log("logo", logo, result, collresult);
 
 } catch (error) {
   console.error('Error fetching data:', error);

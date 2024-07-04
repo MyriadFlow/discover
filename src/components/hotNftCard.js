@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-const HotNftCard = ({ nft, sold }) => {
+const HotNftCard = ({ nft }) => {
 
   const [logo , setLogos] = useState("");
   const [priceUSD, setPriceUSD] = useState("");
@@ -44,7 +44,7 @@ try {
     }
   }
 
-  console.log("logo", logo, result, phyresult);
+  // console.log("logo", logo, result, phyresult);
 
 } catch (error) {
   console.error('Error fetching data:', error);
@@ -79,8 +79,6 @@ try {
    pricetoUSD();
   }, [])
 
-
-  
 
   return (
       <div style={{ position: "relative", display: "inline-block" }}>
@@ -176,20 +174,6 @@ try {
                 ) :
                 (
                   <div>
-
-                    <div
-                    className="px-10 text-lg"
-                    style={{
-                      color: "#DF1FDD",
-                      height: "30px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {sold} Sold
-                  </div>
-
                   <div
                     className="px-10 text-lg"
                     style={{

@@ -46,7 +46,7 @@ try {
     }
   }
 
-  console.log("logo", logo, result, collresult);
+  // console.log("logo", logo, result, collresult);
 
 } catch (error) {
   console.error('Error fetching data:', error);
@@ -140,7 +140,7 @@ try {
           <img
             src={`${
               "https://nftstorage.link/ipfs"
-            }/${nft?.cover_image.slice(7)}`}
+            }/${nft?.logo_image.slice(7)}`}
             className="rounded"
             style={{ padding: "20px", borderRadius: '30px' }}
           />

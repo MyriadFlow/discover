@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Avatar } from '@readyplayerme/visage';
 import { ethers } from 'ethers';
 import { abi } from "../../../components/abi/abi";
+import {useAccount, useChainId } from 'wagmi';
+import Moralis from 'moralis';
 
 const NFTPage = ({ params }) => {
   const id = params?.id;
@@ -15,6 +17,9 @@ const NFTPage = ({ params }) => {
   const [logos, setLogos] = useState("");
   const [brandDesc, setbrandDesc] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sold, setsold] = useState(0);
+
+  const chainId = useChainId()
 
   const [activeTab, setActiveTab] = useState('Color'); // Default tab
 
@@ -63,7 +68,7 @@ const NFTPage = ({ params }) => {
 
 		const avatardata = await avatar.json();
 
-		console.log("avatar", avatardata);
+		// console.log("avatar", avatardata);
 
     const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === id);
 
@@ -96,11 +101,11 @@ const NFTPage = ({ params }) => {
   const conversionRateResult = await conversionRateRes.json();
   const ethToUsdRate = conversionRateResult.ethereum.usd;
   
-  console.log("Current ETH to USD rate:", ethToUsdRate);
+  // console.log("Current ETH to USD rate:", ethToUsdRate);
  
   // Convert the lowest price from ETH to USD
   const lowestPriceInUSD = onephygital?.price * ethToUsdRate;
-  console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
+  // console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
   setPriceUSD(lowestPriceInUSD.toFixed(2));
     }
   
@@ -151,7 +156,7 @@ const NFTPage = ({ params }) => {
 
     try {
 
-      console.log("ethers", ethers);
+      // console.log("ethers", ethers);
 
       if (typeof window !== "undefined" && window.ethereum) {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -172,7 +177,7 @@ const NFTPage = ({ params }) => {
 
         const result = await tx.wait();
   
-        console.log("Result:", result);
+        // console.log("Result:", result);
         setLoading(false);
         window.location.href = `/confirm/${id}`;
       }
@@ -182,6 +187,66 @@ const NFTPage = ({ params }) => {
       setLoading(false); // Set loading state to false in case of error
     }
   };
+
+
+  	  // ------------------------------------ how many items sold --------------------------------------------------------------
+
+
+      const fetch = async() => {
+
+        try {
+          await Moralis.start({
+          apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY
+          });
+      
+          const response = await Moralis.EvmApi.events.getContractEvents({
+          "chain": chainId,
+          "order": "DESC",
+          "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
+          "address": "0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d",
+          "abi": {
+          "anonymous": false,
+          "inputs": [
+          {
+            "indexed": false,
+            "name": "currentIndex",
+            "type": "uint256",
+            "internal_type": "uint256"
+          },
+          {
+            "indexed": false,
+            "name": "quantity",
+            "type": "uint256",
+            "internal_type": "uint256"
+          },
+          {
+            "indexed": true,
+            "name": "creator",
+            "type": "address",
+            "internal_type": "address"
+          }
+          ],
+          "name": "PhygitalAAssetCreated",
+          "type": "event"
+        }
+          });
+        
+        
+          // console.log("response", response.raw, response.raw.result[0].data.currentIndex);
+          setsold(response.raw.result[0].data.currentIndex);
+        } catch (e) {
+          console.error(e);
+        }
+      
+      
+        }
+      
+        useEffect(() => {
+        fetch();
+        }, [])
+        
+      
+        //----------------------------------------------------------------------------------------------------//
 
 
 
@@ -283,6 +348,19 @@ const NFTPage = ({ params }) => {
             <div>{priceUSD} USD</div>
             <div>Phygital & Unique avatar </div>
           </div>
+
+          <div
+                    className="px-10 text-lg"
+                    style={{
+                      color: "#DF1FDD",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {sold}/{onephygital?.quantity} Sold
+                  </div>
 
           <div className="mt-10" style={{ display: "flex", gap: "20px" }}>
             <button
