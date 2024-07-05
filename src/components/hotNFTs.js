@@ -69,7 +69,7 @@ const HotNFTs = ({ hotnftdata }) => {
 			</div>
 
 			<div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
-        {hotnftdata?.slice(0, 8).map((nft, index) => (
+        {hotnftdata?.slice(-8).map((nft, index) => (
           <HotNftCard key={index} nft={nft} />
         ))}
       </div>
