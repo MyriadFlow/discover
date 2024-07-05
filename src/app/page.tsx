@@ -1,5 +1,6 @@
 'use client'
 import Image from 'next/image'
+import Link from 'next/link'
 import MostLoved from '../components/mostLoved'
 import MostRecently from '../components/mostRecently'
 import LeaderBoard from '../components/leaderboard'
@@ -114,8 +115,8 @@ export default function Home() {
 						Create & interact with AI-Powered brand ambassadors.
 					</div>
 					<div className='flex gap-10 mt-10'>
-						<button style={exploreButtonStyle}>Explore</button>
-						<button style={exploreButtonStyle}>Launch</button>
+						<Link href="https://discover-two.vercel.app" style={exploreButtonStyle}>Explore</Link>
+						<Link href="https://studio-one-sigma.vercel.app" target="_blank" style={exploreButtonStyle}>Launch</Link>
 					</div>
 				</div>
 
