@@ -184,7 +184,7 @@ const ConfirmAddr = ({ params }) => {
           </p>
         </div>
         <div style={{ display: "flex", alignItems: "center", paddingTop: "20px", paddingBottom: "16px" }}>
-          <Link
+          <a
             href="/"
             type="button"
             style={{
@@ -203,7 +203,7 @@ const ConfirmAddr = ({ params }) => {
             }}
           >
             Go Back to Discover
-          </Link>
+          </a>
         </div>
 
         <div style={{ display: "flex", alignItems: "center", paddingTop: "16px", paddingBottom: "80px" }}>

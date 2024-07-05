@@ -193,7 +193,7 @@ try {
             </div>
           </div>
         </Link>
-        <Link href={`https://webxr.myriadflow.com/${nft?.id}`} target="_blank"
+        <Link href={`https://webxr-ebon.vercel.app/${nft?.id}`} target="_blank"
           style={{
             position: "absolute",
             top: "10px",

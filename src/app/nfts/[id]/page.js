@@ -2,6 +2,8 @@
 import React, {useState, useEffect} from "react";
 import Link from "next/link";
 import { Avatar } from '@readyplayerme/visage';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ethers } from 'ethers';
 import { abi } from "../../../components/abi/abi";
 import {useAccount, useChainId } from 'wagmi';
@@ -19,7 +21,9 @@ const NFTPage = ({ params }) => {
   const [loading, setLoading] = useState(false);
   const [sold, setsold] = useState(0);
 
-  const chainId = useChainId()
+  const chainId = useChainId();
+  const account = useAccount();
+  const walletAddress = account.address;
 
   const [activeTab, setActiveTab] = useState('Color'); // Default tab
 
@@ -214,7 +218,7 @@ const NFTPage = ({ params }) => {
 
       // console.log("ethers", ethers);
 
-      if (typeof window !== "undefined" && window.ethereum) {
+      if (typeof window !== "undefined" && window.ethereum && walletAddress) {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
 
         const contract = new ethers.Contract(
@@ -238,6 +242,11 @@ const NFTPage = ({ params }) => {
         // console.log("Result:", result);
         setLoading(false);
         window.location.href = `/confirm/${id}`;
+      }
+      else
+      {
+        toast.warning('Connect your wallet');
+        setLoading(false);
       }
 
     } catch (error) {
@@ -306,8 +315,6 @@ const NFTPage = ({ params }) => {
       
         //----------------------------------------------------------------------------------------------------//
 
-
-
   return (
     <div>
       <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
@@ -328,6 +335,7 @@ const NFTPage = ({ params }) => {
             <w3m-button />
         </div>
     </div>
+    <ToastContainer />
       <div className="flex gap-10 mt-10 px-10">
         <div className="w-1/3">
           <img
@@ -602,7 +610,7 @@ const NFTPage = ({ params }) => {
             <div className="text-4xl font-bold">WebXR</div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div className="w-1/2">
-                <Link href={`https://webxr.myriadflow.com/${onephygital?.id}`} target="_blank"
+                <Link href={`https://webxr-ebon.vercel.app/${onephygital?.id}`} target="_blank"
                   className="rounded"
                   style={{
                     background: "transparent",
