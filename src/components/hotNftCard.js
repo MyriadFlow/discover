@@ -1,11 +1,21 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ethers } from 'ethers';
+import { abi } from "./abi/abi";
+import {useAccount, useChainId } from 'wagmi';
 
 const HotNftCard = ({ nft }) => {
 
   const [logo , setLogos] = useState("");
   const [priceUSD, setPriceUSD] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const chainId = useChainId();
+  const account = useAccount();
+  const walletAddress = account.address;
 
   useEffect(() => {
    const brandmatch = async() => {
@@ -78,6 +88,41 @@ try {
   
    pricetoUSD();
   }, [])
+
+
+
+  const buyasset = async () => {
+    setLoading(true);
+    try {
+
+      if (typeof window !== "undefined" && window.ethereum && walletAddress) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+        const contract = new ethers.Contract(
+          `${nft?.contract_address}`,
+          abi ,
+          provider.getSigner()
+        )
+  
+        const tx = await contract.mint(1 , {value: ethers.utils.parseEther(nft?.price.toString()) });
+
+        const result = await tx.wait();
+  
+        console.log("Result:", result);
+        setLoading(false);
+        window.location.href = `/confirm/${nft?.id}`;
+      }
+      else
+      {
+        toast.warning('Connect your wallet');
+        setLoading(false);
+      }
+
+    } catch (error) {
+      console.error("Error handling buy asset:", error);
+      setLoading(false); // Set loading state to false in case of error
+    }
+  };
 
 
   return (
@@ -155,7 +200,7 @@ try {
                     <div>{priceUSD} USD</div>
                   </div>
                 )}
-              {nft?.product_url ?
+              {nft?.product_url &&
                 (
                   <div
                     className="px-10 text-lg"
@@ -170,24 +215,6 @@ try {
                     }}
                   >
                     Claim
-                  </div>
-                ) :
-                (
-                  <div>
-                  <div
-                    className="px-10 text-lg"
-                    style={{
-                      backgroundColor: "#DF1FDD36",
-                      border: "1px solid black",
-                      height: "30px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: "5px",
-                    }}
-                  >
-                    Buy
-                  </div>
                   </div>
                 )}
             </div>
@@ -207,6 +234,65 @@ try {
         >
           Web XR
         </Link>
+
+
+        {!nft?.product_url &&
+                (
+                  <div>
+                  <button
+                    className="px-10 text-lg"
+                    style={{
+                      backgroundColor: "#DF1FDD36",
+                      border: "1px solid black",
+                      height: "30px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      borderRadius: "5px",
+                      position: "absolute",
+                      bottom: "45px",
+                      right: "20px",
+                    }}
+                    onClick={buyasset}
+                  >
+                    Buy
+                  </button>
+                  </div>
+                )}
+
+<ToastContainer />
+
+
+{loading && (
+  <div
+    style={{
+      // backgroundColor: "#222944E5",
+      display: "flex",
+      overflowY: "auto",
+      overflowX: "hidden",
+      position: "fixed",
+      inset: 0,
+      zIndex: 50,
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      maxHeight: "100%",
+    }}
+    id="popupmodal"
+  >
+    <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
+      <div style={{ position: "relative", borderRadius: "0.5rem", boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
+          <img
+            src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
+            alt="Loading icon"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
       </div>
     );
 }
