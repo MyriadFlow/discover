@@ -47,7 +47,7 @@ const ConfirmAddr = ({ params }) => {
         <Link href="https://myriadflow.com" target="_blank">Home</Link>
 <Link href="">Explore</Link>
 <Link href="">Collections</Link>
-<Link href="">Brand</Link>
+<Link href="">Brands</Link>
         </div>
         <div className="mt-6">
             {/* <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button> */}

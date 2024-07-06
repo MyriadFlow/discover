@@ -126,7 +126,7 @@ try {
 
 
   return (
-    // <Link href={`/nfts/${nft.id}`}>
+    <Link href={`/collections/${nft.id}`}>
         <div
         style={{
           width: "330px",
@@ -231,7 +231,7 @@ try {
           </div>
         </div>
       </div>
-    // </Link>
+     </Link>
   )
 }
 

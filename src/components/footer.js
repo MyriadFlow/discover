@@ -41,7 +41,7 @@ const Footer = () => {
                   <div style={{ padding: '28px' }}>
                     <Link href="https://discord.gg/38jktRtuY7" target="_blank">
                       <img
-                        src="./Vector3.png"
+                        src="/Vector3.png"
                         width={20}
                         height={20}
                         alt="Discord logo"
@@ -69,7 +69,7 @@ const Footer = () => {
                   >
                     <Link href="https://t.me/MyriadFlow" target="_blank">
                       <img
-                        src="./Vector4.png"
+                        src="/Vector4.png"
                         width={20}
                         height={20}
                         alt="Telegram logo"
@@ -90,7 +90,7 @@ const Footer = () => {
                   <div style={{ padding: '28px' }}>
                     <Link href="https://x.com/0xMyriadFlow" target="_blank">
                       <img
-                        src="./Vector2.png"
+                        src="/Vector2.png"
                         width={18}
                         height={18}
                         alt="X logo"
@@ -111,7 +111,7 @@ const Footer = () => {
                   <div style={{ padding: '28px' }}>
                     <Link href="https://www.instagram.com/0xmyriadflow" target="_blank">
                       <img
-                        src="./Vector5.png"
+                        src="/Vector5.png"
                         width={16}
                         height={16}
                         alt="Instagram logo"
