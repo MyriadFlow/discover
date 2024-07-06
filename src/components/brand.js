@@ -19,7 +19,7 @@ const brand = ({brandsdata}) => {
         <div className="mt-4">
         Pushing the Boundaries of Innovation.
         </div>
-        <button className="border"
+        <Link href="/allbrands" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -34,8 +34,10 @@ const brand = ({brandsdata}) => {
           display: "block",
           width: "180px",
           height: "50px",
+          textAlign:'center',
         }}
-        >View All</button>
+        >
+          <div style={{marginTop: '4px'}}>View All</div></Link>
       </div>
 
       <div className="flex text-2xl" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px',gap:'20px', flexWrap: 'wrap'}}>

@@ -1,5 +1,6 @@
 import React from "react";
 import MostLovedCard from "./mostLovedCard";
+import Link from "next/link";
 
 const mostLoved = ({collectionsdata}) => {
   return (
@@ -15,7 +16,7 @@ const mostLoved = ({collectionsdata}) => {
           Must-Have Mints: Don&apos;t Miss Out on These Top-Selling Phygitals Before
           They&apos;re Gone!
         </div>
-        <button className="border"
+        <Link href="/allcollections" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -30,8 +31,10 @@ const mostLoved = ({collectionsdata}) => {
           display: "block",
           width: "180px",
           height: "50px",
+          textAlign:'center',
         }}
-        >View All</button>
+        >
+          <div style={{marginTop: '4px'}}>View All</div></Link>
       </div>
 
       <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>
