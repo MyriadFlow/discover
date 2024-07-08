@@ -5,7 +5,7 @@ import MostLovedCard from "../../components/mostLovedCard";
 import Header1 from '../../components/header1'
 import Footer from '../../components/footer'
 
-const Page = ({brandsdata}) => {
+const Page = () => {
 
     const [brands, setBrands] = useState([]);
 	const [loading, setLoading] = useState(false);
