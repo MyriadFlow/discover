@@ -1,5 +1,6 @@
 "use client"
 import React, {useState, useEffect} from 'react'
+import Link from 'next/link';
 import MostLovedCard from "../../../components/mostLovedCard";
 import HotNftCard from "../../../components/hotNftCard";
 import Header1 from '../../../components/header1'
@@ -121,28 +122,32 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
       {brand?.name}
       </div>
       <div
-        className="text-2xl"
+        className="text-2xl flex"
         style={{ justifyContent: "space-between" }}
       >
-        <div className="mt-4">
+        <div className="mt-4 w-1/2">
         {brand?.description}
         </div>
 
-        <div className="mt-4">
-        Representative : {brand?.representative}
-        </div> 
-
-        <div className="mt-4">
-        Contact Email : {brand?.contact_email}
-        </div> 
-
-        <div className="mt-4">
-        Contact Phone : {brand?.contact_phone}
-        </div>
-        
-        <div className="mt-4">
-        Shipping Address : {brand?.shipping_address}
-        </div> 
+        <Link href="/allcollections" className="border"
+        style={{
+          background: "transparent",
+          border: "6px solid transparent",
+          borderRadius: "8px",
+          backgroundImage: `
+    linear-gradient(white, white),
+    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+  `,
+          backgroundOrigin: "border-box",
+          backgroundClip: "content-box, border-box",
+          WebkitBackgroundClip: "content-box, border-box", // For Safari
+          display: "block",
+          width: "180px",
+          height: "50px",
+          textAlign:'center',
+        }}
+        >
+          <div style={{marginTop: '4px'}}>View All</div></Link>
 
       </div>
 

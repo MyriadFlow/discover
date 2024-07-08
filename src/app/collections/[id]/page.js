@@ -1,5 +1,6 @@
 "use client"
 import React, {useState, useEffect} from 'react'
+import Link from 'next/link';
 import HotNftCard from "../../../components/hotNftCard";
 import Header1 from '../../../components/header1'
 import Footer from '../../../components/footer'
@@ -104,16 +105,36 @@ const Collection = ({params}) => {
       {collections?.name}
       </div>
       <div
-        className="text-2xl"
+        className="text-2xl flex"
         style={{ justifyContent: "space-between" }}
       >
-        <div className="mt-4">
+        <div className="mt-4 w-1/2">
         {collections?.description}
         </div>
 
-        <div className="mt-4">
+        <Link href="/allcollections" className="border"
+        style={{
+          background: "transparent",
+          border: "6px solid transparent",
+          borderRadius: "8px",
+          backgroundImage: `
+    linear-gradient(white, white),
+    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+  `,
+          backgroundOrigin: "border-box",
+          backgroundClip: "content-box, border-box",
+          WebkitBackgroundClip: "content-box, border-box", // For Safari
+          display: "block",
+          width: "180px",
+          height: "50px",
+          textAlign:'center',
+        }}
+        >
+          <div style={{marginTop: '4px'}}>View All</div></Link>
+
+        {/* <div className="mt-4">
         Category : {collections?.category?.data[0]}
-        </div> 
+        </div>  */}
 
       </div>
 
