@@ -33,8 +33,10 @@ const Header1 = () => {
         paddingBottom: '10px'
     }}>
         <div className='mt-4'>
+          <a href="/">
             <img src={isScrolled ? "/logo2.png" : "/logo.png"} 
             style={{width:'200px'}}/>
+            </a>
         </div>
         <div style={{display:'flex', gap:'40px', fontSize:'20px'}} className="font-bold mt-10">
 <Link href="https://myriadflow.com" target="_blank">Home</Link>

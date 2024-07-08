@@ -10,8 +10,11 @@ import {useAccount, useChainId } from 'wagmi';
 const HotNftCard = ({ nft }) => {
 
   const [logo , setLogos] = useState("");
+  const [desc, setdesc] = useState("");
+  const [brandid, setbrandid] = useState("");
   const [priceUSD, setPriceUSD] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const chainId = useChainId();
   const account = useAccount();
@@ -51,6 +54,8 @@ try {
     const matchedBrand = result.find(brand => brand.name === matchingPhy.brand_name);
     if (matchedBrand) {
       setLogos(matchedBrand.logo_image);
+      setdesc(matchedBrand.description);
+      setbrandid(matchedBrand.id);
     }
   }
 
@@ -142,9 +147,9 @@ try {
                 src={`https://nftstorage.link/ipfs/${nft?.image.slice(7)}`}
                 className="rounded"
                 style={{ padding: "20px", borderRadius: '30px' }}
-                alt="Gold Headphones"
+                alt=""
               />
-              <img
+              {/* <img
                 src={`https://nftstorage.link/ipfs/${logo?.slice(7)}`}
                 alt="New Icon"
                 style={{
@@ -155,7 +160,7 @@ try {
                   height: "50px",
                   borderRadius: '50px'
                 }}
-              />
+              /> */}
             </div>
             <div
               className="flex justify-between"
@@ -220,6 +225,56 @@ try {
             </div>
           </div>
         </Link>
+
+              <img
+                src={`https://nftstorage.link/ipfs/${logo?.slice(7)}`}
+                alt="New Icon"
+                style={{
+                  position: "absolute",
+                  top: "10px",
+                  left: "10px",
+                  width: "50px",
+                  height: "50px",
+                  borderRadius: '50px',
+                  zIndex: 1 // Ensure it's on top of the card
+                }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              />
+
+{isHovered && (
+            <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+              style={{
+                position: 'absolute',
+                top: '10%', // Adjust position based on your design
+                left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: '#D9D8D8',
+                color: 'black',
+                padding: '20px',
+                border: '1px solid #ddd',
+                borderRadius: '15px',
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                zIndex: 20,
+                width: '300px',
+                // textAlign: 'center'
+              }}
+            >
+            <div style={{display: 'flex', gap:'20px'}}>
+                <img 
+                src={`${"https://nftstorage.link/ipfs"}/${logo?.slice(7)}`}
+            
+            style={{width: '80px', borderRadius:'100px'}}/>
+              {/* <div className="font-bold mt-6">{onephygital?.brand_name}</div> */}
+              </div>
+              <div className="mt-4" style={{fontSize: '13px', marginBottom:'20px'}}>{desc}</div>
+
+              <Link href={`/brands/${brandid}`} style={{fontSize: '15px', border:'1px solid black', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
+            </div>
+          )}
+
         <Link href={`https://webxr-ebon.vercel.app/${nft?.id}`} target="_blank"
           style={{
             position: "absolute",
