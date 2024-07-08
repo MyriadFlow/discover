@@ -46,6 +46,7 @@ const ConfirmAddr = ({ params }) => {
         <div style={{display:'flex', gap:'40px', fontSize:'20px', color:'white'}} className="font-bold mt-6">
         <Link href="https://myriadflow.com" target="_blank">Home</Link>
 <Link href="">Explore</Link>
+<Link href="/profile">Dashboard</Link>
 <Link href="/allcollections">Collections</Link>
 <Link href="/allbrands">Brands</Link>
         </div>
@@ -208,7 +209,7 @@ const ConfirmAddr = ({ params }) => {
 
         <div style={{ display: "flex", alignItems: "center", paddingTop: "16px", paddingBottom: "80px" }}>
           <Link
-            href=""
+            href="/profile"
             type="button"
             style={{
               width: "50%",
