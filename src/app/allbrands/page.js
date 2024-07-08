@@ -4,7 +4,7 @@ import Link from "next/link";
 import Header1 from '../../components/header1'
 import Footer from '../../components/footer'
 
-const brand = ({brandsdata}) => {
+const Page = ({brandsdata}) => {
 
     const [brands, setBrands] = useState([]);
 	const [loading, setLoading] = useState(false);
@@ -115,4 +115,4 @@ const brand = ({brandsdata}) => {
   );
 };
 
-export default brand;
+export default Page;
