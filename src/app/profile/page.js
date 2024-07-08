@@ -247,7 +247,7 @@ function HomePage() {
 				<Header1 />
 			</div>
       <div style={{padding:'50px'}}>
-        <h4 className='font-bold text-4xl' style={{marginTop:'100px'}}>Your NFTs:</h4>
+        <h4 className='font-bold text-4xl' style={{marginTop:'100px'}}>Your Exclusive NFT Showcase</h4>
         <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
         {matchedNFTs?.map((nft, index) => (
           <ProfileNftCard key={index} nft={nft} />

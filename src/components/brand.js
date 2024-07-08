@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const brand = ({brandsdata}) => {
+const Brand = ({brandsdata}) => {
 
   // const recentBrands = brandsdata.slice(-3).reverse();
 
@@ -75,4 +75,4 @@ const brand = ({brandsdata}) => {
   );
 };
 
-export default brand;
+export default Brand;
