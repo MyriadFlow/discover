@@ -149,7 +149,7 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
           textAlign:'center',
         }}
         >
-          <div style={{marginTop: '4px'}}>View All</div></Link>
+          <div style={{marginTop: '4px'}}>SHARE</div></Link>
 
       </div>
 

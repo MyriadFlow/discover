@@ -130,7 +130,7 @@ const Collection = ({params}) => {
           textAlign:'center',
         }}
         >
-          <div style={{marginTop: '4px'}}>View All</div></Link>
+          <div style={{marginTop: '4px'}}>SHARE</div></Link>
 
         {/* <div className="mt-4">
         Category : {collections?.category?.data[0]}
