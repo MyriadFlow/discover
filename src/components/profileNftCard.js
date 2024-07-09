@@ -271,7 +271,7 @@ try {
               </div>
               <div className="mt-4" style={{fontSize: '13px', marginBottom:'20px'}}>{desc}</div>
 
-              <Link href={`/brands/${brandid}`} style={{fontSize: '15px', border:'1px solid black', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
+              <Link href={`/brand/${brandid}`} style={{fontSize: '15px', border:'1px solid black', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
             </div>
           )}
 

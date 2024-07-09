@@ -41,9 +41,9 @@ const Header1 = () => {
         <div style={{display:'flex', gap:'40px', fontSize:'20px'}} className="font-bold mt-10">
 <Link href="https://myriadflow.com" target="_blank">Home</Link>
 <Link href="">Explore</Link>
+<Link href="/collections">Collections</Link>
+<Link href="/brands">Brands</Link>
 <Link href="/profile">Dashboard</Link>
-<Link href="/allcollections">Collections</Link>
-<Link href="/allbrands">Brands</Link>
         </div>
         <div className="mt-10">
             {/* <button className="px-10 mt-10" style={{paddingTop:'5px', paddingBottom:'5px', borderRadius:'5px',

@@ -1,16 +1,18 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import Link from 'next/link';
+import MostLovedCard from "../../../components/mostLovedCard";
 import HotNftCard from "../../../components/hotNftCard";
 import Header1 from '../../../components/header1'
 import Footer from '../../../components/footer'
 
-const Collection = ({params}) => {
+const Brand = ({params}) => {
 
     const id = params?.id;
 
-    const [phygitals, setPhygitals] = useState([]);
+    const [brand, setBrand] = useState([]);
     const [collections, setcollections] = useState([]);
+    const [nfts, setnfts] = useState([])
     const [loading, setloading] = useState(false);
 
     useEffect(() => {
@@ -19,40 +21,55 @@ const Collection = ({params}) => {
          const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
      
      try {
-       const res = await fetch(`${baseUri}/collections/all`, {
+       const res = await fetch(`${baseUri}/brands/all`, {
          method: 'GET',
          headers: {
            'Content-Type': 'application/json'
          }
        });
      
-       const phyres = await fetch(`${baseUri}/phygitals/all`, {
+       const phyres = await fetch(`${baseUri}/collections/all`, {
          method: 'GET',
          headers: {
            'Content-Type': 'application/json'
          }
        });
+
+       const nfts = await fetch(`${baseUri}/phygitals/all`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
      
-       if (!res.ok || !phyres.ok) {
+       if (!res.ok || !phyres.ok || !nfts.ok) {
          throw new Error('Failed to fetch data');
        }
      
        const result = await res.json();
-       const phygitals = await phyres.json();
+       const collections = await phyres.json();
+       const phynfts = await nfts.json();
      
          // Find the corresponding brand in result
-         const matchedBrand = result.find(coll => coll.id === id);
+         const matchedBrand = result.find(brand => brand.id === id);
          if (matchedBrand) {
-          setcollections(matchedBrand);
+           setBrand(matchedBrand);
          }
 
          // Filter collections by the brand id
-  const matchedCollections = phygitals.filter(phygitals => phygitals.collection_id === id);
+  const matchedCollections = collections.filter(collection => collection.brand_id === id);
 
-  setPhygitals(matchedCollections);
+  // Extract the IDs of the matched collections
+const matchedCollectionIds = matchedCollections.map(collection => collection.id);
+
+// Filter NFTs by the matched collection IDs
+const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.collection_id));
+
+  setcollections(matchedCollections);
+  setnfts(matchedNFTs)
   setloading(false);
      
-       console.log("brand", matchedBrand, matchedCollections);
+       console.log("phynfts", phynfts);
      
      } catch (error) {
        console.error('Error fetching data:', error);
@@ -76,20 +93,22 @@ const Collection = ({params}) => {
       <img
         src={`${
           "https://nftstorage.link/ipfs"
-        }/${collections?.cover_image?.slice(7)}`}
-        alt={collections?.name}
+        }/${brand?.cover_image?.slice(7)}`}
+        alt={brand?.name}
         style={{
           display: "block",
           marginLeft: "auto",
           marginRight: "auto",
+          height:'90vh',
+          width:'100vw'
         }}
       />
 
       <img
         src={`${
           "https://nftstorage.link/ipfs"
-        }/${collections?.logo_image?.slice(7)}`}
-        alt={collections?.name}
+        }/${brand?.logo_image?.slice(7)}`}
+        alt={brand?.name}
         style={{
           width: "250px",  // Adjust the width as needed
           position: "absolute",
@@ -101,18 +120,18 @@ const Collection = ({params}) => {
 
     <div style={{marginLeft:'40px', marginRight: '40px', marginTop:'40px'}}>
 
-        <div className="font-bold text-black text-6xl">
-      {collections?.name}
+        <div className="font-bold text-black" style={{fontSize:'40px'}}>
+      {brand?.name}
       </div>
       <div
         className="text-2xl flex"
         style={{ justifyContent: "space-between" }}
       >
         <div className="mt-4 w-1/2">
-        {collections?.description}
+        {brand?.description}
         </div>
 
-        <Link href="/allcollections" className="border"
+        <Link href="/collections" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -132,16 +151,20 @@ const Collection = ({params}) => {
         >
           <div style={{marginTop: '4px'}}>View All</div></Link>
 
-        {/* <div className="mt-4">
-        Category : {collections?.category?.data[0]}
-        </div>  */}
+      </div>
 
+      <div className="font-bold text-black text-4xl mt-10">Collections</div>
+
+        <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
+        {collections?.map((nft, index) => (
+          <MostLovedCard key={index} nft={nft} />
+        ))}
       </div>
 
       <div className="font-bold text-black text-4xl mt-10">Phygitals</div>
 
-        <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
-        {phygitals?.map((nft, index) => (
+      <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
+        {nfts?.map((nft, index) => (
           <HotNftCard key={index} nft={nft} />
         ))}
       </div>
@@ -187,4 +210,4 @@ const Collection = ({params}) => {
   )
 }
 
-export default Collection;
+export default Brand;

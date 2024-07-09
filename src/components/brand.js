@@ -19,7 +19,7 @@ const Brand = ({brandsdata}) => {
         <div className="mt-4">
         Pushing the Boundaries of Innovation.
         </div>
-        <Link href="/allbrands" className="border"
+        <Link href="/brands" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -42,7 +42,7 @@ const Brand = ({brandsdata}) => {
 
       <div className="flex text-2xl" style={{justifyContent: 'center', marginTop:'200px', paddingBottom:'200px',gap:'20px', flexWrap: 'wrap'}}>
       {brandsdata?.map((brand, index) => (
-          <Link href={`/brands/${brand.id}`} key={index}>
+          <Link href={`/brand/${brand.id}`} key={index}>
           <div key={index} className="flex flex-col justify-center items-center">
             <img
               src={`${

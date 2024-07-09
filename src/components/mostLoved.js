@@ -16,7 +16,7 @@ const mostLoved = ({collectionsdata}) => {
           Must-Have Mints: Don&apos;t Miss Out on These Top-Selling Phygitals Before
           They&apos;re Gone!
         </div>
-        <Link href="/allcollections" className="border"
+        <Link href="/collections" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",

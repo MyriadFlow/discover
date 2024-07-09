@@ -126,7 +126,7 @@ try {
 
 
   return (
-    <Link href={`/collections/${nft.id}`}>
+    <Link href={`/collection/${nft.id}`}>
         <div
         style={{
           width: "330px",
