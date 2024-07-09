@@ -18,8 +18,36 @@ const fontSans = FontSans({
 	variable: '--font-sans',
 })
 export const metadata: Metadata = {
-	title: 'Myriadflow Discover',
-	description: 'Discover Phygital NFTs',
+	title: 'Discover | MyriadFlow',
+	description: 'Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life.',
+	openGraph: {
+		type: 'website',
+		url: 'https://discover-two.vercel.app',
+		title: 'Discover | MyriadFlow',
+		description: 'Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life.',
+		images: [
+			{
+				url: '/metaimg.png',
+				width: 1200,
+				height: 630,
+				alt: 'MyriadFlow Discover',
+			},
+		],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		site: '@MyriadFlow',
+		title: 'Discover | MyriadFlow',
+		description: 'Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life.',
+		images: [
+			{
+				url: '/metaimg.png',
+				width: 1200,
+				height: 630,
+				alt: 'MyriadFlow Discover',
+			},
+		],
+	},
 }
 
 export default function RootLayout({
