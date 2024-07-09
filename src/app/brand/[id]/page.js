@@ -118,7 +118,7 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
       />
     </div>
 
-    <div style={{marginLeft:'40px', marginRight: '40px', marginTop:'40px'}}>
+    <div style={{marginLeft:'40px', marginRight: '40px', marginTop:'100px'}}>
 
         <div className="font-bold text-black" style={{fontSize:'40px'}}>
       {brand?.name}
@@ -153,7 +153,7 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
 
       </div>
 
-      <div className="font-bold text-black text-4xl mt-10">Collections</div>
+      <div className="font-bold text-black text-4xl" style={{marginTop:'100px'}}>Collections</div>
 
         <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
         {collections?.map((nft, index) => (
@@ -161,7 +161,7 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
         ))}
       </div>
 
-      <div className="font-bold text-black text-4xl mt-10">Phygitals</div>
+      <div className="font-bold text-black text-4xl" style={{marginTop:'100px'}}>Phygitals</div>
 
       <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
         {nfts?.map((nft, index) => (

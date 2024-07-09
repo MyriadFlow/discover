@@ -321,7 +321,9 @@ const NFTPage = ({ params }) => {
         <div
           className='mt-4'
         >
+          <a href="/">
           <img src="../logo2.png" style={{ width: '200px' }} alt="Logo" />
+          </a>
 
         </div>
         <div style={{display:'flex', gap:'40px', fontSize:'20px', color:'white'}} className="font-bold mt-6">
