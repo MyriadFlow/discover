@@ -82,6 +82,8 @@ const Collection = ({params}) => {
           display: "block",
           marginLeft: "auto",
           marginRight: "auto",
+          height:'90vh',
+          width:'100vw'
         }}
       />
 
