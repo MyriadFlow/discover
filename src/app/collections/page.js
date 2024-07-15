@@ -53,7 +53,7 @@ const Page = () => {
 			</div>
 
             <div style={{ textAlign: "center", paddingTop: '90px' }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', width: '100vw', height: '100vh' }}>
+            {/* <div style={{ display: 'flex', flexWrap: 'wrap', width: '100vw', height: '100vh' }}>
 			{brands
   .sort(() => Math.random() - 0.5) // Randomly shuffle the array
   .slice(0, 4) // Take the first 4 elements after shuffling
@@ -70,7 +70,7 @@ const Page = () => {
       }}
     />
   ))}
-  </div>
+  </div> */}
 </div>
 
       <div className="font-bold text-black text-4xl" style={{paddingLeft:'100px', paddingTop:'100px'}}>
