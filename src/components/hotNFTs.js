@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import HotNftCard from './hotNftCard'
+import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 
 const HotNFTs = ({ hotnftdata }) => {
@@ -49,7 +50,7 @@ const HotNFTs = ({ hotnftdata }) => {
 					Trending Treasures: Get in on the Action with These Phygitals Making Waves
 					and Potentially Shaping the Future.
 				</div>
-				<button className="border"
+				<Link href="/hotphygitals" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -64,8 +65,10 @@ const HotNFTs = ({ hotnftdata }) => {
           display: "block",
           width: "180px",
           height: "50px",
+          textAlign:'center',
         }}
-        >View All</button>
+        >
+          <div style={{marginTop: '4px'}}>View All</div></Link>
 			</div>
 
 			<div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap', justifyContent:'center' }}>

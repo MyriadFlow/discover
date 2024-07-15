@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const leaderboard = () => {
   return (
@@ -13,7 +14,7 @@ const leaderboard = () => {
         <div className="mt-4">
           This Week&apos;s Top performing AI-Powered Brand Ambassadors
         </div>
-        <button className="border"
+        <Link href="https://webxr-ebon.vercel.app" target="_blank" rel="noopener noreferrer" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -28,8 +29,10 @@ const leaderboard = () => {
           display: "block",
           width: "180px",
           height: "50px",
+          textAlign:'center',
         }}
-        >View All</button>
+        >
+          <div style={{marginTop: '4px'}}>View All</div></Link>
       </div>
 
       <div className="flex px-10" style={{justifyContent: 'center', marginTop:'200px', marginBottom:'200px'}}>
@@ -76,7 +79,7 @@ const leaderboard = () => {
             No. tokens
           </div>
 
-          <button
+          <Link href="https://webxr-ebon.vercel.app" target="_blank" rel="noopener noreferrer"
             className="text-2xl text-center"
             style={{
               border: "2px solid black", // Adds a solid black border
@@ -88,7 +91,7 @@ const leaderboard = () => {
             }}
           >
             WebXR
-          </button>
+          </Link>
         </div>
 
 
@@ -136,7 +139,7 @@ const leaderboard = () => {
             No. tokens
           </div>
 
-          <button
+          <Link href="https://webxr-ebon.vercel.app" target="_blank" rel="noopener noreferrer"
             className="text-2xl text-center"
             style={{
               border: "2px solid black", // Adds a solid black border
@@ -148,7 +151,7 @@ const leaderboard = () => {
             }}
           >
             WebXR
-          </button>
+          </Link>
         </div>
 
 
@@ -184,7 +187,7 @@ const leaderboard = () => {
             No. tokens
           </div>
 
-          <button
+          <Link href="https://webxr-ebon.vercel.app" target="_blank" rel="noopener noreferrer"
             className="text-2xl text-center"
             style={{
               border: "2px solid black", // Adds a solid black border
@@ -196,7 +199,7 @@ const leaderboard = () => {
             }}
           >
             WebXR
-          </button>
+          </Link>
         </div>
 
 
