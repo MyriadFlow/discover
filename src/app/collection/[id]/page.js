@@ -83,7 +83,10 @@ const Collection = ({params}) => {
           marginLeft: "auto",
           marginRight: "auto",
           height:'90vh',
-          width:'100vw'
+          width:'100vw',
+          objectFit: 'cover',
+          transform: 'scale(1)',  // Zooms in the image
+          objectPosition: 'center', 
         }}
       />
 
