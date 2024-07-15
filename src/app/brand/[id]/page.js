@@ -113,7 +113,8 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
         }/${brand?.logo_image?.slice(7)}`}
         alt={brand?.name}
         style={{
-          width: "250px",  // Adjust the width as needed
+          width: "350px",  // Adjust the width as needed
+          borderRadius:'20px',
           position: "absolute",
           bottom: "20px",  // Adjust the offset from the bottom as needed
           left: "20px",  // Adjust the offset from the left as needed

@@ -12,6 +12,11 @@ const Collection = ({params}) => {
     const [phygitals, setPhygitals] = useState([]);
     const [collections, setcollections] = useState([]);
     const [loading, setloading] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [desc, setdesc] = useState("");
+    const [name, setname] = useState("");
+    const [brandid, setbrandid] = useState("");
+    const [logo, setLogos] = useState("");
 
     useEffect(() => {
         const brandmatch = async() => {
@@ -32,13 +37,21 @@ const Collection = ({params}) => {
            'Content-Type': 'application/json'
          }
        });
+
+       const brands = await fetch(`${baseUri}/brands/all`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
      
-       if (!res.ok || !phyres.ok) {
+       if (!res.ok || !phyres.ok || !brands.ok) {
          throw new Error('Failed to fetch data');
        }
      
        const result = await res.json();
        const phygitals = await phyres.json();
+       const branddata = await brands.json();
      
          // Find the corresponding brand in result
          const matchedBrand = result.find(coll => coll.id === id);
@@ -50,9 +63,19 @@ const Collection = ({params}) => {
   const matchedCollections = phygitals.filter(phygitals => phygitals.collection_id === id);
 
   setPhygitals(matchedCollections);
+
+  const matchedBrandlogo = branddata.find(brand => brand.id === matchedBrand.brand_id);
+    if (matchedBrandlogo) {
+      setLogos(matchedBrandlogo.logo_image);
+      setdesc(matchedBrandlogo.description);
+      setbrandid(matchedBrandlogo.id);
+      setname(matchedBrandlogo.name);
+    }
+
+    
   setloading(false);
      
-       console.log("brand", matchedBrand, matchedCollections);
+       console.log("brand", matchedBrand, matchedCollections, matchedBrandlogo);
      
      } catch (error) {
        console.error('Error fetching data:', error);
@@ -96,7 +119,8 @@ const Collection = ({params}) => {
         }/${collections?.logo_image?.slice(7)}`}
         alt={collections?.name}
         style={{
-          width: "250px",  // Adjust the width as needed
+          width: "350px",  // Adjust the width as needed
+          borderRadius:'20px',
           position: "absolute",
           bottom: "20px",  // Adjust the offset from the bottom as needed
           left: "20px",  // Adjust the offset from the left as needed
@@ -106,18 +130,15 @@ const Collection = ({params}) => {
 
     <div style={{marginLeft:'40px', marginRight: '40px', marginTop:'100px'}}>
 
+    <div
+        className="flex"
+        style={{ justifyContent: "space-between" }}
+      >
         <div className="font-bold text-black" style={{fontSize:'40px'}}>
       {collections?.name}
       </div>
-      <div
-        className="text-2xl flex"
-        style={{ justifyContent: "space-between" }}
-      >
-        <div className="mt-4 w-1/2">
-        {collections?.description}
-        </div>
 
-        <Link href="/collections" className="border"
+      <Link href="/collections" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -135,12 +156,66 @@ const Collection = ({params}) => {
           textAlign:'center',
         }}
         >
-          <div style={{marginTop: '4px'}}>SHARE</div></Link>
+          <div style={{marginTop: '4px', fontSize: '20px'}}>SHARE</div></Link>
 
-        {/* <div className="mt-4">
-        Category : {collections?.category?.data[0]}
-        </div>  */}
+          </div>
+      <div
+        className="text-2xl flex"
+        style={{ justifyContent: "space-between" }}
+      >
+        <div className="mt-4 w-1/2">
+        {collections?.description}
+        </div>
 
+        <div className="mt-4 flex gap-10" style={{
+                  position: "relative",
+        }}>
+          <div>Launched By: <br></br>{name}</div>
+          <img
+                src={`https://nftstorage.link/ipfs/${logo?.slice(7)}`}
+                alt="New Icon"
+                style={{
+                  // top: "10px",
+                  // left: "10px",
+                  width: "150px",
+                  height: "150px",
+                  // borderRadius: '50px',
+                  // zIndex: 1 // Ensure it's on top of the card
+                }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              />
+
+{isHovered && (
+            <div
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+              style={{
+                position: 'absolute',
+                top: '40%', // Adjust position based on your design
+                right: '5%',
+                transform: 'translateX(-50%)',
+                backgroundColor: '#D9D8D8',
+                color: 'black',
+                padding: '20px',
+                border: '1px solid #ddd',
+                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+                zIndex: 20,
+                width: '300px',
+                // textAlign: 'center'
+              }}
+            >
+            {/* <div style={{display: 'flex', gap:'20px'}}>
+                <img 
+                src={`${"https://nftstorage.link/ipfs"}/${logo?.slice(7)}`}
+            
+            style={{width: '80px', borderRadius:'100px'}}/>
+              </div> */}
+              <div className="mt-4" style={{fontSize: '13px', marginBottom:'20px', lineHeight: '1.6'}}>{desc}</div>
+              <Link href={`/brand/${brandid}`} style={{fontSize: '15px', border:'1px solid black', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
+            </div>
+          )}
+        </div>  
       </div>
 
       <div className="font-bold text-black text-4xl" style={{marginTop:'100px'}}>Phygitals</div>
