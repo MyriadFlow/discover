@@ -1,6 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from 'next/head'
 import MostLoved from '../components/mostLoved'
 import MostRecently from '../components/mostRecently'
 import LeaderBoard from '../components/leaderboard'
@@ -98,6 +99,21 @@ export default function Home() {
 	}
 
 	return (
+		<>
+		<Head>
+				<title>Discover | MyriadFlow</title>
+				<meta name="description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content="https://discover-two.vercel.app" />
+				<meta property="og:title" content="Discover | MyriadFlow" />
+				<meta property="og:description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
+				<meta property="og:image" content="/metaimg.png" />
+				<meta name="twitter:card" content="summary_large_image" />
+				<meta name="twitter:site" content="@MyriadFlow" />
+				<meta name="twitter:title" content="Discover | MyriadFlow" />
+				<meta name="twitter:description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
+				<meta name="twitter:image" content="/metaimg.png" />
+			</Head>
 		<div className='bg-black'>
 			<div
 				className=''
@@ -364,5 +380,6 @@ export default function Home() {
 )}
 
 		</div>
+		</>
 	)
 }
