@@ -119,6 +119,27 @@ const NFTPage = ({ params }) => {
 
 
 
+  // shareOnTwitter.js
+
+const shareOnTwitter = (url, text, imageUrl = '') => {
+  const twitterBaseUrl = 'https://twitter.com/intent/tweet';
+  const params = new URLSearchParams({
+    url:`${imageUrl}`,
+    text: `${text}`,
+  });
+  window.open(`${twitterBaseUrl}?${params.toString()}`, '_blank');
+};
+
+  const handleShare = () => {
+    const url = window.location.href; // The URL you want to share
+    const imageUrl = `https://nftstorage.link/ipfs/bafkreihbqwvmszwvvrwah3lzankgraxmrwo7kasrl3xx64huij5zy6gmmm`;
+
+    const text = `Check this out🤩\nCoolest Phygital on Discover | Myriadflow✨\n\n${url}\n\n#Myriadflow #Discover #Phygitals #NFTs #Collections\n`;
+
+    shareOnTwitter(url, text, imageUrl);
+  };
+
+
 
 
   useEffect(() => {
@@ -452,6 +473,7 @@ const NFTPage = ({ params }) => {
                 paddingRight: "70px",
                 border: "2px solid black",
               }}
+              onClick={handleShare}
             >
               SHARE
             </button>

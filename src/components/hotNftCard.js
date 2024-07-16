@@ -251,7 +251,7 @@ try {
                 top: '10%', // Adjust position based on your design
                 left: '50%',
                 transform: 'translateX(-50%)',
-                backgroundColor: '#D9D8D8',
+                backgroundImage: 'linear-gradient(120deg,  #30D8FF 0%, #C243FE, #C243FE)',
                 color: 'black',
                 padding: '20px',
                 border: '1px solid #ddd',
