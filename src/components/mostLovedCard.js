@@ -272,21 +272,21 @@ try {
             <div
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-              style={{
-                position: 'absolute',
-                top: '10%', // Adjust position based on your design
-                left: '50%',
-                transform: 'translateX(-50%)',
-                backgroundColor: '#D9D8D8',
-                color: 'black',
-                padding: '20px',
-                border: '1px solid #ddd',
-                borderRadius: '15px',
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                zIndex: 20,
-                width: '300px',
-                // textAlign: 'center'
-              }}
+            style={{
+              position: 'absolute',
+              top: '10%', // Adjust position based on your design
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundImage: 'linear-gradient(120deg, rgba(48, 216, 255, 0.8) 0%, rgba(194, 67, 254, 0.8), rgba(194, 67, 254, 0.8))',
+              color: 'black',
+              padding: '20px',
+              border: '1px solid #ddd',
+              borderRadius: '15px',
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+              zIndex: 20,
+              width: '300px',
+              color: 'white'
+          }}
             >
             <div style={{display: 'flex', gap:'20px'}}>
                 <img 
@@ -297,7 +297,7 @@ try {
               </div>
               <div className="mt-4" style={{fontSize: '13px', marginBottom:'20px'}}>{desc}</div>
 
-              <Link href={`/brand/${brandid}`} style={{fontSize: '15px', border:'1px solid black', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
+              <Link href={`/brand/${brandid}`} style={{fontSize: '15px', border:'1px solid white', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
             </div>
           )}
 
