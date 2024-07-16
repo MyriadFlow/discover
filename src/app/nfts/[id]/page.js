@@ -19,6 +19,7 @@ const NFTPage = ({ params }) => {
   const [avatarUrl, setAvatarUrl] = useState('');
   const [logos, setLogos] = useState("");
   const [brandDesc, setbrandDesc] = useState("");
+  const [brandid, setbrandid] = useState("");
   const [loading, setLoading] = useState(false);
   const [sold, setsold] = useState(0);
 
@@ -165,6 +166,7 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
      if (matchedBrand) {
        setLogos(matchedBrand.logo_image);
        setbrandDesc(matchedBrand.description);
+       setbrandid(matchedBrand.id);
 
        const fetch = async() => {
 
@@ -402,32 +404,33 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
           <div className="text-4xl font-bold">{onephygital?.name}</div>
           <div className="text-lg mt-10 font-bold">Base Network</div>
           <div className="mt-6">Owned by {onephygital?.deployer_address}</div>
-          <div className="mt-4" 
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                    style={{position: 'relative'}}>
+          <div className="mt-4" >
             
-            <div>Created by <span className="font-bold" style={{cursor:'pointer'}}>{onephygital?.brand_name}</span></div>
+            <div>Created by <span className="font-bold" style={{cursor:'pointer', position: 'relative'}}
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
+                                >{onephygital?.brand_name}
 
-            
-          {/* Pop-up Div */}
+                                {/* Pop-up Div */}
           {isHovered && (
             <div
-              style={{
-                position: 'absolute',
-                top: '10%', // Adjust position based on your design
-                left: '50%',
-                transform: 'translateX(-50%)',
-                backgroundColor: '#D9D8D8',
-                color: 'black',
-                padding: '20px',
-                border: '1px solid #ddd',
-                borderRadius: '15px',
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-                zIndex: 20,
-                width: '300px',
-                // textAlign: 'center'
-              }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            style={{
+              position: 'absolute',
+              top: '10%', // Adjust position based on your design
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundImage: 'linear-gradient(120deg, rgba(48, 216, 255, 0.8) 0%, rgba(194, 67, 254, 0.8), rgba(194, 67, 254, 0.8))',
+              color: 'black',
+              padding: '20px',
+              border: '1px solid #ddd',
+              borderRadius: '15px',
+              boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+              zIndex: 20,
+              width: '300px',
+              color: 'white'
+          }}
             >
             <div style={{display: 'flex', gap:'20px'}}>
                 <img 
@@ -436,9 +439,12 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
             style={{width: '80px', borderRadius:'100px'}}/>
               <div className="font-bold mt-6">{onephygital?.brand_name}</div>
               </div>
-              <div className="mt-4" style={{fontSize: '13px'}}>{brandDesc}</div>
+              <div className="mt-4" style={{fontSize: '13px', marginBottom:'20px'}}>{brandDesc}</div>
+              <Link href={`/brand/${brandid}`} style={{fontSize: '15px', border:'1px solid white', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
             </div>
           )}
+                    </span>
+            </div>
 
           </div>
 
