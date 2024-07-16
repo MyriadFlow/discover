@@ -1,6 +1,7 @@
 "use client"
 import React, {useState, useEffect} from "react";
 import Link from "next/link";
+import Head from "next/head";
 import { Avatar } from '@readyplayerme/visage';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -338,6 +339,24 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
 
   return (
     <div>
+      <Head>
+			<title>Discover | MyriadFlow</title>
+			<meta name="description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
+			<meta property="og:type" content="website" />
+			<meta property="og:url" content={`https://discover-two.vercel.app/nfts/${onephygital?.id}`} />
+			<meta property="og:title" content="Discover | MyriadFlow" />
+			<meta property="og:description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
+			<meta property="og:image" content={`${
+              "https://nftstorage.link/ipfs"
+            }/${onephygital?.image?.slice(7)}`} />
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta name="twitter:site" content="@MyriadFlow" />
+			<meta name="twitter:title" content="Discover | MyriadFlow" />
+			<meta name="twitter:description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
+			<meta name="twitter:image" content={`${
+              "https://nftstorage.link/ipfs"
+            }/${onephygital?.image?.slice(7)}`} />
+		</Head>
       <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
         <div
           className='mt-4'
