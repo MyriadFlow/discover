@@ -47,7 +47,7 @@ const ConfirmAddr = ({ params }) => {
         </div>
         <div style={{display:'flex', gap:'40px', fontSize:'20px', color:'white'}} className="font-bold mt-6">
         <Link href="https://myriadflow.com" target="_blank">Home</Link>
-<Link href="">Explore</Link>
+<Link href="/#movetotrends">Explore</Link>
 <Link href="/collections">Collections</Link>
 <Link href="/brands">Brands</Link>
 <Link href="/profile">Dashboard</Link>
