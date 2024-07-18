@@ -25,14 +25,14 @@ const ProfileNftCard = ({ nft }) => {
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
 try {
-  const res = await fetch(`${baseUri}/brands/all`, {
+  const res = await fetch(`${baseUri}/brands/all/554b4903-9a06-4031-98f4-48276c427f78`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
   });
 
-  const phyres = await fetch(`${baseUri}/phygitals/all`, {
+  const phyres = await fetch(`${baseUri}/phygitals/all/554b4903-9a06-4031-98f4-48276c427f78`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'

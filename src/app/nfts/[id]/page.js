@@ -65,7 +65,7 @@ const NFTPage = ({ params }) => {
 		const phyresult = await phyres.json()
 		setonePhygital(phyresult);
 
-    const avatar = await fetch(`${baseUri}/avatars/all`, {
+    const avatar = await fetch(`${baseUri}/avatars/all/554b4903-9a06-4031-98f4-48276c427f78`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -149,7 +149,7 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
      const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
  
  try {
-   const res = await fetch(`${baseUri}/brands/all`, {
+   const res = await fetch(`${baseUri}/brands/all/554b4903-9a06-4031-98f4-48276c427f78`, {
      method: 'GET',
      headers: {
        'Content-Type': 'application/json'
