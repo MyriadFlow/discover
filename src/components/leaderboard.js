@@ -5,7 +5,7 @@ import { Avatar } from '@readyplayerme/visage'
 
 const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com'
 
-const leaderboard = () => {
+const Leaderboard = () => {
 	const [avatars, setAvatars] = useState([])
 	const [fantokens, setFantokens] = useState([])
 	const [topAvatars, setTopAvatars] = useState([])
@@ -345,4 +345,4 @@ const leaderboard = () => {
 	)
 }
 
-export default leaderboard
+export default Leaderboard
