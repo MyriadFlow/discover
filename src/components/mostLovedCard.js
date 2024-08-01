@@ -301,7 +301,7 @@ try {
             </div>
           )}
 
-<Link href={`https://webxr-ebon.vercel.app/${phygitals[0]?.id}`} target="_blank"
+<Link href={`https://webxr.myriadflow.com/${phygitals[0]?.id}`} target="_blank"
 style={{
   position: "absolute",
   top: "10px",

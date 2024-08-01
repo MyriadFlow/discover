@@ -59,7 +59,7 @@ const Leaderboard = () => {
 					This Week&apos;s Top performing AI-Powered Brand Ambassadors
 				</div>
 				<Link
-					href='https://webxr-ebon.vercel.app'
+					href='https://webxr.myriadflow.com'
 					target='_blank'
 					rel='noopener noreferrer'
 					className='border'

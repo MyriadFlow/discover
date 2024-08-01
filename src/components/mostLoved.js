@@ -32,7 +32,7 @@ const mostLoved = ({collectionsdata}) => {
           They&apos;re Gone!
         </div>
         <div className="flex justify-between gap-10" style={{justifyContent: 'space-between'}}>
-          {/* <Link href="https://discover-two.vercel.app" style={exploreButtonStyle}>Explore</Link> */}
+          {/* <Link href="https://discover.myriadflow.com" style={exploreButtonStyle}>Explore</Link> */}
         <Link href="/collections" className="border"
         style={{
           background: "transparent",

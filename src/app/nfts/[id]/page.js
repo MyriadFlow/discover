@@ -43,7 +43,7 @@ const NFTPage = ({ params }) => {
 
 	const apiUrl = isDevelopment
 		? 'http://localhost:3000' // Local development URL
-		: 'https://discover-two.vercel.app' // Production URL
+		: 'https://discover.myriadflow.com' // Production URL
 
 	const [onephygital, setonePhygital] = useState([]);
 
@@ -345,7 +345,7 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
 			<title>Discover | MyriadFlow</title>
 			<meta name="description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
 			<meta property="og:type" content="website" />
-			<meta property="og:url" content={`https://discover-two.vercel.app/nfts/${onephygital?.id}`} />
+			<meta property="og:url" content={`https://discover.myriadflow.com/nfts/${onephygital?.id}`} />
 			<meta property="og:title" content="Discover | MyriadFlow" />
 			<meta property="og:description" content="Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life." />
 			<meta property="og:image" content={`${
@@ -660,7 +660,7 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
             <div className="text-4xl font-bold">WebXR</div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div className="w-1/2">
-                <Link href={`https://webxr-ebon.vercel.app/${onephygital?.id}`} target="_blank"
+                <Link href={`https://webxr.myriadflow.com/${onephygital?.id}`} target="_blank"
                   className="rounded"
                   style={{
                     background: "transparent",

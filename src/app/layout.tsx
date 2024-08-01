@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 	description: 'Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life.',
 	openGraph: {
 		type: 'website',
-		url: 'https://discover-two.vercel.app',
+		url: 'https://discover.myriadflow.com',
 		title: 'Discover | MyriadFlow',
 		description: 'Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life.',
 		images: [

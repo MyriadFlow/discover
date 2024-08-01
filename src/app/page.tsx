@@ -17,7 +17,7 @@ export default function Home() {
 
 	const apiUrl = isDevelopment
 		? 'http://localhost:3000' // Local development URL
-		: 'https://discover-two.vercel.app' // Production URL
+		: 'https://discover.myriadflow.com' // Production URL
 
 	// console.log("api url", apiUrl);
 
@@ -116,7 +116,7 @@ export default function Home() {
 					</div>
 					<div className='flex gap-10 mt-10'>
 						<Link href="#movetotrends" style={exploreButtonStyle}>Explore</Link>
-						<Link href="https://studio-one-sigma.vercel.app" target="_blank" style={exploreButtonStyle}>Launch</Link>
+						<Link href="https://studio.myriadflow.com" target="_blank" style={exploreButtonStyle}>Launch</Link>
 					</div>
 				</div>
 
