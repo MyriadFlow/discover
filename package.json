@@ -36,6 +36,7 @@
 		"tailwind-merge": "^2.3.0",
 		"tailwindcss-animate": "^1.0.7",
 		"three": "^0.167.0",
+		"viem": "^2.16.1",
 		"wagmi": "^2.10.4"
 	},
 	"devDependencies": {
