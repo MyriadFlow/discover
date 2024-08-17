@@ -285,7 +285,7 @@ export default function Home() {
 								fontFamily: 'Bai Jamjuree, sans-serif'
 							}}
 						>
-							You're almost ready!
+							You&apos;re almost ready!
 						</h2>
 						<h2
 							style={{
