@@ -12,6 +12,35 @@ const Header1 = () => {
   const { disconnect } = useDisconnect();
   const pathname = usePathname();
   const [name , setName] = useState('');
+  const [profileImage, setProfileImage] = useState('');
+
+
+  useEffect(() => {
+    const getUserData = async () => {
+      if (address) {
+        try {
+          const response = await fetch(`${baseUri}/profiles/wallet/${address}`, {
+            method: 'GET',
+            headers: {
+              'content-Type': 'application/json',
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data.name);
+            setProfileImage(data.profile_image);
+            
+          } else {
+            console.log('No user found');
+          }
+        } catch (error) {
+          console.error('Error fetching user data', error);
+        }
+      }
+    };
+    getUserData();
+  }, [address]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,9 +157,9 @@ const Header1 = () => {
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
                 >
                   <img
-                    src="/profile.png"
+                    src={profileImage ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${profileImage}` : "/profile.png"}
                     alt="Profile"
-                    style={{ width: '40px', height: '40px' }}
+                    style={{ width: '40px', height: '40px' , borderRadius:'30px' }}
                   />
                 </button>
 
@@ -142,9 +171,9 @@ const Header1 = () => {
                    
                     <div className="flex items-center px-4 py-2">
                       <img
-                        src="/profile.png" 
+                         src={profileImage ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${profileImage}` : "/profile.png"} 
                         alt="Profile"
-                        style={{ width: '40px', height: '40px' , marginRight:'4px' }}
+                        style={{ width: '40px', height: '40px' , marginRight:'4px' , borderRadius:'30px'}}
                       />
                       <div className="flex flex-col">
                         <span className="text-sm font-semibold">{name}</span>

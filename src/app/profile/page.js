@@ -166,7 +166,7 @@ function HomePage() {
           <h1 className="text-4xl">{name || 'Your Name'}</h1>
           <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
           <img src='/verified.png' style={{ marginLeft: '2.5rem', height: '40px', width: '40px' }}></img>
-          <h1 className="text-2xl mt-2">Verified</h1>
+          <h1 className="text-2xl mt-2"> Get Verified</h1>
         </div>
 
         <p className="text-gray-500 text-lg mt-6 ">{bio || "Short bio of the person here"}</p>
