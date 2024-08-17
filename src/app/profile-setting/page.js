@@ -207,37 +207,38 @@ function ProfileSettingsPage() {
                                         Edit Cover
                                     </button>
                                 )}
-                            </div>
 
-                            <div
-                                style={{
-                                    position: 'absolute',
-                                    left: '33%',
-                                    transform: 'translateX(-50%)',
-                                    bottom: '180px',
-                                    cursor: 'pointer'
-                                }}
-                                onMouseEnter={() => setIsProfileHovered(true)}
-                                onMouseLeave={() => setIsProfileHovered(false)}
-                                onClick={() => handleEditClick('profile')}
-                            >
-                                <img
-                                    src={profileImage ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${profileImage}` : "/profile.png"}
-                                    alt="Profile"
+
+                                <div
                                     style={{
-                                        width: '150px',
-                                        height: '150px',
-                                        borderRadius: '50%',
-                                        border: '4px solid white',
-                                        objectFit: 'cover',
+                                        position: 'absolute',
+                                        left: '15%',
+                                        transform: 'translateX(-50%)',
+                                        bottom: '-46px',
+                                        cursor: 'pointer'
                                     }}
-                                />
+                                    onMouseEnter={() => setIsProfileHovered(true)}
+                                    onMouseLeave={() => setIsProfileHovered(false)}
+                                    onClick={() => handleEditClick('profile')}
+                                >
+                                    <img
+                                        src={profileImage ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${profileImage}` : "/profile.png"}
+                                        alt="Profile"
+                                        style={{
+                                            width: '150px',
+                                            height: '150px',
+                                            borderRadius: '50%',
+                                            border: '4px solid white',
+                                            objectFit: 'cover',
+                                        }}
+                                    />
 
-                                {isProfileHovered && (
-                                    <button style={{ position: 'absolute', right: '40px', top: '110px', backgroundColor: '#4B5563', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer' }}>
-                                        Edit
-                                    </button>
-                                )}
+                                    {isProfileHovered && (
+                                        <button style={{ position: 'absolute', right: '40px', top: '110px', backgroundColor: '#4B5563', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer' }}>
+                                            Edit
+                                        </button>
+                                    )}
+                                </div>
                             </div>
 
                             <div style={{ marginTop: '100px' }}>
