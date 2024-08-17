@@ -176,7 +176,7 @@ const Header1 = () => {
                         style={{ width: '40px', height: '40px' , marginRight:'4px' , borderRadius:'30px'}}
                       />
                       <div className="flex flex-col">
-                        <span className="text-sm font-semibold">{name}</span>
+                        <span className="text-sm font-semibold text-black">{name}</span>
                         <Link href="/profile" className="text-xs text-gray-500 hover:underline">
                           View profile
                         </Link>
