@@ -86,17 +86,6 @@ const Header1 = () => {
       getUserData();
   }, [address]);
 
-  const Notification = () => {
-    if (!address) {
-      toast.warning(
-        "Currently works with Metamask and Coinbase Wallet Extension. We are working on Smart Wallet functionality.",
-        {
-          containerId: "containerA",
-          position: "top-left",
-        }
-      );
-    }
-  };
 
   const handleLogout = () => {
     disconnect();
@@ -235,7 +224,7 @@ const Header1 = () => {
                   <img
                     src="/notification.png"
                     alt="Notification"
-                    style={{ width: '40px', height: '40px' }}
+                    style={{ width: '45px', height: '45px' }}
                   />
                 </button>
               </div>
@@ -246,15 +235,13 @@ const Header1 = () => {
                   <img
                     src="/cart.png"
                     alt="Cart"
-                    style={{ width: '40px', height: '40px' }}
+                    style={{ width: '42px', height: '45px' }}
                   />
                 </button>
               </div>
             </>
           ) : (
-            <div onClick={Notification}>
               <w3m-button />
-            </div>
           )}
         </div>
       </div>
