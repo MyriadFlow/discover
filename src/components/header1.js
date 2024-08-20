@@ -11,7 +11,7 @@ const Header1 = () => {
   const { address } = useAccount();
   const { disconnect } = useDisconnect();
   const pathname = usePathname();
-  const [name , setName] = useState('');
+  const [name, setName] = useState('');
   const [profileImage, setProfileImage] = useState('');
 
 
@@ -30,7 +30,7 @@ const Header1 = () => {
             const data = await response.json();
             console.log(data.name);
             setProfileImage(data.profile_image);
-            
+
           } else {
             console.log('No user found');
           }
@@ -57,36 +57,44 @@ const Header1 = () => {
     };
   }, []);
 
-	const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+  const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
-  useEffect(()=>{
-      const getUserData = async ()=>{
-        if(address){
-          try{
-            const response = await fetch(`${baseUri}/profiles/wallet/${address}` , {
-              method:'GET',
-              headers:{
-                'content-Type':'application/json',
-              },
-            });
+  useEffect(() => {
+    const getUserData = async () => {
+      if (address) {
+        try {
+          const response = await fetch(`${baseUri}/profiles/wallet/${address}`, {
+            method: 'GET',
+            headers: {
+              'content-Type': 'application/json',
+            },
+          });
 
-            if(response.ok){
-              const data = await response.json();
-              console.log(data.name);
-              setName(data.name);
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data.name);
+            setName(data.name);
 
-            }else{
-              console.log('No user found')
-            }
-          }catch(error){
-            console.error('Error fetching user data', error);
+          } else {
+            console.log('No user found')
           }
+        } catch (error) {
+          console.error('Error fetching user data', error);
         }
-      };
-      getUserData();
+      }
+    };
+    getUserData();
   }, [address]);
 
-
+  const Notification = () => {
+    if (!address) {
+      toast.warning("Currently works with Metamask and Coinbase Wallet Extension. We are working on Smart Wallet functionality.", {
+        containerId: "containerA",
+        position: 'top-left',
+      }
+      )
+    }
+  };
   const handleLogout = () => {
     disconnect();
   };
@@ -136,33 +144,33 @@ const Header1 = () => {
             Users
           </Link>
         </div>
-        <div className="mt-10 flex" style={{ gap: '20px', marginRight:'80px'}}> 
+        <div className="mt-10 flex" style={{ gap: '20px', marginRight: '80px' }}>
           {address ? (
             <>
               {/* User Section */}
               <div className="relative">
                 <button
                   className="space-x-2"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)} 
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
                   <img
                     src={profileImage ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${profileImage}` : "/profile.png"}
                     alt="Profile"
-                    style={{ width: '40px', height: '40px' , borderRadius:'30px' }}
+                    style={{ width: '40px', height: '40px', borderRadius: '30px' }}
                   />
                 </button>
 
                 {isDropdownOpen && (
                   <div
                     className="absolute right-10 mt-2 p-6 bg-white rounded-lg shadow-xl"
-                    style={{ zIndex: 10, display: 'flex', flexDirection: 'column', width: '250px' }} 
+                    style={{ zIndex: 10, display: 'flex', flexDirection: 'column', width: '250px' }}
                   >
-                   
+
                     <div className="flex items-center px-4 py-2">
                       <img
-                         src={profileImage ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${profileImage}` : "/profile.png"} 
+                        src={profileImage ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${profileImage}` : "/profile.png"}
                         alt="Profile"
-                        style={{ width: '40px', height: '40px' , marginRight:'4px' , borderRadius:'30px'}}
+                        style={{ width: '40px', height: '40px', marginRight: '4px', borderRadius: '30px' }}
                       />
                       <div className="flex flex-col">
                         <span className="text-sm font-semibold text-black">{name}</span>
@@ -172,7 +180,7 @@ const Header1 = () => {
                       </div>
                     </div>
 
-                    
+
                     <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">
                       My assets
                     </Link>
@@ -200,7 +208,7 @@ const Header1 = () => {
 
                     {/* Wallet Address */}
                     <div className="px-4 py-2 text-xs text-gray-500 truncate-wallet">
-                      {address} 
+                      {address}
                     </div>
 
                     {/* Separator */}
@@ -241,7 +249,9 @@ const Header1 = () => {
               </div>
             </>
           ) : (
+            <div onClick={Notification}>
               <w3m-button />
+            </div>
           )}
         </div>
       </div>
