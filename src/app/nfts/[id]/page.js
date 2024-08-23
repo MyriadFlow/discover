@@ -9,6 +9,7 @@ import { ethers } from 'ethers';
 import { abi } from "../../../components/abi/abi";
 import {useAccount, useChainId } from 'wagmi';
 import Moralis from 'moralis';
+import Header1 from "@/components/header1";
 
 const NFTPage = ({ params }) => {
   const id = params?.id;
@@ -359,7 +360,7 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
               "https://nftstorage.link/ipfs"
             }/${onephygital?.image?.slice(7)}`} />
 		</Head>
-      <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
+      {/* <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
         <div
           className='mt-4'
         >
@@ -375,11 +376,12 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
 <Link href="/brands">Brands</Link>
 <Link href="/profile">Dashboard</Link>
         </div>
-        <div className="mt-6">
+        <div className="mt-6"> */}
             {/* <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button> */}
-            <w3m-button />
+            {/* <w3m-button />
         </div>
-    </div>
+    </div> */}
+    <Header1/>
     <ToastContainer />
       <div className="flex gap-10 mt-10 px-10">
         <div className="w-1/3">
