@@ -135,7 +135,7 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
         {brand?.description}
         </div>
 
-        <Link href="/collections" className="border"
+        <Link href="" className="border"
         style={{
           background: "transparent",
           border: "6px solid transparent",
@@ -156,6 +156,77 @@ const matchedNFTs = phynfts.filter(nft => matchedCollectionIds.includes(nft.coll
           <div style={{marginTop: '4px'}}>SHARE</div></Link>
 
       </div>
+
+
+  <div style={{ display: 'flex', flexWrap: 'wrap', float:'right', maxWidth: '200px' ,marginTop:'30px', gap: '8px'}}>
+          {brand.website && (
+            <a href={brand.website} target="_blank" rel="noopener noreferrer">
+              <img src='/website.png' style={{ height: '30px', width: '30px' }} alt="Website" />
+            </a>
+          )}
+          {brand.twitter && (
+            <a href={brand.twitter} target="_blank" rel="noopener noreferrer">
+              <img src='/x.png' style={{ height: '30px', width: '30px' }} alt="Website" />
+            </a>
+          )}
+          {brand.instagram && (
+            <a href={brand.instagram} target="_blank" rel="noopener noreferrer">
+              <img src='/insta.png' style={{ height: '30px', width: '30px' }} alt="Website" />
+            </a>
+          )}
+          {brand.facebook && (
+            <a href={brand.facebook} target="_blank" rel="noopener noreferrer">
+              <img src='/facebook.png' style={{ height: '30px', width: '30px' }} alt="Website" />
+            </a>
+          )}
+          {brand.discord && (
+            <a href={brand.discord} target="_blank" rel="noopener noreferrer">
+              <img src='/discord.png' style={{ height: '30px', width: '30px' }} alt="Website" />
+            </a>
+          )}
+         {brand.additional_link && brand.additional_link === 'whatsapp' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/whatsapp.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+          {brand.additional_link && brand.additional_link === 'youtube' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/youtube.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+          {brand.additional_link && brand.additional_link === 'telegram' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/telegram.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+          {brand.additional_link && brand.additional_link === 'linkedin' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/linkedin.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+          {brand.additional_link && brand.additional_link === 'google' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/google.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+          {brand.additional_link && brand.additional_link === 'tiktok' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/tiktok.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+          {brand.additional_link && brand.additional_link === 'snapchat' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/snapchat.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+          {brand.additional_link && brand.additional_link === 'pinterest' && (
+            <a href={brand.link} target="_blank" rel="noopener noreferrer">
+              <img src='/pinterest.png' style={{ height: '30px', width: '30px' }} alt="WhatsApp" />
+            </a>
+          )}
+
+  </div>
+
 
       <div className="font-bold text-black text-4xl" style={{marginTop:'100px'}}>Collections</div>
 
