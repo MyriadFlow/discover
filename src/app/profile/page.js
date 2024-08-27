@@ -20,6 +20,7 @@ function HomePage() {
   const [website, setWebsite] = useState('');
   const [x, setX] = useState('');
   const [instagram, setInstagram] = useState('');
+  const [activeSection, setActiveSection] = useState('assets');
 
   const apikey = process.env.NEXT_PUBLIC_MORALIS_API_KEY;
   const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
@@ -99,8 +100,10 @@ function HomePage() {
 
         const matched = phyresult.map(phygital => {
           const amountBought = mintedNFTs.reduce((count, nft) => {
-            return count + (nft?.name === phygital.name ? 1 : 0);
+            // console.log(`Comparing ${nft?.token_address} with ${phygital.contract_address}`);
+            return count + (nft?.token_address === phygital.contract_address ? 1 : 0);
           }, 0);
+          
 
           return {
             ...phygital,
@@ -122,9 +125,7 @@ function HomePage() {
 
   return (
     <>
-      <div style={{ zIndex: 10, position: 'fixed', left: 0, right: 0, top: 0 }}>
-        <Header1 />
-      </div>
+      <Header1 />
 
       <div
         style={{
@@ -161,7 +162,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="flex flex-col p-6 rounded-lg shadow-md mx-10" style={{ marginLeft: '2.5rem' }}>
+      <div className="flex flex-col p-6" style={{ marginLeft: '2.5rem' }}>
         <div className="flex mt-10">
           <h1 className="text-4xl">{name || 'Your Name'}</h1>
           <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
@@ -176,10 +177,10 @@ function HomePage() {
           <Link
             href="/profile-setting"
             style={{
-              backgroundColor: '#E6E6E6', 
+              backgroundColor: '#E6E6E6',
               color: 'black',
-              padding: '10px 20px', 
-              borderRadius: '8px', 
+              padding: '10px 20px',
+              borderRadius: '8px',
               textAlign: 'center',
               textDecoration: 'none'
             }}
@@ -190,30 +191,19 @@ function HomePage() {
 
           <button
             style={{
-              backgroundColor: '#ffffff', 
-              color: '#000000', 
-              padding: '10px 40px', 
-              borderRadius: '8px', 
+              backgroundColor: '#ffffff',
+              color: '#000000',
+              padding: '10px 40px',
+              borderRadius: '8px',
               border: '4px solid #38bdf8',
-              marginLeft: '1rem' 
+              marginLeft: '1rem'
             }}
           >
             SHARE
           </button>
         </div>
 
-        <div className="flex mt-10 text-gray-700">
-          <a href="#" className="hover:text-black" style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}>My assets</a>
-          <a href="#" className="hover:text-black" style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}>On Sale</a>
-          <a href="#" className="hover:text-black" style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}>My Brands</a>
-          <a href="#" className="hover:text-black" style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}>My collections</a>
-          <a href="#" className="hover:text-black" style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}>Activity</a>
-          <a href="#" className="hover:text-black" style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}>Rewards</a>
-          <a href="#" className="hover:text-black" style={{ fontSize: '1.25rem' }}>Create</a>
-        </div>
-      </div>
-
-      <div style={{ float: 'right', marginTop: '-280px', marginRight: '20px' }}>
+        <div style={{ float: 'right', width:'300px' , marginLeft:'1100px', marginTop:'-200px'}}>
         <div style={{ display: 'flex' }}>
           {website && (
             <a href={website} target="_blank" rel="noopener noreferrer">
@@ -242,12 +232,76 @@ function HomePage() {
         </div>
       </div>
 
+      <div className="flex mt-10 text-gray-700">
+        <button
+          
+          className={`text-lg hover:text-black hover:underline ${activeSection === 'assets' ? 'text-black underline' : ''}`}
+          style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+          onClick={() => setActiveSection('assets')}
+        >
+          My assets
+        </button>
+        <button
+          className={`text-lg hover:text-black hover:underline ${activeSection === 'sale' ? 'text-black underline' : ''}`}
+          style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+          onClick={() => setActiveSection('sale')}
+        >
+          On Sale
+        </button>
+        <button
+          className={`text-lg hover:text-black hover:underline ${activeSection === 'brands' ? 'text-black underline' : ''}`}
+          style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+          onClick={() => setActiveSection('brands')}
+        >
+          My Brands
+        </button>
+        <button
+          className={`text-lg hover:text-black hover:underline ${activeSection === 'collections' ? 'text-black underline' : ''}`}
+          style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+          onClick={() => setActiveSection('collections')}
+        >
+          My collections
+        </button>
+        <button
+          className={`text-lg hover:text-black hover:underline ${activeSection === 'activity' ? 'text-black underline' : ''}`}
+          style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+          onClick={() => setActiveSection('activity')}
+        >
+          Activity
+        </button>
+        <button
+          className={`text-lg hover:text-black hover:underline ${activeSection === 'rewards' ? 'text-black underline' : ''}`}
+          style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+          onClick={() => setActiveSection('rewards')}
+        >
+          Rewards
+        </button>
+        <a
+          href="https://studio.myriadflow.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-lg hover:text-black hover:underline"
+          style={{ fontSize: '1.25rem' }}
+        >
+          Create
+        </a>
+      </div>
+
       <div style={{ padding: '50px' }}>
-        <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
-          {matchedNFTs?.map((nft, index) => (
+        {activeSection === 'assets' && (
+          <div className='mt-10 flex' style={{ gap: '20px', flexWrap: 'wrap' }}>
+            {matchedNFTs?.map((nft, index) => (
             <ProfileNftCard key={index} nft={nft} />
           ))}
-        </div>
+          </div>
+        )}
+
+        {activeSection !== 'assets' && activeSection !== 'create' && (
+          <div className='mt-10 text-center text-2xl text-gray-600'>
+            Coming Soon
+          </div>
+        )}
+      </div>
       </div>
 
       <div className='pt-20'>

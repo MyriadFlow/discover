@@ -46,17 +46,15 @@ const Leaderboard = () => {
 	useEffect(() => {
 		fetchData()
 	}, [])
+	
 	return (
-		<div className='leaderboard-bg'>
-			<div className='font-bold text-black text-6xl px-10'>
-				Avatar Leaderboard{' '}
+		<div className='p-4 sm:p-6 lg:p-10'>
+			<div className='font-bold text-3xl sm:text-4xl lg:text-6xl'>
+				Avatar Leaderboard
 			</div>
-			<div
-				className='flex justify-between text-2xl px-10'
-				style={{ justifyContent: 'space-between' }}
-			>
+			<div className='flex flex-col sm:flex-row justify-between text-lg sm:text-xl lg:text-2xl mt-4 px-4 sm:px-4'>
 				<div className='mt-4'>
-					This Week&apos;s Top performing AI-Powered Brand Ambassadors
+					This Week&apos;s Top Performing AI-Powered Brand Ambassadors
 				</div>
 				<Link
 					href='https://webxr.myriadflow.com'
@@ -68,9 +66,9 @@ const Leaderboard = () => {
 						border: '6px solid transparent',
 						borderRadius: '8px',
 						backgroundImage: `
-    linear-gradient(white, white),
-    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-  `,
+							linear-gradient(white, white),
+							linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+						`,
 						backgroundOrigin: 'border-box',
 						backgroundClip: 'content-box, border-box',
 						WebkitBackgroundClip: 'content-box, border-box', // For Safari
@@ -84,204 +82,71 @@ const Leaderboard = () => {
 				</Link>
 			</div>
 
-			<div
-				className='flex px-10'
-				style={{
-					justifyContent: 'center',
-					marginTop: '200px',
-					marginBottom: '200px',
-				}}
-			>
+			<div className='flex flex-col lg:flex-row justify-center items-center mt-10'>
 				{topAvatars.length >= 3 && (
 					<>
-						<div className='flex flex-col justify-center items-center'>
-							{/* <img
-								src='./image 7.png'
-								style={{
-									width: '60%',
-									display: 'block',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-								}}
-							/> */}
+						<div className='flex flex-col items-center mx-4 my-6'>
 							<Avatar
 								modelSrc={topAvatars[1].url}
 								cameraInitialDistance={4.5}
 							/>
-							<div style={{ position: 'relative' }}>
+							<div className='relative mt-4'>
 								<img
 									src='./silver.png'
-									style={{
-										width: '60%',
-										display: 'block',
-										marginLeft: 'auto',
-										marginRight: 'auto',
-									}}
+									className='w-2/3 mx-auto'
 								/>
-								<div
-									style={{
-										position: 'absolute',
-										top: '35%',
-										left: '50%',
-										transform: 'translate(-50%, -50%)',
-										textAlign: 'center',
-										fontSize: '24px',
-										fontWeight: 'bold',
-									}}
-								>
+								<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-xl font-bold'>
 									SILVER
 								</div>
 							</div>
-							<div
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									marginTop: '10px',
-									marginBottom: '20px',
-								}}
-							>
+							<div className='text-lg mt-2'>
 								No. tokens: {topAvatars[1].count}
 							</div>
-
-							<button
-								className='text-2xl text-center'
-								style={{
-									border: '2px solid black',
-									padding: '0.5rem 2.5rem',
-									borderRadius: '17px',
-									cursor: 'pointer',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-								}}
-							>
-								<Link
-									href={`/https://webxr-polygon.vercel.app/${topAvatars[1].phygital_id}`}
-								>
+							<button className='mt-4 px-4 py-2 text-xl border border-black rounded-lg cursor-pointer'>
+								<Link href={`/https://webxr-polygon.vercel.app/${topAvatars[1].phygital_id}`}>
 									WEBXR
 								</Link>
 							</button>
 						</div>
 
-						<div
-							className='flex flex-col justify-center items-center'
-							style={{ marginTop: '-200px' }}
-						>
-							{/* <img
-								src='./f41.png'
-								style={{
-									width: '60%',
-									display: 'block',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-								}}
-							/> */}
+						<div className='flex flex-col items-center mx-4 my-6'>
 							<Avatar
 								modelSrc={topAvatars[0].url}
 								cameraInitialDistance={4.5}
 							/>
-							<div style={{ position: 'relative' }}>
+							<div className='relative mt-4'>
 								<img
 									src='./gold.png'
-									style={{
-										width: '60%',
-										display: 'block',
-										marginLeft: 'auto',
-										marginRight: 'auto',
-									}}
+									className='w-2/3 mx-auto'
 								/>
-
-								<div
-									style={{
-										position: 'absolute',
-										top: '35%',
-										left: '50%',
-										transform: 'translate(-50%, -50%)',
-										textAlign: 'center',
-										fontSize: '24px',
-										fontWeight: 'bold',
-									}}
-								>
+								<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-xl font-bold'>
 									GOLD
 								</div>
 							</div>
-							<div
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									marginTop: '10px',
-									marginBottom: '20px',
-								}}
-							>
+							<div className='text-lg mt-2'>
 								No. tokens: {topAvatars[0].count}
 							</div>
-
-							<button
-								className='text-2xl text-center'
-								style={{
-									border: '2px solid black',
-									padding: '0.5rem 2.5rem',
-									borderRadius: '17px',
-									cursor: 'pointer',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-								}}
-							>
-								<Link
-									href={`/https://webxr-polygon.vercel.app/${topAvatars[0].phygital_id}`}
-								>
+							<button className='mt-4 px-4 py-2 text-xl border border-black rounded-lg cursor-pointer'>
+								<Link href={`/https://webxr-polygon.vercel.app/${topAvatars[0].phygital_id}`}>
 									WEBXR
 								</Link>
 							</button>
 						</div>
 
-						<div className='flex flex-col justify-center items-center'>
-							{/* <img
-								src='./f43.png'
-								style={{
-									width: '60%',
-									display: 'block',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-								}}
-							/> */}
+						<div className='flex flex-col items-center mx-4 my-6'>
 							<Avatar
 								modelSrc={topAvatars[2].url}
 								cameraInitialDistance={4.5}
 							/>
 							<img
 								src='./bronze.png'
-								style={{
-									width: '60%',
-									display: 'block',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-								}}
+								className='w-2/3 mx-auto'
 							/>
-							<div
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									marginTop: '10px',
-									marginBottom: '20px',
-								}}
-							>
+							<div className='text-lg mt-2'>
 								No. tokens: {topAvatars[2].count}
 							</div>
-
-							<button
-								className='text-2xl text-center'
-								style={{
-									border: '2px solid black',
-									padding: '0.5rem 2.5rem',
-									borderRadius: '17px',
-									cursor: 'pointer',
-									marginLeft: 'auto',
-									marginRight: 'auto',
-								}}
-							>
-								<Link
-									href={`/https://webxr-polygon.vercel.app/${topAvatars[2].phygital_id}`}
-								>
+							<button className='mt-4 px-4 py-2 text-xl border border-black rounded-lg cursor-pointer'>
+								<Link href={`/https://webxr-polygon.vercel.app/${topAvatars[2].phygital_id}`}>
 									WEBXR
 								</Link>
 							</button>
@@ -290,54 +155,18 @@ const Leaderboard = () => {
 				)}
 			</div>
 
-			<div
-				style={{
-					backgroundColor: '#00000021',
-					position: 'relative',
-					marginTop: '100px',
-				}}
-			>
-				{/* Left Image */}
+			<div className='relative mt-16'>
 				<img
 					src='./trophy1.png'
 					alt='Left'
-					style={{
-						position: 'absolute',
-						top: '0',
-						left: '50px',
-						transform: 'translateY(-50%)',
-						width: '150px', // Adjust as needed
-						height: '150px', // Adjust as needed
-					}}
+					className='absolute top-0 left-4 lg:left-10 transform -translate-y-1/2 w-24 h-24 lg:w-32 lg:h-32'
 				/>
-
-				{/* Right Image */}
 				<img
 					src='./trophy2.png'
 					alt='Right'
-					style={{
-						position: 'absolute',
-						top: '0',
-						right: '50px',
-						transform: 'translateY(-50%)',
-						width: '150px', // Adjust as needed
-						height: '150px', // Adjust as needed
-					}}
+					className='absolute top-0 right-4 lg:right-10 transform -translate-y-1/2 w-24 h-24 lg:w-32 lg:h-32'
 				/>
-
-				<div
-					className='text-center text-2xl font-bold'
-					style={{
-						background:
-							'linear-gradient(to right, #F45EC1 , #F45EC1 , #4EB9F3, #4EB9F3)',
-						WebkitBackgroundClip: 'text',
-						WebkitTextFillColor: 'transparent',
-						backgroundColor: '#00000021',
-						paddingTop: '20px',
-						paddingBottom: '20px',
-						textAlign: 'center',
-					}}
-				>
+				<div className='text-center text-xl lg:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 py-4'>
 					Rewarding Creators, Owners and Supporters.
 				</div>
 			</div>

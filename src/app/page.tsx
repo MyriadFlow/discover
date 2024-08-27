@@ -174,30 +174,25 @@ export default function Home() {
 	}
 
 	return (
-		<div className='bg-black'>
-			<div
-				className=''
-				style={{ zIndex: 10, position: 'fixed', left: 0, right: 0 }}
-			>
-				<Header1 />
-			</div>
-			<div className='flex h-screen bg-white'>
-				<div className='w-1/2 h-full px-16 flex flex-col justify-center'>
-					<div className='text-7xl font-bold'>Discover</div>
-					<div className='text-6xl font-semibold mt-6'>Phygital Xperience</div>
-					<div className='text-6xl font-semibold mt-4'>with MyriadFlow</div>
-					<div className='text-2xl mt-10'>
+		<div className="bg-black">
+			<Header1 />
+			<div className="flex flex-col mt-20 md:flex-row h-screen bg-white">
+				<div className="w-full md:w-1/2 h-full px-8 md:px-16 flex flex-col justify-center">
+					<div className="text-4xl md:text-7xl font-bold">Discover</div>
+					<div className="text-3xl md:text-6xl font-semibold mt-4 md:mt-6">Phygital Xperience</div>
+					<div className="text-3xl md:text-6xl font-semibold mt-2 md:mt-4">with MyriadFlow</div>
+					<div className="text-lg md:text-2xl mt-6 md:mt-10">
 						Explore & launch brands and phygitals with a WebXR experience.
 						Create & interact with AI-Powered brand ambassadors.
 					</div>
-					<div className='flex gap-10 mt-10'>
+					<div className="flex flex-col md:flex-row gap-6 mt-6 md:mt-10">
 						<Link href="#movetotrends" style={exploreButtonStyle}>Explore</Link>
 						<Link href="https://studio.myriadflow.com" target="_blank" style={exploreButtonStyle}>Launch</Link>
 					</div>
 				</div>
 
 				<div
-					className='w-1/2'
+					className="w-full mt-10 md:mt-0 md:w-1/2 h-full "
 					style={{
 						backgroundImage: 'url("./landing.png")',
 						backgroundSize: 'cover',
@@ -208,60 +203,27 @@ export default function Home() {
 					<img
 						src='./image 4.png'
 						alt='Top Left'
-						style={{
-							position: 'absolute',
-							top: '100px',
-							left: '40px',
-							width: '280px',
-							height: '280px',
-						}}
+						className="absolute top-24 left-10 w-32 h-32 hidden md:block md:w-64 md:h-64"
 					/>
 					<img
 						src='./image 6.png'
 						alt='Top Right'
-						style={{
-							position: 'absolute',
-							top: '100px',
-							right: '40px',
-							width: '280px',
-							height: '280px',
-						}}
+						className="absolute top-24 right-10 w-32 h-32 hidden md:block md:w-64 md:h-64"
 					/>
 					<img
 						src='./image 8.png'
 						alt='Bottom Left'
-						style={{
-							position: 'absolute',
-							bottom: '40px',
-							left: '40px',
-							width: '280px',
-							height: '280px',
-						}}
+						className="absolute bottom-10 left-10 w-32 h-32 md:w-64 md:h-64"
 					/>
-
 					<img
 						src='./image 7.png'
 						alt='Overlay'
-						style={{
-							position: 'absolute',
-							bottom: '40px',
-							left: '40px',
-							width: '280px',
-							height: '300px',
-							marginBottom: '20px',
-						}}
+						className="absolute bottom-10 left-10 w-32 h-32 md:w-64 md:h-72 mb-5"
 					/>
-
 					<img
 						src='./image 5.png'
 						alt='Bottom Right'
-						style={{
-							position: 'absolute',
-							bottom: '40px',
-							right: '40px',
-							width: '280px',
-							height: '280px',
-						}}
+						className="absolute bottom-10 right-10 w-32 h-32 md:w-64 md:h-64"
 					/>
 				</div>
 			</div>
@@ -270,9 +232,9 @@ export default function Home() {
 				<div
 					className="fixed inset-0 bg-white bg-opacity-10 backdrop-blur-sm z-50 flex items-center justify-center"
 					style={{
-						boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', 
-						WebkitBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', 
-						MozBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)', 
+						boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+						WebkitBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+						MozBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
 					}}
 				>
 					<div className="bg-white rounded-lg p-6 max-w-md w-full text-center">
@@ -366,11 +328,10 @@ export default function Home() {
 			)}
 
 			<div
-				className='text-4xl font-bold py-6'
+				className="text-2xl md:text-4xl font-bold py-4 md:py-6"
 				style={{
 					textAlign: 'center',
-					backgroundImage:
-						'linear-gradient(to right, #F45EC1 ,#F45EC1 , #F45EC1, #4EB9F3, #4EB9F3, #4EB9F3)',
+					backgroundImage: 'linear-gradient(to right, #F45EC1, #F45EC1, #F45EC1, #4EB9F3, #4EB9F3, #4EB9F3)',
 					WebkitBackgroundClip: 'text',
 					backgroundClip: 'text',
 					color: 'transparent',
@@ -380,114 +341,80 @@ export default function Home() {
 			</div>
 
 			<div
-				className='flex bg-white p-20'
+				className="flex flex-wrap justify-center bg-white p-10 md:p-10"
 				style={{
-					// position: 'relative',
 					width: '100%',
 					height: 'auto',
-					justifyContent: 'center',
 				}}
 			>
 				<img
 					src='./image 41.png'
+					className="w-32 h-auto md:w-44 pb-8"
 					style={{
-						// position: 'absolute',
-						// left: '40px',
 						zIndex: '1',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 				<img
 					src='./image 51.png'
+					className="w-32 h-auto md:w-44 pb-8"
 					style={{
-						// position: 'absolute',
-						// left: 'calc(0px + 180px + 2px)',
 						zIndex: '2',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 				<img
 					src='./2_small 1.png'
+					className="w-32 h-auto md:w-44 pb-8"
 					style={{
-						// position: 'absolute',
-						// left: 'calc(0px + 360px - 30px)',
 						zIndex: '3',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 				<img
 					src='./image 9.png'
+					className="w-32 h-auto md:w-44 pb-8"
 					style={{
-						// position: 'absolute',
-						// left: 'calc(0px + 540px - 60px)',
 						zIndex: '4',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 				<img
 					src='./image 10.png'
+					className="w-32 h-auto md:w-44 pb-8 hidden md:block"
 					style={{
-						// position: 'absolute',
-						// left: 'calc(0px + 720px - 80px)',
 						zIndex: '5',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 				<img
 					src='./image 13.png'
+					className="w-32 h-auto md:w-44 pb-8 hidden md:block"
 					style={{
-						// position: 'absolute',
-						// left: 'calc(0px + 900px - 100px)',
 						zIndex: '6',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 				<img
 					src='./image 11.png'
+					className="w-32 h-auto md:w-44 pb-8 hidden md:block"
 					style={{
-						// position: 'absolute',
-						// left: 'calc(0px + 1080px - 120px)',
 						zIndex: '7',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 				<img
 					src='./image 14.png'
+					className="w-32 h-auto md:w-44 pb-8 hidden md:block"
 					style={{
-						// position: 'absolute',
-						// left: 'calc(0px + 1260px - 140px)',
 						zIndex: '8',
-						width: '180px',
-						height: 'auto',
-						paddingBottom: '100px',
 					}}
 				/>
 			</div>
 
-			<div className='pt-10 bg-white px-10'>
+
+			<div className='pt-10 bg-white px-10 hidden md:block'>
 				<MostLoved collectionsdata={collections} />
 			</div>
 
 			<div className='pt-40 bg-white px-10'>
-				{/* <MostRecently collectionsdata={collections}/> */}
 				<LatestNFTs hotnftdata={phygitals} />
 			</div>
 
-			<div className='pt-40 bg-white'>
+			<div className='pt-40 bg-white hidden md:block'>
 				<LeaderBoard />
 			</div>
 
@@ -495,11 +422,11 @@ export default function Home() {
 				<HotNFTs hotnftdata={phygitals} />
 			</div>
 
-			<div className='pt-40 bg-white px-10'>
+			<div className='pt-40 bg-white px-10 hidden md:block'>
 				<Brand brandsdata={brands} />
 			</div>
 
-			<div className='bg-white'>
+			<div className='bg-white hidden md:block'>
 				<CreateBanner />
 			</div>
 

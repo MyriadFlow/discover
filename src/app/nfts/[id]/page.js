@@ -52,8 +52,6 @@ const NFTPage = ({ params }) => {
 
     setLoading(true);
 
-		// const phyres = await fetch(`${apiUrl}/api/phygitals/${id}`)
-
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
 		  const phyres = await fetch(`${baseUri}/phygitals/${id}`, {
@@ -107,22 +105,13 @@ const NFTPage = ({ params }) => {
   
   const conversionRateResult = await conversionRateRes.json();
   const ethToUsdRate = conversionRateResult.ethereum.usd;
-  
-  // console.log("Current ETH to USD rate:", ethToUsdRate);
  
-  // Convert the lowest price from ETH to USD
   const lowestPriceInUSD = onephygital?.price * ethToUsdRate;
-  // console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
   setPriceUSD(lowestPriceInUSD.toFixed(2));
     }
   
    pricetoUSD();
   }, [onephygital])
-
-
-
-
-  // shareOnTwitter.js
 
 const shareOnTwitter = (url, text, imageUrl = '') => {
   const twitterBaseUrl = 'https://twitter.com/intent/tweet';
@@ -141,9 +130,6 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
 
     shareOnTwitter(url, text, imageUrl);
   };
-
-
-
 
   useEffect(() => {
     const brandmatch = async() => {
@@ -207,9 +193,7 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
           "type": "event"
         }
           });
-        
-        
-          // console.log("response", response.raw, response.raw.result[0].data.currentIndex);
+
           if(response.raw.result[0])
           {
           setsold(response.raw.result[0].data.currentIndex);
@@ -223,8 +207,6 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
 
         fetch();
      }
-
-      
   
  } catch (error) {
    console.error('Error fetching data:', error);
@@ -234,14 +216,10 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
     brandmatch();
    }, [onephygital])
 
-
-
    const buyasset = async () => {
     setLoading(true);
 
     try {
-
-      // console.log("ethers", ethers);
 
       if (typeof window !== "undefined" && window.ethereum && walletAddress) {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -252,19 +230,8 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
           provider.getSigner()
         )
 
-//         const blockchainPrice = await contract.nftPrice();
-//         const priceInDecimal = parseInt(blockchainPrice._hex, 16);
-//         console.log("blockchainPrice in decimal", priceInDecimal);
-
-  
         const tx = await contract.mint(1 , {value: ethers.utils.parseEther(onephygital?.price.toString()) });
-        // const tx = await contract.mint(1 , {value: `${priceInDecimal}` });
-
-        // const tx = await contract.mint(1 , {value: "1000000000000000" });
-
         const result = await tx.wait();
-  
-        // console.log("Result:", result);
         setLoading(false);
         window.location.href = `/confirm/${id}`;
       }
@@ -279,66 +246,6 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
       setLoading(false); // Set loading state to false in case of error
     }
   };
-
-
-  	  // ------------------------------------ how many items sold --------------------------------------------------------------
-
-
-      // const fetch = async() => {
-
-      //   try {
-      //     await Moralis.start({
-      //     apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY
-      //     });
-      
-      //     const response = await Moralis.EvmApi.events.getContractEvents({
-      //     "chain": chainId,
-      //     "order": "DESC",
-      //     "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
-      //     "address": "0x2FB88a490b12B5bb5fD22d73D4bCD4B2F888b94d",
-      //     "abi": {
-      //     "anonymous": false,
-      //     "inputs": [
-      //     {
-      //       "indexed": false,
-      //       "name": "currentIndex",
-      //       "type": "uint256",
-      //       "internal_type": "uint256"
-      //     },
-      //     {
-      //       "indexed": false,
-      //       "name": "quantity",
-      //       "type": "uint256",
-      //       "internal_type": "uint256"
-      //     },
-      //     {
-      //       "indexed": true,
-      //       "name": "creator",
-      //       "type": "address",
-      //       "internal_type": "address"
-      //     }
-      //     ],
-      //     "name": "PhygitalAAssetCreated",
-      //     "type": "event"
-      //   }
-      //     });
-        
-        
-      //     // console.log("response", response.raw, response.raw.result[0].data.currentIndex);
-      //     setsold(response.raw.result[0].data.currentIndex);
-      //   } catch (e) {
-      //     console.error(e);
-      //   }
-      
-      
-      //   }
-      
-        useEffect(() => {
-        // fetch();
-        }, [])
-        
-      
-        //----------------------------------------------------------------------------------------------------//
 
   return (
     <div>
@@ -360,30 +267,9 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
               "https://nftstorage.link/ipfs"
             }/${onephygital?.image?.slice(7)}`} />
 		</Head>
-      {/* <div className="px-10" style={{display:'flex', justifyContent: 'space-between', background: 'linear-gradient(90deg, #DF1FDD8A, #30D8FFAB, #5347E7AB)', paddingBottom: '10px'}}>
-        <div
-          className='mt-4'
-        >
-          <a href="/">
-          <img src="../logo2.png" style={{ width: '200px' }} alt="Logo" />
-          </a>
-
-        </div>
-        <div style={{display:'flex', gap:'40px', fontSize:'20px', color:'white'}} className="font-bold mt-6">
-        <Link href="https://myriadflow.com" target="_blank">Home</Link>
-<Link href="/#movetotrends">Explore</Link>
-<Link href="/collections">Collections</Link>
-<Link href="/brands">Brands</Link>
-<Link href="/profile">Dashboard</Link>
-        </div>
-        <div className="mt-6"> */}
-            {/* <button className="px-10 mt-6" style={{color: "white", paddingTop:'5px', paddingBottom:'5px', borderRadius:'50px', backgroundImage: 'url("../Rectangle 12.png")'}}>Connect</button> */}
-            {/* <w3m-button />
-        </div>
-    </div> */}
     <Header1/>
     <ToastContainer />
-      <div className="flex gap-10 mt-10 px-10">
+      <div className="flex gap-10 mt-24 px-10">
         <div className="w-1/3">
           <img
             src={`${
@@ -412,8 +298,6 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
                                 onMouseEnter={() => setIsHovered(true)}
                                 onMouseLeave={() => setIsHovered(false)}
                                 >{onephygital?.brand_name}
-
-                                {/* Pop-up Div */}
           {isHovered && (
             <div
             onMouseEnter={() => setIsHovered(true)}
@@ -478,14 +362,13 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
 
           <div className="mt-0" style={{ display: "flex", gap: "20px" }}>
             <button
-            //  href={`/confirm/${id}`}
               className="w-1/2 justify-center flex"
               style={{
                 backgroundColor: "#30D8FF",
                 paddingTop: "10px",
                 paddingBottom: "10px",
-                paddingLeft: "70px",
-                paddingRight: "70px",
+                paddingLeft: "50px",
+                paddingRight: "50px",
               }}
               onClick={buyasset}
             >
@@ -496,13 +379,26 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
               style={{
                 paddingTop: "10px",
                 paddingBottom: "10px",
-                paddingLeft: "70px",
-                paddingRight: "70px",
+                paddingLeft: "50px",
+                paddingRight: "50px",
                 border: "2px solid black",
               }}
               onClick={handleShare}
             >
               SHARE
+            </button>
+            <button
+             className="w-1/2 flex items-center justify-center"
+              style={{
+                paddingTop: "10px",
+                paddingBottom: "10px",
+                border: "2px solid black",
+                
+              }}
+              // onClick={}
+            >
+              MOVE TO CART
+               <span><img src="/cart.png" className="h-8 w-8 ml-4"/></span>
             </button>
           </div>
           </>)
