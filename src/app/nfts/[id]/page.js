@@ -10,7 +10,7 @@ import { abi } from "../../../components/abi/abi";
 import {useAccount, useChainId } from 'wagmi';
 import Moralis from 'moralis';
 import Header1 from "@/components/header1";
-
+import axios from 'axios';
 const NFTPage = ({ params }) => {
   const id = params?.id;
 
@@ -247,6 +247,42 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
     }
   };
 
+  const handleAddToCart = async () => {
+    const cartItem = {
+      phygital_id: onephygital.id,
+      wallet_address: walletAddress,
+      quantity: 1,
+      name: onephygital.name,
+      price: onephygital.price,
+      image: onephygital.image,
+      logo: logos,
+    };
+    const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+  
+    try {
+      const response = await axios.get(`${baseUri}/cart/${walletAddress}`);
+      const cartItems = response.data;
+  
+      const existingItem = cartItems.find(item => item.phygital_id === onephygital.id);
+  
+      if (existingItem) {
+        await axios.post(`${baseUri}/cart`, {
+          phygital_id: onephygital.id,
+          wallet_address: walletAddress,
+          quantity: existingItem.quantity + 1
+        });
+      } else {
+        await axios.post(`${baseUri}/cart`, cartItem);
+      }
+  
+      toast.success('Added to Cart!');
+    } catch (error) {
+      toast.error('Failed to add to cart. Please try again.');
+      console.error('Error adding to cart:', error);
+    }
+  };
+  
+
   return (
     <div>
       <Head>
@@ -395,7 +431,7 @@ const shareOnTwitter = (url, text, imageUrl = '') => {
                 border: "2px solid black",
                 
               }}
-              // onClick={}
+              onClick={handleAddToCart}
             >
               MOVE TO CART
                <span><img src="/cart.png" className="h-8 w-8 ml-4"/></span>

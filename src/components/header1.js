@@ -160,9 +160,11 @@ const Header1 = () => {
                 <button className="text-xl">
                   <img src="/notification.png" alt="Notification" style={{ width: '45px', height: '45px' }} />
                 </button>
-                <button className="text-xl">
-                  <img src="/cart.png" alt="Cart" style={{ width: '42px', height: '45px' }} />
-                </button>
+                <Link href="/cart">
+                  <button className="text-xl">
+                    <img src="/cart.png" alt="Cart" style={{ width: '42px', height: '45px' }} />
+                  </button>
+                </Link>
               </>
             ) : (
               <button onClick={Notification} className="text-xl">
