@@ -6,10 +6,12 @@ import ProfileNftCard from '../../components/profileNftCard';
 import Header1 from '../../components/header1';
 import Footer from '../../components/footer';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 function HomePage() {
   const { address } = useAccount();
   const chainId = useChainId();
+  const router = useRouter();
 
   const [mintedNFTs, setMintedNFTs] = useState([]);
   const [matchedNFTs, setMatchedNFTs] = useState([]);
@@ -21,9 +23,15 @@ function HomePage() {
   const [x, setX] = useState('');
   const [instagram, setInstagram] = useState('');
   const [activeSection, setActiveSection] = useState('assets');
+  const [showForm, setShowForm] = useState(false);
 
   const apikey = process.env.NEXT_PUBLIC_MORALIS_API_KEY;
   const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+  const handleVerify = () => {
+
+    setShowForm(true)
+  };
 
   useEffect(() => {
     const fetchNFTs = async () => {
@@ -166,8 +174,69 @@ function HomePage() {
         <div className="flex mt-10">
           <h1 className="text-4xl">{name || 'Your Name'}</h1>
           <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
-          <img src='/verified.png' style={{ marginLeft: '2.5rem', height: '40px', width: '40px' }}></img>
-          <h1 className="text-2xl mt-2"> Get Verified</h1>
+          {instagram || x ? (
+            <>
+              <img src='/verified.png' style={{ marginLeft: '2.5rem', height: '40px', width: '40px' }} />
+              <button className="text-2xl mt-2 ml-2">Verified</button>
+            </>
+          ) : (
+            <>
+              <img src='/verified.png' style={{ marginLeft: '2.5rem', height: '40px', width: '40px' }} />
+              <button className="text-2xl mt-2 ml-2" onClick={handleVerify}>Get Verified</button>
+              {showForm && (
+                <div
+                  className="fixed inset-0 bg-white bg-opacity-10 backdrop-blur-sm z-50 flex items-center justify-center"
+                  style={{
+                    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    WebkitBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    MozBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                  }}
+                >
+                  <div className="flex flex-col bg-white rounded-lg p-8 max-w-md w-full text-center">
+                    <h2
+                      className="text-3xl mb-4"
+                      style={{
+                        background: 'linear-gradient(90deg, #30D8FF 0%, #5B0292 100%)',
+                        backgroundClip: 'text',
+                        color: 'transparent',
+                        fontFamily: 'Bai Jamjuree, sans-serif'
+                      }}
+                    >
+                      Hold on!
+                    </h2>
+                    <h2
+                      style={{
+                        fontFamily: 'Bai Jamjuree, sans-serif',
+                        fontWeight: 300,
+                        fontSize: '15px',
+                        lineHeight: '27.5px',
+                        textAlign: 'center',
+                        color: 'black'
+                      }}
+                    >
+                      To begin your verification process, you must link your X or Instagram account.
+                    </h2>
+                    <button
+                      onClick={() => {
+                        setShowForm(false);
+                        router.push('/profile-setting');
+                      }}
+                      className="w-full py-2 mt-2 rounded-md border border-gray-300 bg-white text-black bg-sky-500"
+                    >
+                      Continue
+                    </button>
+                    <button
+                      onClick={() => setShowForm(false)}
+                      className="w-full py-2 mt-2 rounded-md border border-gray-300 bg-white text-black"
+                    >
+                      Cancle
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+
         </div>
         <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {address}</h1>
 
