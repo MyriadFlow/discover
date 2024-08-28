@@ -129,13 +129,13 @@ const Header1 = () => {
                           <Link href="/profile" className="text-xs text-gray-500 hover:underline">View profile</Link>
                         </div>
                       </div>
-                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My assets</Link>
-                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">On sale</Link>
-                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My brands</Link>
-                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My collections</Link>
-                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Activity</Link>
-                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Rewards</Link>
-                      <Link href="/" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Create</Link>
+                      <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My assets</Link>
+                      <Link href="/profile#onsale" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">On sale</Link>
+                      <Link href="/profile#mybrands" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My brands</Link>
+                      <Link href="/profile#mycollections" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My collections</Link>
+                      <Link href="/profile#activity" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Activity</Link>
+                      <Link href="/profile#rewards" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Rewards</Link>
+                      <Link href="https://studio.myriadflow.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Create</Link>
                       <Link href="/profile-setting" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Profile Settings</Link>
                       <div className="border-t border-gray-200 my-2"></div>
                       <button onClick={handleLogout} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-left">Log out</button>

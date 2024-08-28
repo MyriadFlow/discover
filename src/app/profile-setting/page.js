@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Header1 from '../../components/header1';
 import Footer from '../../components/footer';
 import { useAccount } from 'wagmi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProfileSettingsPage() {
     const { address } = useAccount();
@@ -15,6 +17,7 @@ function ProfileSettingsPage() {
     const [instagram, setInstagram] = useState('');
     const [coverImage, setCoverImage] = useState('');
     const [profileImage, setProfileImage] = useState('');
+    const [email, setEmail] = useState('');
 
     const [isEditing, setIsEditing] = useState(false);
     const [isCoverHovered, setIsCoverHovered] = useState(false);
@@ -23,10 +26,44 @@ function ProfileSettingsPage() {
     const [isProfilePopupVisible, setIsProfilePopupVisible] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
+    const [showForm, setShowForm] = useState(false);
+
 
     const [currentSection, setCurrentSection] = useState('profile');
 
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+    const deleteAccount = async () => {
+        // if (!window.confirm('Are you sure you want to delete your account?')) {
+        //   return;
+        // }
+
+        try {
+            const response = await fetch(`${baseUri}/profiles/walletandemail/${address}/${email}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                // body: JSON.stringify({ walletAddress, email }),
+            });
+
+            if (response.ok) {
+                toast.success('Account deleted successfully!');
+                window.location.reload();
+            } else {
+                const errorData = await response.json();
+                toast.error(`Failed to delete account: ${errorData.error}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('An error occurred while deleting the account.');
+        }
+    };
+
+    const handleDelete = () => {
+
+        setShowForm(true)
+    };
 
     const handleSave = async () => {
         const profileData = {
@@ -133,6 +170,7 @@ function ProfileSettingsPage() {
                         setWebsite(data.website);
                         setx(data.x);
                         setInstagram(data.instagram);
+                        setEmail(data.email);
                     } else {
                         console.log('No user found');
                     }
@@ -499,26 +537,131 @@ function ProfileSettingsPage() {
                                 </div>
                             )}
                         </>
-                    ) : (
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                height: '500px',
-                                backgroundColor: '#F3F4F6',
-                                borderRadius: '8px',
-                                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-                            }}
-                        >
-                            <h2 style={{ color: '#6B7280', fontSize: '2rem', textAlign: 'center' }}>
-                                Coming Soon
-                            </h2>
+                    ) : currentSection === 'account' ? (
+                        <div style={{ padding: '20px', marginLeft: '10px' }}>
+                            <div style={{ marginBottom: '40px' }}>
+                                <label style={{ display: 'block', fontSize: '1.25rem', marginBottom: '8px' }}>Email Address</label>
+                                <div
+                                    style={{
+                                        backgroundColor: '#E5E7EB',
+                                        padding: '10px 20px',
+                                        borderRadius: '8px',
+                                        color: '#6B7280',
+                                        fontSize: '1rem',
+                                        width: '300px',
+                                    }}
+                                >
+                                    {email}
+                                </div>
+                            </div>
+
+                            {/* Danger Zone Section */}
+                            <div style={{ marginBottom: '20px' }}>
+                                <label style={{ display: 'block', fontSize: '1.25rem', marginBottom: '8px', color: '#EF4444' }}>Danger Zone</label>
+                                <button
+                                    style={{
+                                        backgroundColor: '#E5E7EB',
+                                        padding: '10px 20px',
+                                        borderRadius: '8px',
+                                        color: '#EF4444',
+                                        fontSize: '1rem',
+                                        border: 'none',
+                                        cursor: 'pointer',
+                                    }}
+                                    onClick={handleDelete}
+                                >
+                                    Delete My Account
+                                </button>
+                            </div>
+                            {showForm && (
+                                <div
+                                    className="fixed inset-0 bg-white bg-opacity-10 backdrop-blur-sm z-50 flex items-center justify-center"
+                                    style={{
+                                        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                                        WebkitBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                                        MozBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                                    }}
+                                >
+                                    <div className="flex flex-col bg-white rounded-lg p-20 max-w-md w-full text-center">
+                                        <h2
+                                            className="text-3xl mb-4"
+                                            style={{
+                                                background: 'linear-gradient(90deg, #30D8FF 0%, #5B0292 100%)',
+                                                backgroundClip: 'text',
+                                                color: 'transparent',
+                                                fontFamily: 'Bai Jamjuree, sans-serif'
+                                            }}
+                                        >
+                                            Are You Sure?
+                                        </h2>
+                                        <h2
+                                            style={{
+                                                fontFamily: 'Bai Jamjuree, sans-serif',
+                                                fontWeight: 300,
+                                                fontSize: '15px',
+                                                lineHeight: '27.5px',
+                                                textAlign: 'center',
+                                                color: 'black'
+                                            }}
+                                        >
+                                            When you delete your account, we will delete all your data. This action cannot be undone.
+                                        </h2>
+                                        <input
+                                            type="email"
+                                            placeholder="Email Address"
+                                            value={email}
+                                            className="w-full p-2 mb-2 rounded-md border border-gray-300 mt-4"
+                                            required
+                                        />
+                                        <button
+                                            onClick={deleteAccount}
+                                            style={{
+                                                backgroundColor: '#E5E7EB',
+                                                padding: '10px 20px',
+                                                borderRadius: '8px',
+                                                color: '#EF4444',
+                                                fontSize: '1rem',
+                                                border: 'none',
+                                                cursor: 'pointer',
+                                            }}
+                                        >
+                                            Delete account Forever
+                                        </button>
+                                        <button
+                                            onClick={() => setShowForm(false)}
+                                            className="w-full py-2 mt-2 rounded-md border border-gray-300 bg-white text-black"
+                                        >
+                                            Cancle
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                            {/* Warning Text */}
+                            <div style={{ color: 'black', fontSize: '0.875rem' }}>
+                                This action cannot be undone!
+                            </div>
                         </div>
-                    )}
+                    )
+                        : (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: '500px',
+                                    backgroundColor: '#F3F4F6',
+                                    borderRadius: '8px',
+                                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                                }}
+                            >
+                                <h2 style={{ color: '#6B7280', fontSize: '2rem', textAlign: 'center' }}>
+                                    Coming Soon
+                                </h2>
+                            </div>
+                        )}
                 </div >
             </div >
-
+            <ToastContainer />
             <Footer />
         </>
     );
