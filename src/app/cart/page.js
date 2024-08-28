@@ -3,8 +3,8 @@ import { React, useEffect, useState } from "react";
 import Header1 from '../../components/header1';
 import { useAccount } from "wagmi";
 import Link from "next/link";
-import { ToastContainer, toast } from 'react-toastify'; // Import ToastContainer and toast
-import 'react-toastify/dist/ReactToastify.css'; // Import CSS for Toast notifications
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cart() {
     const { address } = useAccount();

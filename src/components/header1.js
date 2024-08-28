@@ -103,7 +103,7 @@ const Header1 = () => {
             <Link href="/#movetotrends" style={{ color: getLinkColor("/#movetotrends") }}>Explore</Link>
             <Link href="/collections" style={{ color: getLinkColor("/collections") }}>Collections</Link>
             <Link href="/brands" style={{ color: getLinkColor("/brands") }}>Brands</Link>
-            <Link href="/profile" style={{ color: getLinkColor("/profile") }}>Users</Link>
+            <Link href="/user" style={{ color: getLinkColor("/user") }}>Users</Link>
           </div>
           <div className="flex items-center space-x-4">
             {address ? (
@@ -192,7 +192,7 @@ const Header1 = () => {
               <Link href="/#movetotrends" style={{ color: getLinkColor("/#movetotrends") }} className="block py-2 text-lg">Explore</Link>
               <Link href="/collections" style={{ color: getLinkColor("/collections") }} className="block py-2 text-lg">Collections</Link>
               <Link href="/brands" style={{ color: getLinkColor("/brands") }} className="block py-2 text-lg">Brands</Link>
-              <Link href="/profile" style={{ color: getLinkColor("/profile") }} className="block py-2 text-lg">Users</Link>
+              <Link href="/user" style={{ color: getLinkColor("/user") }} className="block py-2 text-lg">Users</Link>
             </div>
           </div>
         )}
