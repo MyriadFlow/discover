@@ -14,6 +14,7 @@ const Header1 = () => {
   const pathname = usePathname();
   const [name, setName] = useState('');
   const [profileImage, setProfileImage] = useState('');
+  const [username , setUserName] = useState('');
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const Header1 = () => {
           if (response.ok) {
             const data = await response.json();
             setProfileImage(data.profile_image);
+            setUserName(data.username);
             setName(data.name);
           } else {
             console.log('No user found');
@@ -126,15 +128,15 @@ const Header1 = () => {
                         />
                         <div>
                           <span className="block text-sm font-semibold">{name}</span>
-                          <Link href="/profile" className="text-xs text-gray-500 hover:underline">View profile</Link>
+                          <Link href={`/${username}`} className="text-xs text-gray-500 hover:underline">View profile</Link>
                         </div>
                       </div>
-                      <Link href="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My assets</Link>
-                      <Link href="/profile#onsale" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">On sale</Link>
-                      <Link href="/profile#mybrands" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My brands</Link>
-                      <Link href="/profile#mycollections" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My collections</Link>
-                      <Link href="/profile#activity" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Activity</Link>
-                      <Link href="/profile#rewards" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Rewards</Link>
+                      <Link href={`/${username}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My assets</Link>
+                      <Link href={`/${username}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">On sale</Link>
+                      <Link href={`/${username}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My brands</Link>
+                      <Link href={`/${username}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">My collections</Link>
+                      <Link href={`/${username}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Activity</Link>
+                      <Link href={`/${username}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Rewards</Link>
                       <Link href="https://studio.myriadflow.com" target="_blank" rel="noopener noreferrer" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Create</Link>
                       <Link href="/profile-setting" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Profile Settings</Link>
                       <div className="border-t border-gray-200 my-2"></div>
