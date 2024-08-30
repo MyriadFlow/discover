@@ -469,7 +469,7 @@ function HomePage({ params }) {
 
         <div className="flex flex-col p-6" style={{ marginLeft: '2.5rem' }}>
           <div className="flex mt-10">
-            <h1 className="text-4xl">{name || 'Your Name'}</h1>
+            <h1 className="text-4xl">{guestname || 'Your Name'}</h1>
             <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
             {guestinstagram || guestx ? (
               <>
@@ -486,7 +486,7 @@ function HomePage({ params }) {
           </div>
           <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {walletAddress}</h1>
 
-          <p className="text-gray-500 text-lg mt-6 ">{bio || "Short bio of the person here"}</p>
+          <p className="text-gray-500 text-lg mt-6 ">{guestbio || "Short bio of the person here"}</p>
 
           <div className="flex mt-6">
             <button
