@@ -99,7 +99,7 @@ const Header1 = () => {
             />
           </a>
           <div className="hidden sm:flex items-center space-x-8 text-lg font-bold">
-            <Link href="/" style={{ color: getLinkColor("/") }}>Home</Link>
+            <Link href="https://myriadflow.com" style={{ color: getLinkColor("/") }}>Home</Link>
             <Link href="/#movetotrends" style={{ color: getLinkColor("/#movetotrends") }}>Explore</Link>
             <Link href="/collections" style={{ color: getLinkColor("/collections") }}>Collections</Link>
             <Link href="/brands" style={{ color: getLinkColor("/brands") }}>Brands</Link>
@@ -188,7 +188,7 @@ const Header1 = () => {
               >
                 <img src="/close.png" alt="Close" className="w-12 h-12" />
               </button>
-              <Link href="/" style={{ color: getLinkColor("/") }} className="block py-2 text-lg">Home</Link>
+              <Link href="https://myriadflow.com" style={{ color: getLinkColor("/") }} className="block py-2 text-lg">Home</Link>
               <Link href="/#movetotrends" style={{ color: getLinkColor("/#movetotrends") }} className="block py-2 text-lg">Explore</Link>
               <Link href="/collections" style={{ color: getLinkColor("/collections") }} className="block py-2 text-lg">Collections</Link>
               <Link href="/brands" style={{ color: getLinkColor("/brands") }} className="block py-2 text-lg">Brands</Link>
