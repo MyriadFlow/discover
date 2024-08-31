@@ -42,8 +42,8 @@ function User() {
                 <h1 className="text-2xl lg:text-3xl font-bold mb-6 lg:mb-10">All Users</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
                     {users.map((user, index) => (
-                        <Link href={`/${user.username}`}>
-                            <div key={index} className="bg-white shadow-lg rounded-lg p-4">
+                        <div key={index} className="bg-white shadow-lg rounded-lg p-4">
+                            <Link href={`/${user.username}`}>
                                 <div className="relative">
                                     {user.cover_image ? (
                                         <img
@@ -78,8 +78,8 @@ function User() {
                                         </button>
                                     </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
                     ))}
                 </div>
             </div>
