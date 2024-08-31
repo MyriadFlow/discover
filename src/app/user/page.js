@@ -4,10 +4,12 @@ import Header1 from '../../components/header1';
 import { useAccount } from "wagmi";
 import 'react-toastify/dist/ReactToastify.css';
 import Link from "next/link";
+import Footer from "@/components/footer";
 
 function User() {
     const { address } = useAccount();
     const [users, setUsers] = useState([]);
+    const [owners, setOwners] = useState([]);
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
     useEffect(() => {
@@ -35,6 +37,37 @@ function User() {
         getUserData();
     }, [address]);
 
+    useEffect(() => {
+        const getPhygitalData = async () => {
+            const ownerStatuses = await Promise.all(
+                users.map(async (user) => {
+                    if (user.wallet_address) {
+                        try {
+                            const response = await fetch(`${baseUri}/phygitals/deployer_address/${user.wallet_address}`, {
+                                method: 'GET',
+                                headers: {
+                                    'content-Type': 'application/json',
+                                },
+                            });
+
+                            if (response.ok) {
+                                return true;
+                            }
+                        } catch (error) {
+                            console.error('Error fetching Phygital data', error);
+                        }
+                    }
+                    return false;
+                })
+            );
+            setOwners(ownerStatuses);
+        };
+
+        if (users.length > 0) {
+            getPhygitalData();
+        }
+    }, [users]);
+
     return (
         <div>
             <Header1 />
@@ -43,7 +76,7 @@ function User() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
                     {users.map((user, index) => (
                         <div key={index} className="bg-white shadow-lg rounded-lg p-4">
-                            <Link href={`/${user.username}`}>
+                            <Link href={`/${encodeURIComponent(user.username)}`}>
                                 <div className="relative">
                                     {user.cover_image ? (
                                         <img
@@ -67,7 +100,11 @@ function User() {
                                     <div>
                                         <h2 className="text-lg font-bold">{user.name || "Display Name"}</h2>
                                         <div className="flex items-center gap-2">
-                                            <p className="text-sm text-gray-500">Visitor</p>
+                                            {owners[index] ? (
+                                                <p className="text-sm text-gray-500">Creator</p>
+                                            ) : (
+                                                <p className="text-sm text-gray-500">Visitor</p>
+                                            )}
                                             <img src="/verified.png" className="h-6 w-6" alt="Verified" />
                                         </div>
                                     </div>
@@ -82,6 +119,9 @@ function User() {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="mt-20">
+                <Footer />
             </div>
         </div>
     );

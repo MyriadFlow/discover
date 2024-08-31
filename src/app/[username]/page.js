@@ -34,6 +34,7 @@ function HomePage({ params }) {
   const [walletAddress, setGuestWalletAddress] = useState('');
   const [activeSection, setActiveSection] = useState('assets');
   const [showForm, setShowForm] = useState(false);
+  const [owner, setOwner] = useState(false);
 
   const apikey = process.env.NEXT_PUBLIC_MORALIS_API_KEY;
   const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
@@ -173,6 +174,31 @@ function HomePage({ params }) {
     }
   }, [mintedNFTs, baseUri]);
 
+  useEffect(() => {
+    const getPhygitalData = async () => {
+      if (walletAddress) {
+        try {
+          const response = await fetch(`${baseUri}/phygitals/deployer_address/${walletAddress}`, {
+            method: 'GET',
+            headers: {
+              'content-Type': 'application/json',
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setOwner(true);
+            console.log("Phygital data based on address", data);
+          } else {
+            console.log('No Phygital found');
+          }
+        } catch (error) {
+          console.error('Error fetching user data', error);
+        }
+      }
+    };
+    getPhygitalData();
+  }, [walletAddress]);
 
   if (address === walletAddress) {
     return (
@@ -217,7 +243,11 @@ function HomePage({ params }) {
         <div className="flex flex-col p-6" style={{ marginLeft: '2.5rem' }}>
           <div className="flex mt-10">
             <h1 className="text-4xl">{name || 'Your Name'}</h1>
-            <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
+            {owner ? (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Creator</h1>
+            ) : (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Visitor</h1>
+            )}
             {instagram || x ? (
               <>
                 <img src='/verified.png' style={{ marginLeft: '2.5rem', height: '40px', width: '40px' }} />
@@ -470,7 +500,11 @@ function HomePage({ params }) {
         <div className="flex flex-col p-6" style={{ marginLeft: '2.5rem' }}>
           <div className="flex mt-10">
             <h1 className="text-4xl">{guestname || 'Your Name'}</h1>
-            <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
+            {owner ? (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Creator</h1>
+            ) : (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Visitor</h1>
+            )}
             {guestinstagram || guestx ? (
               <>
                 <img src='/verified.png' style={{ marginLeft: '2.5rem', height: '40px', width: '40px' }} />

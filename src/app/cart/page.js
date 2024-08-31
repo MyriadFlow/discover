@@ -5,6 +5,7 @@ import { useAccount } from "wagmi";
 import Link from "next/link";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "@/components/footer";
 
 function Cart() {
     const { address } = useAccount();
@@ -152,6 +153,9 @@ function Cart() {
                         <p className="text-2xl sm:text-3xl text-center col-span-full mt-32">Your cart is empty.</p>
                     )}
                 </div>
+            </div>
+            <div className="mt-20">
+                <Footer />
             </div>
         </div>
     );
