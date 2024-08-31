@@ -15,8 +15,6 @@ function Cart() {
 
 
     const getCartItems = async () => {
-        const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
-
         try {
             const response = await fetch(`${baseUri}/cart/${address}`, {
                 method: 'GET',
@@ -48,10 +46,10 @@ function Cart() {
     return (
         <div>
             <Header1 />
-            <div className="mx-20 mt-32">
+            <div className="mx-4 mt-32 sm:mx-8 md:mx-10">
 
-                <h1 className="text-3xl font-bold mb-10">My Shopping Cart</h1>
-                <div className="flex gap-8">
+                <h1 className="text-2xl sm:text-3xl font-bold mb-10">My Shopping Cart</h1>
+                <div className="flex flex-wrap gap-4">
                     {cartItems.length > 0 ? (
                         cartItems.map((item) => (
                             <div key={item.phygital_id} style={{
@@ -96,7 +94,7 @@ function Cart() {
                                             </button>
                                         </Link>
                                         <button
-                                            className="px-4  bg-red-500 text-white rounded hover:bg-red-600"
+                                            className="px-4 bg-red-500 text-white rounded hover:bg-red-600"
                                             onClick={async () => {
                                                 try {
                                                     await fetch(`${baseUri}/cart/${address}/${item.phygital_id}`, {
@@ -115,40 +113,19 @@ function Cart() {
                                         >
                                             Remove
                                         </button>
-
                                     </div>
                                 </div>
-
 
                                 {/* Brand Logo and Hover Effect */}
                                 <img
                                     src={`https://nftstorage.link/ipfs/${item.logo?.slice(7)}`}
                                     alt="Brand Logo"
-                                    style={{
-                                        position: "absolute",
-                                        top: "10px",
-                                        left: "10px",
-                                        width: "50px",
-                                        height: "50px",
-                                        borderRadius: '50%',
-                                        zIndex: 1
-                                    }}
-                                    onMouseEnter={() => setIsHovered(true)}
-                                    onMouseLeave={() => setIsHovered(false)}
+                                    className="absolute top-2 left-2 w-12 h-12 rounded-full z-10"
                                 />
 
                                 {/* Web XR Link */}
                                 <Link href={`https://webxr.myriadflow.com/${item.phygital_id}`} target="_blank"
-                                    style={{
-                                        position: "absolute",
-                                        top: "10px",
-                                        right: "10px",
-                                        padding: "5px 20px",
-                                        borderRadius: "10px",
-                                        border: '1px solid black',
-                                        background: 'white',
-                                        zIndex: 1
-                                    }}
+                                    className="absolute top-2 right-2 px-3 py-1 text-sm bg-white border border-black rounded"
                                 >
                                     Web XR
                                 </Link>
@@ -156,28 +133,15 @@ function Cart() {
 
                                 {loading && (
                                     <div
-                                        style={{
-                                            display: "flex",
-                                            overflowY: "auto",
-                                            overflowX: "hidden",
-                                            position: "fixed",
-                                            inset: 0,
-                                            zIndex: 50,
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            width: "100%",
-                                            maxHeight: "100%",
-                                        }}
+                                        className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"
                                         id="popupmodal"
                                     >
-                                        <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
-                                            <div style={{ position: "relative", borderRadius: "0.5rem", boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" }}>
-                                                <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
-                                                    <img
-                                                        src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
-                                                        alt="Loading icon"
-                                                    />
-                                                </div>
+                                        <div className="bg-white p-4 rounded shadow-lg">
+                                            <div className="flex justify-center">
+                                                <img
+                                                    src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
+                                                    alt="Loading icon"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -185,13 +149,10 @@ function Cart() {
                             </div>
                         ))
                     ) : (
-                        <p className="flex justify-center items-center mt-32 text-3xl mx-[40%]">Your cart is empty.</p>
+                        <p className="text-2xl sm:text-3xl text-center col-span-full mt-32">Your cart is empty.</p>
                     )}
                 </div>
             </div>
-
-
-            <ToastContainer />
         </div>
     );
 }
