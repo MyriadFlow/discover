@@ -30,6 +30,7 @@ function ProfileSettingsPage() {
 
 
     const [currentSection, setCurrentSection] = useState('profile');
+    const [validationError, setValidationError] = useState('');
 
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
@@ -66,6 +67,14 @@ function ProfileSettingsPage() {
     };
 
     const handleSave = async () => {
+        // Validate username length
+        if (userName.length < 4) {
+            setValidationError('Username must be at least 4 characters long.');
+            return;
+        } else {
+            setValidationError('');
+        }
+
         const profileData = {
             name: displayName,
             username: userName,
@@ -304,6 +313,11 @@ function ProfileSettingsPage() {
                                     }}
                                     style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '20px' }}
                                 />
+                                {validationError && (
+                                    <p style={{ color: 'red', fontSize: '14px', marginBottom: '20px' }}>
+                                        {validationError}
+                                    </p>
+                                )}
 
                                 <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Bio</label>
                                 <textarea
