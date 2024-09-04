@@ -71,6 +71,9 @@ function ProfileSettingsPage() {
         if (userName.length < 4) {
             setValidationError('Username must be at least 4 characters long.');
             return;
+        } else if (userName !== userName.toLowerCase()) {
+            setValidationError('Username must be in lowercase.');
+            return;
         } else {
             setValidationError('');
         }
