@@ -12,6 +12,8 @@ function User() {
     const [owners, setOwners] = useState([]);
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
+    const filteredUsers = users.filter(user => user.instagram || user.x);
+
     useEffect(() => {
         const getUserData = async () => {
             if (address) {
@@ -40,7 +42,7 @@ function User() {
     useEffect(() => {
         const getPhygitalData = async () => {
             const ownerStatuses = await Promise.all(
-                users.map(async (user) => {
+                filteredUsers.map(async (user) => {
                     if (user.wallet_address) {
                         try {
                             const response = await fetch(`${baseUri}/phygitals/deployer_address/${user.wallet_address}`, {
@@ -74,7 +76,7 @@ function User() {
             <div className="mx-4 lg:mx-20 mt-16 lg:mt-32">
                 <h1 className="text-2xl lg:text-3xl font-bold mb-6 lg:mb-10">All Users</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-                    {users.map((user, index) => (
+                    {filteredUsers.map((user, index) => (
                         <div key={index} className="bg-white shadow-lg rounded-lg p-4">
                             <Link href={`/${encodeURIComponent(user.username)}`}>
                                 <div className="relative">

@@ -31,6 +31,8 @@ export default function Home() {
 	const [showForm, setShowForm] = useState(false);
 	const account = useAccount()
 	const [displayName, setDisplayName] = useState('');
+	const [userName, setUserName] = useState('');
+	const [validationError, setValidationError] = useState('');
 	const [email, setEmail] = useState('');
 	const [tosChecked, setTosChecked] = useState(false);
 	const [newsletterChecked, setNewsletterChecked] = useState(false);
@@ -74,7 +76,18 @@ export default function Home() {
 
 
 	const handleSubmit = async () => {
-		if (displayName && email && tosChecked) {
+
+		if (userName.length < 4) {
+			setValidationError('Username must be at least 4 characters long.');
+			return;
+		} else if (userName !== userName.toLowerCase()) {
+			setValidationError('Username must be in lowercase.');
+			return;
+		} else {
+			setValidationError('');
+		}
+
+		if (displayName && email && tosChecked && userName) {
 			try {
 				const profileId = uuidv4();
 				const response = await fetch(`${baseUri}/profiles`, {
@@ -86,6 +99,7 @@ export default function Home() {
 						id: profileId,
 						name: displayName,
 						email: email,
+						username: userName,
 						wallet_address: account.address,
 						chaintype_id: '554b4903-9a06-4031-98f4-48276c427f78'
 					}),
@@ -93,6 +107,7 @@ export default function Home() {
 
 				if (response.ok) {
 					setShowForm(false);
+					window.location.reload();
 				} else {
 					console.error('Failed to submit profile data');
 				}
@@ -259,7 +274,7 @@ export default function Home() {
 								color: 'black'
 							}}
 						>
-							Choose a public display name and share your email address to sign up with MyriadFlow.
+							Choose a public display name and user name, and share your email address to sign up with MyriadFlow.
 						</h2>
 
 						<input
@@ -278,6 +293,19 @@ export default function Home() {
 							className="w-full p-2 mb-2 rounded-md border border-gray-300"
 							required
 						/>
+						<input
+							type="text"
+							placeholder="User Name"
+							value={userName}
+							onChange={(e) => setUserName(e.target.value)}
+							className="w-full p-2 mb-2 rounded-lg border border-gray-300"
+							required
+						/>
+						{validationError && (
+							<p style={{ color: 'red', fontSize: '14px', marginBottom: '20px' }}>
+								{validationError}
+							</p>
+						)}
 						<div className="mb-4 flex items-center mt-4">
 							<input
 								type="checkbox"

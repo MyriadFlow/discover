@@ -5,6 +5,7 @@ import Footer from '../../components/footer';
 import { useAccount } from 'wagmi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 
 function ProfileSettingsPage() {
     const { address } = useAccount();
@@ -80,6 +81,7 @@ function ProfileSettingsPage() {
 
         const profileData = {
             name: displayName,
+            email: email,
             username: userName,
             bio: bio,
             website: website,
@@ -222,14 +224,58 @@ function ProfileSettingsPage() {
                     >
                         Notifications
                     </button>
+                    {instagram || x ? (
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            backgroundColor: '#F3E9FE',
+                            borderRadius: '8px',
+                            padding: '20px',
+                            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                            maxWidth: '300px',
+                            marginTop: '30px'
+                        }}>
+                            <p style={{ color: '#6B7280', marginBottom: '20px' }}>You have completed the verification process. Your profile is visible on the Users page.</p>
 
-                    <div style={{ backgroundColor: '#F3E9FE', borderRadius: '8px', padding: '20px', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)', maxWidth: '300px', marginTop: '30px' }}>
-                        <img src="/verified.png" alt="Verified Icon" style={{ width: '50px', height: '50px', marginBottom: '20px' }} />
-                        <div>
-                            <p style={{ color: '#6B7280', marginBottom: '20px' }}>Click to proceed with the verification process to become a creator and gain the trust of the community!</p>
-                            <button style={{ backgroundColor: '#7D4AB5', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer' }} onClick={() => handleButtonClick('get verified')}>Get Verified!</button>
+                            <img src="/verified.png" alt="Verified Icon" style={{ width: '50px', height: '50px', marginBottom: '20px' }} />
+                            <Link href="/user">
+                                <button style={{ backgroundColor: '#7D4AB5', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer' }}>Users</button>
+                            </Link>
                         </div>
-                    </div>
+                    ) : (
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                            backgroundColor: '#F3E9FE',
+                            borderRadius: '8px',
+                            padding: '20px',
+                            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                            maxWidth: '300px',
+                            marginTop: '30px'
+                        }}>
+                            <img src="/verified.png" alt="Verified Icon" style={{ width: '50px', height: '50px', marginBottom: '20px' }} />
+                            <p style={{ color: '#6B7280', marginBottom: '20px' }}>Click to proceed with the verification process to become a creator and gain the trust of the community!</p>
+                            <button
+                                style={{
+                                    backgroundColor: '#7D4AB5',
+                                    color: '#ffffff',
+                                    padding: '10px 20px',
+                                    borderRadius: '8px',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => handleButtonClick('get verified')}
+                            >
+                                Get Verified!
+                            </button>
+                        </div>
+                    )}
+
                 </div>
 
                 {/* Main Content */}
@@ -299,6 +345,17 @@ function ProfileSettingsPage() {
                                     value={displayName}
                                     onChange={(e) => {
                                         setDisplayName(e.target.value);
+                                        setIsEditing(true);
+                                    }}
+                                    style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '20px' }}
+                                />
+                                <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Email</label>
+                                <input
+                                    className='w-1/2'
+                                    type='text'
+                                    value={email}
+                                    onChange={(e) => {
+                                        setEmail(e.target.value);
                                         setIsEditing(true);
                                     }}
                                     style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '20px' }}
@@ -658,6 +715,45 @@ function ProfileSettingsPage() {
                                 This action cannot be undone!
                             </div>
                         </div>
+                    ) : currentSection === 'get verified' ? (
+                        <>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    height: '500px',
+                                    backgroundColor: '#F3F4F6',
+                                    borderRadius: '8px',
+                                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+                                }}
+                            >
+                                <h2
+                                    className="text-5xl mb-4"
+                                    style={{
+                                        background: 'linear-gradient(90deg, #30D8FF 0%, #5B0292 100%)',
+                                        backgroundClip: 'text',
+                                        color: 'transparent',
+                                        fontFamily: 'Bai Jamjuree, sans-serif'
+                                    }}
+                                >
+                                    Hold on!
+                                </h2>
+                                <h2
+                                    style={{
+                                        fontFamily: 'Bai Jamjuree, sans-serif',
+                                        fontWeight: 300,
+                                        fontSize: '25px',
+                                        lineHeight: '27.5px',
+                                        textAlign: 'center',
+                                        color: 'black'
+                                    }}
+                                >
+                                    To begin your verification process, you must link your X or Instagram account.
+                                </h2>
+                            </div>
+                        </>
                     )
                         : (
                             <div
