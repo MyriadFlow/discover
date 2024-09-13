@@ -1,12 +1,20 @@
 import React from 'react';
-import Link from 'next/link'; 
+import Link from 'next/link';
 
 const Footer = () => {
+
+  const socialLinks = [
+    { icon: '/Vector3.png', link: 'https://discord.gg/38jktRtuY7' },
+    { icon: '/Vector4.png', link: 'https://t.me/MyriadFlow' },
+    { icon: '/Vector2.png', link: 'https://x.com/0xMyriadFlow' },
+    { icon: '/Vector5.png', link: 'https://www.instagram.com/0xmyriadflow' }
+  ];
+
   return (
     <div>
       <footer className="bg-gradient-to-r from-[#30D8FF] via-[#A32CC4] to-[#C243FE] p-10 lg:p-16">
         <section className="flex flex-col lg:flex-row justify-between items-center space-y-10 lg:space-y-0">
-          
+
           <div className="brand text-left">
             <Link href="https://myriadflow.com/" passHref>
               <img
@@ -27,7 +35,10 @@ const Footer = () => {
 
           <div className="links text-left text-white text-sm">
             <h3 className='text-2xl font-semibold'>About</h3>
-            <Link href="/MyriadFlow_Terms_of_Service.pdf" target="_blank" className="block mt-7 text-white no-underline">
+            <Link href="/guide" className="block mt-7 text-white no-underline">
+              Guide
+            </Link>
+            <Link href="/MyriadFlow_Terms_of_Service.pdf" target="_blank" className="block text-white no-underline">
               Terms of Service
             </Link>
             <Link href="/MyriadFlow_Creator_Terms_and_Conditions.pdf" target="_blank" className="block text-white no-underline">
@@ -58,9 +69,9 @@ const Footer = () => {
             id="connect"
             className="social-links flex justify-center lg:justify-end gap-5"
           >
-            {['/Vector3.png', '/Vector4.png', '/Vector2.png', '/Vector5.png'].map((icon, index) => (
+            {socialLinks.map(({ icon, link }, index) => (
               <div key={index} className="rounded-full border-2 border-[#0E46A3] p-4 bg-[#15063C]">
-                <Link href="#" target="_blank">
+                <Link href={link} target="_blank">
                   <img
                     src={icon}
                     width={20}
