@@ -241,7 +241,7 @@ function ProfileSettingsPage() {
                             <p style={{ color: '#6B7280', marginBottom: '20px' }}>You have completed the verification process. Your profile is visible on the Users page.</p>
 
                             <img src="/verified.png" alt="Verified Icon" style={{ width: '50px', height: '50px', marginBottom: '20px' }} />
-                            <Link href="/user">
+                            <Link href="/users">
                                 <button style={{ backgroundColor: '#7D4AB5', color: '#ffffff', padding: '10px 20px', borderRadius: '8px', cursor: 'pointer' }}>Users</button>
                             </Link>
                         </div>
