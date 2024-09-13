@@ -12,7 +12,7 @@ export default function GuidePage() {
             >
                 <Header1 />
             </div>
-            <div className="mx-20 px-4 py-8 mt-32">
+            <div className="mx-40 px-4 py-8 mt-32">
                 <h1 className="text-5xl font-bold mb-4">Create a profile</h1>
 
                 <p className="text-3xl mb-6">
@@ -24,7 +24,7 @@ export default function GuidePage() {
                 </p>
 
                 <div className="mb-8">
-                    <Image
+                    <img
                         src="/guide.png"
                         alt="MyriadFlow Profile Example"
                         width={600}
