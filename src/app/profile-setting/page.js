@@ -75,6 +75,9 @@ function ProfileSettingsPage() {
         } else if (userName !== userName.toLowerCase()) {
             setValidationError('Username must be in lowercase.');
             return;
+        } else if (userName.includes(' ')) {
+            setValidationError('Username cannot contain spaces.');
+            return;
         } else {
             setValidationError('');
         }

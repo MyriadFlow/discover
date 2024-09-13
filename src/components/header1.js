@@ -70,14 +70,14 @@ const Header1 = () => {
 
   const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
-  const Notification = () => {
-    if (!address) {
-      toast.warning("Currently works with Metamask and Coinbase Wallet Extension. We are working on Smart Wallet functionality.", {
-        containerId: "containerA",
-        position: 'top-left',
-      });
-    }
-  };
+  // const Notification = () => {
+  //   if (!address) {
+  //     toast.warning("Currently works with Metamask and Coinbase Wallet Extension. We are working on Smart Wallet functionality.", {
+  //       containerId: "containerA",
+  //       position: 'top-left',
+  //     });
+  //   }
+  // };
 
   const handleLogout = () => {
     disconnect();
@@ -169,9 +169,9 @@ const Header1 = () => {
                 </Link>
               </>
             ) : (
-              <button onClick={Notification} className="text-xl">
+              // <button onClick={Notification} className="text-xl">
                 <w3m-button />
-              </button>
+              // </button>
             )}
           </div>
           <button className="sm:hidden text-2xl" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
