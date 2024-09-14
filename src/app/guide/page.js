@@ -33,7 +33,7 @@ export default function GuidePage() {
                     />
                 </div>
 
-                <h2 className="text-3xl font-semibold mb-4">How to create a profile:</h2>
+                <h2 className="text-3xl font-semibold mb-4">What You Need:</h2>
 
                 <p className="text-2xl mb-4">To get started on MyriadFlow, you&apos;ll need:</p>
 
