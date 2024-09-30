@@ -149,21 +149,47 @@ function HomePage({ params }) {
         const phyresult = await phyres.json();
         console.log("Phygitals:", phyresult);
 
-        const matched = phyresult.map(phygital => {
-          const amountBought = mintedNFTs.reduce((count, nft) => {
-            // console.log(`Comparing ${nft?.token_address} with ${phygital.contract_address}`);
-            return count + (nft?.token_address === phygital.contract_address ? 1 : 0);
-          }, 0);
-
-
+        const matched = await Promise.all(phyresult.map(async (phygital) => {
+          const amountBought = await mintedNFTs.reduce(async (countPromise, nft) => {
+            const count = await countPromise;
+            if (nft?.contract_type === 'ERC1155') {
+              try {
+                const response = await fetch(`http://localhost:9090/get-mint-fantoken/${address}`, {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                });
+                
+                if (!response.ok) {
+                  throw new Error('Failed to fetch minted tokens');
+                }
+                
+                const mintedTokens = await response.json();
+                
+                const matchingToken = mintedTokens.find(token => {
+                  return token.nftContractAddress === phygital.contract_address && 
+                         token.token_id === nft.token_id;
+                });
+                return count + (matchingToken ? 1 : 0);
+              } catch (error) {
+                console.error('Error fetching minted tokens:', error);
+                return count;
+              }
+            } else {
+              // For non-ERC1155 tokens, use the existing logic
+              return count + (nft?.token_address === phygital.contract_address ? 1 : 0);
+            }
+          }, Promise.resolve(0));
           return {
             ...phygital,
             amount_bought: amountBought
           };
-        }).filter(phygital => phygital.amount_bought > 0);
-
-        setMatchedNFTs(matched);
-        console.log("Matched NFTs:", matched);
+        }));
+        
+        const filteredMatched = matched.filter(phygital => phygital.amount_bought > 0);
+        setMatchedNFTs(filteredMatched);
+        console.log("Matched NFTs:", filteredMatched);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
