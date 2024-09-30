@@ -154,7 +154,7 @@ function HomePage({ params }) {
             const count = await countPromise;
             if (nft?.contract_type === 'ERC1155') {
               try {
-                const response = await fetch(`http://localhost:9090/get-mint-fantoken/${address}`, {
+                const response = await fetch(`${baseUri}/get-mint-fantoken/${address}`, {
                   method: 'GET',
                   headers: {
                     'Content-Type': 'application/json'
