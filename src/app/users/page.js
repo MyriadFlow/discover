@@ -126,8 +126,14 @@ function User() {
                     <div>
                         <div className="text-center mt-10">
                             <h2 className="text-4xl">
-                             <Link href="https://discover.myriadflow.com/guide" className="text-blue-600 hover:underline">Create a profile</Link> to see all users.
+                                <Link href="https://discover.myriadflow.com/guide" className="text-blue-600 hover:underline">Create a profile</Link> to see all users.
                             </h2>
+                            <h2 className="text-4xl mt-10">
+                                Already have a profile?
+                            </h2>
+                            <div className="flex justify-center mt-10">
+                                <w3m-button />
+                            </div>
                         </div>
                     </div>
                 )}
