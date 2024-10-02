@@ -340,7 +340,7 @@ function HomePage({ params }) {
           </div>
           <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {address}</h1>
 
-          <p className="text-gray-500 text-lg mt-6 ">{bio || "Short bio of the person here"}</p>
+          <p className="text-gray-500 text-lg mt-6 w-3/5">{bio || "Short bio of the person here"}</p>
 
           <div className="flex mt-6">
             <Link
@@ -372,7 +372,7 @@ function HomePage({ params }) {
             </button>
           </div>
 
-          <div style={{ float: 'right', width: '300px', marginLeft: '1100px', marginTop: '-200px' }}>
+          <div style={{ float: 'right', width: '300px', marginLeft: '1150px', marginTop: '-200px' }}>
             <div style={{ display: 'flex' }}>
               {website && (
                 <a href={website} target="_blank" rel="noopener noreferrer">
@@ -546,7 +546,7 @@ function HomePage({ params }) {
           </div>
           <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {walletAddress}</h1>
 
-          <p className="text-gray-500 text-lg mt-6 ">{guestbio || "Short bio of the person here"}</p>
+          <p className="text-gray-500 text-lg mt-6 w-3/5">{guestbio || "Short bio of the person here"}</p>
 
           <div className="flex mt-6">
             <button
@@ -577,7 +577,7 @@ function HomePage({ params }) {
             </button>
           </div>
 
-          <div style={{ float: 'right', width: '300px', marginLeft: '1100px', marginTop: '-200px' }}>
+          <div style={{ float: 'right', width: '300px', marginLeft: '1150px', marginTop: '-200px' }}>
             <div style={{ display: 'flex' }}>
               {guestwebsite && (
                 <a href={guestwebsite} target="_blank" rel="noopener noreferrer">

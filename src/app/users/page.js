@@ -75,52 +75,62 @@ function User() {
             <Header1 />
             <div className="mx-4 lg:mx-20 mt-16 lg:mt-32">
                 <h1 className="text-2xl lg:text-3xl font-bold mb-6 lg:mb-10">All Users</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-                    {filteredUsers.map((user, index) => (
-                        <div key={index} className="bg-white shadow-lg rounded-lg p-4">
-                            <Link href={`/${encodeURIComponent(user.username)}`}>
-                                <div className="relative">
-                                    {user.cover_image ? (
+                {address ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+                        {filteredUsers.map((user, index) => (
+                            <div key={index} className="bg-white shadow-lg rounded-lg p-4">
+                                <Link href={`/${encodeURIComponent(user.username)}`}>
+                                    <div className="relative">
+                                        {user.cover_image ? (
+                                            <img
+                                                src={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${user.cover_image}`}
+                                                alt="Cover"
+                                                className="w-full h-24 object-cover rounded-t-lg"
+                                            />
+                                        ) : (
+                                            <div
+                                                className="w-full h-24 rounded-t-lg"
+                                                style={{ backgroundColor: '#D1D5DB' }}
+                                            ></div>
+                                        )}
                                         <img
-                                            src={`${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${user.cover_image}`}
-                                            alt="Cover"
-                                            className="w-full h-24 object-cover rounded-t-lg"
+                                            src={user.profile_image ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${user.profile_image}` : "/profile.png"}
+                                            alt="Profile"
+                                            className="w-12 h-12 object-cover rounded-full absolute top-16 left-4 border-2 border-white"
                                         />
-                                    ) : (
-                                        <div
-                                            className="w-full h-24 rounded-t-lg"
-                                            style={{ backgroundColor: '#D1D5DB' }}
-                                        ></div>
-                                    )}
-                                    <img
-                                        src={user.profile_image ? `${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${user.profile_image}` : "/profile.png"}
-                                        alt="Profile"
-                                        className="w-12 h-12 object-cover rounded-full absolute top-16 left-4 border-2 border-white"
-                                    />
-                                </div>
-                                <div className="mt-8 flex justify-between items-center">
-                                    <div>
-                                        <h2 className="text-lg font-bold">{user.name || "Display Name"}</h2>
-                                        <div className="flex items-center gap-2">
-                                            {owners[index] ? (
-                                                <p className="text-sm text-gray-500">Creator</p>
-                                            ) : (
-                                                <p className="text-sm text-gray-500">Visitor</p>
-                                            )}
-                                            <img src="/verified.png" className="h-6 w-6" alt="Verified" />
+                                    </div>
+                                    <div className="mt-8 flex justify-between items-center">
+                                        <div>
+                                            <h2 className="text-lg font-bold">{user.name || "Display Name"}</h2>
+                                            <div className="flex items-center gap-2">
+                                                {owners[index] ? (
+                                                    <p className="text-sm text-gray-500">Creator</p>
+                                                ) : (
+                                                    <p className="text-sm text-gray-500">Visitor</p>
+                                                )}
+                                                <img src="/verified.png" className="h-6 w-6" alt="Verified" />
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-sm text-gray-500">X Followers</p>
+                                            <button className="mt-2 bg-gray-200 text-gray-700 font-semibold py-1 px-3 rounded-full flex items-center">
+                                                <span className="mr-2">+</span>Follow
+                                            </button>
                                         </div>
                                     </div>
-                                    <div className="text-right">
-                                        <p className="text-sm text-gray-500">X Followers</p>
-                                        <button className="mt-2 bg-gray-200 text-gray-700 font-semibold py-1 px-3 rounded-full flex items-center">
-                                            <span className="mr-2">+</span>Follow
-                                        </button>
-                                    </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div>
+                        <div className="text-center mt-10">
+                            <h2 className="text-4xl">
+                             <Link href="https://discover.myriadflow.com/guide" className="text-blue-600 hover:underline">Create a profile</Link> to see all users.
+                            </h2>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                )}
             </div>
             <div className="mt-20">
                 <Footer />
