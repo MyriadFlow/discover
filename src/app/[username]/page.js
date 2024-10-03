@@ -327,6 +327,10 @@ function HomePage({ params }) {
             <h1 className="text-4xl">{name || 'Your Name'}</h1>
             {owner ? (
               <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Creator</h1>
+            ) : matchedNFTs.length > 0 ? (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
+            ) : matchedWebxrs.length > 0 ? (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Supporter</h1>
             ) : (
               <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Visitor</h1>
             )}
@@ -591,6 +595,10 @@ function HomePage({ params }) {
             <h1 className="text-4xl">{guestname || 'Your Name'}</h1>
             {owner ? (
               <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Creator</h1>
+            ) : matchedNFTs.length > 0 ? (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Owner</h1>
+            ) : matchedWebxrs.length > 0 ? (
+              <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Supporter</h1>
             ) : (
               <h1 className="text-2xl mt-2" style={{ marginLeft: '2.5rem' }}>Visitor</h1>
             )}
