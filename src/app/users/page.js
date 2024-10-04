@@ -10,6 +10,7 @@ function User() {
     const { address } = useAccount();
     const [users, setUsers] = useState([]);
     const [owners, setOwners] = useState([]);
+    const [supporters , setSupproters] = useState([]);
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
     const filteredUsers = users.filter(user => user.instagram || user.x);
@@ -70,6 +71,37 @@ function User() {
         }
     }, [users]);
 
+    useEffect(() => {
+        const getMintFantokenData = async () => {
+            const supporterStatuses = await Promise.all(
+                filteredUsers.map(async (user) => {
+                    if (user.wallet_address) {
+                        try {
+                            const response = await fetch(`${baseUri}/get-mint-fantoken/${user.wallet_address}`, {
+                                method: 'GET',
+                                headers: {
+                                    'content-Type': 'application/json',
+                                },
+                            });
+
+                            if (response.ok) {
+                                return true;
+                            }
+                        } catch (error) {
+                            console.error('Error fetching Phygital data', error);
+                        }
+                    }
+                    return false;
+                })
+            );
+            setSupproters(supporterStatuses);
+        };
+
+        if (users.length > 0) {
+            getMintFantokenData();
+        }
+    }, [users]);
+
     return (
         <div>
             <Header1 />
@@ -105,7 +137,10 @@ function User() {
                                             <div className="flex items-center gap-2">
                                                 {owners[index] ? (
                                                     <p className="text-sm text-gray-500">Creator</p>
-                                                ) : (
+                                                ) : supporters[index] ?(
+                                                    <p className="text-sm text-gray-500">Supporter</p>
+                                                ):
+                                                 (
                                                     <p className="text-sm text-gray-500">Visitor</p>
                                                 )}
                                                 <img src="/verified.png" className="h-6 w-6" alt="Verified" />
