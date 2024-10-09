@@ -12,6 +12,7 @@ function ProfileSettingsPage() {
 
     const [displayName, setDisplayName] = useState('');
     const [userName, setUserName] = useState('');
+    const [baseName, setBaseName] = useState('');
     const [bio, setBio] = useState('');
     const [website, setWebsite] = useState('');
     const [x, setx] = useState('');
@@ -86,6 +87,7 @@ function ProfileSettingsPage() {
             name: displayName,
             email: email,
             username: userName,
+            basename: baseName,
             bio: bio,
             website: website,
             x: x,
@@ -181,6 +183,7 @@ function ProfileSettingsPage() {
                         const data = await response.json();
                         setDisplayName(data.name);
                         setUserName(data.username);
+                        setBaseName(data.basename);
                         setCoverImage(data.cover_image);
                         setProfileImage(data.profile_image);
                         setBio(data.bio);
@@ -381,6 +384,21 @@ function ProfileSettingsPage() {
                                         {validationError}
                                     </p>
                                 )}
+
+                                <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Basename</label>
+                                <input
+                                    className='w-1/2'
+                                    type='text'
+                                    placeholder='Enter your new basename here'
+                                    value={baseName}
+                                    onChange={(e) => {
+                                        setBaseName(e.target.value);
+                                        setIsEditing(true);
+                                    }}
+                                    style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '5px' }}
+                                />
+                                <p style={{ fontSize: '13px', marginBottom: '20px' }}>Don&apos;t have one? Get your Base name at https://www.base.org/names</p>
+
 
                                 <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Bio</label>
                                 <textarea

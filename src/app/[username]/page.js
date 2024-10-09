@@ -37,6 +37,9 @@ function HomePage({ params }) {
   const [activeSection, setActiveSection] = useState('assets');
   const [showForm, setShowForm] = useState(false);
   const [owner, setOwner] = useState(false);
+  const [showCreatorOptions, setShowCreatorOptions] = useState(false);
+  const [hoveredOption, setHoveredOption] = useState(null);
+  const [status, setStatus] = useState('');
 
   const apikey = process.env.NEXT_PUBLIC_MORALIS_API_KEY;
   const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
@@ -203,13 +206,13 @@ function HomePage({ params }) {
                     'Content-Type': 'application/json'
                   }
                 });
-        
+
                 if (!response.ok) {
                   throw new Error('Failed to fetch minted tokens');
                 }
-        
+
                 const mintedFanTokens = await response.json();
-        
+
                 const matchingFanToken = mintedFanTokens.find(token => {
                   return token.nftContractAddress === phygital.contract_address &&
                     token.token_id === nft.token_id;
@@ -220,7 +223,7 @@ function HomePage({ params }) {
                 return count;
               }
             }
-            return count; 
+            return count;
           }, Promise.resolve(0));
           return {
             ...phygital,
@@ -280,6 +283,33 @@ function HomePage({ params }) {
       }
     };
     getPhygitalData();
+  }, [walletAddress]);
+
+  useEffect(() => {
+    const getElevateData = async () => {
+      if (walletAddress) {
+        try {
+          const response = await fetch(`${baseUri}/elevate/walletaddress/${walletAddress}`, {
+            method: "GET",
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          if (response.ok) {
+            const data = await response.json();
+            setStatus(data.status);
+          } else {
+            console.log('No user found');
+          }
+        } catch (error) {
+          console.error('Error fetching user data', error);
+        }
+      } else {
+        console.log('No wallet address provided');
+      }
+    };
+
+    getElevateData();
   }, [walletAddress]);
 
   if (address === walletAddress) {
@@ -510,15 +540,26 @@ function HomePage({ params }) {
             >
               Rewards
             </button>
-            <a
-              href="https://studio.myriadflow.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg hover:text-black hover:underline"
-              style={{ fontSize: '1.25rem' }}
-            >
-              Create
-            </a>
+            {owner ? (
+              <a
+                href="https://studio.myriadflow.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`text-lg hover:text-black hover:underline`}
+                style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+              >
+                Create
+              </a>
+            ) : (
+              <button
+                id='create'
+                className={`text-lg hover:text-black hover:underline ${activeSection === 'create' ? 'text-black underline' : ''}`}
+                style={{ marginRight: '2.5rem', fontSize: '1.25rem' }}
+                onClick={() => setActiveSection('create')}
+              >
+                Create
+              </button>
+            )}
           </div>
 
           <div style={{ padding: '50px' }}>
@@ -536,6 +577,110 @@ function HomePage({ params }) {
                 </div>
               </>
             )}
+            {activeSection === 'create' && (
+              <>
+                <div>
+                  {instagram || x ? (
+                    <>
+                      {!showCreatorOptions && status !== 'pending' && status !== 'done' && (
+                        <>
+                          <div className='flex gap-4'>
+                            <img src='/verified.png' alt="Verified" style={{ marginRight: '10px', height: '60px', width: '60px' }} />
+                            <h2 className='mt-2'>You have completed the verification process. Your profile is now visible on <br /> the Users page. You can also now become a creator!</h2>
+                          </div>
+                          <div className='flex gap-8 mt-10 mx-20'>
+                            <Link href="/users">
+                              <button className="bg-pink-300 text-black rounded-full px-8 py-2 border border-black">See Users</button>
+                            </Link>
+                            <button
+                              className="bg-pink-300 text-black rounded-full px-8 py-2 border border-black"
+                              onClick={() => setShowCreatorOptions(true)}
+                            >
+                              Become a Creator
+                            </button>
+                          </div>
+                        </>
+                      )}
+
+                      {showCreatorOptions && status !== 'pending' && status !== 'done' && (
+                        <div style={{ marginTop: '20px' }}>
+                          <h2>You have not yet created any brands. Are you a <strong
+                            onMouseEnter={() => setHoveredOption('premium')}
+                            onMouseLeave={() => setHoveredOption(null)}
+                            style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                          >
+                            Premium Brand
+                          </strong> or looking to join our <strong
+                            onMouseEnter={() => setHoveredOption('elevate')}
+                            onMouseLeave={() => setHoveredOption(null)}
+                            style={{ cursor: 'pointer', textDecoration: 'underline' }}
+                          >
+                              Elevate Program
+                            </strong>? Choose the correct alternative.</h2>
+                          <div style={{ marginTop: '10px' }}>
+                            <button className="bg-blue-500 text-white rounded-full px-8 py-2">Premium Brand</button>
+                            <Link href="/elevateform">
+                              <button className="bg-blue-500 text-white rounded-full px-8 py-2" style={{ marginLeft: '10px' }}>Join Elevate Program</button>
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+                      {status === 'pending' && (
+                        <div>
+                          <p className="mb-4 mt-8">
+                            Thank you for your interest in the MyriadFlow Elevate Program! We look forward to reviewing your application. Please keep checking your provided email address, and this page for further communication. Best of luck!
+                          </p>
+                        </div>
+                      )}
+                      {status === 'done' && (
+                        <>
+                          <div className='flex gap-4'>
+                            <img src='/trophy2.png' alt="Verified" style={{ marginRight: '10px', height: '100px', width: '100px' }} />
+                            <h2 className='mt-2'>Congratulations! You have been approved to join our Elevate Program!
+                              <br />We have credited your wallet with funds to claim your Basename (5+ characters for 1 year) and to launch your first collection.                        </h2>
+                          </div><div className='flex gap-8 mt-10 mx-20'>
+                            <a href="https://www.base.org/names" target="_blank" rel="noopener noreferrer">
+                              <button className="bg-cyan-300 text-black rounded-full px-8 py-2 border border-black">
+                                Claim Basename
+                              </button>
+                            </a>
+                            <a href="https://studio.myriadflow.com/" target="_blank" rel="noopener noreferrer">
+                              <button
+                                className="bg-cyan-300 text-black rounded-full px-8 py-2 border border-black"
+                              >
+                                Create a Brand
+                              </button>
+                            </a>
+                          </div>
+                        </>
+                      )}
+
+                      {hoveredOption === 'premium' && (
+                        <div className="popup" style={popupStyle}>
+                          <h3>Premium Brand</h3>
+                          <p>Select this option if you meet the criteria to be featured as a premium brand or creator on MyriadFlow&apos;s main Discover marketplace. Premium brands enjoy enhanced visibility and access to exclusive tools designed for established creators and brands.</p>
+                        </div>
+                      )}
+
+                      {hoveredOption === 'elevate' && (
+                        <div className="popup" style={popupStyle}>
+                          <h3>Elevate Program</h3>
+                          <p>Choose this option if you are an emerging creator or grassroots brand seeking to leverage our platform&apos;s unique features.</p>
+                          <p>You will benefit from sponsored Basenames and incur no upfront costs to launch your phygital NFTs and virtual brand ambassadors.</p>
+                          <p>As your brand develops and gains traction, you&apos;ll have the opportunity to transition into the premium category and be showcased on our main page.</p>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <div>
+                      <h2>Verification Required</h2>
+                      <p>Please link your Instagram or X account to create content.</p>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+
 
             {activeSection !== 'assets' && activeSection !== 'create' && (
               <div className='mt-10 text-center text-2xl text-gray-600'>
@@ -751,5 +896,15 @@ function HomePage({ params }) {
     );
   }
 }
+
+const popupStyle = {
+  backgroundColor: 'white',
+  border: '1px solid #ccc',
+  borderRadius: '5px',
+  padding: '10px',
+  zIndex: 1000,
+  width: '300px',
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+};
 
 export default HomePage;
