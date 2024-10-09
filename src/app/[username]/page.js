@@ -658,16 +658,16 @@ function HomePage({ params }) {
                       {hoveredOption === 'premium' && (
                         <div className="popup" style={popupStyle}>
                           <h3>Premium Brand</h3>
-                          <p>Select this option if you meet the criteria to be featured as a premium brand or creator on MyriadFlow's main Discover marketplace. Premium brands enjoy enhanced visibility and access to exclusive tools designed for established creators and brands.</p>
+                          <p>Select this option if you meet the criteria to be featured as a premium brand or creator on MyriadFlow&apos;s main Discover marketplace. Premium brands enjoy enhanced visibility and access to exclusive tools designed for established creators and brands.</p>
                         </div>
                       )}
 
                       {hoveredOption === 'elevate' && (
                         <div className="popup" style={popupStyle}>
                           <h3>Elevate Program</h3>
-                          <p>Choose this option if you are an emerging creator or grassroots brand seeking to leverage our platform's unique features.</p>
+                          <p>Choose this option if you are an emerging creator or grassroots brand seeking to leverage our platform&apos;s unique features.</p>
                           <p>You will benefit from sponsored Basenames and incur no upfront costs to launch your phygital NFTs and virtual brand ambassadors.</p>
-                          <p>As your brand develops and gains traction, you'll have the opportunity to transition into the premium category and be showcased on our main page.</p>
+                          <p>As your brand develops and gains traction, you&apos;ll have the opportunity to transition into the premium category and be showcased on our main page.</p>
                         </div>
                       )}
                     </>
