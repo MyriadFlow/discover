@@ -173,8 +173,6 @@ export default function Home() {
 			setCollections(collresult)
 
 			setLoading(false)
-
-			console.log('new database output', result, phyresult, collresult)
 		} catch (error) {
 			console.error('Error fetching data:', error)
 			setLoading(false)
@@ -202,20 +200,22 @@ export default function Home() {
 	return (
 		<div className='bg-black'>
 			<Header1 />
-			<div className='flex flex-col mt-20 md:flex-row h-screen bg-white'>
-				<div className='w-full md:w-1/2 h-full px-8 md:px-16 flex flex-col justify-center'>
-					<div className='text-4xl md:text-7xl font-bold'>Discover</div>
-					<div className='text-3xl md:text-6xl font-semibold mt-4 md:mt-6'>
-						Phygital Xperience
+			<div className='flex flex-col md:flex-row h-screen bg-white relative'>
+				<div className='w-full md:w-1/2 h-full px-8 md:px-16 flex flex-col justify-center '>
+					<div className='text-4xl md:text-7xl font-bold'>
+						MyriadFlow Elevate
 					</div>
-					<div className='text-3xl md:text-6xl font-semibold mt-2 md:mt-4'>
-						with MyriadFlow
+					<div className='text-3xl md:text-5xl font-thin mt-4 md:mt-10'>
+						Phygital Xperience for Emerging Brands
 					</div>
-					<div className='text-lg md:text-2xl mt-6 md:mt-10'>
-						Explore & launch brands and phygitals with a WebXR experience.
-						Create & interact with AI-Powered brand ambassadors.
-					</div>
-					<div className='flex flex-col md:flex-row gap-6 mt-6 md:mt-10'>
+					{/* <div className='text-3xl md:text-6xl font-semibold mt-2 md:mt-4'>
+        with MyriadFlow
+      </div>
+      <div className='text-lg md:text-2xl mt-6 md:mt-10'>
+        Explore & launch brands and phygitals with a WebXR experience.
+        Create & interact with AI-Powered brand ambassadors.
+      </div> */}
+					<div className='flex flex-col md:flex-row gap-6 mt-6 md:mt-28'>
 						<Link href='#movetotrends' style={exploreButtonStyle}>
 							Explore
 						</Link>
@@ -229,40 +229,21 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div
-					className='w-full mt-10 md:mt-0 md:w-1/2 h-full '
-					style={{
-						backgroundImage: 'url("./landing.png")',
-						backgroundSize: 'cover',
-						backgroundPosition: 'center',
-						position: 'relative',
-					}}
-				>
+				<div className='w-full md:w-1/2 h-full relative'>
 					<img
-						src='./image 4.png'
-						alt='Top Left'
-						className='absolute top-24 left-10 w-32 h-32 hidden md:block md:w-64 md:h-64'
+						src='./hero_background.png'
+						alt='Hero Background'
+						className='absolute inset-0 w-full h-full object-cover'
 					/>
-					<img
-						src='./image 6.png'
-						alt='Top Right'
-						className='absolute top-24 right-10 w-32 h-32 hidden md:block md:w-64 md:h-64'
-					/>
-					<img
-						src='./image 8.png'
-						alt='Bottom Left'
-						className='absolute bottom-10 left-10 w-32 h-32 md:w-64 md:h-64'
-					/>
-					<img
-						src='./image 7.png'
-						alt='Overlay'
-						className='absolute bottom-10 left-10 w-32 h-32 md:w-64 md:h-72 mb-5'
-					/>
-					<img
-						src='./image 5.png'
-						alt='Bottom Right'
-						className='absolute bottom-10 right-10 w-32 h-32 md:w-64 md:h-64'
-					/>
+					<div className='absolute bottom-4 left-8 text-white text-sm md:text-2xl md:mb-10 md:font-thin max-w-1/2 md:w-3/4'>
+						MyriadFlow Elevate empowers <br /> emerging brands & creators to
+						launch <br />
+						phygitals with WebXR experiences.
+					</div>
+				</div>
+
+				<div className='absolute top-1/4 text-5xl font-semibold left-1/2 transform -translate-x-14  bg-[#6BF66F] text-black px-4 py-1 rounded-md rotate-[-30deg]'>
+					Africa Edition
 				</div>
 			</div>
 
@@ -394,7 +375,7 @@ export default function Home() {
 					color: 'transparent',
 				}}
 			>
-				Beyond Real World Assets.
+				Empowering Local Creators.
 			</div>
 
 			<div
@@ -405,59 +386,45 @@ export default function Home() {
 				}}
 			>
 				<img
-					src='./image 41.png'
-					className='w-32 h-auto md:w-44 pb-8'
-					style={{
-						zIndex: '1',
-					}}
-				/>
-				<img
-					src='./image 51.png'
+					src='./demo1.png'
 					className='w-32 h-auto md:w-44 pb-8'
 					style={{
 						zIndex: '2',
 					}}
 				/>
 				<img
-					src='./2_small 1.png'
+					src='./demo2.png'
 					className='w-32 h-auto md:w-44 pb-8'
 					style={{
 						zIndex: '3',
 					}}
 				/>
 				<img
-					src='./image 9.png'
+					src='./demo3.png'
 					className='w-32 h-auto md:w-44 pb-8'
 					style={{
 						zIndex: '4',
 					}}
 				/>
 				<img
-					src='./image 10.png'
+					src='./demo4.png'
 					className='w-32 h-auto md:w-44 pb-8 hidden md:block'
 					style={{
 						zIndex: '5',
 					}}
 				/>
 				<img
-					src='./image 13.png'
+					src='./demo5.png'
 					className='w-32 h-auto md:w-44 pb-8 hidden md:block'
 					style={{
 						zIndex: '6',
 					}}
 				/>
 				<img
-					src='./image 11.png'
+					src='./demo6.png'
 					className='w-32 h-auto md:w-44 pb-8 hidden md:block'
 					style={{
 						zIndex: '7',
-					}}
-				/>
-				<img
-					src='./image 14.png'
-					className='w-32 h-auto md:w-44 pb-8 hidden md:block'
-					style={{
-						zIndex: '8',
 					}}
 				/>
 			</div>
