@@ -314,7 +314,7 @@ const Header1 = () => {
 						ref={menuRef}
 						className='sm:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-40'
 					>
-						<div className='flex flex-col items-center justify-center h-full bg-white text-black relative'>
+						<div className='flex flex-col items-center justify-center h-full  bg-transparent text-black relative'>
 							<button
 								onClick={() => setIsDropdownOpen(false)}
 								className='absolute top-4 right-4 text-xl text-gray-700'
