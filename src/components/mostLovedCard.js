@@ -144,7 +144,7 @@ try {
 
 
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
+    <div style={{ position: "relative", display: "inline-block" }}  >
     <Link href={`/collection/${nft.id}`}>
         <div
         style={{
@@ -154,6 +154,7 @@ try {
           position: "relative",
           overflow: "hidden",
         }}
+        className='border-2 border-[#C50191]'
       >
         <div style={{ position: 'relative' }}>
           <img
@@ -231,13 +232,13 @@ try {
           :
           (
           <div>
-            <div className="text-xl">Starts from {lowestPrice} ETH</div>
+            <div className="text-xl">{lowestPrice} ETH</div>
             <div>{lowestPriceUSD} USD</div>
           </div>)}
           <div
-            className="px-10 text-lg"
+            className="px-6 text-lg text-white"
             style={{
-              backgroundColor: "#DF1FDD36",
+              backgroundColor: "#D3169A",
               border: "1px solid black",
               height: "30px",
               display: "flex",
@@ -247,6 +248,12 @@ try {
             }}
           >
             Buy
+          </div>
+          <div>
+          <img 
+                src="./shopping_cart.png"
+            
+            style={{width: '35px', borderRadius:'25px'}}/>
           </div>
         </div>
       </div>
