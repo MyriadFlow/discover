@@ -17,6 +17,7 @@ const Header1 = () => {
 	const [name, setName] = useState('')
 	const [profileImage, setProfileImage] = useState('')
 	const [username, setUserName] = useState('')
+	const [isSessionActive, setIsSessionActive] = useState(false)
 	const menuRef = useRef(null)
 
 	useEffect(() => {
@@ -24,18 +25,25 @@ const Header1 = () => {
 		const savedAddress = localStorage.getItem('walletAddress')
 
 		if (savedAddress) {
-			// Automatically connect if there's an address saved and not currently connected
-			if (!isConnected) {
-				connect({ connector: injected() })
-			}
+			// Set session active if wallet was previously connected
+			setIsSessionActive(true)
 		}
 
 		// Manage session details in localStorage based on connection status
-		if (isConnected && !savedAddress) {
-			// Store session details in localStorage
-			localStorage.setItem('walletAddress', address)
+		if (isConnected) {
+			if (!savedAddress) {
+				// Store session details in localStorage when connected
+				localStorage.setItem('walletAddress', address!)
+			}
+			setIsSessionActive(true) // Update session state on connection
+		} else {
+			if (savedAddress) {
+				// Clear session on disconnect
+				localStorage.removeItem('walletAddress')
+				setIsSessionActive(false)
+			}
 		}
-	}, [connect, isConnected, address])
+	}, [isConnected, address])
 
 	useEffect(() => {
 		const getUserData = async () => {
