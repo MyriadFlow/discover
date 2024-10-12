@@ -104,7 +104,7 @@ export default function Home() {
 						email: email,
 						username: userName,
 						wallet_address: address,
-						chaintype_id: '6c736e9b-37e6-43f5-9841-c0ac740282dfn',
+						chaintype_id: '554b4903-9a06-4031-98f4-48276c427f78',
 					}),
 				})
 
@@ -131,7 +131,7 @@ export default function Home() {
 				process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com'
 
 			const res = await fetch(
-				`${baseUri}/brands/all/6c736e9b-37e6-43f5-9841-c0ac740282df`,
+				`${baseUri}/brands/all/554b4903-9a06-4031-98f4-48276c427f78`,
 				{
 					method: 'GET',
 					headers: {
@@ -141,7 +141,7 @@ export default function Home() {
 			)
 
 			const phyres = await fetch(
-				`${baseUri}/phygitals/all/6c736e9b-37e6-43f5-9841-c0ac740282df`,
+				`${baseUri}/phygitals/all/554b4903-9a06-4031-98f4-48276c427f78`,
 				{
 					method: 'GET',
 					headers: {
@@ -151,7 +151,7 @@ export default function Home() {
 			)
 
 			const collres = await fetch(
-				`${baseUri}/collections/all/6c736e9b-37e6-43f5-9841-c0ac740282df`,
+				`${baseUri}/collections/all/554b4903-9a06-4031-98f4-48276c427f78`,
 				{
 					method: 'GET',
 					headers: {
