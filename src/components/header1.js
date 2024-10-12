@@ -4,36 +4,46 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { toast, ToastContainer } from 'react-toastify'
 import { useAccount, useDisconnect, useConnect } from 'wagmi'
+import { injected } from 'wagmi/connectors'
 
 const Header1 = () => {
 	const [isScrolled, setIsScrolled] = useState(false)
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 	const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
 	const { address, isConnected } = useAccount()
-	const { connect, connectors } = useConnect()
+	const { connect } = useConnect()
 	const { disconnect } = useDisconnect()
 	const pathname = usePathname()
 	const [name, setName] = useState('')
 	const [profileImage, setProfileImage] = useState('')
 	const [username, setUserName] = useState('')
-	const [storedAddress, setStoredAddress] = useState(null)
+	const [isSessionActive, setIsSessionActive] = useState(false)
 	const menuRef = useRef(null)
 
 	useEffect(() => {
-		// Check for an existing wallet session in localStorage
+		// Check for saved wallet address in localStorage
 		const savedAddress = localStorage.getItem('walletAddress')
-		setStoredAddress(savedAddress)
 
-		// Silently connect if there's a saved address but the user is not connected
-		if (savedAddress && !isConnected) {
-			connect({ connector: connectors[0] }) // Assuming InjectedConnector for MetaMask
+		if (savedAddress) {
+			// Set session active if wallet was previously connected
+			setIsSessionActive(true)
 		}
 
-		// On connection, store wallet address in localStorage
-		if (isConnected && !savedAddress) {
-			localStorage.setItem('walletAddress', address)
+		// Manage session details in localStorage based on connection status
+		if (isConnected) {
+			if (!savedAddress) {
+				// Store session details in localStorage when connected
+				localStorage.setItem('walletAddress', address!)
+			}
+			setIsSessionActive(true) // Update session state on connection
+		} else {
+			if (savedAddress) {
+				// Clear session on disconnect
+				localStorage.removeItem('walletAddress')
+				setIsSessionActive(false)
+			}
 		}
-	}, [isConnected, address, connect, connectors])
+	}, [isConnected, address])
 
 	useEffect(() => {
 		const getUserData = async () => {
@@ -304,7 +314,7 @@ const Header1 = () => {
 						ref={menuRef}
 						className='sm:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-40'
 					>
-						<div className='flex flex-col items-center justify-center h-full  bg-transparent text-black relative'>
+						<div className='flex flex-col items-center justify-center h-full bg-white text-black relative'>
 							<button
 								onClick={() => setIsDropdownOpen(false)}
 								className='absolute top-4 right-4 text-xl text-gray-700'
