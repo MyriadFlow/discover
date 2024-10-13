@@ -24,7 +24,7 @@ const MostLovedElevate = ({ collectionsdata }) => {
 			</div>
 			<div className='text-lg md:text-2xl mt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0'>
 				<div>
-					Must-Have Mints: Don't Miss Out on These Top-Selling Phygitals Before They're Gone!
+					Must-Have Mints: Don&apos;t Miss Out on These Top-Selling Phygitals Before They&apos;re Gone!
 				</div>
 				<div className='flex gap-4'>
 					<Link
