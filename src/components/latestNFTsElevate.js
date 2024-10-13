@@ -16,7 +16,7 @@ const LatestNFTsElevate = ({ hotnftdata }) => {
         Most Recently Launched
       </div>
       <div className="font-bold text-black text-4xl sm:text-5xl lg:text-6xl mt-6 sm:mt-8 lg:mt-10">
-        Most Recently Launched
+        New on Elevate
       </div>
       <div className="flex flex-col sm:flex-row justify-between text-lg sm:text-xl lg:text-2xl mt-4">
         <div className="mt-4">
@@ -30,9 +30,9 @@ const LatestNFTsElevate = ({ hotnftdata }) => {
             border: "6px solid transparent",
             borderRadius: "8px",
             backgroundImage: `
-              linear-gradient(white, white),
-              linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-            `,
+    linear-gradient(white, white),
+    linear-gradient(rgba(197, 1, 145, 1), rgba(197, 1, 145, 1))
+  `,
             backgroundOrigin: "border-box",
             backgroundClip: "content-box, border-box",
             WebkitBackgroundClip: "content-box, border-box", // For Safari
@@ -51,7 +51,7 @@ const LatestNFTsElevate = ({ hotnftdata }) => {
       <div className="mt-8 sm:mt-10 lg:mt-12 flex flex-wrap gap-4 sm:gap-6 justify-center">
         {hotnftdata
           ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-          .slice(0, 8)
+          .slice(0, 5)
           .map((nft, index) => (
             <HotNftCardElevate key={index} nft={nft} />
           ))}

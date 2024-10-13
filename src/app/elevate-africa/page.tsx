@@ -7,7 +7,7 @@ import LeaderBoard from '../../components/leaderboard'
 import HotNFTsElevate from '../../components/hotNFTsElevate'
 import LatestNFTsElevate from '../../components/latestNFTsElevate'
 import Brand from '../../components/brand'
-import CreateBanner from '../../components/createbanner'
+import CreateBannerElevate from '../../components/createbannerElevate'
 import Header2 from '../../components/header2'
 import Footer from '../../components/footer'
 import { useEffect, useState } from 'react'
@@ -446,7 +446,7 @@ export default function Home() {
 			</div>
 
 			<div className='bg-white hidden md:block'>
-				<CreateBanner />
+				<CreateBannerElevate />
 			</div>
 
 			<div className='bg-white pt-20'>

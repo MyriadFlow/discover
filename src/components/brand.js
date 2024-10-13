@@ -23,9 +23,9 @@ const Brand = ({ brandsdata }) => {
             border: "6px solid transparent",
             borderRadius: "8px",
             backgroundImage: `
-              linear-gradient(white, white),
-              linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-            `,
+    linear-gradient(white, white),
+    linear-gradient(rgba(197, 1, 145, 1), rgba(197, 1, 145, 1))
+  `,
             backgroundOrigin: "border-box",
             backgroundClip: "content-box, border-box",
             WebkitBackgroundClip: "content-box, border-box", // For Safari
@@ -55,7 +55,7 @@ const Brand = ({ brandsdata }) => {
               />
               <div
                 className="text-center mt-4"
-                style={{ fontSize: '1.5rem'}}
+                style={{ fontSize: '1.5rem' }}
               >
                 {brand.name}
               </div>

@@ -24,9 +24,9 @@ const HotNFTsElevate = ({ hotnftdata }) => {
 						border: '6px solid transparent',
 						borderRadius: '8px',
 						backgroundImage: `
-							linear-gradient(white, white),
-							linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-						`,
+    linear-gradient(white, white),
+    linear-gradient(rgba(197, 1, 145, 1), rgba(197, 1, 145, 1))
+  `,
 						backgroundOrigin: 'border-box',
 						backgroundClip: 'content-box, border-box',
 						WebkitBackgroundClip: 'content-box, border-box', // For Safari
@@ -41,7 +41,7 @@ const HotNFTsElevate = ({ hotnftdata }) => {
 			</div>
 
 			<div className='mt-10 flex flex-wrap justify-center gap-6 lg:gap-8'>
-				{hotnftdata?.slice(-8).map((nft, index) => (
+				{hotnftdata?.slice(-5).map((nft, index) => (
 					<HotNftCardElevate key={index} nft={nft} />
 				))}
 			</div>

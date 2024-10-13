@@ -35,9 +35,9 @@ const MostLovedElevate = ({ collectionsdata }) => {
 							border: '6px solid transparent',
 							borderRadius: '8px',
 							backgroundImage: `
-                linear-gradient(white, white),
-                linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-              `,
+    linear-gradient(white, white),
+    linear-gradient(rgba(197, 1, 145, 1), rgba(197, 1, 145, 1))
+  `,
 							backgroundOrigin: 'border-box',
 							backgroundClip: 'content-box, border-box',
 							WebkitBackgroundClip: 'content-box, border-box', // For Safari
@@ -53,7 +53,7 @@ const MostLovedElevate = ({ collectionsdata }) => {
 			</div>
 
 			<div className='mt-10 flex flex-wrap gap-4 justify-center'>
-				{collectionsdata?.slice(-8).map((nft, index) => (
+				{collectionsdata?.slice(-5).map((nft, index) => (
 					<MostLovedCardElevate key={index} nft={nft} />
 				))}
 			</div>
