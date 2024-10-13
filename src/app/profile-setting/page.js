@@ -140,6 +140,7 @@ function ProfileSettingsPage() {
                 const ipfsHash = data.IpfsHash;
                 if (type === 'cover') {
                     setCoverImage(ipfsHash);
+                    console.log("Coverimage" , coverImage)
                     setIsCoverPopupVisible(false);
                 } else if (type === 'profile') {
                     setProfileImage(ipfsHash);
@@ -292,8 +293,8 @@ function ProfileSettingsPage() {
                             <div
                                 style={{
                                     height: '250px',
-                                    backgroundColor: coverImage ? 'transparent' : '#D1D5DB',
-                                    backgroundImage: coverImage ? `url(${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${coverImage})` : 'none',
+                                    // backgroundColor: coverImage ? 'transparent' : '#D1D5DB',
+                                    backgroundImage: coverImage ? `url(https://gateway.pinata.cloud/ipfs/${coverImage})` : '#D1D5DB',
                                     backgroundSize: 'cover',
                                     backgroundPosition: 'center',
                                     position: 'relative',
