@@ -8,7 +8,7 @@ import HotNFTsElevate from '../../components/hotNFTsElevate'
 import LatestNFTsElevate from '../../components/latestNFTsElevate'
 import Brand from '../../components/brand'
 import CreateBanner from '../../components/createbanner'
-import Header1 from '../../components/header1'
+import Header2 from '../../components/header2'
 import Footer from '../../components/footer'
 import { useEffect, useState } from 'react'
 import { useAccount, useConnect } from 'wagmi'
@@ -199,7 +199,7 @@ export default function Home() {
 
 	return (
 		<div className='bg-black'>
-			<Header1 />
+			<Header2 />
 			<div className='flex flex-col md:flex-row h-screen bg-white relative'>
 				<div className='w-full md:w-1/2 h-full px-8 md:px-16 flex flex-col justify-center '>
 					<div className='text-4xl md:text-7xl font-bold'>
@@ -435,10 +435,6 @@ export default function Home() {
 
 			<div className='pt-40 bg-white px-10'>
 				<LatestNFTsElevate hotnftdata={phygitals} />
-			</div>
-
-			<div className='pt-40 bg-white hidden md:block'>
-				<LeaderBoard />
 			</div>
 
 			<div className='pt-40 bg-white px-10'>

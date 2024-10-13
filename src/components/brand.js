@@ -16,7 +16,7 @@ const Brand = ({ brandsdata }) => {
           Pushing the Boundaries of Innovation.
         </div>
         <Link
-          href="/brands"
+          href=""
           className="border mt-4 sm:mt-0"
           style={{
             background: "transparent",

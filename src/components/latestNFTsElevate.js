@@ -23,7 +23,7 @@ const LatestNFTsElevate = ({ hotnftdata }) => {
           New Frontier: Be Among the First to Discover the Newest Phygitals Making Their Debut!
         </div>
         <Link
-          href="/newphygitals"
+          href=""
           className="border mt-4 sm:mt-0"
           style={{
             background: "transparent",

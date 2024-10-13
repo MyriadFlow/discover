@@ -20,7 +20,7 @@ const MostLovedElevate = ({ collectionsdata }) => {
 		<div id='movetotrends' className='p-4 md:p-4'>
 			<div className='font-semibold text-pink-500'>Most Loved Right Now</div>
 			<div className='font-bold text-black text-4xl md:text-6xl mt-4 md:mt-10'>
-				New on Elevate
+				Most recently launched
 			</div>
 			<div className='text-lg md:text-2xl mt-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0'>
 				<div>
@@ -29,7 +29,7 @@ const MostLovedElevate = ({ collectionsdata }) => {
 				</div>
 				<div className='flex gap-4'>
 					<Link
-						href='/collections'
+						href=''
 						className='border'
 						style={{
 							background: 'transparent',

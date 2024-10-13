@@ -17,7 +17,7 @@ const HotNFTsElevate = ({ hotnftdata }) => {
 					Trending Treasures: Get in on the Action with These Phygitals Making Waves and Potentially Shaping the Future.
 				</div>
 				<Link
-					href="/hotphygitals"
+					href=""
 					className="border mt-4 sm:mt-0"
 					style={{
 						background: 'transparent',
