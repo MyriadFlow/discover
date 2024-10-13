@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ethers } from 'ethers';
 import { abi } from "./abi/abi";
 import { useAccount, useChainId } from 'wagmi';
+import axios from 'axios';
 
 const HotNftCardElevate = ({ nft }) => {
 
@@ -128,6 +129,86 @@ const HotNftCardElevate = ({ nft }) => {
     }
   };
 
+
+  const [onephygital, setonePhygital] = useState([]);
+
+  const getBrands = async () => {
+
+    setLoading(true);
+
+    const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+
+    const phyres = await fetch(`${baseUri}/phygitals/${nft.id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const phyresult = await phyres.json()
+    setonePhygital(phyresult);
+
+    const avatar = await fetch(`${baseUri}/avatars/all/554b4903-9a06-4031-98f4-48276c427f78`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const avatardata = await avatar.json();
+
+    console.log("avatar", avatardata, phyresult);
+
+    const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === nft.id);
+
+    // If found, update the state with the avatar URL
+    if (selectedAvatar) {
+      setAvatarUrl(selectedAvatar.url);
+    }
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getBrands()
+  }, [])
+
+  const handleAddToCart = async () => {
+    const cartItem = {
+      phygital_id: onephygital.id,
+      wallet_address: walletAddress,
+      quantity: 1,
+      name: onephygital.name,
+      price: onephygital.price,
+      image: onephygital.image,
+      logo: logo,
+    };
+    const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
+    if (walletAddress) {
+      try {
+        const response = await axios.get(`${baseUri}/cart/${walletAddress}`);
+        const cartItems = response.data;
+
+        const existingItem = cartItems.find(item => item.phygital_id === onephygital.id);
+
+        if (existingItem) {
+          await axios.post(`${baseUri}/cart`, {
+            phygital_id: onephygital.id,
+            wallet_address: walletAddress,
+            quantity: existingItem.quantity + 1
+          });
+        } else {
+          await axios.post(`${baseUri}/cart`, cartItem);
+        }
+
+        toast.success('Added to Cart!');
+      } catch (error) {
+        toast.error('Failed to add to cart. Please try again.');
+        console.error('Error adding to cart:', error);
+      }
+    }else{
+      toast.warning('Connect your wallet');
+    }
+  };
 
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
@@ -293,25 +374,37 @@ const HotNftCardElevate = ({ nft }) => {
 
       {!nft?.product_url &&
         (
-          <div>
+          <div
+            style={{
+              position: "absolute",
+              bottom: "45px",
+              right: "20px",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px"
+            }}
+          >
             <button
               className="px-10 text-lg"
               style={{
-                backgroundColor: "#DF1FDD36",
+                backgroundColor: "#D3169A",
                 border: "1px solid black",
                 height: "30px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "5px",
-                position: "absolute",
-                bottom: "45px",
-                right: "20px",
               }}
               onClick={buyasset}
             >
               Buy
             </button>
+            <img
+              src="./cartblack1.png"
+              style={{ width: '35px', borderRadius: '25px', cursor: 'pointer' }}
+              alt="Cart"
+              onClick={handleAddToCart}
+            />
           </div>
         )}
 

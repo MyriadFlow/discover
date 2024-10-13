@@ -10,11 +10,11 @@ const HotNFTsElevate = ({ hotnftdata }) => {
 				Most Loved NFTs Now
 			</div>
 			<div className='font-bold text-3xl sm:text-4xl lg:text-6xl mt-6 sm:mt-8 lg:mt-10 lg:text-left'>
-				Hot NFTs
+				Hot Products
 			</div>
 			<div className='flex flex-col sm:flex-row justify-between text-lg sm:text-xl lg:text-2xl mt-4'>
 				<div className='mt-4 sm:text-left'>
-					Trending Treasures: Get in on the Action with These Phygitals Making Waves and Potentially Shaping the Future.
+					Trending Treasures: Get in on the Action with These NFTs Shaping the Future!
 				</div>
 				<Link
 					href=""

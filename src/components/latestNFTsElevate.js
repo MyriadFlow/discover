@@ -16,7 +16,7 @@ const LatestNFTsElevate = ({ hotnftdata }) => {
         Most Recently Launched
       </div>
       <div className="font-bold text-black text-4xl sm:text-5xl lg:text-6xl mt-6 sm:mt-8 lg:mt-10">
-        New on Discover
+        Most Recently Launched
       </div>
       <div className="flex flex-col sm:flex-row justify-between text-lg sm:text-xl lg:text-2xl mt-4">
         <div className="mt-4">

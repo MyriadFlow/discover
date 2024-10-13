@@ -345,11 +345,10 @@ export default function Home() {
 						</div>
 						<button
 							onClick={handleSubmit}
-							className={`w-full py-2 rounded-md text-black ${
-								tosChecked && displayName && email
+							className={`w-full py-2 rounded-md text-black ${tosChecked && displayName && email
 									? 'bg-[#30D8FF]'
 									: 'bg-gray-300 cursor-not-allowed'
-							}`}
+								}`}
 							disabled={!tosChecked || !displayName || !email}
 						>
 							Finish Sign-Up
@@ -429,10 +428,6 @@ export default function Home() {
 				/>
 			</div>
 
-			<div className='pt-10 bg-white px-10 hidden md:block'>
-				<MostLovedElevate collectionsdata={collections} />
-			</div>
-
 			<div className='pt-40 bg-white px-10'>
 				<LatestNFTsElevate hotnftdata={phygitals} />
 			</div>
@@ -440,6 +435,11 @@ export default function Home() {
 			<div className='pt-40 bg-white px-10'>
 				<HotNFTsElevate hotnftdata={phygitals} />
 			</div>
+			
+			<div className='pt-10 bg-white px-10 hidden md:block'>
+				<MostLovedElevate collectionsdata={collections} />
+			</div>
+
 
 			<div className='pt-40 bg-white px-10 hidden md:block'>
 				<Brand brandsdata={brands} />
