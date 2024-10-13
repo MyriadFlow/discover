@@ -104,7 +104,7 @@ export default function Home() {
 						email: email,
 						username: userName,
 						wallet_address: address,
-						chaintype_id: '6c736e9b-37e6-43f5-9841-c0ac740282dfn',
+						chaintype_id: '554b4903-9a06-4031-98f4-48276c427f78',
 					}),
 				})
 
