@@ -5,50 +5,38 @@ const CreateBanner = () => {
     <div
       className="relative w-full"
       style={{
-        backgroundImage: 'url("./Rectangle 39472.png")',
+        backgroundColor: 'rgba(244, 0, 171, 0.5)',
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "80vh",
       }}
     >
       <img
-        src="./image 18.png"
-        alt="Left Mid"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "100px",
-          transform: "translateY(-50%)",
-          width: "350px",
-          height: "350px",
-        }}
-      />
-      <img
-        src="./image 17.png"
+        src="./web.png"
         alt="Right Mid"
         style={{
           position: "absolute",
           top: "50%",
-          right: "100px",
+          right: "150px",
           transform: "translateY(-50%)",
-          width: "350px",
-          height: "350px",
+          width: "400px",
+          height: "400px",
         }}
       />
 
       <div
-        className="absolute flex flex-col items-center justify-center"
+        className="absolute flex flex-col"
         style={{
           top: "50%",
-          left: "50%",
+          left: "25%",
           transform: "translate(-50%, -50%)",
           textAlign: "center",
           color: "black", // Adjust color as needed
         }}
       >
-        <h1 className="text-6xl">Create Your Own?</h1>
+        <h1 className="text-7xl">Create Your Own?</h1>
         <button
-          className="rounded"
+          className="rounded mt-8"
           style={{
             background: "transparent",
             border: "6px solid transparent",
@@ -66,7 +54,6 @@ const CreateBanner = () => {
             width: "150px",
             height: '50px', // Set fixed width for the button
             display: "block",
-            margin: "20px auto", // Center the button
           }}
         >
           Get Started

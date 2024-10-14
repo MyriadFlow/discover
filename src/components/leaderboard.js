@@ -46,13 +46,13 @@ const Leaderboard = () => {
 	useEffect(() => {
 		fetchData()
 	}, [])
-	
+
 	return (
 		<div className='p-4 sm:p-6 lg:p-10'>
-			<div className='font-bold text-3xl sm:text-4xl lg:text-6xl'>
+			<div className='font-bold text-3xl sm:text-4xl lg:text-6xl mx-20'>
 				Avatar Leaderboard
 			</div>
-			<div className='flex flex-col sm:flex-row justify-between text-lg sm:text-xl lg:text-2xl mt-4 px-4 sm:px-4'>
+			<div className='flex flex-col sm:flex-row justify-between text-lg sm:text-xl lg:text-2xl mt-4 px-4 sm:px-4 mx-16'>
 				<div className='mt-4'>
 					This Week&apos;s Top Performing AI-Powered Brand Ambassadors
 				</div>
@@ -82,7 +82,7 @@ const Leaderboard = () => {
 				</Link>
 			</div>
 
-			<div className='flex flex-col lg:flex-row justify-center items-center mt-10'>
+			<div className='flex flex-col lg:flex-row justify-center items-center mt-10 h-96' style={{ backgroundColor: 'rgba(244, 0, 171, 0.5)' }}>
 				{topAvatars.length >= 3 && (
 					<>
 						<div className='flex flex-col items-center mx-4 my-6'>
@@ -102,7 +102,7 @@ const Leaderboard = () => {
 							<div className='text-lg mt-2'>
 								No. tokens: {topAvatars[1].count}
 							</div>
-							<button className='mt-4 px-4 py-2 text-xl border border-black rounded-lg cursor-pointer'>
+							<button className='mt-4 px-8 py-2 text-xl border border-black rounded-full cursor-pointer' style={{ backgroundColor: 'rgba(90, 255, 255, 1)' }}>
 								<Link href={`/https://webxr-polygon.vercel.app/${topAvatars[1].phygital_id}`}>
 									WEBXR
 								</Link>
@@ -126,7 +126,7 @@ const Leaderboard = () => {
 							<div className='text-lg mt-2'>
 								No. tokens: {topAvatars[0].count}
 							</div>
-							<button className='mt-4 px-4 py-2 text-xl border border-black rounded-lg cursor-pointer'>
+							<button className='mt-4 px-8 py-2 text-xl border border-black rounded-full cursor-pointer' style={{ backgroundColor: 'rgba(90, 255, 255, 1)' }}>
 								<Link href={`/https://webxr-polygon.vercel.app/${topAvatars[0].phygital_id}`}>
 									WEBXR
 								</Link>
@@ -145,7 +145,7 @@ const Leaderboard = () => {
 							<div className='text-lg mt-2'>
 								No. tokens: {topAvatars[2].count}
 							</div>
-							<button className='mt-4 px-4 py-2 text-xl border border-black rounded-lg cursor-pointer'>
+							<button className='mt-4 px-8 py-2 text-xl border border-black rounded-full cursor-pointer' style={{ backgroundColor: 'rgba(90, 255, 255, 1)' }}>
 								<Link href={`/https://webxr-polygon.vercel.app/${topAvatars[2].phygital_id}`}>
 									WEBXR
 								</Link>
@@ -155,7 +155,7 @@ const Leaderboard = () => {
 				)}
 			</div>
 
-			<div className='relative mt-16'>
+			<div className='relative bg-black'>
 				<img
 					src='./trophy1.png'
 					alt='Left'
@@ -166,7 +166,7 @@ const Leaderboard = () => {
 					alt='Right'
 					className='absolute top-0 right-4 lg:right-10 transform -translate-y-1/2 w-24 h-24 lg:w-32 lg:h-32'
 				/>
-				<div className='text-center text-xl lg:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 py-4'>
+				<div className='text-center text-xl lg:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-blue-500 py-4 bg-black'>
 					Rewarding Creators, Owners and Supporters.
 				</div>
 			</div>

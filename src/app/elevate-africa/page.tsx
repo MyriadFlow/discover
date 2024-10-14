@@ -208,13 +208,6 @@ export default function Home() {
 					<div className='text-3xl md:text-5xl font-thin mt-4 md:mt-10'>
 						Phygital Xperience for Emerging Brands
 					</div>
-					{/* <div className='text-3xl md:text-6xl font-semibold mt-2 md:mt-4'>
-        with MyriadFlow
-      </div>
-      <div className='text-lg md:text-2xl mt-6 md:mt-10'>
-        Explore & launch brands and phygitals with a WebXR experience.
-        Create & interact with AI-Powered brand ambassadors.
-      </div> */}
 					<div className='flex flex-col md:flex-row gap-6 mt-6 md:mt-28'>
 						<Link href='#movetotrends' style={exploreButtonStyle}>
 							Explore
