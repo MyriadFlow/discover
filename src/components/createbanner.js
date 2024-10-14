@@ -8,7 +8,7 @@ const CreateBanner = () => {
         backgroundColor: 'rgba(244, 0, 171, 0.5)',
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "80vh",
+        height: "70vh",
       }}
     >
       <img

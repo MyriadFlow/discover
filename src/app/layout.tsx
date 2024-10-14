@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 		description: 'Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life.',
 		images: [
 			{
-				url: '/metaimg.png',
+				url: '/discover_share_image_web.png',
 				width: 1200,
 				height: 630,
 				alt: 'MyriadFlow Discover',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 		description: 'Own the future of collecting! MyriadFlow Discover lets you buy, sell, and showcase unique phygital NFTs. Explore immersive VR experiences that bring your digital collectibles to life.',
 		images: [
 			{
-				url: '/metaimg.png',
+				url: '/discover_share_image_web.png',
 				width: 1200,
 				height: 630,
 				alt: 'MyriadFlow Discover',

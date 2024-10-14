@@ -204,7 +204,7 @@ export default function Home() {
 			<Header1 />
 			<div className='flex flex-col md:flex-row h-screen bg-white relative mt-20 md:mt-0'>
 				<div className='w-full md:w-1/2 h-full px-8 md:px-16 flex flex-col justify-center relative overflow-hidden'>
-					<div className='absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-white opacity-15'></div>
+					{/* <div className='absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-white opacity-15'></div>
 
 					<div className='absolute inset-0'>
 						<img
@@ -212,7 +212,7 @@ export default function Home() {
 							alt='Hero Background'
 							className='w-full h-full object-cover object-center mix-blend-overlay transform scale-x-[-1]'
 						/>
-					</div>
+					</div> */}
 
 					<div className='relative z-10'>
 						<div
@@ -398,7 +398,7 @@ export default function Home() {
 			>
 				<img
 					src='./image 14.png'
-					className='w-32 h-auto md:w-44 pb-8'
+					className='w-32 h-auto md:w-44 pb-8 mt-10'
 					style={{
 						zIndex: '2',
 						transform: 'rotate(-15deg)',
@@ -406,14 +406,14 @@ export default function Home() {
 				/>
 				<img
 					src='./image 15.png'
-					className='w-32 h-auto md:w-44 pb-8'
+					className='w-32 h-auto md:w-44 pb-8 mt-10'
 					style={{
 						zIndex: '3',
 					}}
 				/>
 				<img
 					src='./image 41.png'
-					className='w-32 h-auto md:w-44 pb-8'
+					className='w-32 h-auto md:w-44 pb-8 mt-10'
 					style={{
 						zIndex: '4',
 						transform: 'rotate(-15deg)',
@@ -421,44 +421,45 @@ export default function Home() {
 				/>
 				<img
 					src='./image 16.png'
-					className='w-32 h-auto md:w-44 pb-8 hidden md:block'
+					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
 					style={{
 						zIndex: '5',
 					}}
 				/>
 				<img
 					src='./image 19.png'
-					className='w-32 h-auto md:w-44 pb-8 hidden md:block'
+					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
 					style={{
 						zIndex: '6',
 					}}
 				/>
 				<img
 					src='./image 4.png'
-					className='w-32 h-auto md:w-44 pb-8 hidden md:block'
+					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
 					style={{
 						zIndex: '7',
+						transform: 'rotate(15deg)',
 					}}
 				/>
-			</div>
-
-			<div className='pt-10 bg-white px-10 hidden md:block'>
-				<MostLoved collectionsdata={collections} />
 			</div>
 
 			<div className='pt-40 bg-white px-10'>
 				<LatestNFTs hotnftdata={phygitals} />
 			</div>
 
-			<div className='pt-40 bg-white hidden md:block -mx-10'>
-				<LeaderBoard />
-			</div>
-
 			<div className='pt-40 bg-white px-10'>
 				<HotNFTs hotnftdata={phygitals} />
 			</div>
 
-			<div className='pt-40 bg-white px-10 hidden md:block'>
+			<div className='pt-40 bg-white hidden md:block -mx-10'>
+				<LeaderBoard />
+			</div>
+			
+			<div className='pt-10 bg-white px-10 hidden md:block'>
+				<MostLoved collectionsdata={collections} />
+			</div>
+
+			<div className='pt-40 pb-10 bg-white px-10 hidden md:block'>
 				<Brand brandsdata={brands} />
 			</div>
 
@@ -478,7 +479,7 @@ export default function Home() {
 			>
 				Future of Brands.
 			</div>
-			<div className='bg-white'>
+			<div className='bg-white pt-10'>
 				<Footer />
 			</div>
 
