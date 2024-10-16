@@ -18,6 +18,7 @@ const Header1 = () => {
 	const [username, setUserName] = useState('')
 	const [storedAddress, setStoredAddress] = useState(null)
 	const menuRef = useRef(null)
+	const [isExploreDropdownOpen, setIsExploreDropdownOpen] = useState(false)
 
 	useEffect(() => {
 		// Check for an existing wallet session in localStorage
@@ -122,30 +123,64 @@ const Header1 = () => {
 							alt='Logo'
 						/>
 					</a>
+					<div className='relative'>
+						<button
+							onClick={() => setIsExploreDropdownOpen(!isExploreDropdownOpen)}
+							className='flex items-center text-lg font-bold'
+							style={{ color: isScrolled ? 'white' : 'black' }}
+						>
+							Explore
+							<img src='/drop.png' alt='Arrow' className='inline-block ml-1' style={{ width: '16px', height: '16px' }} />
+						</button>
+						{isExploreDropdownOpen && (
+							<div
+								className={`absolute left-0 mt-10 p-2 rounded-lg shadow-lg w-48 text-lg font-bold ${isScrolled ? 'bg-black text-white' : 'bg-white text-black'}`}
+							>
+								<Link href='/collections' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+									Collections
+								</Link>
+								<Link href='/brands' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+									Brands
+								</Link>
+								<Link href='/users' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+									Users
+								</Link>
+								<div style={{ borderBottom: '2px solid rgba(223, 31, 221, 1)', margin: '4px 0', width: '80%', marginLeft: '10%' }}/>
+								<Link href='/elevate-africa' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+									Elevate
+								</Link>
+							</div>
+						)}
+					</div>
 					<div className='hidden sm:flex items-center space-x-8 text-lg font-bold'>
 						<Link
 							href='https://myriadflow.com'
 							style={{ color: getLinkColor('/') }}
+							target='_blank' // Open in a new tab
+							rel='noopener noreferrer' // Security best practice
 						>
 							Home
+							<img
+								src={isScrolled ? '/whitearrow.png' : '/arrow.png'}
+								alt='Arrow'
+								className='inline-block ml-1'
+								style={{ width: '12px', height: '12px' }}
+							/>
 						</Link>
 						<Link
-							href='/#movetotrends'
+							href='https://discover.myriadflow.com'
 							style={{ color: getLinkColor('/#movetotrends') }}
 						>
-							Explore
+							Discover
 						</Link>
 						<Link
-							href='/collections'
+							href='https://webxr.myriadflow.com'
 							style={{ color: getLinkColor('/collections') }}
 						>
-							Collections
+							WebXR
 						</Link>
-						<Link href='/brands' style={{ color: getLinkColor('/brands') }}>
-							Brands
-						</Link>
-						<Link href='/users' style={{ color: getLinkColor('/users') }}>
-							Users
+						<Link href='https://studio.myriadflow.com' style={{ color: getLinkColor('/users') }}>
+							Studio
 						</Link>
 					</div>
 					<div className='flex items-center space-x-4'>

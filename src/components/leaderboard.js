@@ -78,7 +78,14 @@ const Leaderboard = () => {
 						textAlign: 'center',
 					}}
 				>
-					<div style={{ marginTop: '4px' }}>View All</div>
+					<div style={{ marginTop: '4px' }}>View All
+					<img
+								src={'arrow.png'}
+								alt='Arrow'
+								className='inline-block ml-1'
+								style={{ width: '12px', height: '12px' }}
+							/>
+					</div>
 				</Link>
 			</div>
 			<div className='flex flex-col lg:flex-row justify-center items-center mt-10' style={{

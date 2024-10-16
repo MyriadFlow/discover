@@ -398,7 +398,7 @@ export default function Home() {
 			>
 				<img
 					src='./image 14.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10'
+					className='w-32 h-auto md:w-44 mt-32'
 					style={{
 						zIndex: '2',
 						transform: 'rotate(-15deg)',
@@ -406,14 +406,14 @@ export default function Home() {
 				/>
 				<img
 					src='./image 15.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10'
+					className='w-32 h-auto md:w-44  mt-32'
 					style={{
 						zIndex: '3',
 					}}
 				/>
 				<img
 					src='./image 41.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10'
+					className='w-32 h-auto md:w-44  mt-32'
 					style={{
 						zIndex: '4',
 						transform: 'rotate(-15deg)',
@@ -421,21 +421,21 @@ export default function Home() {
 				/>
 				<img
 					src='./image 16.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
+					className='w-32 h-auto md:w-44  mt-32 hidden md:block'
 					style={{
 						zIndex: '5',
 					}}
 				/>
 				<img
 					src='./image 19.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
+					className='w-32 h-auto md:w-44  mt-32 hidden md:block'
 					style={{
 						zIndex: '6',
 					}}
 				/>
 				<img
 					src='./image 4.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
+					className='w-32 h-auto md:w-44  mt-32 hidden md:block'
 					style={{
 						zIndex: '7',
 						transform: 'rotate(15deg)',

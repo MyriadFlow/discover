@@ -16,25 +16,24 @@ const Brand = ({ brandsdata }) => {
           Pushing the Boundaries of Innovation.
         </div>
         <Link
-          href=""
+          href="/brands"
           className="border mt-4 sm:mt-0"
           style={{
             background: "transparent",
             border: "6px solid transparent",
             borderRadius: "8px",
             backgroundImage: `
-    linear-gradient(white, white),
-    linear-gradient(rgba(197, 1, 145, 1), rgba(197, 1, 145, 1))
-  `,
+              linear-gradient(white, white),
+              linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+            `,
             backgroundOrigin: "border-box",
             backgroundClip: "content-box, border-box",
             WebkitBackgroundClip: "content-box, border-box", // For Safari
             display: "block",
             width: "180px",
             height: "50px",
-            textAlign: "center",
-          }}
-        >
+            textAlign: 'center',
+          }}>
           <div style={{ marginTop: '4px' }}>View All</div>
         </Link>
       </div>

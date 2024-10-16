@@ -38,29 +38,41 @@ const CreateBanner = () => {
         <h1 className="text-7xl">Create Your Own?</h1>
         <h1 className='text-2xl mt-8'>Launch phygitals & virtual experiences for your Brand.
           <br /> No coding knowledge needed.</h1>
-        <button
-          className="rounded mt-8"
-          style={{
-            background: "transparent",
-            border: "6px solid transparent",
-            borderRadius: "8px",
-            backgroundImage: `
-              linear-gradient(white, white),
-              linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-            `,
-            backgroundOrigin: "border-box",
-            backgroundClip: "content-box, border-box",
-            WebkitBackgroundClip: "content-box, border-box", // For Safari
-            color: "black", // Adjust text color to match your design
-            cursor: "pointer",
-            fontSize: "1.1rem",
-            width: "150px",
-            height: '50px', // Set fixed width for the button
-            display: "block",
-          }}
+        <a
+          href="https://studio.myriadflow.com"
+          target="_blank" // Open in a new tab
+          rel="noopener noreferrer" // Security best practice
         >
-          Get Started
-        </button>
+          <button
+            className="rounded mt-8"
+            style={{
+              background: "transparent",
+              border: "6px solid transparent",
+              borderRadius: "8px",
+              backgroundImage: `
+        linear-gradient(white, white),
+        linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+      `,
+              backgroundOrigin: "border-box",
+              backgroundClip: "content-box, border-box",
+              WebkitBackgroundClip: "content-box, border-box", // For Safari
+              color: "black", // Adjust text color to match your design
+              cursor: "pointer",
+              fontSize: "1.1rem",
+              width: "150px",
+              height: '50px', // Set fixed width for the button
+              display: "block",
+            }}
+          >
+            Get Started
+            <img
+              src={'arrow.png'}
+              alt='Arrow'
+              className='inline-block ml-1'
+              style={{ width: '12px', height: '12px' }}
+            />
+          </button>
+        </a>
       </div>
     </div>
   );

@@ -221,6 +221,7 @@ const HotNftCard = ({ nft }) => {
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
             overflow: "hidden",
             cursor: "pointer",
+            border: "2px solid rgba(228, 68, 230, 1)"
           }}
         >
           <div style={{ position: 'relative' }}>
@@ -367,10 +368,17 @@ const HotNftCard = ({ nft }) => {
           border: '1px solid black',
           background: 'white',
           zIndex: 1 ,// Ensure it's on top of the card 
-          backgroundColor: 'rgba(90, 255, 255, 1)'
+          backgroundColor: 'rgba(90, 255, 255, 1)',
+          color: 'black'
         }}
       >
         Web XR
+        <img
+								src={'arrow.png'}
+								alt='Arrow'
+								className='inline-block ml-1'
+								style={{ width: '12px', height: '12px' }}
+							/>
       </Link>
 
 
@@ -389,13 +397,14 @@ const HotNftCard = ({ nft }) => {
             <button
               className="px-10 text-lg"
               style={{
-                backgroundColor: "#D3169A",
+                backgroundColor: "rgba(228, 68, 230, 1)",
                 border: "1px solid black",
                 height: "30px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "5px",
+                color:'white'
               }}
               onClick={buyasset}
             >
