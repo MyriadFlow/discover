@@ -81,14 +81,18 @@ const Leaderboard = () => {
 					<div style={{ marginTop: '4px' }}>View All</div>
 				</Link>
 			</div>
+			<div className='flex flex-col lg:flex-row justify-center items-center mt-10' style={{
+				backgroundImage: "url('./leaderboard_background.png')",
+				backgroundSize: 'cover',
+				height: '600px'
+			}}>
 
-			<div className='flex flex-col lg:flex-row justify-center items-center mt-10 h-96' style={{ backgroundColor: 'rgba(244, 0, 171, 0.5)' }}>
 				{topAvatars.length >= 3 && (
 					<>
-						<div className='flex flex-col items-center mx-4 my-6'>
+						<div className='w-full md:w-1/3 flex flex-col items-center justify-center mb-10 md:mb-0'>
 							<Avatar
 								modelSrc={topAvatars[1].url}
-								cameraInitialDistance={4.5}
+								cameraInitialDistance={2}
 							/>
 							<div className='relative mt-4'>
 								<img
@@ -109,10 +113,10 @@ const Leaderboard = () => {
 							</button>
 						</div>
 
-						<div className='flex flex-col items-center mx-4 my-6'>
+						<div className='w-full md:w-1/3 flex flex-col items-center justify-center mb-10 md:mb-0'>
 							<Avatar
 								modelSrc={topAvatars[0].url}
-								cameraInitialDistance={4.5}
+								cameraInitialDistance={2}
 							/>
 							<div className='relative mt-4'>
 								<img
@@ -133,15 +137,20 @@ const Leaderboard = () => {
 							</button>
 						</div>
 
-						<div className='flex flex-col items-center mx-4 my-6'>
+						<div className='w-full md:w-1/3 flex flex-col items-center justify-center mb-10 md:mb-0'>
 							<Avatar
 								modelSrc={topAvatars[2].url}
-								cameraInitialDistance={4.5}
+								cameraInitialDistance={2}
 							/>
-							<img
-								src='./bronze.png'
-								className='w-2/3 mx-auto'
-							/>
+							<div className='relative mt-4'>
+								<img
+									src='./bronze.png'
+									className='w-2/3 mx-auto'
+								/>
+								<div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-xl font-bold'>
+
+								</div>
+							</div>
 							<div className='text-lg mt-2'>
 								No. tokens: {topAvatars[2].count}
 							</div>

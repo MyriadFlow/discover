@@ -39,7 +39,7 @@ const Brand = ({ brandsdata }) => {
         </Link>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-10 mt-6 sm:mt-8 lg:mt-10 pb-10">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-10 mt-6 sm:mt-8 lg:mt-10 pb-20">
         {limitedBrands?.map((brand, index) => (
           <Link href={`/brand/${brand.id}`} key={index} className="flex flex-col justify-center items-center">
             <div className="flex flex-col justify-center items-center">

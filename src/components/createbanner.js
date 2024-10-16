@@ -5,7 +5,8 @@ const CreateBanner = () => {
     <div
       className="relative w-full"
       style={{
-        backgroundColor: 'rgba(244, 0, 171, 0.5)',
+        // backgroundColor: 'rgba(244, 0, 171, 0.5)',
+        backgroundImage: "url('./createbanner.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "70vh",
@@ -30,11 +31,13 @@ const CreateBanner = () => {
           top: "50%",
           left: "25%",
           transform: "translate(-50%, -50%)",
-          textAlign: "center",
-          color: "black", // Adjust color as needed
+          // textAlign: "center",
+          color: "black",
         }}
       >
         <h1 className="text-7xl">Create Your Own?</h1>
+        <h1 className='text-2xl mt-8'>Launch phygitals & virtual experiences for your Brand.
+          <br /> No coding knowledge needed.</h1>
         <button
           className="rounded mt-8"
           style={{

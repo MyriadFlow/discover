@@ -16,6 +16,7 @@ const HotNftCardElevate = ({ nft }) => {
   const [priceUSD, setPriceUSD] = useState("");
   const [loading, setLoading] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [avatarUrl, setAvatarUrl] = useState('');
 
   const chainId = useChainId();
   const account = useAccount();
@@ -429,7 +430,7 @@ const HotNftCardElevate = ({ nft }) => {
           id="popupmodal"
         >
           <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
-            <div style={{ position: "relative", borderRadius: "0.5rem", boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)" }}>
+            <div style={{ position: "relative"}}>
               <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
                 <img
                   src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
