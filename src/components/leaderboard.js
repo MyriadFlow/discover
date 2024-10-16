@@ -82,8 +82,8 @@ const Leaderboard = () => {
 					<img
 								src={'arrow.png'}
 								alt='Arrow'
-								className='inline-block ml-1'
-								style={{ width: '12px', height: '12px' }}
+								className='inline-block ml-2 -mt-2'
+								style={{ width: '15px', height: '15px' }}
 							/>
 					</div>
 				</Link>

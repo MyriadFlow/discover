@@ -479,7 +479,7 @@ export default function Home() {
 			>
 				Future of Brands.
 			</div>
-			<div className='bg-white pt-20'>
+			<div className='bg-white pt-32'>
 				<Footer />
 			</div>
 

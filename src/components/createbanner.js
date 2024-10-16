@@ -68,7 +68,7 @@ const CreateBanner = () => {
             <img
               src={'arrow.png'}
               alt='Arrow'
-              className='inline-block ml-1'
+              className='inline-block ml-2 -mt-1'
               style={{ width: '12px', height: '12px' }}
             />
           </button>

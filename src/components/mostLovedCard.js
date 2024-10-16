@@ -12,6 +12,7 @@ const MostLovedCard = ({nft}) => {
   const [desc, setdesc] = useState("");
   const [brandid, setbrandid] = useState("");
   const [phygitals, setPhygitals] = useState([]);
+  const [isHoveredNft, setIsHoveredNft] = useState(false);
 
   useEffect(() => {
    const brandmatch = async() => {
@@ -149,11 +150,15 @@ try {
         <div
         style={{
           width: "330px",
+          height: "500px",
           borderRadius: "30px",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
-          position: "relative",
           overflow: "hidden",
+          cursor: "pointer",
+          border: isHoveredNft ? "2px solid rgba(228, 68, 230, 1)" : "none"
         }}
+        onMouseEnter={() => setIsHoveredNft(true)}
+        onMouseLeave={() => setIsHoveredNft(false)}
       >
         <div style={{ position: 'relative' }}>
           <img
@@ -178,19 +183,6 @@ try {
               borderRadius:'50px'
             }}
           />
-          <div
-            style={{
-              position: "absolute",
-              top: "10px",
-              right: "10px",
-              padding: "5px 20px",
-              borderRadius: "10px",
-              border: '1px solid black',
-              background:'white'
-            }}
-          >
-            Web XR
-          </div>
         </div>
         <div
           className="flex justify-between"
@@ -231,22 +223,23 @@ try {
           :
           (
           <div>
-            <div className="text-xl">Starts from {lowestPrice} ETH</div>
+            <div className="text-xl">Starts from <br/> {lowestPrice} ETH</div>
             <div>{lowestPriceUSD} USD</div>
           </div>)}
           <div
             className="px-10 text-lg"
             style={{
-              backgroundColor: "#DF1FDD36",
+              backgroundColor: "rgba(244, 0, 171, 1)",
               border: "1px solid black",
               height: "30px",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               borderRadius: "5px",
+              color: 'white'
             }}
           >
-            Buy
+            View
           </div>
         </div>
       </div>
@@ -310,10 +303,18 @@ style={{
   borderRadius: "10px",
   border: '1px solid black',
   background: 'white',
-  zIndex: 1 // Ensure it's on top of the card
+  zIndex: 1,// Ensure it's on top of the card 
+  backgroundColor: 'rgba(90, 255, 255, 1)',
+  color: 'black'
 }}
 >
 Web XR
+<img
+          src={'arrow.png'}
+          alt='Arrow'
+          className='inline-block ml-2 -mt-2'
+          style={{ width: '11px', height: '11px' }}
+        />
 </Link>
 </div>
   )

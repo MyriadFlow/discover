@@ -106,7 +106,7 @@ const Header1 = () => {
 	}
 
 	const getLinkColor = (path) => {
-		return pathname === path ? '#DF1FDD' : isScrolled ? 'white' : 'black'
+		return pathname === path ? 'white' : isScrolled ? 'white' : 'black'
 	}
 
 	return (
@@ -115,61 +115,47 @@ const Header1 = () => {
 				className={`fixed top-0 w-full sm:px-10 py-4 bg-black text-white transition-all duration-300 ease-in-out ${isScrolled ? 'bg-black' : 'bg-transparent'
 					} z-50`}
 			>
-				<div className='container mx-auto flex justify-between items-center'>
+				<div className=' flex justify-between items-center'>
 					<a href='/' className='flex items-center'>
 						<img
 							src={isScrolled ? '/logo2.png' : '/logo.png'}
-							className='w-32 sm:w-48'
+							className='w-32 sm:w-52'
 							alt='Logo'
 						/>
 					</a>
-					<div className='relative'>
+					<div className='relative ml-80'>
 						<button
 							onClick={() => setIsExploreDropdownOpen(!isExploreDropdownOpen)}
-							className='flex items-center text-lg font-bold'
+							className='flex items-center text-2xl font-bold'
 							style={{ color: isScrolled ? 'white' : 'black' }}
 						>
 							Explore
-							<img src='/drop.png' alt='Arrow' className='inline-block ml-1' style={{ width: '16px', height: '16px' }} />
+							<img src='/drop.png' alt='Arrow' className='inline-block ml-2' style={{ width: '16px', height: '16px' }} />
 						</button>
 						{isExploreDropdownOpen && (
 							<div
-								className={`absolute left-0 mt-10 p-2 rounded-lg shadow-lg w-48 text-lg font-bold ${isScrolled ? 'bg-black text-white' : 'bg-white text-black'}`}
+								className={`absolute left-0 mt-10 p-2 rounded-lg shadow-lg w-48 text-2xl font-bold ${isScrolled ? 'bg-black text-white' : 'bg-white text-black'}`}
 							>
-								<Link href='/collections' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+								<Link href='/collections' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
 									Collections
 								</Link>
-								<Link href='/brands' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+								<Link href='/brands' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
 									Brands
 								</Link>
-								<Link href='/users' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+								<Link href='/users' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
 									Users
 								</Link>
-								<div style={{ borderBottom: '2px solid rgba(223, 31, 221, 1)', margin: '4px 0', width: '80%', marginLeft: '10%' }}/>
-								<Link href='/elevate-africa' className='block px-4 py-2 text-sm hover:bg-gray-200'>
+								<div style={{ borderBottom: '2px solid rgba(223, 31, 221, 1)', margin: '4px 0', width: '80%', marginLeft: '10%' }} />
+								<Link href='/elevate-africa' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
 									Elevate
 								</Link>
 							</div>
 						)}
 					</div>
-					<div className='hidden sm:flex items-center space-x-8 text-lg font-bold'>
-						<Link
-							href='https://myriadflow.com'
-							style={{ color: getLinkColor('/') }}
-							target='_blank' // Open in a new tab
-							rel='noopener noreferrer' // Security best practice
-						>
-							Home
-							<img
-								src={isScrolled ? '/whitearrow.png' : '/arrow.png'}
-								alt='Arrow'
-								className='inline-block ml-1'
-								style={{ width: '12px', height: '12px' }}
-							/>
-						</Link>
+					<div className='hidden sm:flex items-center space-x-8 text-2xl font-bold'>
 						<Link
 							href='https://discover.myriadflow.com'
-							style={{ color: getLinkColor('/#movetotrends') }}
+							style={{ color: getLinkColor('/') }}
 						>
 							Discover
 						</Link>
@@ -181,6 +167,20 @@ const Header1 = () => {
 						</Link>
 						<Link href='https://studio.myriadflow.com' style={{ color: getLinkColor('/users') }}>
 							Studio
+						</Link>
+						<Link
+							href='https://myriadflow.com'
+							style={{ color: getLinkColor('') }}
+							target='_blank' // Open in a new tab
+							rel='noopener noreferrer' // Security best practice
+						>
+							Home
+							<img
+								src={isScrolled ? '/whitearrow.png' : '/arrow.png'}
+								alt='Arrow'
+								className='inline-block ml-1'
+								style={{ width: '12px', height: '12px' }}
+							/>
 						</Link>
 					</div>
 					<div className='flex items-center space-x-4'>

@@ -16,6 +16,7 @@ const HotNftCard = ({ nft }) => {
   const [priceUSD, setPriceUSD] = useState("");
   const [loading, setLoading] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isHoveredNft, setIsHoveredNft] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState('');
 
   const chainId = useChainId();
@@ -206,7 +207,7 @@ const HotNftCard = ({ nft }) => {
         toast.error('Failed to add to cart. Please try again.');
         console.error('Error adding to cart:', error);
       }
-    }else{
+    } else {
       toast.warning('Connect your wallet');
     }
   };
@@ -221,8 +222,10 @@ const HotNftCard = ({ nft }) => {
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
             overflow: "hidden",
             cursor: "pointer",
-            border: "2px solid rgba(228, 68, 230, 1)"
+            border: isHoveredNft ? "2px solid rgba(228, 68, 230, 1)" : "none"
           }}
+          onMouseEnter={() => setIsHoveredNft(true)}
+          onMouseLeave={() => setIsHoveredNft(false)}
         >
           <div style={{ position: 'relative' }}>
             <img
@@ -367,18 +370,18 @@ const HotNftCard = ({ nft }) => {
           borderRadius: "10px",
           border: '1px solid black',
           background: 'white',
-          zIndex: 1 ,// Ensure it's on top of the card 
+          zIndex: 1,// Ensure it's on top of the card 
           backgroundColor: 'rgba(90, 255, 255, 1)',
           color: 'black'
         }}
       >
         Web XR
         <img
-								src={'arrow.png'}
-								alt='Arrow'
-								className='inline-block ml-1'
-								style={{ width: '12px', height: '12px' }}
-							/>
+          src={'arrow.png'}
+          alt='Arrow'
+          className='inline-block ml-2 -mt-2'
+          style={{ width: '11px', height: '11px' }}
+        />
       </Link>
 
 
@@ -397,14 +400,14 @@ const HotNftCard = ({ nft }) => {
             <button
               className="px-10 text-lg"
               style={{
-                backgroundColor: "rgba(228, 68, 230, 1)",
+                backgroundColor: "rgba(244, 0, 171, 1)",
                 border: "1px solid black",
                 height: "30px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 borderRadius: "5px",
-                color:'white'
+                color: 'white'
               }}
               onClick={buyasset}
             >
@@ -440,7 +443,7 @@ const HotNftCard = ({ nft }) => {
           id="popupmodal"
         >
           <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
-            <div style={{ position: "relative"}}>
+            <div style={{ position: "relative" }}>
               <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
                 <img
                   src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
