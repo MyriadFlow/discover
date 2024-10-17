@@ -106,7 +106,7 @@ const Header1 = () => {
 	}
 
 	const getLinkColor = (path) => {
-		return pathname === path ? 'white' : isScrolled ? 'white' : 'black'
+		return isScrolled ? (pathname === path ? 'rgba(223, 31, 221, 1)' : 'white') : (pathname === path ? 'rgba(48, 216, 255, 1)' : 'black')
 	}
 
 	return (
@@ -130,7 +130,12 @@ const Header1 = () => {
 							style={{ color: isScrolled ? 'white' : 'black' }}
 						>
 							Explore
-							<img src='/drop.png' alt='Arrow' className='inline-block ml-2 mt-1' style={{ width: '18px', height: '16px' }} />
+							<img
+								src={isScrolled ? '/pinkdrop.png' : '/drop.png'}
+								alt='Arrow'
+								className='inline-block ml-2 mt-1'
+								style={{ width: '18px', height: '16px' }}
+							/>
 						</button>
 						{isExploreDropdownOpen && (
 							<div
@@ -305,17 +310,17 @@ const Header1 = () => {
 								</div>
 								<button className='text-xl'>
 									<img
-										src='/notification.png'
+										src={isScrolled ? '/notification.png' : '/bluenotification.png'}
 										alt='Notification'
-										style={{ width: '45px', height: '45px' }}
+										className='w-10 h-10'
 									/>
 								</button>
 								<Link href='/cart'>
 									<button className='text-xl'>
 										<img
-											src='/cart.png'
+											src={isScrolled ? '/cart.png' : '/bluecart.png'}
 											alt='Cart'
-											style={{ width: '42px', height: '45px' }}
+											className='w-10 h-10'
 										/>
 									</button>
 								</Link>
