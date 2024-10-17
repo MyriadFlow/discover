@@ -119,40 +119,40 @@ const Header1 = () => {
 					<a href='/' className='flex items-center'>
 						<img
 							src={isScrolled ? '/logo2.png' : '/logo.png'}
-							className='w-32 sm:w-52'
+							className='w-32 sm:w-56'
 							alt='Logo'
 						/>
 					</a>
 					<div className='relative ml-80'>
 						<button
 							onClick={() => setIsExploreDropdownOpen(!isExploreDropdownOpen)}
-							className='flex items-center text-2xl font-bold'
+							className='flex items-center text-xl font-bold'
 							style={{ color: isScrolled ? 'white' : 'black' }}
 						>
 							Explore
-							<img src='/drop.png' alt='Arrow' className='inline-block ml-2' style={{ width: '16px', height: '16px' }} />
+							<img src='/drop.png' alt='Arrow' className='inline-block ml-2 mt-1' style={{ width: '18px', height: '16px' }} />
 						</button>
 						{isExploreDropdownOpen && (
 							<div
-								className={`absolute left-0 mt-10 p-2 rounded-lg shadow-lg w-48 text-2xl font-bold ${isScrolled ? 'bg-black text-white' : 'bg-white text-black'}`}
+								className={`absolute left-0 mt-10 p-2 rounded-lg shadow-lg w-48 text-xl font-bold ${isScrolled ? 'bg-black text-white' : 'bg-white text-black'}`}
 							>
-								<Link href='/collections' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
+								<Link href='/collections' className='block px-4 py-2 text-xl hover:bg-gray-200'>
 									Collections
 								</Link>
-								<Link href='/brands' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
+								<Link href='/brands' className='block px-4 py-2 text-xl hover:bg-gray-200'>
 									Brands
 								</Link>
-								<Link href='/users' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
+								<Link href='/users' className='block px-4 py-2 text-xl hover:bg-gray-200'>
 									Users
 								</Link>
 								<div style={{ borderBottom: '2px solid rgba(223, 31, 221, 1)', margin: '4px 0', width: '80%', marginLeft: '10%' }} />
-								<Link href='/elevate-africa' className='block px-4 py-2 text-2xl hover:bg-gray-200'>
+								<Link href='/elevate-africa' className='block px-4 py-2 text-xl hover:bg-gray-200'>
 									Elevate
 								</Link>
 							</div>
 						)}
 					</div>
-					<div className='hidden sm:flex items-center space-x-8 text-2xl font-bold'>
+					<div className='hidden sm:flex items-center space-x-8 text-xl font-bold'>
 						<Link
 							href='https://discover.myriadflow.com'
 							style={{ color: getLinkColor('/') }}
@@ -178,7 +178,7 @@ const Header1 = () => {
 							<img
 								src={isScrolled ? '/whitearrow.png' : '/arrow.png'}
 								alt='Arrow'
-								className='inline-block ml-1'
+								className='inline-block ml-2 -mt-1'
 								style={{ width: '12px', height: '12px' }}
 							/>
 						</Link>
