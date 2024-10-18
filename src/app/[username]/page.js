@@ -705,7 +705,7 @@ function HomePage({ params }) {
             position: 'relative',
             height: '350px',
             backgroundColor: coverImage ? 'transparent' : '#D1D5DB',
-            backgroundImage: coverImage ? `url(${process.env.NEXT_PUBLIC_GATEWAY_URL}/ipfs/${guestcoverImage})` : 'none',
+            backgroundImage: coverImage ? `url(https://gateway.pinata.cloud/ipfs/${guestcoverImage})` : 'none',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             marginTop: '100px',
