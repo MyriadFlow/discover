@@ -20,6 +20,7 @@ function HomePage({ params }) {
   const [matchedNFTs, setMatchedNFTs] = useState([]);
   const [matchedWebxrs, setMatchedWebxr] = useState([]);
   const [name, setName] = useState('');
+  const [basename, setBaseName] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [bio, setBio] = useState('');
@@ -27,6 +28,7 @@ function HomePage({ params }) {
   const [x, setX] = useState('');
   const [instagram, setInstagram] = useState('');
   const [guestname, setGuestName] = useState('');
+  const [guestbasename, setGuestBaseName] = useState('');
   const [guestcoverImage, setGuestCoverImage] = useState('');
   const [guestprofileImage, setGuestProfileImage] = useState('');
   const [guestbio, setGuestBio] = useState('');
@@ -87,6 +89,7 @@ function HomePage({ params }) {
             const data = await response.json();
             console.log(data.name);
             setGuestName(data.name);
+            setGuestBaseName(data.basename);
             setGuestCoverImage(data.cover_image);
             setGuestProfileImage(data.profile_image);
             setGuestBio(data.bio);
@@ -126,6 +129,7 @@ function HomePage({ params }) {
             setWebsite(data.website);
             setX(data.x);
             setInstagram(data.instagram);
+            setBaseName(data.basename);
           } else {
             console.log('No user found');
           }
@@ -373,6 +377,7 @@ function HomePage({ params }) {
               <>
                 <img src='/verified.png' style={{ marginLeft: '2.5rem', height: '40px', width: '40px' }} />
                 <button className="text-2xl mt-2 ml-2" onClick={handleVerify}>Get Verified</button>
+
                 {showForm && (
                   <div
                     className="fixed inset-0 bg-white bg-opacity-10 backdrop-blur-sm z-50 flex items-center justify-center"
@@ -426,7 +431,7 @@ function HomePage({ params }) {
                 )}
               </>
             )}
-
+            <h1 className="text-2xl" style={{ marginLeft: '10rem' }}>{basename}</h1>
           </div>
           <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {address}</h1>
 
@@ -604,23 +609,10 @@ function HomePage({ params }) {
 
                       {showCreatorOptions && status !== 'pending' && status !== 'done' && (
                         <div style={{ marginTop: '20px' }}>
-                          <h2>You have not yet created any brands. Are you a <strong
-                            onMouseEnter={() => setHoveredOption('premium')}
-                            onMouseLeave={() => setHoveredOption(null)}
-                            style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                          >
-                            Premium Brand
-                          </strong> or looking to join our <strong
-                            onMouseEnter={() => setHoveredOption('elevate')}
-                            onMouseLeave={() => setHoveredOption(null)}
-                            style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                          >
-                              Elevate Program
-                            </strong>? Choose the correct alternative.</h2>
+                          <h2>You have not yet created any brands. Go to studio to get started.</h2>
                           <div style={{ marginTop: '10px' }}>
-                            <button className="bg-blue-500 text-white rounded-full px-8 py-2">Premium Brand</button>
-                            <Link href="/elevateform">
-                              <button className="bg-blue-500 text-white rounded-full px-8 py-2" style={{ marginLeft: '10px' }}>Join Elevate Program</button>
+                            <Link href="https://studio.myriadflow.com/">
+                              <button className="text-black rounded-full px-8 py-2" style={{ marginLeft: '10px', backgroundColor: 'rgba(48, 216, 255, 1)' }}>Go to Studio</button>
                             </Link>
                           </div>
                         </div>
@@ -758,7 +750,7 @@ function HomePage({ params }) {
                 <button className="text-2xl mt-2 ml-2">Not Verified</button>
               </>
             )}
-
+            <h1 className="text-2xl" style={{ marginLeft: '10rem' }}>{guestbasename}</h1>
           </div>
           <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {walletAddress}</h1>
 
