@@ -69,6 +69,14 @@ function ProfileSettingsPage() {
     };
 
     const handleSave = async () => {
+
+        const isValidFormat = /^[a-z0-9]+\.base\.eth$/.test(baseName);
+        if (!isValidFormat) {
+            setValidationError('Base name must follow the format name.base.eth');
+            return; // Prevent saving if invalid
+        } else {
+            setValidationError(''); // Clear error if valid
+        }
         // Validate username length
         if (userName.length < 4) {
             setValidationError('Username must be at least 4 characters long.');
@@ -140,7 +148,7 @@ function ProfileSettingsPage() {
                 const ipfsHash = data.IpfsHash;
                 if (type === 'cover') {
                     setCoverImage(ipfsHash);
-                    console.log("Coverimage" , coverImage)
+                    console.log("Coverimage", coverImage)
                     setIsCoverPopupVisible(false);
                 } else if (type === 'profile') {
                     setProfileImage(ipfsHash);
@@ -390,7 +398,7 @@ function ProfileSettingsPage() {
                                 <input
                                     className='w-1/2'
                                     type='text'
-                                    placeholder='Enter your new basename here'
+                                    placeholder='Must be name.base.eth'
                                     value={baseName}
                                     onChange={(e) => {
                                         setBaseName(e.target.value);

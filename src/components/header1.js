@@ -127,7 +127,7 @@ const Header1 = () => {
 						<button
 							onClick={() => setIsExploreDropdownOpen(!isExploreDropdownOpen)}
 							className='flex items-center text-xl font-bold'
-							style={{ color: isScrolled ? 'white' : 'black' }}
+							style={{ color: isScrolled ? (pathname === '/' ? 'white' : getLinkColor(pathname)) : (pathname === '/' ? 'black' : getLinkColor(pathname)) }}
 						>
 							Explore
 							<img
@@ -166,11 +166,13 @@ const Header1 = () => {
 						</Link>
 						<Link
 							href='https://webxr.myriadflow.com'
-							style={{ color: getLinkColor('/collections') }}
+							style={{ color: getLinkColor('') }}
 						>
 							WebXR
 						</Link>
-						<Link href='https://studio.myriadflow.com' style={{ color: getLinkColor('/users') }}>
+						<Link href='https://studio.myriadflow.com'
+							style={{ color: getLinkColor('') }}
+						>
 							Studio
 						</Link>
 						<Link
@@ -320,7 +322,7 @@ const Header1 = () => {
 										<img
 											src={isScrolled ? '/cart.png' : '/bluecart.png'}
 											alt='Cart'
-											className='w-10 h-10'
+											className='w-10 h-10 mt-2'
 										/>
 									</button>
 								</Link>
