@@ -106,7 +106,7 @@ const Header1 = () => {
 	}
 
 	const getLinkColor = (path) => {
-		return isScrolled ? (pathname === path ? 'rgba(223, 31, 221, 1)' : 'white') : (pathname === path ? 'rgba(48, 216, 255, 1)' : 'black')
+		return isScrolled ? (pathname === path ? 'rgba(223, 31, 221, 1)' : 'white') : (pathname === path ? 'black' : 'black')
 	}
 
 	return (
@@ -193,7 +193,7 @@ const Header1 = () => {
 					<div className='flex items-center space-x-4'>
 						{address ? (
 							<>
-								<div className='relative'>
+								<div className='relative mt-1'>
 									<button
 										onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
 										className='focus:outline-none'
