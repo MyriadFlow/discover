@@ -125,9 +125,8 @@ const ElevateForm = () => {
                         <label className="block text-lg font-medium">3. Brief Description of Your Brand/Project:</label>
                         <textarea
                             name="brand_description"
-                            placeholder="What is your brand or project about? (max 150 words)"
+                            placeholder="What is your brand or project about?"
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 mb-10"
-                            maxLength="150"
                             value={formData.brand_description}
                             onChange={handleChange}
                             required
@@ -137,9 +136,8 @@ const ElevateForm = () => {
                         <label className="block text-lg font-medium">4. Why Do You Believe You Belong in the Emerging Creator Program?</label>
                         <textarea
                             name="program_alignment"
-                            placeholder="Explain how you align with the program's goals and values. (max 150 words)"
+                            placeholder="Explain how you align with the program's goals and values."
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 mb-10"
-                            maxLength="150"
                             value={formData.program_alignment}
                             onChange={handleChange}
                             required
@@ -149,9 +147,8 @@ const ElevateForm = () => {
                         <label className="block text-lg font-medium">5. What Potential Do You See in Your Brand or Project?</label>
                         <textarea
                             name="brand_vision"
-                            placeholder="Share your vision for growth and how you plan to contribute to the MyriadFlow community. (max 150 words)"
+                            placeholder="Share your vision for growth and how you plan to contribute to the MyriadFlow community."
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 mb-10"
-                            maxLength="150"
                             value={formData.brand_vision}
                             onChange={handleChange}
                             required
@@ -161,9 +158,8 @@ const ElevateForm = () => {
                         <label className="block text-lg font-medium">6. Any Additional Information You Would Like to Provide:</label>
                         <textarea
                             name="additional_information"
-                            placeholder="Share anything else you think we should know about you or your project. (max 100 words)"
+                            placeholder="Share anything else you think we should know about you or your project."
                             className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 mb-10"
-                            maxLength="100"
                             value={formData.additional_information}
                             onChange={handleChange}
                         />
