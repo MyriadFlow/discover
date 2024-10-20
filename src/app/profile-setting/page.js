@@ -70,7 +70,7 @@ function ProfileSettingsPage() {
 
     const handleSave = async () => {
 
-        const isValidFormat = /^[a-z0-9]+\.base\.eth$/.test(baseName);
+        const isValidFormat = baseName === '' || /^[a-z0-9]+\.base\.eth$/.test(baseName);
         if (!isValidFormat) {
             setValidationError('Base name must follow the format name.base.eth');
             return; // Prevent saving if invalid
