@@ -208,7 +208,7 @@ export default function Home() {
 					<div className='text-3xl md:text-5xl font-thin mt-4 md:mt-10'>
 						Phygital Xperience for Emerging Brands
 					</div>
-					<div className='flex flex-col md:flex-row gap-6 mt-6 md:mt-28'>
+					<div className='hidden md:flex flex-col md:flex-row gap-6 mt-6 md:mt-28'>
 						<Link href='#movetotrends' style={exploreButtonStyle}>
 							Explore
 						</Link>
@@ -226,16 +226,16 @@ export default function Home() {
 					<img
 						src='./hero_background.png'
 						alt='Hero Background'
-						className='absolute inset-0 w-full h-full object-cover'
+						className='absolute inset-0 w-full h-[70vh] md:h-full object-cover'
 					/>
-					<div className='absolute bottom-4 left-8 text-white text-sm md:text-2xl md:mb-10 md:font-thin max-w-1/2 md:w-3/4'>
+					<div className='absolute -bottom-20 md:bottom-4 left-8 text-white text-lg md:text-2xl md:mb-10 md:font-thin max-w-1/2 md:w-3/4'>
 						MyriadFlow Elevate empowers <br /> emerging brands & creators to
 						launch <br />
 						phygitals with WebXR experiences.
 					</div>
 				</div>
 
-				<div className='absolute top-1/4 text-5xl font-semibold left-1/2 transform -translate-x-14  bg-[#6BF66F] text-black px-4 py-1 rounded-md rotate-[-30deg]'>
+				<div className='absolute top-96 md:top-1/4 text-2xl md:text-5xl font-semibold left-1/3 md:left-1/2 transform -translate-x-14 md:-translate-x-14 bg-[#6BF66F] text-black px-4 py-1 rounded-md rotate-[-30deg] md:rotate-[-30deg]'>
 					Africa Edition
 				</div>
 			</div>
@@ -339,8 +339,8 @@ export default function Home() {
 						<button
 							onClick={handleSubmit}
 							className={`w-full py-2 rounded-md text-black ${tosChecked && displayName && email
-									? 'bg-[#30D8FF]'
-									: 'bg-gray-300 cursor-not-allowed'
+								? 'bg-[#30D8FF]'
+								: 'bg-gray-300 cursor-not-allowed'
 								}`}
 							disabled={!tosChecked || !displayName || !email}
 						>
@@ -357,7 +357,7 @@ export default function Home() {
 			)}
 
 			<div
-				className='text-2xl md:text-4xl font-bold py-4 md:py-6'
+				className='text-2xl mt-32 md:mt-0 md:text-4xl font-bold py-4 md:py-6'
 				style={{
 					textAlign: 'center',
 					backgroundImage:
@@ -371,7 +371,7 @@ export default function Home() {
 			</div>
 
 			<div
-				className='flex flex-wrap justify-center bg-white p-10 md:p-10'
+				className='flex flex-wrap justify-center bg-white p-0 md:p-10'
 				style={{
 					width: '100%',
 					height: 'auto',
@@ -428,7 +428,7 @@ export default function Home() {
 			<div className='pt-40 bg-white px-10'>
 				<HotNFTsElevate hotnftdata={phygitals} />
 			</div>
-			
+
 			<div className='pt-10 bg-white px-10 hidden md:block'>
 				<MostLovedElevate collectionsdata={collections} />
 			</div>
