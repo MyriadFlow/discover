@@ -123,18 +123,17 @@ const Header1 = () => {
 							alt='Logo'
 						/>
 					</a>
-					<div className='relative ml-80'>
+					<div className='relative ml-0 md:ml-80'>
 						<button
 							onClick={() => setIsExploreDropdownOpen(!isExploreDropdownOpen)}
-							className='flex items-center text-xl font-bold'
+							className='flex items-center text-sm md:text-xl font-bold'
 							style={{ color: isScrolled ? (pathname === '/' ? 'white' : getLinkColor(pathname)) : (pathname === '/' ? 'black' : getLinkColor(pathname)) }}
 						>
 							Explore
 							<img
 								src={isScrolled ? '/pinkdrop.png' : '/drop.png'}
 								alt='Arrow'
-								className='inline-block ml-2 mt-1'
-								style={{ width: '18px', height: '16px' }}
+								className='inline-block ml-1 md:ml-2 mr-1 md:mr-0 mt-1 w-4 h-3 md:w-5 md:h-4'
 							/>
 						</button>
 						{isExploreDropdownOpen && (
@@ -343,7 +342,7 @@ const Header1 = () => {
 				{isDropdownOpen && (
 					<div
 						ref={menuRef}
-						className='sm:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-40'
+						className='sm:hidden fixed top-0 left-0 w-full h-full bg-white bg-opacity-75 z-40'
 					>
 						<div className='flex flex-col items-center justify-center h-full  bg-transparent text-black relative'>
 							<button
@@ -353,39 +352,35 @@ const Header1 = () => {
 								<img src='/close.png' alt='Close' className='w-12 h-12' />
 							</button>
 							<Link
-								href='https://myriadflow.com'
+								href='https://discover.myriadflow.com'
 								style={{ color: getLinkColor('/') }}
-								className='block py-2 text-lg'
+							>
+								Discover
+							</Link>
+							<Link
+								href='https://webxr.myriadflow.com'
+								style={{ color: getLinkColor('') }}
+							>
+								WebXR
+							</Link>
+							<Link href='https://studio.myriadflow.com'
+								style={{ color: getLinkColor('') }}
+							>
+								Studio
+							</Link>
+							<Link
+								href='https://myriadflow.com'
+								style={{ color: getLinkColor('') }}
+								target='_blank' // Open in a new tab
+								rel='noopener noreferrer' // Security best practice
 							>
 								Home
-							</Link>
-							<Link
-								href='/#movetotrends'
-								style={{ color: getLinkColor('/#movetotrends') }}
-								className='block py-2 text-lg'
-							>
-								Explore
-							</Link>
-							<Link
-								href='/collections'
-								style={{ color: getLinkColor('/collections') }}
-								className='block py-2 text-lg'
-							>
-								Collections
-							</Link>
-							<Link
-								href='/brands'
-								style={{ color: getLinkColor('/brands') }}
-								className='block py-2 text-lg'
-							>
-								Brands
-							</Link>
-							<Link
-								href='/users'
-								style={{ color: getLinkColor('/users') }}
-								className='block py-2 text-lg'
-							>
-								Users
+								<img
+									src={isScrolled ? '/whitearrow.png' : '/arrow.png'}
+									alt='Arrow'
+									className='inline-block ml-2 -mt-1'
+									style={{ width: '12px', height: '12px' }}
+								/>
 							</Link>
 						</div>
 					</div>
