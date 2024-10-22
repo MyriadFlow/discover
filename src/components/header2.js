@@ -100,6 +100,13 @@ const Header2 = () => {
 	//   }
 	// };
 
+	const handleNotificationClick = () => {
+		toast.info("Coming soon", {
+			containerId: "containerA",
+			position: 'top-right',
+		});
+	}
+
 	const handleLogout = () => {
 		disconnect()
 	}
@@ -268,19 +275,19 @@ const Header2 = () => {
 										</div>
 									)}
 								</div>
-								<button className='text-xl'>
+								<button className='text-xl' onClick={handleNotificationClick}>
 									<img
-										src='/notification.png'
+										src={isScrolled ? '/notification.png' : '/blacknotification.png'}
 										alt='Notification'
-										style={{ width: '45px', height: '45px' }}
+										className='w-10 h-10'
 									/>
 								</button>
 								<Link href='/cart'>
 									<button className='text-xl'>
 										<img
-											src='/cart.png'
+											src={isScrolled ? '/cart.png' : '/blackcart.png'}
 											alt='Cart'
-											style={{ width: '42px', height: '45px' }}
+											className='w-10 h-10 mt-2'
 										/>
 									</button>
 								</Link>
@@ -301,7 +308,7 @@ const Header2 = () => {
 				{isDropdownOpen && (
 					<div
 						ref={menuRef}
-						className='sm:hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 z-40'
+						className='sm:hidden fixed top-0 left-0 w-full h-full bg-white bg-opacity-90 z-40'
 					>
 						<div className='flex flex-col items-center justify-center h-full  bg-transparent text-black relative'>
 							<button
@@ -311,36 +318,31 @@ const Header2 = () => {
 								<img src='/close.png' alt='Close' className='w-12 h-12' />
 							</button>
 							<Link
-								href='https://myriadflow.com'
-								style={{ color: getLinkColor('/') }}
+								href=''
 								className='block py-2 text-lg'
 							>
 								Home
 							</Link>
 							<Link
-								href='/#movetotrends'
-								style={{ color: getLinkColor('/#movetotrends') }}
+								href=''
 								className='block py-2 text-lg'
 							>
 								Explore
 							</Link>
 							<Link
-								href='/collections'
-								style={{ color: getLinkColor('/collections') }}
+								href=''
 								className='block py-2 text-lg'
 							>
 								Collections
 							</Link>
 							<Link
-								href='/brands'
-								style={{ color: getLinkColor('/brands') }}
+								href=''
 								className='block py-2 text-lg'
 							>
 								Brands
 							</Link>
 							<Link
-								href='/users'
-								style={{ color: getLinkColor('/users') }}
+								href=''
 								className='block py-2 text-lg'
 							>
 								Users

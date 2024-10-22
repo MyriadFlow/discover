@@ -24,7 +24,7 @@ const Brand = ({ brandsdata }) => {
             borderRadius: "8px",
             backgroundImage: `
               linear-gradient(white, white),
-              linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+              linear-gradient(rgba(197, 1, 145, 1), rgba(197, 1, 145, 1))
             `,
             backgroundOrigin: "border-box",
             backgroundClip: "content-box, border-box",

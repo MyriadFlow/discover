@@ -379,49 +379,77 @@ export default function Home() {
 			>
 				<img
 					src='./demo1.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10'
+					className='w-20 h-22 md:w-44 pb-8 mt-10 hidden md:block'
 					style={{
 						zIndex: '2',
 					}}
 				/>
 				<img
+					src='./demo3.png'
+					className='w-20 h-22 md:w-44 pb-8 mt-10 md:hidden'
+					style={{
+						zIndex: '4',
+					}}
+				/>
+				<img
 					src='./demo2.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10'
+					className='w-20 h-22 md:w-44 pb-8 mt-10 md:hidden'
+					style={{
+						zIndex: '3',
+					}}
+				/>
+				<img
+					src='./demo2.png'
+					className='hidden md:block w-20 h-22 md:w-44 pb-8 mt-10'
 					style={{
 						zIndex: '3',
 					}}
 				/>
 				<img
 					src='./demo3.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10'
+					className='hidden md:block w-20 h-22 md:w-44 pb-8 mt-10'
 					style={{
 						zIndex: '4',
 					}}
 				/>
 				<img
+					src='./demo5.png'
+					className='w-20 h-22 md:w-44 pb-8 mt-10 md:hidden'
+					style={{
+						zIndex: '6',
+					}}
+				/>
+				<img
 					src='./demo4.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
+					className='w-20 h-22 md:w-44 pb-8 mt-10 md:hidden'
+					style={{
+						zIndex: '5',
+					}}
+				/>
+				<img
+					src='./demo4.png'
+					className='hidden md:block w-20 h-22 md:w-44 pb-8 mt-10'
 					style={{
 						zIndex: '5',
 					}}
 				/>
 				<img
 					src='./demo5.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
+					className='hidden md:block w-20 h-22 md:w-44 pb-8 mt-10'
 					style={{
 						zIndex: '6',
 					}}
 				/>
 				<img
 					src='./demo6.png'
-					className='w-32 h-auto md:w-44 pb-8 mt-10 hidden md:block'
+					className='w-20 h-22 md:w-44 pb-8 mt-10 hidden md:block'
 					style={{
 						zIndex: '7',
 					}}
 				/>
 			</div>
 
-			<div className='pt-40 bg-white px-10'>
+			<div className='pt-20 md:pt-40 bg-white px-10'>
 				<LatestNFTsElevate hotnftdata={phygitals} />
 			</div>
 

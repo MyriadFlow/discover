@@ -8,6 +8,7 @@ import Header1 from '../../components/header1';
 import Footer from '../../components/footer';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Avatar, Identity, Name, Badge, Address } from '@coinbase/onchainkit/identity';
 
 function HomePage({ params }) {
   const { username } = params;
@@ -432,6 +433,10 @@ function HomePage({ params }) {
               </>
             )}
             <h1 className="text-2xl" style={{ marginLeft: '10rem' }}>{basename}</h1>
+            {/* <Identity address={address} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
+              <Name>
+              </Name>
+            </Identity> */}
           </div>
           <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {address}</h1>
 
@@ -751,6 +756,10 @@ function HomePage({ params }) {
               </>
             )}
             <h1 className="text-2xl" style={{ marginLeft: '10rem' }}>{guestbasename}</h1>
+            {/* <Identity address={walletAddress} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
+              <Name>
+              </Name>
+            </Identity> */}
           </div>
           <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {walletAddress}</h1>
 

@@ -17,6 +17,7 @@ const HotNftCardElevate = ({ nft }) => {
   const [loading, setLoading] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState('');
+  const [isHoveredNft, setIsHoveredNft] = useState(false);
 
   const chainId = useChainId();
   const account = useAccount();
@@ -206,7 +207,7 @@ const HotNftCardElevate = ({ nft }) => {
         toast.error('Failed to add to cart. Please try again.');
         console.error('Error adding to cart:', error);
       }
-    }else{
+    } else {
       toast.warning('Connect your wallet');
     }
   };
@@ -221,7 +222,10 @@ const HotNftCardElevate = ({ nft }) => {
             boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.3)",
             overflow: "hidden",
             cursor: "pointer",
+            border: isHoveredNft ? "2px solid rgba(228, 68, 230, 1)" : "none"
           }}
+          onMouseEnter={() => setIsHoveredNft(true)}
+          onMouseLeave={() => setIsHoveredNft(false)}
         >
           <div style={{ position: 'relative' }}>
             <img
@@ -365,7 +369,7 @@ const HotNftCardElevate = ({ nft }) => {
           padding: "5px 20px",
           borderRadius: "10px",
           border: '1px solid black',
-          background: 'white',
+          background: 'rgba(107, 246, 111, 1)',
           zIndex: 1 // Ensure it's on top of the card
         }}
       >
@@ -430,7 +434,7 @@ const HotNftCardElevate = ({ nft }) => {
           id="popupmodal"
         >
           <div style={{ position: "relative", padding: "1rem", width: "100%", maxHeight: "100%" }}>
-            <div style={{ position: "relative"}}>
+            <div style={{ position: "relative" }}>
               <div style={{ display: "flex", justifyContent: "center", gap: "1rem" }}>
                 <img
                   src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"

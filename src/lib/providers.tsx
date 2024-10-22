@@ -5,6 +5,8 @@ import { createWeb3Modal } from '@web3modal/wagmi/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { State, WagmiProvider } from 'wagmi'
 import { config, projectId } from './wagmi'
+import { OnchainKitProvider } from '@coinbase/onchainkit';
+import { base } from 'wagmi/chains';
 
 // Initialize React Query Client
 const queryClient = new QueryClient()
@@ -30,7 +32,12 @@ export default function AppKitProvider({ children, initialState }: AppKitProvide
   return (
     <WagmiProvider config={config} initialState={initialState}>
       <QueryClientProvider client={queryClient}>
-        {children}
+        <OnchainKitProvider
+          apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+          chain={base}
+        >
+          {children}
+        </OnchainKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   )

@@ -101,6 +101,13 @@ const Header1 = () => {
 	//   }
 	// };
 
+	const handleNotificationClick = () => {
+		toast.info("Coming soon", {
+			containerId: "containerA",
+			position: 'top-right',
+		});
+	}
+
 	const handleLogout = () => {
 		disconnect()
 	}
@@ -123,7 +130,7 @@ const Header1 = () => {
 							alt='Logo'
 						/>
 					</a>
-					<div className='relative ml-0 md:ml-80'>
+					<div className='relative ml-0 md:ml-80 hidden md:block'>
 						<button
 							onClick={() => setIsExploreDropdownOpen(!isExploreDropdownOpen)}
 							className='flex items-center text-sm md:text-xl font-bold'
@@ -225,7 +232,7 @@ const Header1 = () => {
 													</span>
 													<Link
 														href={`/${username}`}
-														className='text-xs text-gray-500 hover:underline'
+														className='text-xs text-gray-500 hover:underline hidden md:block'
 													>
 														View profile
 													</Link>
@@ -309,9 +316,9 @@ const Header1 = () => {
 										</div>
 									)}
 								</div>
-								<button className='text-xl'>
+								<button className='text-xl' onClick={handleNotificationClick}>
 									<img
-										src={isScrolled ? '/notification.png' : '/bluenotification.png'}
+										src={isScrolled ? '/notification.png' : '/blacknotification.png'}
 										alt='Notification'
 										className='w-10 h-10'
 									/>
@@ -319,7 +326,7 @@ const Header1 = () => {
 								<Link href='/cart'>
 									<button className='text-xl'>
 										<img
-											src={isScrolled ? '/cart.png' : '/bluecart.png'}
+											src={isScrolled ? '/cart.png' : '/blackcart.png'}
 											alt='Cart'
 											className='w-10 h-10 mt-2'
 										/>
@@ -336,15 +343,15 @@ const Header1 = () => {
 						className='sm:hidden text-2xl'
 						onClick={() => setIsDropdownOpen(!isDropdownOpen)}
 					>
-						<img src='/menu.png' alt='Menu' className='w-6 h-6 ml-4' />
+						<img src='/menu.png' alt='Menu' className='w-6 h-6 mr-6' />
 					</button>
 				</div>
 				{isDropdownOpen && (
 					<div
 						ref={menuRef}
-						className='sm:hidden fixed top-0 left-0 w-full h-full bg-white bg-opacity-75 z-40'
+						className='sm:hidden fixed top-0 left-0 w-full h-full bg-white bg-opacity-90 z-40'
 					>
-						<div className='flex flex-col items-center justify-center h-full  bg-transparent text-black relative'>
+						<div className='flex flex-col items-center justify-center h-full  bg-transparent text-black relative text-xl'>
 							<button
 								onClick={() => setIsDropdownOpen(false)}
 								className='absolute top-4 right-4 text-xl text-gray-700'
@@ -353,34 +360,43 @@ const Header1 = () => {
 							</button>
 							<Link
 								href='https://discover.myriadflow.com'
-								style={{ color: getLinkColor('/') }}
 							>
 								Discover
 							</Link>
 							<Link
 								href='https://webxr.myriadflow.com'
-								style={{ color: getLinkColor('') }}
 							>
 								WebXR
 							</Link>
 							<Link href='https://studio.myriadflow.com'
-								style={{ color: getLinkColor('') }}
 							>
 								Studio
 							</Link>
 							<Link
 								href='https://myriadflow.com'
-								style={{ color: getLinkColor('') }}
 								target='_blank' // Open in a new tab
 								rel='noopener noreferrer' // Security best practice
 							>
 								Home
 								<img
-									src={isScrolled ? '/whitearrow.png' : '/arrow.png'}
+									src='/arrow.png'
 									alt='Arrow'
 									className='inline-block ml-2 -mt-1'
 									style={{ width: '12px', height: '12px' }}
 								/>
+							</Link>
+							<Link href='/collections' className='block px-4 py-2 text-xl hover:bg-gray-200'>
+								Collections
+							</Link>
+							<Link href='/brands' className='block px-4 py-2 text-xl hover:bg-gray-200'>
+								Brands
+							</Link>
+							<Link href='/users' className='block px-4 py-2 text-xl hover:bg-gray-200'>
+								Users
+							</Link>
+							<div style={{ borderBottom: '2px solid rgba(223, 31, 221, 1)', margin: '4px 0', width: '80%', marginLeft: '10%' }} />
+							<Link href='/elevate-africa' className='block px-4 py-2 text-xl hover:bg-gray-200'>
+								Elevate
 							</Link>
 						</div>
 					</div>

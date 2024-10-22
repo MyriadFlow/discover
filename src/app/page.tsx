@@ -390,7 +390,7 @@ export default function Home() {
 			</div>
 
 			<div
-				className='flex flex-wrap justify-center bg-white p-10 md:p-10'
+				className='flex flex-wrap justify-center bg-white p-0 md:p-10'
 				style={{
 					width: '100%',
 					height: 'auto',
@@ -398,44 +398,75 @@ export default function Home() {
 			>
 				<img
 					src='./image 14.png'
-					className='w-32 h-auto md:w-44 mt-32'
+					className='w-20 h-22 md:w-44 mt-32 hidden md:block'
 					style={{
 						zIndex: '2',
 						transform: 'rotate(-15deg)',
 					}}
 				/>
 				<img
-					src='./image 15.png'
-					className='w-32 h-auto md:w-44  mt-32'
-					style={{
-						zIndex: '3',
-					}}
-				/>
-				<img
 					src='./image 41.png'
-					className='w-32 h-auto md:w-44  mt-32'
+					className='w-20 h-22 md:w-44  mt-32 block md:hidden'
 					style={{
 						zIndex: '4',
 						transform: 'rotate(-15deg)',
 					}}
 				/>
 				<img
+					src='./image 15.png'
+					className='w-20 h-22 md:w-44  mt-32 md:hidden'
+					style={{
+						zIndex: '3',
+						transform: 'rotate(-15deg)',
+					}}
+				/>
+				<img
+					src='./image 15.png'
+					className='hidden md:block w-20 h-22 md:w-44  mt-32'
+					style={{
+						zIndex: '3',
+					}}
+				/>
+				<img
+					src='./image 41.png'
+					className='hidden md:block w-20 h-22 md:w-44  mt-32'
+					style={{
+						zIndex: '4',
+						transform: 'rotate(-15deg)',
+					}}
+				/>
+				<img
+					src='./image 19.png'
+					className='w-20 h-22 md:w-44  mt-32 md:hidden'
+					style={{
+						zIndex: '6',
+						transform: 'rotate(30deg)',
+					}}
+				/>
+				<img
 					src='./image 16.png'
-					className='w-32 h-auto md:w-44  mt-32 hidden md:block'
+					className='w-20 h-22 md:w-44  mt-32 md:hidden'
+					style={{
+						zIndex: '5',
+					}}
+				/>
+				<img
+					src='./image 16.png'
+					className='hidden md:block w-20 h-22 md:w-44  mt-32'
 					style={{
 						zIndex: '5',
 					}}
 				/>
 				<img
 					src='./image 19.png'
-					className='w-32 h-auto md:w-44  mt-32 hidden md:block'
+					className='hidden md:block w-20 h-22 md:w-44  mt-32'
 					style={{
 						zIndex: '6',
 					}}
 				/>
 				<img
 					src='./image 4.png'
-					className='w-32 h-auto md:w-44  mt-32 hidden md:block'
+					className='w-20 h-22 md:w-44  mt-32 hidden md:block'
 					style={{
 						zIndex: '7',
 						transform: 'rotate(15deg)',
@@ -443,7 +474,7 @@ export default function Home() {
 				/>
 			</div>
 
-			<div className='pt-40 bg-white px-10'>
+			<div className='pt-20 md:pt-40 bg-white px-10'>
 				<LatestNFTs hotnftdata={phygitals} />
 			</div>
 
@@ -454,7 +485,7 @@ export default function Home() {
 			<div className='pt-40 bg-white hidden md:block -mx-10'>
 				<LeaderBoard />
 			</div>
-			
+
 			<div className='pt-10 bg-white px-10 hidden md:block'>
 				<MostLoved collectionsdata={collections} />
 			</div>

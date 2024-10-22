@@ -42,7 +42,7 @@ const LatestNFTsElevate = ({ hotnftdata }) => {
             textAlign: 'center',
           }}
         >
-          <div className="flex items-center justify-center h-full" style={{ marginTop: '4px' }}>
+          <div className="flex items-center justify-center h-full">
             View All
           </div>
         </Link>
