@@ -432,13 +432,35 @@ function HomePage({ params }) {
                 )}
               </>
             )}
-            <h1 className="text-2xl" style={{ marginLeft: '10rem' }}>{basename}</h1>
-            {/* <Identity address={address} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
-              <Name>
-              </Name>
-            </Identity> */}
           </div>
-          <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {address}</h1>
+
+          <div className='flex items-center'>
+            <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600', display: 'flex', alignItems: 'center' }}>
+              Wallet Address: {address}
+              <button
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(address)
+                    .then(() => {
+                      alert('Address copied to clipboard!')
+                    })
+                    .catch((err) => {
+                      console.error('Failed to copy address:', err)
+                    })
+                }}
+                className='ml-2'
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
+                <img src='/copy.png' alt="Copy" style={{ height: '26px', width: '26px' }} />
+              </button>
+            </h1>
+            <div style={{ marginTop: '0.1rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600', marginLeft: '5rem' }}>
+              <Identity address={address} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
+                <Name>
+                </Name>
+              </Identity>
+            </div>
+          </div>
 
           <p className="text-gray-500 text-lg mt-6 w-3/5">{bio || "Short bio of the person here"}</p>
 
@@ -755,13 +777,35 @@ function HomePage({ params }) {
                 <button className="text-2xl mt-2 ml-2">Not Verified</button>
               </>
             )}
-            <h1 className="text-2xl" style={{ marginLeft: '10rem' }}>{guestbasename}</h1>
-            {/* <Identity address={walletAddress} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
-              <Name>
-              </Name>
-            </Identity> */}
           </div>
-          <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600' }}>Wallet Address : {walletAddress}</h1>
+
+          <div className='flex items-center'>
+            <h1 style={{ marginTop: '0.5rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600', display: 'flex', alignItems: 'center' }}>
+              Wallet Address: {walletAddress}
+              <button
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(walletAddress)
+                    .then(() => {
+                      alert('Address copied to clipboard!')
+                    })
+                    .catch((err) => {
+                      console.error('Failed to copy address:', err)
+                    })
+                }}
+                className='ml-2'
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
+                <img src='/copy.png' alt="Copy" style={{ height: '26px', width: '26px' }} />
+              </button>
+            </h1>
+            <div style={{ marginTop: '0.1rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600', marginLeft: '5rem' }}>
+              <Identity address={walletAddress} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
+                <Name>
+                </Name>
+              </Identity>
+            </div>
+          </div>
 
           <p className="text-gray-500 text-lg mt-6 w-3/5">{guestbio || "Short bio of the person here"}</p>
 
