@@ -1,5 +1,5 @@
 # Install dependencies only when needed
-FROM node:16-alpine AS deps
+FROM node:18-alpine AS deps
 
 # Install libc6-compat if needed
 RUN apk add --no-cache libc6-compat
@@ -16,7 +16,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
-FROM node:16-alpine AS builder
+FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Install pnpm globally
@@ -33,7 +33,7 @@ COPY . .
 RUN pnpm run build
 
 # Production image, copy all the files and run Next.js
-FROM node:16-alpine AS runner
+FROM node:18-alpine AS runner
 WORKDIR /app
 
 # Install pnpm globally
