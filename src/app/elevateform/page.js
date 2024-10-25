@@ -189,7 +189,7 @@ const ElevateForm = () => {
                 {isSubmitted && (
                     <div>
                         <p className="mb-4 mt-8">
-                            Thank you for your interest in the MyriadFlow Elevate Program! We look forward to reviewing your application. Please keep checking your provided email address, and the <Link href={`/${username}`} className="text-blue-500 underline">create page</Link> on your profile for further communication. Best of luck!
+                            Thank you for your interest in the MyriadFlow Elevate Program! We look forward to reviewing your application. Please keep checking your provided email address, and the <Link href={`/${username}#create`} className="text-blue-500 underline">create page</Link> on your profile for further communication. Best of luck!
                         </p>
                     </div>
                 )}

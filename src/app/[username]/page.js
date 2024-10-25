@@ -52,6 +52,14 @@ function HomePage({ params }) {
   };
 
   useEffect(() => {
+    // Check if the URL has a hash and set the active section
+    if (window.location.hash) {
+        const section = window.location.hash.substring(1);
+        setActiveSection(section);
+    }
+}, []);
+
+  useEffect(() => {
     const fetchNFTs = async () => {
       try {
         await Moralis.start({ apiKey: apikey });
