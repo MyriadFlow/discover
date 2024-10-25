@@ -1,24 +1,26 @@
 # Step 1: Use the official Node.js image as the base image
 FROM node:18-alpine
 
-# Step 2: Set the working directory inside the container
+# Step 2: Install pnpm globally
+RUN npm install -g pnpm
+
+# Step 3: Set the working directory inside the container
 WORKDIR /app
 
-# Step 3: Copy the package.json and package-lock.json files to the container
-COPY package.json package-lock.json ./
+# Step 4: Copy the package.json and pnpm-lock.yaml files to the container
+COPY package.json pnpm-lock.yaml ./
 
-# Step 4: Install the dependencies
-RUN npm install
+# Step 5: Install the dependencies using pnpm
+RUN pnpm install
 
-# Step 5: Copy the rest of the application code to the container
-# This includes all files and directories needed to build and run the Next.js app
+# Step 6: Copy the rest of the application code to the container
 COPY . .
 
-# Step 6: Build the Next.js application
-RUN npm run build
+# Step 7: Build the Next.js application
+RUN pnpm run build
 
-# Step 7: Expose the port the app runs on
+# Step 8: Expose the port the app runs on
 EXPOSE 3000
 
-# Step 8: Define the command to run the application
-CMD ["npm", "run", "start"]
+# Step 9: Define the command to run the application using pnpm
+CMD ["pnpm", "run", "start"]
