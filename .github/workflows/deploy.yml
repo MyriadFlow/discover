@@ -69,4 +69,4 @@ jobs:
             sudo docker stop discover && sudo docker rm discover && sudo docker rmi discover
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
             sudo docker pull ghcr.io/myriadflow/discover:prod
-            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:prod
+            sudo docker run --name="discover" -p 9082:9082 -d ghcr.io/myriadflow/discover:prod
