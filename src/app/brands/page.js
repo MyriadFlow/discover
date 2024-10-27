@@ -78,7 +78,7 @@ const Page = () => {
 
       <div className="flex text-2xl" style={{justifyContent: 'center', marginTop:'40px', paddingBottom:'200px', gap:'70px', flexWrap: 'wrap'}}>
       {brands?.map((brand, index) => (
-          <Link href={`/brand/${brand.id}`} key={index}>
+          <Link href={`/brand/${brand.name.replace(/\s+/g, '-')}`} key={index}>
           <div key={index} className="flex flex-col justify-center items-center">
             <img
               src={`${
