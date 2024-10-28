@@ -7,7 +7,7 @@ import Header1 from '../../../components/header1'
 import Footer from '../../../components/footer'
 
 const Brand = ({ params }) => {
-  const brandName = params?.id.replace(/-/g, ' ');
+  const brandName = params?.id.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 
   const [brand, setBrand] = useState([]);
   const [collections, setcollections] = useState([]);
