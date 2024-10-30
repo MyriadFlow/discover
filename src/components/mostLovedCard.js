@@ -146,7 +146,7 @@ try {
 
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
-    <Link href={`/collection/${nft.id}`}>
+    <Link href={`/collection/${nft.name.toLowerCase().replace(/\s+/g, '-')}`}>
         <div
         style={{
           width: "330px",

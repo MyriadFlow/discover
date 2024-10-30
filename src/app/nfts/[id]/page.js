@@ -13,7 +13,7 @@ import Header1 from "@/components/header1";
 import axios from 'axios';
 import Footer from "@/components/footer";
 const NFTPage = ({ params }) => {
-  const id = params?.id;
+  const id = params?.id.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 
   const [isHovered, setIsHovered] = useState(false);
   const [showPopover, setShowPopover] = useState(false);
@@ -55,34 +55,48 @@ const NFTPage = ({ params }) => {
 
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
-    const phyres = await fetch(`${baseUri}/phygitals/${id}`, {
+    const nfts = await fetch(`${baseUri}/phygitals/all/554b4903-9a06-4031-98f4-48276c427f78`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     });
 
-    const phyresult = await phyres.json()
-    setonePhygital(phyresult);
+    const phynfts = await nfts.json();
 
-    const avatar = await fetch(`${baseUri}/avatars/all/554b4903-9a06-4031-98f4-48276c427f78`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+    const matchedNft = phynfts.find(nft => nft.name === id);
+    if (matchedNft) {
+      const NftId = matchedNft.id;
+
+      const phyres = await fetch(`${baseUri}/phygitals/${NftId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const phyresult = await phyres.json()
+      setonePhygital(phyresult);
+
+      const avatar = await fetch(`${baseUri}/avatars/all/554b4903-9a06-4031-98f4-48276c427f78`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const avatardata = await avatar.json();
+
+      console.log("avatar", avatardata, phyresult);
+
+      const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === NftId);
+
+      // If found, update the state with the avatar URL
+      if (selectedAvatar) {
+        setAvatarUrl(selectedAvatar.url);
       }
-    });
-
-    const avatardata = await avatar.json();
-
-    console.log("avatar", avatardata, phyresult);
-
-    const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === id);
-
-    // If found, update the state with the avatar URL
-    if (selectedAvatar) {
-      setAvatarUrl(selectedAvatar.url);
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -279,7 +293,7 @@ const NFTPage = ({ params }) => {
         toast.error('Failed to add to cart. Please try again.');
         console.error('Error adding to cart:', error);
       }
-    }else{
+    } else {
       toast.warning('Connect your wallet');
     }
   };

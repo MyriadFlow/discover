@@ -6,7 +6,7 @@ import Header1 from '../../../components/header1';
 import Footer from '../../../components/footer';
 
 const Collection = ({ params }) => {
-  const id = params?.id;
+  const id = params?.id.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 
   const [phygitals, setPhygitals] = useState([]);
   const [collections, setCollections] = useState([]);
@@ -53,28 +53,28 @@ const Collection = ({ params }) => {
         const brandData = await brands.json();
 
         // Find the corresponding brand in result
-        const matchedBrand = result.find(coll => coll.id === id);
+        const matchedBrand = result.find(coll => coll.name === id);
         if (matchedBrand) {
           setCollections(matchedBrand);
+          const CollectionId = matchedBrand.id;
+
+          // Filter collections by the brand id
+          const matchedCollections = phygitals.filter(phygital => phygital.collection_id === CollectionId);
+
+          setPhygitals(matchedCollections);
+
+          const matchedBrandLogo = brandData.find(brand => brand.id === matchedBrand.brand_id);
+          if (matchedBrandLogo) {
+            setLogos(matchedBrandLogo.logo_image);
+            setDesc(matchedBrandLogo.description);
+            setBrandId(matchedBrandLogo.id);
+            setName(matchedBrandLogo.name);
+          }
+
+          setLoading(false);
+
+          console.log("brand", matchedBrand, matchedCollections, matchedBrandLogo);
         }
-
-        // Filter collections by the brand id
-        const matchedCollections = phygitals.filter(phygital => phygital.collection_id === id);
-
-        setPhygitals(matchedCollections);
-
-        const matchedBrandLogo = brandData.find(brand => brand.id === matchedBrand.brand_id);
-        if (matchedBrandLogo) {
-          setLogos(matchedBrandLogo.logo_image);
-          setDesc(matchedBrandLogo.description);
-          setBrandId(matchedBrandLogo.id);
-          setName(matchedBrandLogo.name);
-        }
-
-        setLoading(false);
-
-        console.log("brand", matchedBrand, matchedCollections, matchedBrandLogo);
-
       } catch (error) {
         console.error('Error fetching data:', error);
         setLoading(false);
@@ -161,7 +161,7 @@ const Collection = ({ params }) => {
                   zIndex: 20,
                   width: '300px',
                   color: 'white'
-              }}
+                }}
               >
                 <div className="text-sm">{desc}</div>
                 <Link href={`/brand/${brandid}`} className="block mt-4 text-sm border border-white rounded-full py-1 px-4">
