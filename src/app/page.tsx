@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import MostLoved from '../components/mostLoved'
 import MostRecently from '../components/mostRecently'
-import LeaderBoard from '../components/leaderboard'
+import LeaderBoard from "@/components/leaderboard"
 import HotNFTs from '../components/hotNFTs'
 import LatestNFTs from '../components/latestNFTs'
 import Brand from '../components/brand'
