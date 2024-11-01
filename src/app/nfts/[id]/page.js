@@ -301,7 +301,7 @@ const NFTPage = ({ params }) => {
 
 
   return (
-    <>{ownerAddress && walletAddress ? (
+    <>{ownerAddress === walletAddress ? (
       <div>
         <Head>
           <title>Discover | MyriadFlow</title>
@@ -376,24 +376,22 @@ const NFTPage = ({ params }) => {
 
                 <div className="mt-4 lg:mt-0 flex flex-col lg:flex-row gap-4">
                   <button
-                    className="w-full lg:w-1/2 bg-cyan-400 py-2 text-center hidden md:block"
+                    className="w-full lg:w-1/3 bg-cyan-400 py-2 text-center hidden md:block"
                   >
                     PUT TO MARKET
                   </button>
                   <button
-                    className="w-full lg:w-1/2 border-2 border-black py-2 text-center hidden md:block"
+                    className="w-full lg:w-1/3 border-2 border-black py-2 text-center hidden md:block"
                     onClick={handleShare}
                   >
                     SHARE
                   </button>
                   <Link href={`https://webxr.myriadflow.com/${onephygital?.id}`}
-                    target="_blank">
-                    <button
-                      className="w-full lg:w-1/2 flex items-center justify-center border-2 border-[rgba(223, 31, 221, 1)] py-2"
-                    >
-                      CERTIFICATE
-                      <img src="/certificate.png" className="h-8 w-8 ml-4" />
-                    </button>
+                    target="_blank"
+                    className="w-full lg:w-1/2 flex items-center justify-center border-2 border-[rgba(223, 31, 221, 1)] py-2"
+                  >
+                    CERTIFICATE
+                    <img src="/certificate.png" className="h-8 w-8 ml-4" />
                   </Link>
 
                 </div>
