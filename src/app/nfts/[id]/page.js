@@ -12,6 +12,7 @@ import Moralis from 'moralis';
 import Header1 from "@/components/header1";
 import axios from 'axios';
 import Footer from "@/components/footer";
+import { ProvenanceAttestation } from '@/components/provenance-attestation'
 const NFTPage = ({ params }) => {
   const id = params?.id.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 
@@ -19,12 +20,19 @@ const NFTPage = ({ params }) => {
   const [showPopover, setShowPopover] = useState(false);
   const [priceUSD, setPriceUSD] = useState("");
   const [avatarUrl, setAvatarUrl] = useState('');
+  const [avatar, setAvatar] = useState('');
   const [logos, setLogos] = useState("");
   const [brandDesc, setbrandDesc] = useState("");
   const [brandid, setbrandid] = useState("");
   const [loading, setLoading] = useState(false);
   const [sold, setsold] = useState(0);
   const [ownerAddress, setOwnerAddress] = useState("");
+
+  const [showProvenance, setShowProvenance] = useState(false);
+
+  const togglePopup = () => {
+    setShowProvenance(!showProvenance);
+  };
 
   const chainId = useChainId();
   const account = useAccount();
@@ -93,6 +101,7 @@ const NFTPage = ({ params }) => {
 
       // If found, update the state with the avatar URL
       if (selectedAvatar) {
+        setAvatar(selectedAvatar)
         setAvatarUrl(selectedAvatar.url);
       }
       setLoading(false);
@@ -326,6 +335,18 @@ const NFTPage = ({ params }) => {
               className="w-full h-auto max-w-[70vh] max-h-[70vh] object-cover"
             />
           </div>
+          {showProvenance && (
+            <div className='fixed inset-0 bg-white bg-opacity-10 backdrop-blur-sm z-50 flex items-center justify-center'
+              style={{
+                boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                WebkitBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                MozBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+              }}>
+              <div className='z-10 md:w-[60%] top-1/2 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2 h-[85%] overflow-y-scroll'>
+                <ProvenanceAttestation phygital={onephygital} avatarModel={avatar && avatarUrl} showAttestation={() => setShowProvenance(false)}/>
+              </div>
+            </div>
+          )}
           <div className="w-full lg:w-2/3 border border-gray-300 p-4 lg:p-12 h-auto lg:h-[70vh]">
             <div className="text-2xl lg:text-4xl font-bold">{onephygital?.name}</div>
             <div className="text-lg mt-4 lg:mt-10 font-bold">Base Network</div>
@@ -386,14 +407,13 @@ const NFTPage = ({ params }) => {
                   >
                     SHARE
                   </button>
-                  <Link href={`https://webxr.myriadflow.com/${onephygital?.id}`}
-                    target="_blank"
+                  <button
                     className="w-full lg:w-1/2 flex items-center justify-center border-2 border-[rgba(223, 31, 221, 1)] py-2"
+                    onClick={togglePopup}
                   >
                     CERTIFICATE
                     <img src="/certificate.png" className="h-8 w-8 ml-4" />
-                  </Link>
-
+                  </button>
                 </div>
               </>
             ) : (
