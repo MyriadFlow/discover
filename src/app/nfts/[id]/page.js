@@ -26,7 +26,9 @@ const NFTPage = ({ params }) => {
   const [brandid, setbrandid] = useState("");
   const [loading, setLoading] = useState(false);
   const [sold, setsold] = useState(0);
-  const [ownerAddress, setOwnerAddress] = useState("");
+  const [owner, setOwner] = useState(false);
+  const [mintedNFTs, setMintedNFTs] = useState([]);
+
 
   const [showProvenance, setShowProvenance] = useState(false);
 
@@ -37,6 +39,8 @@ const NFTPage = ({ params }) => {
   const chainId = useChainId();
   const account = useAccount();
   const walletAddress = account.address;
+  const apikey = process.env.NEXT_PUBLIC_MORALIS_API_KEY;
+  const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
   const [activeTab, setActiveTab] = useState('Color'); // Default tab
 
@@ -85,7 +89,7 @@ const NFTPage = ({ params }) => {
       });
 
       const phyresult = await phyres.json()
-      setOwnerAddress(phyresult.deployer_address)
+      // setOwner(phyresult.deployer_address)
       setonePhygital(phyresult);
 
       const avatar = await fetch(`${baseUri}/avatars/all/554b4903-9a06-4031-98f4-48276c427f78`, {
@@ -307,10 +311,77 @@ const NFTPage = ({ params }) => {
     }
   };
 
+  useEffect(() => {
+    const fetchNFTs = async () => {
+      try {
+        await Moralis.start({ apiKey: apikey });
 
+        const assets = await Moralis.EvmApi.nft.getWalletNFTs({
+          chain: chainId,
+          format: 'decimal',
+          mediaItems: false,
+          address: walletAddress
+        });
+
+        setMintedNFTs(assets.raw.result);
+        console.log("NFTs:", assets.raw.result);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+
+    if (walletAddress && chainId) {
+      fetchNFTs();
+    }
+  }, [walletAddress, chainId, apikey]);
+
+  useEffect(() => {
+    const fetchPhygitals = async () => {
+      try {
+        const phyres = await fetch(`${baseUri}/phygitals/all/554b4903-9a06-4031-98f4-48276c427f78`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (!phyres.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const phyresult = await phyres.json();
+        console.log("Phygitals:", phyresult);
+
+        const matched = await Promise.all(phyresult.map(async (phygital) => {
+          const amountBought = await mintedNFTs.reduce(async (countPromise, nft) => {
+            const count = await countPromise;
+            return count + (nft?.token_address === phygital.contract_address ? 1 : 0);
+          }, Promise.resolve(0));
+          return {
+            ...phygital,
+            amount_bought: amountBought
+          };
+        }));
+
+        const filteredMatched = matched.filter(phygital => phygital.amount_bought > 0);
+        const nftMatched = filteredMatched.filter(nft => nft.id === onephygital.id);
+        if(nftMatched.length > 0){
+          setOwner(true);
+        }
+        console.log("Matched NFTs:", filteredMatched);
+        console.log("Matched NFTs 2:", nftMatched);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    if (mintedNFTs.length > 0) {
+      fetchPhygitals();
+    }
+  }, [mintedNFTs, baseUri , onephygital.id]);
 
   return (
-    <>{ownerAddress === walletAddress ? (
+    <>{owner ? (
       <div>
         <Head>
           <title>Discover | MyriadFlow</title>
@@ -343,7 +414,7 @@ const NFTPage = ({ params }) => {
                 MozBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
               }}>
               <div className='z-10 md:w-[60%] top-1/2 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2 h-[85%] overflow-y-scroll'>
-                <ProvenanceAttestation phygital={onephygital} avatarModel={avatar && avatarUrl} showAttestation={() => setShowProvenance(false)}/>
+                <ProvenanceAttestation phygital={onephygital} avatarModel={avatar && avatarUrl} showAttestation={() => setShowProvenance(false)} />
               </div>
             </div>
           )}
