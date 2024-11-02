@@ -214,7 +214,7 @@ const HotNftCardElevate = ({ nft }) => {
 
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
-      <Link href={`/nfts/${nft.id}`}>
+      <Link href={`/nfts/${nft.name.toLowerCase().replace(/\s+/g, '-')}`}>
         <div
           style={{
             width: "330px",
