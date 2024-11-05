@@ -365,7 +365,7 @@ const NFTPage = ({ params }) => {
 
         const filteredMatched = matched.filter(phygital => phygital.amount_bought > 0);
         const nftMatched = filteredMatched.filter(nft => nft.id === onephygital.id);
-        if(nftMatched.length > 0){
+        if (nftMatched.length > 0) {
           setOwner(true);
         }
         console.log("Matched NFTs:", filteredMatched);
@@ -378,7 +378,7 @@ const NFTPage = ({ params }) => {
     if (mintedNFTs.length > 0) {
       fetchPhygitals();
     }
-  }, [mintedNFTs, baseUri , onephygital.id]);
+  }, [mintedNFTs, baseUri, onephygital.id]);
 
   return (
     <>{owner ? (
@@ -413,7 +413,7 @@ const NFTPage = ({ params }) => {
                 WebkitBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
                 MozBoxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
               }}>
-              <div className='z-10 md:w-[60%] top-1/2 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2 h-[85%] overflow-y-scroll'>
+              <div className='z-10 md:w-[60%] w-[100%] top-1/2 left-1/2 absolute transform -translate-x-1/2 -translate-y-1/2 h-[85%] overflow-y-scroll'>
                 <ProvenanceAttestation phygital={onephygital} avatarModel={avatar && avatarUrl} showAttestation={() => setShowProvenance(false)} />
               </div>
             </div>
