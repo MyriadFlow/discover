@@ -132,7 +132,7 @@ const ProfileNftCard = ({ nft }) => {
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
       {/* Main Link for NFT */}
-      <Link href={`/nfts/${nft.id}`}>
+      <Link href={`/nfts/${nft.name.toLowerCase().replace(/\s+/g, '-')}`}>
         <div
           style={{
             width: "330px",

@@ -6,6 +6,7 @@ import { useAccount } from 'wagmi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
+import { v4 as uuidv4 } from 'uuid';
 
 function ProfileSettingsPage() {
     const { address } = useAccount();
@@ -19,6 +20,9 @@ function ProfileSettingsPage() {
     const [coverImage, setCoverImage] = useState('');
     const [profileImage, setProfileImage] = useState('');
     const [email, setEmail] = useState('');
+    const [profileid, setId] = useState('');
+    const [selectedSocialLink, setSelectedSocialLink] = useState('');
+    const [link, setLink] = useState('');
 
     const [isEditing, setIsEditing] = useState(false);
     const [isCoverHovered, setIsCoverHovered] = useState(false);
@@ -33,20 +37,57 @@ function ProfileSettingsPage() {
     const [currentSection, setCurrentSection] = useState('profile');
     const [validationError, setValidationError] = useState('');
 
+    const [addresses, setAddresses] = useState([{ id: '', full_name: '', street_address: '', street_address_2: '', city: '', pincode: '', country: '' }]);
+    const countries = ['USA', 'Canada', 'UK', 'Australia'];
+
+    const handleAddAddress = () => {
+        // Use functional update to ensure the latest state is used
+        setAddresses(prevAddresses => [
+            ...prevAddresses,
+            { id: uuidv4(), full_name: '', street_address: '', street_address_2: '', city: '', pincode: '', country: '' }
+        ]);
+    };
+
+    const handleAddressChange = (index, field, value) => {
+        // Use functional update to ensure the latest state is used
+        setAddresses(prevAddresses => {
+            const newAddresses = [...prevAddresses];
+            newAddresses[index][field] = value;
+            return newAddresses; // Return the updated addresses
+        });
+    };
+
     const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
 
-    const deleteAccount = async () => {
-        // if (!window.confirm('Are you sure you want to delete your account?')) {
-        //   return;
-        // }
+    const deleteAddress = async (id) => {
+        try {
+            const response = await fetch(`${baseUri}/profiles/addresses/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
+            if (response.ok) {
+                toast.success('Address deleted successfully!');
+                window.location.reload();
+            } else {
+                const errorData = await response.json();
+                toast.error(`Failed to delete address: ${errorData.error}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('An error occurred while deleting the address.');
+        }
+    };
+
+    const deleteAccount = async () => {
         try {
             const response = await fetch(`${baseUri}/profiles/walletandemail/${address}/${email}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                // body: JSON.stringify({ walletAddress, email }),
             });
 
             if (response.ok) {
@@ -63,7 +104,6 @@ function ProfileSettingsPage() {
     };
 
     const handleDelete = () => {
-
         setShowForm(true)
     };
 
@@ -91,7 +131,9 @@ function ProfileSettingsPage() {
             x: x,
             instagram: instagram,
             cover_image: coverImage,
-            profile_image: profileImage
+            profile_image: profileImage,
+            selected_social_link: selectedSocialLink,
+            link: link
         };
 
         try {
@@ -102,6 +144,41 @@ function ProfileSettingsPage() {
                 },
                 body: JSON.stringify(profileData)
             });
+
+            await Promise.all(addresses.map(async (addressesall, index) => {
+                if (addressesall.id && addressesall.id === addressesall.id) {
+                    try {
+                        const addressData = await fetch(`${baseUri}/profiles/addresses/${profileid}`, {
+                            method: "PUT",
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(addresses)
+                        });
+
+                        if (addressData.ok) {
+                            console.log("Address Updated Successfully");
+                        }
+                    } catch (error) {
+                        console.error('Error fetching address data', error);
+                    }
+                } else {
+                    try {
+                        const responseAddress = await fetch(`${baseUri}/profiles/addresses/${profileid}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(addresses)
+                        });
+                        if (responseAddress.ok) {
+                            console.log("Address Added Successfully");
+                        }
+                    } catch (error) {
+                        console.error('Failed to save profile settings.');
+                    }
+                }
+            }));
 
             if (response.ok) {
                 console.log('Profile settings saved successfully!');
@@ -180,6 +257,7 @@ function ProfileSettingsPage() {
 
                     if (response.ok) {
                         const data = await response.json();
+                        setId(data.id);
                         setDisplayName(data.name);
                         setUserName(data.username);
                         setCoverImage(data.cover_image);
@@ -188,6 +266,8 @@ function ProfileSettingsPage() {
                         setWebsite(data.website);
                         setx(data.x);
                         setInstagram(data.instagram);
+                        setSelectedSocialLink(data.selected_social_link);
+                        setLink(data.link);
                         setEmail(data.email);
                     } else {
                         console.log('No user found');
@@ -199,6 +279,30 @@ function ProfileSettingsPage() {
         };
         getUserData();
     }, [address]);
+
+    useEffect(() => {
+        if (profileid) {
+            const getAddressData = async () => {
+                try {
+                    const addressData = await fetch(`${baseUri}/profiles/addresses/${profileid}`, {
+                        method: "GET",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (addressData.ok) {
+                        const addressdata = await addressData.json();
+                        setAddresses(addressdata);
+                    }
+                } catch (error) {
+                    console.error('Error fetching address data', error);
+                }
+            };
+
+            getAddressData();
+        }
+    }, [profileid])
 
     return (
         <>
@@ -436,6 +540,159 @@ function ProfileSettingsPage() {
                                     }}
                                     style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '20px' }}
                                 />
+
+                                <select
+                                    className='border-0 bg-[#0000001A] rounded w-1/2 h-10 mt-8 mb-6'
+                                    style={{ display: 'block' }}
+                                    value={selectedSocialLink}
+                                    onChange={(e) => {
+                                        setSelectedSocialLink(e.target.value);
+                                        setIsEditing(true);
+                                    }}
+                                >
+                                    <option value=''>+ Choose</option>
+                                    <option value='telegram'>Telegram</option>
+                                    <option value='linkedin'>LinkedIn</option>
+                                    <option value='youtube'>YouTube</option>
+                                    <option value='whatsapp'>WhatsApp</option>
+                                    <option value='google'>Google</option>
+                                    <option value='tiktok'>TikTok</option>
+                                    <option value='snapchat'>Snapchat</option>
+                                    <option value='pinterest'>Pinterest</option>
+                                </select>
+                                <input
+                                    className='w-1/2'
+                                    type='text'
+                                    placeholder='https://'
+                                    value={link}
+                                    onChange={(e) => {
+                                        setLink(e.target.value);
+                                        setIsEditing(true);
+                                    }}
+                                    style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '20px' }}
+                                />
+
+
+                                <h1 className='text-4xl' style={{ marginTop: '60px', marginBottom: '80px' }}>My Delivery Addresses</h1>
+                                {addresses.length > 0 ? (
+                                    addresses.map((address, index) => (
+                                        <div key={index} style={{ marginBottom: '20px' }}>
+                                            <h2 className='text-2xl' style={{ marginBottom: '20px' }}>Address {index + 1}</h2>
+                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Full Name</label>
+                                            <input
+                                                className='w-1/2'
+                                                type='text'
+                                                value={address.full_name}
+                                                onChange={(e) => {
+                                                    handleAddressChange(index, 'full_name', e.target.value);
+                                                    setIsEditing(true);
+                                                }}
+                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+                                            />
+                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Street Address</label>
+                                            <input
+                                                className='w-1/2'
+                                                type='text'
+                                                value={address.street_address}
+                                                onChange={(e) => {
+                                                    handleAddressChange(index, 'street_address', e.target.value);
+                                                    setIsEditing(true);
+                                                }}
+                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+                                            />
+                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Street Address Line 2 (optional)</label>
+                                            <input
+                                                className='w-1/2'
+                                                type='text'
+                                                value={address.street_address_2}
+                                                onChange={(e) => {
+                                                    handleAddressChange(index, 'street_address_2', e.target.value);
+                                                    setIsEditing(true);
+                                                }}
+                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+                                            />
+                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>City</label>
+                                            <input
+                                                className='w-1/2'
+                                                type='text'
+                                                value={address.city}
+                                                onChange={(e) => {
+                                                    handleAddressChange(index, 'city', e.target.value);
+                                                    setIsEditing(true);
+                                                }}
+                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+                                            />
+                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Pincode / Zipcode</label>
+                                            <input
+                                                className='w-1/2'
+                                                type='text'
+                                                value={address.pincode}
+                                                onChange={(e) => {
+                                                    handleAddressChange(index, 'pincode', e.target.value);
+                                                    setIsEditing(true);
+                                                }}
+                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+                                            />
+                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Country</label>
+                                            <select
+                                                className='w-1/2'
+                                                value={address.country}
+                                                onChange={(e) => {
+                                                    handleAddressChange(index, 'country', e.target.value);
+                                                    setIsEditing(true);
+                                                }}
+                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
+                                            >
+                                                <option value=''>+ Choose</option>
+                                                {countries.map((country, i) => (
+                                                    <option key={i} value={country}>{country}</option>
+                                                ))}
+                                            </select>
+                                            <button className='p-4' style={{
+                                                backgroundColor: '#7D4AB5',
+                                                color: '#ffffff',
+                                                padding: '10px 20px',
+                                                borderRadius: '8px',
+                                                cursor: 'pointer',
+                                                marginTop: '20px'
+                                            }} onClick={() => deleteAddress(address.id)}>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className='text-xl'>No addresses available. Please add a delivery address.</p>
+                                )}
+                                {addresses.length > 0 ? (
+                                    <button
+                                        onClick={handleAddAddress}
+                                        style={{
+                                            backgroundColor: '#7D4AB5',
+                                            color: '#ffffff',
+                                            padding: '10px 20px',
+                                            borderRadius: '8px',
+                                            cursor: 'pointer',
+                                            marginTop: '20px'
+                                        }}
+                                    >
+                                        Add another delivery address
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleAddAddress}
+                                        style={{
+                                            backgroundColor: '#7D4AB5',
+                                            color: '#ffffff',
+                                            padding: '10px 20px',
+                                            borderRadius: '8px',
+                                            cursor: 'pointer',
+                                            marginTop: '20px'
+                                        }}
+                                    >
+                                        Add delivery address
+                                    </button>
+                                )}
+
                             </div>
 
                             {
