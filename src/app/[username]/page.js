@@ -43,6 +43,12 @@ function HomePage({ params }) {
   const [showCreatorOptions, setShowCreatorOptions] = useState(false);
   const [hoveredOption, setHoveredOption] = useState(null);
   const [status, setStatus] = useState('');
+  const [discord, setDiscord] = useState('');
+  const [selectedSocialLink, setSelectedSocialLink] = useState('');
+  const [link, setLink] = useState('');
+  const [guestdiscord, setGuestDiscord] = useState('');
+  const [guestselectedSocialLink, setGuestSelectedSocialLink] = useState('');
+  const [guestlink, setGuestLink] = useState('');
 
   const apikey = process.env.NEXT_PUBLIC_MORALIS_API_KEY;
   const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com';
@@ -106,6 +112,9 @@ function HomePage({ params }) {
             setGuestX(data.x);
             setGuestInstagram(data.instagram);
             setGuestWalletAddress(data.wallet_address);
+            setGuestDiscord(data.discord);
+            setGuestSelectedSocialLink(data.selected_social_link);
+            setGuestLink(data.link);
           } else {
             console.log('No user found');
           }
@@ -139,6 +148,9 @@ function HomePage({ params }) {
             setX(data.x);
             setInstagram(data.instagram);
             setBaseName(data.basename);
+            setDiscord(data.discord);
+            setSelectedSocialLink(data.selected_social_link);
+            setLink(data.link);
           } else {
             console.log('No user found');
           }
@@ -519,6 +531,51 @@ function HomePage({ params }) {
                   <img src='/insta.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
                 </a>
               )}
+              {discord && (
+                <a href={discord} target="_blank" rel="noopener noreferrer">
+                  <img src='/discord.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+                </a>
+              )}
+              {selectedSocialLink === "youtube" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/youtube.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {selectedSocialLink === "telegram" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/telegram.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {selectedSocialLink === "linkedin" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/linkedin.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {selectedSocialLink === "whatsapp" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/whatsapp.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {selectedSocialLink === "google" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/google.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {selectedSocialLink === "tiktok" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/tiktok.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {selectedSocialLink === "snapchat" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/snapchat.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {selectedSocialLink === "pinterest" && link && (
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                <img src='/pinterest.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
             </div>
 
             <div style={{ marginTop: '2.5rem', padding: '1.5rem', backgroundColor: '#FFFFFF', borderRadius: '0.5rem', boxShadow: '0 10px 10px rgba(0, 0, 0, 0.1)' }}>
@@ -862,6 +919,51 @@ function HomePage({ params }) {
                 <a href={guestinstagram} target="_blank" rel="noopener noreferrer">
                   <img src='/insta.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
                 </a>
+              )}
+              {guestdiscord && (
+                <a href={guestdiscord} target="_blank" rel="noopener noreferrer">
+                  <img src='/discord.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+                </a>
+              )}
+              {guestselectedSocialLink === "youtube" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/youtube.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {guestselectedSocialLink === "telegram" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/telegram.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {guestselectedSocialLink === "linkedin" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/linkedin.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {guestselectedSocialLink === "whatsapp" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/whatsapp.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {guestselectedSocialLink === "google" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/google.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {guestselectedSocialLink === "tiktok" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/tiktok.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {guestselectedSocialLink === "snapchat" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/snapchat.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
+              )}
+              {guestselectedSocialLink === "pinterest" && guestlink && (
+                <a href={guestlink} target="_blank" rel="noopener noreferrer">
+                <img src='/pinterest.png' style={{ height: '30px', width: '30px', marginLeft: '10px' }} alt="Instagram" />
+              </a>
               )}
             </div>
 
