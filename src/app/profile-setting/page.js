@@ -17,6 +17,8 @@ function ProfileSettingsPage() {
     const [website, setWebsite] = useState('');
     const [x, setx] = useState('');
     const [instagram, setInstagram] = useState('');
+    const [discord, setDiscord] = useState('');
+    const [allusernames,setAllUsernames] = useState([]);
     const [coverImage, setCoverImage] = useState('');
     const [profileImage, setProfileImage] = useState('');
     const [email, setEmail] = useState('');
@@ -118,6 +120,12 @@ function ProfileSettingsPage() {
         } else if (userName.includes(' ')) {
             setValidationError('Username cannot contain spaces.');
             return;
+        } else if (allusernames.some(profile => profile.username === userName)) {
+            setValidationError('This username is already taken.');
+            return;
+        } else if (!/^[a-z]+$/.test(userName)) {
+            setValidationError('Username can only contain letters (no special characters).');
+            return;
         } else {
             setValidationError('');
         }
@@ -130,6 +138,7 @@ function ProfileSettingsPage() {
             website: website,
             x: x,
             instagram: instagram,
+            discord: discord,
             cover_image: coverImage,
             profile_image: profileImage,
             selected_social_link: selectedSocialLink,
@@ -266,6 +275,7 @@ function ProfileSettingsPage() {
                         setWebsite(data.website);
                         setx(data.x);
                         setInstagram(data.instagram);
+                        setDiscord(data.discord);
                         setSelectedSocialLink(data.selected_social_link);
                         setLink(data.link);
                         setEmail(data.email);
@@ -303,6 +313,30 @@ function ProfileSettingsPage() {
             getAddressData();
         }
     }, [profileid])
+
+    useEffect(() => {
+        if (address) {
+            const getAllProfile = async () => {
+                try {
+                    const usernameData = await fetch(`${baseUri}/profiles/all`, {
+                        method: "GET",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (usernameData.ok) {
+                        const usernamedata = await usernameData.json();
+                        setAllUsernames(usernamedata);
+                    }
+                } catch (error) {
+                    console.error('Error fetching address data', error);
+                }
+            };
+
+            getAllProfile();
+        }
+    }, [address])
 
     return (
         <>
@@ -541,6 +575,18 @@ function ProfileSettingsPage() {
                                     style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '20px' }}
                                 />
 
+                                <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Discord</label>
+                                <input
+                                    className='w-1/2'
+                                    type='text'
+                                    value={discord}
+                                    onChange={(e) => {
+                                        setDiscord(e.target.value);
+                                        setIsEditing(true);
+                                    }}
+                                    style={{ padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB', width: '50%', marginBottom: '20px' }}
+                                />
+
                                 <select
                                     className='border-0 bg-[#0000001A] rounded w-1/2 h-10 mt-8 mb-6'
                                     style={{ display: 'block' }}
@@ -634,20 +680,16 @@ function ProfileSettingsPage() {
                                                 style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
                                             />
                                             <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Country</label>
-                                            <select
+                                            <input
                                                 className='w-1/2'
+                                                type='text'
                                                 value={address.country}
                                                 onChange={(e) => {
                                                     handleAddressChange(index, 'country', e.target.value);
                                                     setIsEditing(true);
                                                 }}
                                                 style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
-                                            >
-                                                <option value=''>+ Choose</option>
-                                                {countries.map((country, i) => (
-                                                    <option key={i} value={country}>{country}</option>
-                                                ))}
-                                            </select>
+                                            />
                                             <button className='p-4' style={{
                                                 backgroundColor: '#7D4AB5',
                                                 color: '#ffffff',

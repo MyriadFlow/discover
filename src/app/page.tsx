@@ -38,6 +38,7 @@ export default function Home() {
 	const [email, setEmail] = useState('')
 	const [tosChecked, setTosChecked] = useState(false)
 	const [newsletterChecked, setNewsletterChecked] = useState(false)
+    const [allusernames,setAllUsernames] = useState([]);
 
 	const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com'
 
@@ -76,6 +77,35 @@ export default function Home() {
 		checkEmailExists()
 	}, [address])
 
+	useEffect(() => {
+        if (address) {
+            const getAllProfile = async () => {
+                try {
+                    const usernameData = await fetch(`${baseUri}/profiles/all`, {
+                        method: "GET",
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                    });
+
+                    if (usernameData.ok) {
+                        const usernamedata = await usernameData.json();
+                        setAllUsernames(usernamedata);
+                    }
+                } catch (error) {
+                    console.error('Error fetching address data', error);
+                }
+            };
+
+            getAllProfile();
+        }
+    }, [address])
+
+	interface Profile {
+		username: string;
+	}
+	const allusername: Profile[] = allusernames;
+
 	const handleSubmit = async () => {
 		if (userName.length < 4) {
 			setValidationError('Username must be at least 4 characters long.')
@@ -86,7 +116,13 @@ export default function Home() {
 		} else if (userName.includes(' ')) {
 			setValidationError('Username cannot contain spaces.')
 			return
-		} else {
+		} else if (allusername.some(profile => profile.username === userName)) {
+            setValidationError('This username is already taken.');
+            return;
+        } else if (!/^[a-z]+$/.test(userName)) {
+            setValidationError('Username can only contain letters (no special characters).');
+            return;
+        } else {
 			setValidationError('')
 		}
 
