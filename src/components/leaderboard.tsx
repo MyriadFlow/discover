@@ -6,12 +6,13 @@ import { getAvatars, getFanTokens, getPhygitals } from '@/utils/queries'
 import { AvatarType, FanTokenType } from '@/types/types'
 import Image from 'next/image'
 import { getFanMainTokens } from '../utils/queries'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const baseUri = process.env.NEXT_PUBLIC_URI || 'https://app.myriadflow.com'
 
 const Leaderboard = () => {
 	const [count, setCount] = useState<number[]>([])
+	const [phygitalNames, setPhygitalNames] = useState([]);
 
 	const results = useQueries({
 		queries: [
@@ -76,6 +77,20 @@ const Leaderboard = () => {
 	// })
 
 	const topAvatars = fanTokenMainResults.data
+
+	useEffect(() => {
+		const fetchPhygitalNames = async () => {
+		  if (topAvatars) {
+			const allPhygitals = await getPhygitals();
+			const names = topAvatars.map((avatar: { phygital_id: any }, index: any) => {
+			  const phygital = allPhygitals.find((p: any) => p.id === avatar.phygital_id);
+			  return phygital?.name?.toLowerCase().replace(/\s+/g, '-');
+			});
+			setPhygitalNames(names);
+		  }
+		};
+		fetchPhygitalNames();
+	  }, [topAvatars]);
 
 	return (
 		<div className='p-4 sm:p-6 lg:p-10'>
@@ -155,7 +170,7 @@ const Leaderboard = () => {
 									</div>
 
 									<Link
-										href={`https://webxr.myriadflow.com/${topAvatars?.[1].phygital_id}`}
+										href={`https://webxr.myriadflow.com/${phygitalNames[1]}`}
 									>
 										<div className='bg-gradient-to-b from-[#999999] to-[#DD21DD]  text-center text-2xl px-4 py-2 rounded-full border border-black bg-white cursor-pointer hover:bg-gray-200'>
 											WEBXR
@@ -194,7 +209,7 @@ const Leaderboard = () => {
 										</p>
 									</div>
 									<Link
-										href={`https://webxr.myriadflow.com/${topAvatars?.[0].phygital_id}`}
+										href={`https://webxr.myriadflow.com/${phygitalNames[0]}`}
 									>
 										<div className='bg-gradient-to-b from-[#999999] to-[#DD21DD]  text-center text-2xl px-4 py-2 rounded-full border border-black bg-white cursor-pointer hover:bg-gray-200'>
 											WEBXR
@@ -232,7 +247,7 @@ const Leaderboard = () => {
 									</div>
 
 									<Link
-										href={`https://webxr.myriadflow.com/${topAvatars?.[2].phygital_id}`}
+										href={`https://webxr.myriadflow.com/${phygitalNames[2]}`}
 									>
 										<div className='bg-gradient-to-b from-[#999999] to-[#DD21DD] text-center text-2xl px-4 py-2 rounded-full border border-black bg-white cursor-pointer hover:bg-gray-200'>
 											WEBXR

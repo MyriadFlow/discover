@@ -13,6 +13,7 @@ const HotNftCard = ({ nft }) => {
   const [logo, setLogos] = useState("");
   const [desc, setdesc] = useState("");
   const [brandid, setbrandid] = useState("");
+  const [name, setbrandName] = useState("");
   const [priceUSD, setPriceUSD] = useState("");
   const [loading, setLoading] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -59,6 +60,7 @@ const HotNftCard = ({ nft }) => {
             setLogos(matchedBrand.logo_image);
             setdesc(matchedBrand.description);
             setbrandid(matchedBrand.id);
+            setbrandName(matchedBrand.name);
           }
         }
 
@@ -159,7 +161,7 @@ const HotNftCard = ({ nft }) => {
 
     const avatardata = await avatar.json();
 
-    console.log("avatar", avatardata, phyresult);
+    // console.log("avatar", avatardata, phyresult);
 
     const selectedAvatar = avatardata.find(avatar => avatar.phygital_id === nft.id);
 
@@ -357,11 +359,11 @@ const HotNftCard = ({ nft }) => {
           </div>
           <div className="mt-4" style={{ fontSize: '13px', marginBottom: '20px' }}>{desc}</div>
 
-          <Link href={`/brand/${brandid}`} style={{ fontSize: '15px', border: '1px solid white', borderRadius: '30px', padding: '4px' }}>View brand page</Link>
+          <Link href={`/brand/${name.toLowerCase().replace(/\s+/g, '-')}`} style={{ fontSize: '15px', border: '1px solid white', borderRadius: '30px', padding: '4px' }}>View brand page</Link>
         </div>
       )}
 
-      <Link href={`https://webxr.myriadflow.com/${nft?.id}`} target="_blank"
+      <Link href={`https://webxr.myriadflow.com/${nft?.name.toLowerCase().replace(/\s+/g, '-')}`} target="_blank"
         style={{
           position: "absolute",
           top: "10px",

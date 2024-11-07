@@ -12,6 +12,7 @@ const ProfileNftCard = ({ nft }) => {
   const [logo, setLogos] = useState("");
   const [desc, setdesc] = useState("");
   const [brandid, setbrandid] = useState("");
+  const [name, setbrandName] = useState("");
   const [priceUSD, setPriceUSD] = useState("");
   const [loading, setLoading] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -56,6 +57,7 @@ const ProfileNftCard = ({ nft }) => {
             setLogos(matchedBrand.logo_image);
             setdesc(matchedBrand.description);
             setbrandid(matchedBrand.id);
+            setbrandName(matchedBrand.name);
           }
         }
 
@@ -261,12 +263,12 @@ const ProfileNftCard = ({ nft }) => {
             {/* <div className="font-bold mt-6">{onephygital?.brand_name}</div> */}
           </div>
           <div className="mt-4" style={{ fontSize: '13px', marginBottom: '20px' }}>{desc}</div>
-          <Link href={`/brand/${brandid}`} style={{ fontSize: '15px', border: '1px solid white', borderRadius: '30px', padding: '4px' }}>View brand page</Link>
+          <Link href={`/brand/${name.toLowerCase().replace(/\s+/g, '-')}`} style={{ fontSize: '15px', border: '1px solid white', borderRadius: '30px', padding: '4px' }}>View brand page</Link>
         </div>
       )}
 
       {/* Web XR Link */}
-      <Link href={`https://webxr.myriadflow.com/${nft?.id}`} target="_blank"
+      <Link href={`https://webxr.myriadflow.com/${nft?.name.toLowerCase().replace(/\s+/g, '-')}`} target="_blank"
         style={{
           position: "absolute",
           top: "10px",

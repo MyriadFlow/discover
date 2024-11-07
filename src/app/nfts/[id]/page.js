@@ -24,6 +24,7 @@ const NFTPage = ({ params }) => {
   const [logos, setLogos] = useState("");
   const [brandDesc, setbrandDesc] = useState("");
   const [brandid, setbrandid] = useState("");
+  const [name, setbrandName] = useState("");
   const [loading, setLoading] = useState(false);
   const [sold, setsold] = useState(0);
   const [owner, setOwner] = useState(false);
@@ -182,57 +183,7 @@ const NFTPage = ({ params }) => {
           setLogos(matchedBrand.logo_image);
           setbrandDesc(matchedBrand.description);
           setbrandid(matchedBrand.id);
-
-          const fetch = async () => {
-
-            try {
-              await Moralis.start({
-                apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY
-              });
-
-              const response = await Moralis.EvmApi.events.getContractEvents({
-                "chain": chainId,
-                "order": "DESC",
-                "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
-                "address": `${onephygital?.contract_address}`,
-                "abi": {
-                  "anonymous": false,
-                  "inputs": [
-                    {
-                      "indexed": false,
-                      "name": "currentIndex",
-                      "type": "uint256",
-                      "internal_type": "uint256"
-                    },
-                    {
-                      "indexed": false,
-                      "name": "quantity",
-                      "type": "uint256",
-                      "internal_type": "uint256"
-                    },
-                    {
-                      "indexed": true,
-                      "name": "creator",
-                      "type": "address",
-                      "internal_type": "address"
-                    }
-                  ],
-                  "name": "PhygitalAAssetCreated",
-                  "type": "event"
-                }
-              });
-
-              if (response.raw.result[0]) {
-                setsold(response.raw.result[0].data.currentIndex);
-              }
-            } catch (e) {
-              console.error(e);
-            }
-
-
-          }
-
-          fetch();
+          setbrandName(matchedBrand.name);
         }
 
       } catch (error) {
@@ -241,6 +192,56 @@ const NFTPage = ({ params }) => {
     }
 
     brandmatch();
+  }, [onephygital])
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        // await Moralis.start({
+        //   apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY
+        // });
+
+        const response = await Moralis.EvmApi.events.getContractEvents({
+          "chain": chainId,
+          "order": "DESC",
+          "topic": "0x328ff68d0e66694e405c9f8fc906a346b345aa1f87ec216eaa82f2c654d0d34a",
+          "address": `${onephygital?.contract_address}`,
+          "abi": {
+            "anonymous": false,
+            "inputs": [
+              {
+                "indexed": false,
+                "name": "currentIndex",
+                "type": "uint256",
+                "internal_type": "uint256"
+              },
+              {
+                "indexed": false,
+                "name": "quantity",
+                "type": "uint256",
+                "internal_type": "uint256"
+              },
+              {
+                "indexed": true,
+                "name": "creator",
+                "type": "address",
+                "internal_type": "address"
+              }
+            ],
+            "name": "PhygitalAAssetCreated",
+            "type": "event"
+          }
+        });
+
+        if (response.raw.result[0]) {
+          setsold(response.raw.result[0].data.currentIndex);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    fetch();
   }, [onephygital])
 
   const buyasset = async () => {
@@ -445,7 +446,7 @@ const NFTPage = ({ params }) => {
                         <div className="font-bold">{onephygital?.brand_name?.toString()}</div>
                       </div>
                       <div className="mt-4 text-sm lg:text-base">{brandDesc?.toString()}</div>
-                      <Link href={`/brand/${brandid}`} className="mt-4 text-sm border border-white rounded-full px-4 py-1 inline-block">View brand page</Link>
+                      <Link href={`/brand/${name.toLowerCase().replace(/\s+/g, '-')}`} className="mt-4 text-sm border border-white rounded-full px-4 py-1 inline-block">View brand page</Link>
                     </div>
                   )}
                 </span>
@@ -574,7 +575,7 @@ const NFTPage = ({ params }) => {
             <div className="flex flex-col md:flex-row justify-between">
               <div className="w-full md:w-1/2">
                 <Link
-                  href={`https://webxr.myriadflow.com/${onephygital?.id}`}
+                  href={`https://webxr.myriadflow.com/${onephygital?.name?.toLowerCase().replace(/\s+/g, '-')}`}
                   target="_blank"
                   className="rounded"
                   style={{
@@ -738,7 +739,7 @@ const NFTPage = ({ params }) => {
                         <div className="font-bold">{onephygital?.brand_name?.toString()}</div>
                       </div>
                       <div className="mt-4 text-sm lg:text-base">{brandDesc?.toString()}</div>
-                      <Link href={`/brand/${brandid}`} className="mt-4 text-sm border border-white rounded-full px-4 py-1 inline-block">View brand page</Link>
+                      <Link href={`/brand/${name.toLowerCase().replace(/\s+/g, '-')}`} className="mt-4 text-sm border border-white rounded-full px-4 py-1 inline-block">View brand page</Link>
                     </div>
                   )}
                 </span>
@@ -868,7 +869,7 @@ const NFTPage = ({ params }) => {
             <div className="flex flex-col md:flex-row justify-between">
               <div className="w-full md:w-1/2">
                 <Link
-                  href={`https://webxr.myriadflow.com/${onephygital?.id}`}
+                  href={`https://webxr.myriadflow.com/${onephygital?.name?.toLowerCase().replace(/\s+/g, '-')}`}
                   target="_blank"
                   className="rounded"
                   style={{

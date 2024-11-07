@@ -11,6 +11,7 @@ const MostLovedCardElevate = ({ nft }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [desc, setdesc] = useState("");
   const [brandid, setbrandid] = useState("");
+  const [name, setbrandName] = useState("");
   const [phygitals, setPhygitals] = useState([]);
   const [isHoveredNft, setIsHoveredNft] = useState(false);
 
@@ -58,6 +59,7 @@ const MostLovedCardElevate = ({ nft }) => {
             setLogos(matchedBrand.logo_image);
             setdesc(matchedBrand.description);
             setbrandid(matchedBrand.id);
+            setbrandName(matchedBrand.name);
           }
         }
 
@@ -305,7 +307,7 @@ const MostLovedCardElevate = ({ nft }) => {
           </div>
           <div className="mt-4" style={{ fontSize: '13px', marginBottom: '20px' }}>{desc}</div>
 
-          <Link href={`/brand/${brandid}`} style={{ fontSize: '15px', border: '1px solid white', borderRadius: '30px', padding: '4px' }}>View brand page</Link>
+          <Link href={`/brand/${name.toLowerCase().replace(/\s+/g, '-')}`} style={{ fontSize: '15px', border: '1px solid white', borderRadius: '30px', padding: '4px' }}>View brand page</Link>
         </div>
       )}
     </div>

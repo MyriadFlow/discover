@@ -164,7 +164,7 @@ const Collection = ({ params }) => {
                 }}
               >
                 <div className="text-sm">{desc}</div>
-                <Link href={`/brand/${brandid}`} className="block mt-4 text-sm border border-white rounded-full py-1 px-4">
+                <Link href={`/brand/${name.toLowerCase().replace(/\s+/g, '-')}`} className="block mt-4 text-sm border border-white rounded-full py-1 px-4">
                   View brand page
                 </Link>
               </div>

@@ -11,6 +11,7 @@ const MostLovedCard = ({nft}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [desc, setdesc] = useState("");
   const [brandid, setbrandid] = useState("");
+  const [name, setbrandName] = useState("");
   const [phygitals, setPhygitals] = useState([]);
   const [isHoveredNft, setIsHoveredNft] = useState(false);
 
@@ -58,6 +59,7 @@ try {
       setLogos(matchedBrand.logo_image);
       setdesc(matchedBrand.description);
       setbrandid(matchedBrand.id);
+      setbrandName(matchedBrand.name);
     }
   }
 
@@ -290,11 +292,11 @@ try {
               </div>
               <div className="mt-4" style={{fontSize: '13px', marginBottom:'20px'}}>{desc}</div>
 
-              <Link href={`/brand/${brandid}`} style={{fontSize: '15px', border:'1px solid white', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
+              <Link href={`/brand/${name.toLowerCase().replace(/\s+/g, '-')}`} style={{fontSize: '15px', border:'1px solid white', borderRadius:'30px', padding:'4px'}}>View brand page</Link>
             </div>
           )}
 
-<Link href={`https://webxr.myriadflow.com/${phygitals[0]?.id}`} target="_blank"
+<Link href={`https://webxr.myriadflow.com/${phygitals[0]?.name.toLowerCase().replace(/\s+/g, '-')}`} target="_blank"
 style={{
   position: "absolute",
   top: "10px",
