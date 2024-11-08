@@ -1140,7 +1140,7 @@ function ProfileSettingsPage() {
                 </div>
               </div>
 
-              {isEditing && (
+             
                 <button
                   onClick={handleSave}
                   style={{
@@ -1168,7 +1168,7 @@ function ProfileSettingsPage() {
                 //     >
                 //       Edit
                 //     </button>
-              )}
+         
 
               {isCoverPopupVisible && (
                 <div
