@@ -1140,35 +1140,19 @@ function ProfileSettingsPage() {
                 </div>
               </div>
 
-             
-                <button
-                  onClick={handleSave}
-                  style={{
-                    backgroundColor: "#30D8FF",
-                    color: "#FFFFFF",
-                    padding: "10px 20px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                    marginTop: "20px",
-                  }}
-                >
-                  Save Changes
-                </button>
-                //   ) : (
-                //     <button
-                //       onClick={() => setIsEditing(true)}
-                //       style={{
-                //         backgroundColor: "#7D4AB5",
-                //         color: "#ffffff",
-                //         padding: "10px 20px",
-                //         borderRadius: "8px",
-                //         cursor: "pointer",
-                //         marginTop: "20px",
-                //       }}
-                //     >
-                //       Edit
-                //     </button>
-         
+              <button
+                onClick={handleSave}
+                style={{
+                  backgroundColor: "#30D8FF",
+                  color: "#FFFFFF",
+                  padding: "10px 20px",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  marginTop: "20px",
+                }}
+              >
+                Save Changes
+              </button>
 
               {isCoverPopupVisible && (
                 <div
