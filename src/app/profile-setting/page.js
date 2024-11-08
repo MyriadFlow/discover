@@ -34,6 +34,7 @@ function ProfileSettingsPage() {
     const [selectedFile, setSelectedFile] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
     const [showForm, setShowForm] = useState(false);
+    const [isAddressesOpen, setIsAddressesOpen] = useState(false);
 
 
     const [currentSection, setCurrentSection] = useState('profile');
@@ -619,121 +620,267 @@ function ProfileSettingsPage() {
                                 />
 
 
-                                <h1 className='text-4xl' style={{ marginTop: '60px', marginBottom: '80px' }}>My Delivery Addresses</h1>
-                                {addresses.length > 0 ? (
-                                    addresses.map((address, index) => (
-                                        <div key={index} style={{ marginBottom: '20px' }}>
-                                            <h2 className='text-2xl' style={{ marginBottom: '20px' }}>Address {index + 1}</h2>
-                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Full Name</label>
-                                            <input
-                                                className='w-1/2'
-                                                type='text'
-                                                value={address.full_name}
-                                                onChange={(e) => {
-                                                    handleAddressChange(index, 'full_name', e.target.value);
-                                                    setIsEditing(true);
-                                                }}
-                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
-                                            />
-                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Street Address</label>
-                                            <input
-                                                className='w-1/2'
-                                                type='text'
-                                                value={address.street_address}
-                                                onChange={(e) => {
-                                                    handleAddressChange(index, 'street_address', e.target.value);
-                                                    setIsEditing(true);
-                                                }}
-                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
-                                            />
-                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Street Address Line 2 (optional)</label>
-                                            <input
-                                                className='w-1/2'
-                                                type='text'
-                                                value={address.street_address_2}
-                                                onChange={(e) => {
-                                                    handleAddressChange(index, 'street_address_2', e.target.value);
-                                                    setIsEditing(true);
-                                                }}
-                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
-                                            />
-                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>City</label>
-                                            <input
-                                                className='w-1/2'
-                                                type='text'
-                                                value={address.city}
-                                                onChange={(e) => {
-                                                    handleAddressChange(index, 'city', e.target.value);
-                                                    setIsEditing(true);
-                                                }}
-                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
-                                            />
-                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Pincode / Zipcode</label>
-                                            <input
-                                                className='w-1/2'
-                                                type='text'
-                                                value={address.pincode}
-                                                onChange={(e) => {
-                                                    handleAddressChange(index, 'pincode', e.target.value);
-                                                    setIsEditing(true);
-                                                }}
-                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
-                                            />
-                                            <label style={{ display: 'block', fontWeight: '500', marginBottom: '10px' }}>Country</label>
-                                            <input
-                                                className='w-1/2'
-                                                type='text'
-                                                value={address.country}
-                                                onChange={(e) => {
-                                                    handleAddressChange(index, 'country', e.target.value);
-                                                    setIsEditing(true);
-                                                }}
-                                                style={{ display: 'block', marginBottom: '10px', padding: '10px', borderRadius: '8px', border: '1px solid #D1D5DB' }}
-                                            />
-                                            <button className='p-4' style={{
-                                                backgroundColor: '#7D4AB5',
-                                                color: '#ffffff',
-                                                padding: '10px 20px',
-                                                borderRadius: '8px',
-                                                cursor: 'pointer',
-                                                marginTop: '20px'
-                                            }} onClick={() => deleteAddress(address.id)}>
-                                                Delete
-                                            </button>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <p className='text-xl'>No addresses available. Please add a delivery address.</p>
-                                )}
-                                {addresses.length > 0 ? (
-                                    <button
-                                        onClick={handleAddAddress}
-                                        style={{
-                                            backgroundColor: '#7D4AB5',
-                                            color: '#ffffff',
-                                            padding: '10px 20px',
-                                            borderRadius: '8px',
-                                            cursor: 'pointer',
-                                            marginTop: '20px'
-                                        }}
-                                    >
-                                        Add another delivery address
-                                    </button>
-                                ) : (
-                                    <button
-                                        onClick={handleAddAddress}
-                                        style={{
-                                            backgroundColor: '#7D4AB5',
-                                            color: '#ffffff',
-                                            padding: '10px 20px',
-                                            borderRadius: '8px',
-                                            cursor: 'pointer',
-                                            marginTop: '20px'
-                                        }}
-                                    >
-                                        Add delivery address
-                                    </button>
-                                )}
+                                <div className="mt-16 mb-20">
+                  <button
+                    onClick={() => setIsAddressesOpen(!isAddressesOpen)}
+                    className="w-full flex justify-between items-center text-4xl mb-4 bg-transparent border-none cursor-pointer"
+                    style={{ padding: "10px 0" }}
+                  >
+                    <h1>My Delivery Addresses</h1>
+                    <span
+                      style={{
+                        transform: isAddressesOpen
+                          ? "rotate(180deg)"
+                          : "rotate(0deg)",
+                        transition: "transform 0.3s ease",
+                      }}
+                    >
+                      ▼
+                    </span>
+                  </button>
+
+                  <div
+                    style={{
+                      maxHeight: isAddressesOpen ? "2000px" : "0",
+                      overflow: "hidden",
+                      transition: "max-height 0.3s ease-in-out",
+                    }}
+                  >
+                    {addresses.length > 0 ? (
+                      addresses.map((address, index) => (
+                        <div key={index} style={{ marginBottom: "20px" }}>
+                          <h2
+                            className="text-2xl"
+                            style={{ marginBottom: "20px" }}
+                          >
+                            Address {index + 1}
+                          </h2>
+                          <label
+                            style={{
+                              display: "block",
+                              fontWeight: "500",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            Full Name
+                          </label>
+                          <input
+                            className="w-1/2"
+                            type="text"
+                            value={address.full_name}
+                            onChange={(e) => {
+                              handleAddressChange(
+                                index,
+                                "full_name",
+                                e.target.value
+                              );
+                              setIsEditing(true);
+                            }}
+                            style={{
+                              display: "block",
+                              marginBottom: "10px",
+                              padding: "10px",
+                              borderRadius: "8px",
+                              border: "1px solid #D1D5DB",
+                            }}
+                          />
+                          <label
+                            style={{
+                              display: "block",
+                              fontWeight: "500",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            Street Address
+                          </label>
+                          <input
+                            className="w-1/2"
+                            type="text"
+                            value={address.street_address}
+                            onChange={(e) => {
+                              handleAddressChange(
+                                index,
+                                "street_address",
+                                e.target.value
+                              );
+                              setIsEditing(true);
+                            }}
+                            style={{
+                              display: "block",
+                              marginBottom: "10px",
+                              padding: "10px",
+                              borderRadius: "8px",
+                              border: "1px solid #D1D5DB",
+                            }}
+                          />
+                          <label
+                            style={{
+                              display: "block",
+                              fontWeight: "500",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            Street Address Line 2 (optional)
+                          </label>
+                          <input
+                            className="w-1/2"
+                            type="text"
+                            value={address.street_address_2}
+                            onChange={(e) => {
+                              handleAddressChange(
+                                index,
+                                "street_address_2",
+                                e.target.value
+                              );
+                              setIsEditing(true);
+                            }}
+                            style={{
+                              display: "block",
+                              marginBottom: "10px",
+                              padding: "10px",
+                              borderRadius: "8px",
+                              border: "1px solid #D1D5DB",
+                            }}
+                          />
+                          <label
+                            style={{
+                              display: "block",
+                              fontWeight: "500",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            City
+                          </label>
+                          <input
+                            className="w-1/2"
+                            type="text"
+                            value={address.city}
+                            onChange={(e) => {
+                              handleAddressChange(
+                                index,
+                                "city",
+                                e.target.value
+                              );
+                              setIsEditing(true);
+                            }}
+                            style={{
+                              display: "block",
+                              marginBottom: "10px",
+                              padding: "10px",
+                              borderRadius: "8px",
+                              border: "1px solid #D1D5DB",
+                            }}
+                          />
+                          <label
+                            style={{
+                              display: "block",
+                              fontWeight: "500",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            Pincode / Zipcode
+                          </label>
+                          <input
+                            className="w-1/2"
+                            type="text"
+                            value={address.pincode}
+                            onChange={(e) => {
+                              handleAddressChange(
+                                index,
+                                "pincode",
+                                e.target.value
+                              );
+                              setIsEditing(true);
+                            }}
+                            style={{
+                              display: "block",
+                              marginBottom: "10px",
+                              padding: "10px",
+                              borderRadius: "8px",
+                              border: "1px solid #D1D5DB",
+                            }}
+                          />
+                          <label
+                            style={{
+                              display: "block",
+                              fontWeight: "500",
+                              marginBottom: "10px",
+                            }}
+                          >
+                            Country
+                          </label>
+                          <input
+                            className="w-1/2"
+                            type="text"
+                            value={address.country}
+                            onChange={(e) => {
+                              handleAddressChange(
+                                index,
+                                "country",
+                                e.target.value
+                              );
+                              setIsEditing(true);
+                            }}
+                            style={{
+                              display: "block",
+                              marginBottom: "10px",
+                              padding: "10px",
+                              borderRadius: "8px",
+                              border: "1px solid #D1D5DB",
+                            }}
+                          />
+                          <button
+                            className="p-4"
+                            style={{
+                              backgroundColor: "#7D4AB5",
+                              color: "#ffffff",
+                              padding: "10px 20px",
+                              borderRadius: "8px",
+                              cursor: "pointer",
+                              marginTop: "20px",
+                            }}
+                            onClick={() => deleteAddress(address.id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-xl">
+                        No addresses available. Please add a delivery address.
+                      </p>
+                    )}
+                    {addresses.length > 0 ? (
+                      <button
+                        onClick={handleAddAddress}
+                        style={{
+                          backgroundColor: "#7D4AB5",
+                          color: "#ffffff",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          cursor: "pointer",
+                          marginTop: "20px",
+                        }}
+                      >
+                        Add another delivery address
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleAddAddress}
+                        style={{
+                          backgroundColor: "#7D4AB5",
+                          color: "#ffffff",
+                          padding: "10px 20px",
+                          borderRadius: "8px",
+                          cursor: "pointer",
+                          marginTop: "20px",
+                        }}
+                      >
+                        Add delivery address
+                      </button>
+                    )}
+                  </div>
+                </div>
 
                             </div>
 
@@ -743,7 +890,7 @@ function ProfileSettingsPage() {
                                         onClick={handleSave}
                                         style={{
                                             backgroundColor: '#7D4AB5',
-                                            color: '#ffffff',
+                                            color: "#30D8FF",
                                             padding: '10px 20px',
                                             borderRadius: '8px',
                                             cursor: 'pointer',
