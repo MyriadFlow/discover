@@ -165,30 +165,30 @@ const Brand = ({ params }) => {
               className="text-2xl flex gap-2"
               style={{ justifyContent: "space-between" }}
             >
-              {/* {isOwner && ( */}
-              {/* <Link
-                href={`/brand/${params.id}/edit`}
-                className="border"
-                style={{
-                  background: "transparent",
-                  border: "6px solid transparent",
-                  borderRadius: "8px",
-                  backgroundImage: `
+              {isOwner && (
+                <Link
+                  href={`/edit-brand/${params.id}`}
+                  className="border"
+                  style={{
+                    background: "transparent",
+                    border: "6px solid transparent",
+                    borderRadius: "8px",
+                    backgroundImage: `
                     linear-gradient(white, white),
                     linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
                   `,
-                  backgroundOrigin: "border-box",
-                  backgroundClip: "content-box, border-box",
-                  WebkitBackgroundClip: "content-box, border-box",
-                  display: "block",
-                  width: "180px",
-                  height: "50px",
-                  textAlign: "center",
-                }}
-              >
-                <div style={{ marginTop: "4px" }}>EDIT BRAND</div>
-              </Link> */}
-              {/* )} */}
+                    backgroundOrigin: "border-box",
+                    backgroundClip: "content-box, border-box",
+                    WebkitBackgroundClip: "content-box, border-box",
+                    display: "block",
+                    width: "180px",
+                    height: "50px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div style={{ marginTop: "4px" }}>EDIT BRAND</div>
+                </Link>
+              )}
               <Link
                 href=""
                 className="border"
