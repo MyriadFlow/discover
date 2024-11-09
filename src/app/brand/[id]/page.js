@@ -167,7 +167,7 @@ const Brand = ({ params }) => {
             >
               {isOwner && (
                 <Link
-                  href={`/edit-brand/${params.id}`}
+                  href={`https://studio.myriadflow.com/edit-brand/${params.id}`}
                   className="border"
                   style={{
                     background: "#E6E6E6",
