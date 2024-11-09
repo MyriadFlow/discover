@@ -170,23 +170,18 @@ const Brand = ({ params }) => {
                   href={`/edit-brand/${params.id}`}
                   className="border"
                   style={{
-                    background: "transparent",
-                    border: "6px solid transparent",
-                    borderRadius: "8px",
-                    backgroundImage: `
-                    linear-gradient(white, white),
-                    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-                  `,
-                    backgroundOrigin: "border-box",
-                    backgroundClip: "content-box, border-box",
-                    WebkitBackgroundClip: "content-box, border-box",
+                    background: "#E6E6E6",
+                    border: "none",
+                    borderRadius: "30px",
                     display: "block",
                     width: "180px",
                     height: "50px",
                     textAlign: "center",
+                    color: "#000",
+                    fontWeight: 400
                   }}
                 >
-                  <div style={{ marginTop: "4px" }}>EDIT BRAND</div>
+                  <div style={{ marginTop: "4px" }}>Edit profile</div>
                 </Link>
               )}
               <Link
