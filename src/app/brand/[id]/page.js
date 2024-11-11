@@ -117,7 +117,7 @@ const Brand = ({ params }) => {
     )}`;
 
     // Create a formatted text with all the information
-    const shareText = `${brand.name}\n\n${brand.description}\n\nView more at: ${window.location.href}\n\n${imageUrl}`;
+    const shareText = `${brand.name}\n\n${brand.description}\n\nView more at: ${window.location.href}`;
 
     try {
       await navigator.clipboard.writeText(shareText);
