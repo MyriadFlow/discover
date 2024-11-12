@@ -38,6 +38,7 @@ function ProfileSettingsPage() {
 
   const [currentSection, setCurrentSection] = useState("profile");
   const [validationError, setValidationError] = useState("");
+  const [editLoading, setEditLoading] = useState(false)
 
   const [addresses, setAddresses] = useState([
     {
@@ -131,27 +132,28 @@ function ProfileSettingsPage() {
   };
 
   const handleSave = async () => {
+    console.log("updating")
     // Validate username length
-    if (userName.length < 4) {
-      setValidationError("Username must be at least 4 characters long.");
-      return;
-    } else if (userName !== userName.toLowerCase()) {
-      setValidationError("Username must be in lowercase.");
-      return;
-    } else if (userName.includes(" ")) {
-      setValidationError("Username cannot contain spaces.");
-      return;
-    } else if (allusernames.some((profile) => profile.username === userName)) {
-      setValidationError("This username is already taken.");
-      return;
-    } else if (!/^[a-z]+$/.test(userName)) {
-      setValidationError(
-        "Username can only contain letters (no special characters)."
-      );
-      return;
-    } else {
-      setValidationError("");
-    }
+    // if (userName.length < 4) {
+    //   setValidationError("Username must be at least 4 characters long.");
+    //   return;
+    // } else if (userName !== userName.toLowerCase()) {
+    //   setValidationError("Username must be in lowercase.");
+    //   return;
+    // } else if (userName.includes(" ")) {
+    //   setValidationError("Username cannot contain spaces.");
+    //   return;
+    // } else if (allusernames.some((profile) => profile.username === userName)) {
+    //   setValidationError("This username is already taken.");
+    //   return;
+    // } else if (!/^[a-z]+$/.test(userName)) {
+    //   setValidationError(
+    //     "Username can only contain letters (no special characters)."
+    //   );
+    //   return;
+    // } else {
+    //   setValidationError("");
+    // }
 
     const profileData = {
       name: displayName,
@@ -168,6 +170,7 @@ function ProfileSettingsPage() {
       link: link,
     };
 
+    setEditLoading(true)
     try {
       const response = await fetch(`${baseUri}/profiles/${address}`, {
         method: "PUT",
@@ -193,6 +196,7 @@ function ProfileSettingsPage() {
               );
 
               if (addressData.ok) {
+                toast.success("Address updated successfully!");
                 console.log("Address Updated Successfully");
               }
             } catch (error) {
@@ -221,13 +225,17 @@ function ProfileSettingsPage() {
       );
 
       if (response.ok) {
+        toast.success("Profile settings saved successfully!");
         console.log("Profile settings saved successfully!");
         setIsEditing(false);
       } else {
         console.error("Failed to save profile settings.");
+        toast.error("Failed to save profile settings.");
       }
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setEditLoading(false)
     }
   };
 
@@ -642,6 +650,7 @@ function ProfileSettingsPage() {
                 <input
                   className="w-1/2"
                   type="text"
+                  disabled
                   value={email}
                   onChange={(e) => {
                     setEmail(e.target.value);
@@ -1151,7 +1160,7 @@ function ProfileSettingsPage() {
                   marginTop: "20px",
                 }}
               >
-                Save Changes
+                {editLoading ? "Saving changes..." : "Save Changes"}
               </button>
 
               {isCoverPopupVisible && (
