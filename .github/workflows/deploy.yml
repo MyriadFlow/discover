@@ -65,7 +65,7 @@ jobs:
         if: github.ref == 'refs/heads/${{ matrix.branch }}'
         uses: appleboy/ssh-action@v0.1.7
         with:
-          host: ${{ secrets.REMOTE_SERVER_ADDRESS }}
+          host: ${{ github.ref == 'refs/heads/prod' && secrets.REMOTE_SERVER_ADDRESS || secrets.DEV_REMOTE_SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.REMOTE_SERVER_KEY }}
           port: ${{ secrets.SSH_PORT }}
