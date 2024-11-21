@@ -81,7 +81,7 @@ jobs:
         with:
           host: ${{ secrets.DEV_REMOTE_SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.REMOTE_SERVER_KEY }}
+          key: ${{ secrets.DEV_REMOTE_SERVER_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
             pwd
