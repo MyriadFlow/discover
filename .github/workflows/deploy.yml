@@ -42,39 +42,56 @@ jobs:
         run: |
           echo "$ENV_FILE" > .env
           export CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
-          export TAG=$([[ $CURRENT_BRANCH == "prod" || $CURRENT_BRANCH == "main" ]] && echo $CURRENT_BRANCH || echo "latest")
-          echo "Tag: $TAG"
+          export TAG=$([[ $CURRENT_BRANCH == $(basename ${{ github.ref }}) ]] && echo $CURRENT_BRANCH || echo "latest")
+          echo $TAG
           export GITHUB_REF_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
           export GITHUB_BRANCH_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$TAG
           export GITHUB_REF_IMAGE=$(echo $GITHUB_REF_IMAGE | tr '[:upper:]' '[:lower:]')
           export GITHUB_BRANCH_IMAGE=$(echo $GITHUB_BRANCH_IMAGE | tr '[:upper:]' '[:lower:]')
           docker build --build-arg version=$GITHUB_SHA -t $GITHUB_REF_IMAGE -t $GITHUB_BRANCH_IMAGE .
-          echo "Pushing Images to GitHub Container Registry"
+          echo "Pushing Image to GitHub Container Registry"
           docker push $GITHUB_REF_IMAGE
           docker push $GITHUB_BRANCH_IMAGE
-          rm -f .env
+          rm -rf .env
 
-  deploy:
+  deploy-prod:
+    name: Deploy to Production
     needs: next-build
+    if: github.ref == 'refs/heads/prod'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        branch: [prod, main]
     steps:
-      - name: Deploy on Server
-        if: github.ref == 'refs/heads/${{ matrix.branch }}'
+      - name: Deploy on Production Server
         uses: appleboy/ssh-action@v0.1.7
         with:
-          host: ${{ github.ref == 'refs/heads/prod' && secrets.REMOTE_SERVER_ADDRESS || secrets.DEV_REMOTE_SERVER_ADDRESS }}
+          host: ${{ secrets.REMOTE_SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.REMOTE_SERVER_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
             pwd
             cd ~/discover
-            sudo docker stop discover || true
-            sudo docker rm discover || true
-            sudo docker rmi discover || true
+            sudo docker stop discover && sudo docker rm discover && sudo docker rmi ghcr.io/myriadflow/discover:prod
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
-            sudo docker pull ghcr.io/myriadflow/discover:${{ matrix.branch }}
-            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:${{ matrix.branch }}
+            sudo docker pull ghcr.io/myriadflow/discover:prod
+            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:prod
+
+  deploy-dev:
+    name: Deploy to Development
+    needs: next-build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy on Development Server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.DEV_REMOTE_SERVER_ADDRESS }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.REMOTE_SERVER_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            pwd
+            cd ~/discover
+            sudo docker stop discover && sudo docker rm discover && sudo docker rmi ghcr.io/myriadflow/discover:main
+            echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
+            sudo docker pull ghcr.io/myriadflow/discover:main
+            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:main
