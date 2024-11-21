@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - prod
+      - main
   pull_request:
     branches:
       - prod
+      - main
 
 jobs:
   next-build:
@@ -21,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Docker Buildx for multi-platform builds (optional)
+      # Step 2: Set up Docker Buildx for multi-platform builds
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -33,30 +35,34 @@ jobs:
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_TOKEN }}
 
+      # Step 4: Build and Push Docker Image
       - name: Build and Push Docker Image
         env:
           ENV_FILE: ${{ secrets.DISCOVER_ENV_FILE }}
         run: |
           echo "$ENV_FILE" > .env
           export CURRENT_BRANCH=${GITHUB_REF#refs/heads/}
-          export TAG=$([[ $CURRENT_BRANCH == $(basename ${{ github.ref }}) ]] && echo $CURRENT_BRANCH || echo "latest")
-          echo $TAG
+          export TAG=$([[ $CURRENT_BRANCH == "prod" || $CURRENT_BRANCH == "main" ]] && echo $CURRENT_BRANCH || echo "latest")
+          echo "Tag: $TAG"
           export GITHUB_REF_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
           export GITHUB_BRANCH_IMAGE=ghcr.io/$GITHUB_REPOSITORY:$TAG
           export GITHUB_REF_IMAGE=$(echo $GITHUB_REF_IMAGE | tr '[:upper:]' '[:lower:]')
           export GITHUB_BRANCH_IMAGE=$(echo $GITHUB_BRANCH_IMAGE | tr '[:upper:]' '[:lower:]')
           docker build --build-arg version=$GITHUB_SHA -t $GITHUB_REF_IMAGE -t $GITHUB_BRANCH_IMAGE .
-          echo "Pushing Image to GitHub Container Registry"
+          echo "Pushing Images to GitHub Container Registry"
           docker push $GITHUB_REF_IMAGE
           docker push $GITHUB_BRANCH_IMAGE
-          rm -rf .env
+          rm -f .env
 
-  ghcr-push:
-    needs: next-build # Job depends on next-build(above) job
+  deploy:
+    needs: next-build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        branch: [prod, main]
     steps:
-      - name: Deploy on Production server
-        if: github.ref == 'refs/heads/prod'
+      - name: Deploy on Server
+        if: github.ref == 'refs/heads/${{ matrix.branch }}'
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.REMOTE_SERVER_ADDRESS }}
@@ -66,7 +72,9 @@ jobs:
           script: |
             pwd
             cd ~/discover
-            sudo docker stop discover && sudo docker rm discover && sudo docker rmi discover
+            sudo docker stop discover || true
+            sudo docker rm discover || true
+            sudo docker rmi discover || true
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
-            sudo docker pull ghcr.io/myriadflow/discover:prod
-            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:prod
+            sudo docker pull ghcr.io/myriadflow/discover:${{ matrix.branch }}
+            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:${{ matrix.branch }}
