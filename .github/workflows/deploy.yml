@@ -50,44 +50,48 @@ jobs:
           docker push $GITHUB_BRANCH_IMAGE
           rm -rf .env
 
-  deploy-prod:
-    name: Deploy to Production
-    needs: next-build
-    if: github.ref == 'refs/heads/prod'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy on Production Server
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.REMOTE_SERVER_ADDRESS }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.REMOTE_SERVER_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            pwd
-            cd ~/discover
-            sudo docker stop discover && sudo docker rm discover && sudo docker rmi ghcr.io/myriadflow/discover:prod
-            echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
-            sudo docker pull ghcr.io/myriadflow/discover:prod
-            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:prod
-
-  deploy-dev:
-    name: Deploy to Development
-    needs: next-build
+  Deploy-to-Dev:
+    name: Deploy to Development Server
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    needs: Build-and-Push
     steps:
       - name: Deploy on Development Server
         uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.DEV_REMOTE_SERVER_ADDRESS }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.REMOTE_SERVER_KEY }}
-          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.DEV_SERVER_USERNAME }}
+          key: ${{ secrets.DEV_REMOTE_SERVER_KEY }}
+          port: ${{ secrets.DEV_SSH_PORT }}
           script: |
             pwd
             cd ~/discover
-            sudo docker stop discover && sudo docker rm discover && sudo docker rmi ghcr.io/myriadflow/discover:main
+            sudo docker stop discover || true
+            sudo docker rm discover || true
+            sudo docker rmi discover || true
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
-            sudo docker pull ghcr.io/myriadflow/discover:main
-            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:main
+            sudo docker pull ghcr.io/$GITHUB_REPOSITORY:main
+            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/$GITHUB_REPOSITORY:main
+
+  Deploy-to-Prod:
+    name: Deploy to Production Server
+    if: github.ref == 'refs/heads/prod'
+    runs-on: ubuntu-latest
+    needs: Build-and-Push
+    steps:
+      - name: Deploy on Production Server
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.PROD_REMOTE_SERVER_ADDRESS }}
+          username: ${{ secrets.PROD_SERVER_USERNAME }}
+          key: ${{ secrets.PROD_REMOTE_SERVER_KEY }}
+          port: ${{ secrets.PROD_SSH_PORT }}
+          script: |
+            pwd
+            cd ~/discover
+            sudo docker stop discover || true
+            sudo docker rm discover || true
+            sudo docker rmi discover || true
+            echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
+            sudo docker pull ghcr.io/$GITHUB_REPOSITORY:prod
+            sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/$GITHUB_REPOSITORY:prod
