@@ -32,7 +32,7 @@ const Page = () => {
 		  setBrands(result);
 		  setLoading(false);
 
-		  console.log("new database output", result, phyresult, collresult);
+		//   console.log("new database output", result, phyresult, collresult);
 		} catch (error) {
 		  console.error('Error fetching data:', error);
 		  setLoading(false);

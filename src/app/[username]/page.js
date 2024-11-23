@@ -102,7 +102,7 @@ function HomePage({ params }) {
 
           if (response.ok) {
             const data = await response.json();
-            console.log(data.name);
+            // console.log(data.name);
             setGuestName(data.name);
             setGuestBaseName(data.basename);
             setGuestCoverImage(data.cover_image);
@@ -139,7 +139,7 @@ function HomePage({ params }) {
 
           if (response.ok) {
             const data = await response.json();
-            console.log(data.name);
+            // console.log(data.name);
             setName(data.name);
             setCoverImage(data.cover_image);
             setProfileImage(data.profile_image);
