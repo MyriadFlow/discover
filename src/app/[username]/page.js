@@ -475,10 +475,10 @@ function HomePage({ params }) {
               </button>
             </h1>
             <div style={{ marginTop: '0.1rem', fontSize: '1.125rem', color: '#374151', fontWeight: '600', marginLeft: '5rem' }}>
-              <Identity address={address} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
+              {/* <Identity address={address} schemaId="0xf8b05c79f090979bf4a80270aba232dff11a10d9ca55c4f88de95317970f0de9">
                 <Name>
                 </Name>
-              </Identity>
+              </Identity> */}
             </div>
           </div>
 
