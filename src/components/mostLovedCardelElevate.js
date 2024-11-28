@@ -112,7 +112,7 @@ const MostLovedCardElevate = ({ nft }) => {
         // Find the lowest price
         const lowestPrice = Math.min(...prices);
 
-        console.log("The lowest price is:", lowestPrice, filteredData, prices);
+        // console.log("The lowest price is:", lowestPrice, filteredData, prices);
         setlowestPrice(lowestPrice);
 
 
@@ -126,11 +126,11 @@ const MostLovedCardElevate = ({ nft }) => {
         const conversionRateResult = await conversionRateRes.json();
         const ethToUsdRate = conversionRateResult.ethereum.usd;
 
-        console.log("Current ETH to USD rate:", ethToUsdRate);
+        // console.log("Current ETH to USD rate:", ethToUsdRate);
 
         // Convert the lowest price from ETH to USD
         const lowestPriceInUSD = lowestPrice * ethToUsdRate;
-        console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
+        // console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
         setLowestPriceUSD(lowestPriceInUSD.toFixed(2));
 
         const productURL = filteredData[0].product_url;

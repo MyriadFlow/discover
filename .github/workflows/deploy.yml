@@ -65,8 +65,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             pwd
-            cd ~/discover
-            sudo docker stop discover && sudo docker rm discover && sudo docker rmi discover
+            sudo docker stop discover && sudo docker rm discover && sudo docker rmi hcr.io/myriadflow/discover:prod
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
             sudo docker pull ghcr.io/myriadflow/discover:prod
             sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:prod
@@ -82,12 +81,11 @@ jobs:
         with:
           host: ${{ secrets.DEV_REMOTE_SERVER_ADDRESS }}
           username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.REMOTE_SERVER_KEY }}
+          key: ${{ secrets.DEV_REMOTE_SERVER_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
             pwd
-            cd ~/discover
-            sudo docker stop discover && sudo docker rm discover && sudo docker rmi discover
+            sudo docker stop discover && sudo docker rm discover && sudo docker rmi hcr.io/myriadflow/discover:main
             echo ${{ secrets.GHCR_TOKEN }} | sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} --password-stdin
             sudo docker pull ghcr.io/myriadflow/discover:main
             sudo docker run --name="discover" -p 9082:3000 -d ghcr.io/myriadflow/discover:main
