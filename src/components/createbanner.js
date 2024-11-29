@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const CreateBanner = () => {
   return (
@@ -36,8 +36,10 @@ const CreateBanner = () => {
         }}
       >
         <h1 className="text-7xl">Create Your Own?</h1>
-        <h1 className='text-2xl mt-8'>Launch phygitals & virtual experiences for your Brand.
-          <br /> No coding knowledge needed.</h1>
+        <h1 className="text-2xl mt-8">
+          Launch phygitals & virtual experiences for your Brand.
+          <br /> No coding knowledge needed.
+        </h1>
         <a
           href="https://studio.myriadflow.com"
           target="_blank" // Open in a new tab
@@ -60,22 +62,22 @@ const CreateBanner = () => {
               cursor: "pointer",
               fontSize: "1.1rem",
               width: "150px",
-              height: '50px', // Set fixed width for the button
+              height: "50px", // Set fixed width for the button
               display: "block",
             }}
           >
             Get Started
             <img
-              src={'arrow.png'}
-              alt='Arrow'
-              className='inline-block ml-2 -mt-1'
-              style={{ width: '12px', height: '12px' }}
+              src={"arrow.png"}
+              alt="Arrow"
+              className="inline-block ml-2 -mt-1"
+              style={{ width: "12px", height: "12px" }}
             />
           </button>
         </a>
       </div>
     </div>
   );
-}
+};
 
 export default CreateBanner;

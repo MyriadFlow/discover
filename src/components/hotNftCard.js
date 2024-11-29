@@ -88,11 +88,11 @@ const HotNftCard = ({ nft }) => {
       const conversionRateResult = await conversionRateRes.json();
       const ethToUsdRate = conversionRateResult.ethereum.usd;
 
-      console.log("Current ETH to USD rate:", ethToUsdRate);
+      // console.log("Current ETH to USD rate:", ethToUsdRate);
 
       // Convert the lowest price from ETH to USD
       const lowestPriceInUSD = nft?.price * ethToUsdRate;
-      console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
+      // console.log("The lowest price in USD is:", lowestPriceInUSD.toFixed(2));
       setPriceUSD(lowestPriceInUSD.toFixed(2));
     }
 

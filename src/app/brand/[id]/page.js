@@ -2,10 +2,14 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAccount } from "wagmi";
+import { toast } from "react-toastify";
+
 import MostLovedCard from "../../../components/mostLovedCard";
 import HotNftCard from "../../../components/hotNftCard";
 import Header1 from "../../../components/header1";
 import Footer from "../../../components/footer";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const Brand = ({ params }) => {
   const brandName = params?.id
@@ -104,6 +108,42 @@ const Brand = ({ params }) => {
     brandmatch();
   }, []);
 
+  const handleShare = async () => {
+    if (!brand) return;
+
+    // Construct the image URL
+    const imageUrl = `https://nftstorage.link/ipfs/${brand.cover_image?.slice(
+      7
+    )}`;
+
+    // Create a formatted text with all the information
+    const shareText = `${brand.name}\n\n${brand.description}\n\nView more at: ${window.location.href}`;
+
+    try {
+      await navigator.clipboard.writeText(shareText);
+      toast.success("Brand details copied to clipboard!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.error("Error copying details:", error);
+      toast.error("Failed to copy brand details", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
   return (
     <>
       <div
@@ -128,9 +168,9 @@ const Brand = ({ params }) => {
             display: "block",
             marginLeft: "auto",
             marginRight: "auto",
-            height: "90vh",
             width: "100vw",
-            transform: "scale(1)", // Zooms in the image
+            objectFit: "cover", // This maintains aspect ratio while covering the container
+            height: "90vh",
             objectPosition: "center",
           }}
         />
@@ -150,9 +190,7 @@ const Brand = ({ params }) => {
         />
       </div>
 
-      <div
-        style={{ marginLeft: "40px", marginRight: "40px", marginTop: "100px" }}
-      >
+      <div style={{ margin: "100px 100px" }}>
         <div className="flex items-start flex-justify">
           <div>
             <div className="font-bold text-black" style={{ fontSize: "40px" }}>
@@ -165,18 +203,36 @@ const Brand = ({ params }) => {
               className="text-2xl flex gap-2"
               style={{ justifyContent: "space-between" }}
             >
-              {/* {isOwner && ( */}
-              {/* <Link
-                href={`/brand/${params.id}/edit`}
-                className="border"
+              {isOwner && (
+                <Link
+                  href={`https://studio.myriadflow.com/edit-brand/${params.id}`}
+                  className="border"
+                  style={{
+                    background: "#E6E6E6",
+                    border: "none",
+                    borderRadius: "30px",
+                    display: "block",
+                    width: "180px",
+                    height: "50px",
+                    textAlign: "center",
+                    color: "#000",
+                    fontWeight: 400,
+                  }}
+                >
+                  <div style={{ marginTop: "4px" }}>Edit profile</div>
+                </Link>
+              )}
+              <div
+                onClick={handleShare}
+                className="border cursor-pointer"
                 style={{
                   background: "transparent",
                   border: "6px solid transparent",
                   borderRadius: "8px",
                   backgroundImage: `
-                    linear-gradient(white, white),
-                    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-                  `,
+      linear-gradient(white, white),
+      linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
+    `,
                   backgroundOrigin: "border-box",
                   backgroundClip: "content-box, border-box",
                   WebkitBackgroundClip: "content-box, border-box",
@@ -186,31 +242,8 @@ const Brand = ({ params }) => {
                   textAlign: "center",
                 }}
               >
-                <div style={{ marginTop: "4px" }}>EDIT BRAND</div>
-              </Link> */}
-              {/* )} */}
-              <Link
-                href=""
-                className="border"
-                style={{
-                  background: "transparent",
-                  border: "6px solid transparent",
-                  borderRadius: "8px",
-                  backgroundImage: `
-    linear-gradient(white, white),
-    linear-gradient(to right, #AF40FF, #5B42F3, #00DDEB)
-  `,
-                  backgroundOrigin: "border-box",
-                  backgroundClip: "content-box, border-box",
-                  WebkitBackgroundClip: "content-box, border-box", // For Safari
-                  display: "block",
-                  width: "180px",
-                  height: "50px",
-                  textAlign: "center",
-                }}
-              >
                 <div style={{ marginTop: "4px" }}>SHARE</div>
-              </Link>
+              </div>
             </div>
 
             <div

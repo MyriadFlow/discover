@@ -55,7 +55,7 @@ export default function Home() {
 
 					if (response.ok) {
 						const data = await response.json()
-						console.log(data.email)
+						// console.log(data.email)
 
 						// If the email exists, set showForm to false
 						if (data.email) {
