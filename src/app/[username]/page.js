@@ -1232,7 +1232,7 @@ function HomePage({ params }) {
                 />
               </button>
             </h1>
-            <div
+            {/* <div
               style={{
                 marginTop: "0.1rem",
                 fontSize: "1.125rem",
@@ -1247,7 +1247,7 @@ function HomePage({ params }) {
               >
                 <Name></Name>
               </Identity>
-            </div>
+            </div> */}
           </div>
 
           <p className="text-gray-500 text-lg mt-6 w-3/5">
@@ -1457,7 +1457,7 @@ function HomePage({ params }) {
               )}
             </div>
 
-            <div
+            {/* <div
               style={{
                 marginTop: "2.5rem",
                 padding: "1.5rem",
@@ -1490,7 +1490,7 @@ function HomePage({ params }) {
                   {walletAddress}
                 </h1>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex mt-10 text-gray-700">
