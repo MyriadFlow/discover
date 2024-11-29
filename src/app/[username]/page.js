@@ -1457,7 +1457,7 @@ function HomePage({ params }) {
               )}
             </div>
 
-            {/* <div
+            <div
               style={{
                 marginTop: "2.5rem",
                 padding: "1.5rem",
@@ -1473,7 +1473,7 @@ function HomePage({ params }) {
                 <h1 style={{ fontSize: "1.125rem", color: "#6B7280" }}>
                   {"0 Following"}
                 </h1>
-                <h1
+                {/* <h1
                   style={{
                     marginTop: "0.5rem",
                     fontSize: "1.125rem",
@@ -1488,9 +1488,9 @@ function HomePage({ params }) {
                   className="truncate-wallet"
                 >
                   {walletAddress}
-                </h1>
+                </h1> */}
               </div>
-            </div> */}
+            </div>
           </div>
 
           <div className="flex mt-10 text-gray-700">
