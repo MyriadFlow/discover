@@ -799,7 +799,7 @@ function HomePage({ params }) {
                 <h1 style={{ fontSize: "1.125rem", color: "#6B7280" }}>
                   {"0 Following"}
                 </h1>
-                <h1
+                {/* <h1
                   style={{
                     marginTop: "0.5rem",
                     fontSize: "1.125rem",
@@ -808,18 +808,18 @@ function HomePage({ params }) {
                   }}
                 >
                   Address
-                </h1>
-                <h1
+                </h1> */}
+                {/* <h1
                   style={{ fontSize: "1.125rem", color: "#6B7280" }}
                   className="truncate-wallet"
                 >
                   {address}
-                </h1>
+                </h1> */}
               </div>
             </div>
           </div>
 
-          <div className="flex mt-10 text-gray-700">
+          <div className="flex mt-20 text-gray-700">
             <button
               id="myassets"
               className={`text-lg hover:text-black hover:underline ${
@@ -1473,7 +1473,7 @@ function HomePage({ params }) {
                 <h1 style={{ fontSize: "1.125rem", color: "#6B7280" }}>
                   {"0 Following"}
                 </h1>
-                {/* <h1
+                <h1
                   style={{
                     marginTop: "0.5rem",
                     fontSize: "1.125rem",
@@ -1488,7 +1488,7 @@ function HomePage({ params }) {
                   className="truncate-wallet"
                 >
                   {walletAddress}
-                </h1> */}
+                </h1>
               </div>
             </div>
           </div>
