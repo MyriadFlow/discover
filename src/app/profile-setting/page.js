@@ -4,7 +4,7 @@ import Header1 from "../../components/header1";
 import Footer from "../../components/footer";
 import { useAccount } from "wagmi";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import Link from "next/link";
 import { v4 as uuidv4 } from "uuid";
 
@@ -38,7 +38,7 @@ function ProfileSettingsPage() {
 
   const [currentSection, setCurrentSection] = useState("profile");
   const [validationError, setValidationError] = useState("");
-  const [editLoading, setEditLoading] = useState(false)
+  const [editLoading, setEditLoading] = useState(false);
 
   const [addresses, setAddresses] = useState([
     {
@@ -132,7 +132,7 @@ function ProfileSettingsPage() {
   };
 
   const handleSave = async () => {
-    console.log("updating")
+    console.log("updating");
     // Validate username length
     // if (userName.length < 4) {
     //   setValidationError("Username must be at least 4 characters long.");
@@ -170,7 +170,7 @@ function ProfileSettingsPage() {
       link: link,
     };
 
-    setEditLoading(true)
+    setEditLoading(true);
     try {
       const response = await fetch(`${baseUri}/profiles/${address}`, {
         method: "PUT",
@@ -235,7 +235,7 @@ function ProfileSettingsPage() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setEditLoading(false)
+      setEditLoading(false);
     }
   };
 

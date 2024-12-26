@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Bai_Jamjuree as FontSans } from "next/font/google";
 import "./globals.css";
-
+import "react-toastify/dist/ReactToastify.css";
 import { cn } from "@/lib/utils";
-
 import { headers } from "next/headers";
-
 import { cookieToInitialState } from "wagmi";
 import Providers from "@/lib/providers";
 import { config } from "@/lib/wagmi";

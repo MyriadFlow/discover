@@ -4,12 +4,13 @@ import Link from "next/link";
 import { useAccount } from "wagmi";
 import { toast } from "react-toastify";
 
-import MostLovedCard from "../../../components/mostLovedCard";
-import HotNftCard from "../../../components/hotNftCard";
-import Header1 from "../../../components/header1";
-import Footer from "../../../components/footer";
-
-import "react-toastify/dist/ReactToastify.css";
+import MostLovedCard from "@/components/mostLovedCard";
+import HotNftCard from "@/components/hotNftCard";
+import Header1 from "@/components/header1";
+import Footer from "@/components/footer";
+import { apiRequest } from "@/utils/api";
+import LoaderAnimated from "@/components/ui/LoaderAnimated";
+import Image from "next/image";
 
 const Brand = ({ params }) => {
   const brandName = params?.id
@@ -17,133 +18,70 @@ const Brand = ({ params }) => {
     .replace(/\b\w/g, (char) => char.toUpperCase());
 
   const [brand, setBrand] = useState();
-  const [collections, setcollections] = useState([]);
-  const [nfts, setnfts] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [collections, setCollections] = useState([]);
+  const [nfts, setNfts] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const { address: userAddress } = useAccount();
 
   useEffect(() => {
-    const brandmatch = async () => {
-      setloading(true);
-      const baseUri =
-        process.env.NEXT_PUBLIC_URI || "https://app.myriadflow.com";
+    const fetchBrandData = async () => {
+      setLoading(true);
 
       try {
-        const res = await fetch(
-          `${baseUri}/brands/all/554b4903-9a06-4031-98f4-48276c427f78`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const [brands, allCollections, allNfts] = await Promise.all([
+          apiRequest("/brands/all/554b4903-9a06-4031-98f4-48276c427f78"),
+          apiRequest("/collections/all/554b4903-9a06-4031-98f4-48276c427f78"),
+          apiRequest("/phygitals/all/554b4903-9a06-4031-98f4-48276c427f78"),
+        ]);
 
-        const phyres = await fetch(
-          `${baseUri}/collections/all/554b4903-9a06-4031-98f4-48276c427f78`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        const nfts = await fetch(
-          `${baseUri}/phygitals/all/554b4903-9a06-4031-98f4-48276c427f78`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!res.ok || !phyres.ok || !nfts.ok) {
-          throw new Error("Failed to fetch data");
-        }
-
-        const result = await res.json();
-        const collections = await phyres.json();
-        const phynfts = await nfts.json();
-
-        // Find the corresponding brand in result
-        const matchedBrand = result.find((brand) => brand.name === brandName);
+        const matchedBrand = brands.find((brand) => brand.name === brandName);
+        console.log("matchedBrand", matchedBrand);
         if (matchedBrand) {
-          const isOwner =
+          setIsOwner(
             userAddress?.toLowerCase() ===
-            matchedBrand?.payout_address?.toLowerCase();
-          console.log(isOwner, matchedBrand, userAddress);
-          setIsOwner(isOwner);
+              matchedBrand?.payout_address?.toLowerCase()
+          );
           setBrand(matchedBrand);
-          const brandId = matchedBrand.id;
-          //  console.log("Brand Id",brandid)
 
-          // Filter collections by the brand id
-          const matchedCollections = collections.filter(
-            (collection) => collection.brand_id === brandId
+          const matchedCollections = allCollections.filter(
+            (collection) => collection.brand_id === matchedBrand.id
           );
 
-          // Extract the IDs of the matched collections
-          const matchedCollectionIds = matchedCollections.map(
-            (collection) => collection.id
+          const matchedNfts = allNfts.filter((nft) =>
+            matchedCollections.map((col) => col.id).includes(nft.collection_id)
           );
 
-          // Filter NFTs by the matched collection IDs
-          const matchedNFTs = phynfts.filter((nft) =>
-            matchedCollectionIds.includes(nft.collection_id)
-          );
-
-          setcollections(matchedCollections);
-          setnfts(matchedNFTs);
-          setloading(false);
+          setCollections(matchedCollections);
+          setNfts(matchedNfts);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
-        setloading(false);
+        console.error("Error fetching brand data:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
-    brandmatch();
-  }, []);
+    fetchBrandData();
+  }, [brandName, userAddress]);
 
   const handleShare = async () => {
     if (!brand) return;
 
-    // Construct the image URL
     const imageUrl = `https://nftstorage.link/ipfs/${brand.cover_image?.slice(
       7
     )}`;
-
-    // Create a formatted text with all the information
     const shareText = `${brand.name}\n\n${brand.description}\n\nView more at: ${window.location.href}`;
 
     try {
       await navigator.clipboard.writeText(shareText);
-      toast.success("Brand details copied to clipboard!", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success("Brand details copied to clipboard!");
     } catch (error) {
       console.error("Error copying details:", error);
-      toast.error("Failed to copy brand details", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error("Failed to copy brand details");
     }
   };
-
+  console.log("brand", brand);
   return (
     <>
       <div
@@ -160,22 +98,15 @@ const Brand = ({ params }) => {
         }}
       >
         <img
+          className="block mx-auto w-screen h-[90vh] object-cover object-center"
           src={`${"https://nftstorage.link/ipfs"}/${brand?.cover_image?.slice(
             7
           )}`}
           alt={brand?.name}
-          style={{
-            display: "block",
-            marginLeft: "auto",
-            marginRight: "auto",
-            width: "100vw",
-            objectFit: "cover", // This maintains aspect ratio while covering the container
-            height: "90vh",
-            objectPosition: "center",
-          }}
         />
 
         <img
+          className="w-[350px] rounded-[20px] absolute bottom-[20px] left-[20px]"
           src={`${"https://nftstorage.link/ipfs"}/${brand?.logo_image?.slice(
             7
           )}`}
@@ -190,36 +121,20 @@ const Brand = ({ params }) => {
         />
       </div>
 
-      <div style={{ margin: "100px 100px" }}>
+      <div className="w-full" style={{ padding: "100px 100px" }}>
         <div className="flex items-start justify-between">
-          <div>
-            <div className="font-bold text-black" style={{ fontSize: "40px" }}>
-              {brand?.name}
-            </div>
+          <div className="w-full">
+            <div className="font-bold text-black text-4xl">{brand?.name}</div>
             <div className="mt-4 w-1/2">{brand?.description}</div>
           </div>
           <div>
-            <div
-              className="text-2xl flex gap-2"
-              style={{ justifyContent: "space-between" }}
-            >
+            <div className="text-2xl flex gap-2 justify-between">
               {isOwner && (
                 <Link
                   href={`https://studio.myriadflow.com/edit-brand/${params.id}`}
-                  className="border"
-                  style={{
-                    background: "#E6E6E6",
-                    border: "none",
-                    borderRadius: "30px",
-                    display: "block",
-                    width: "180px",
-                    height: "50px",
-                    textAlign: "center",
-                    color: "#000",
-                    fontWeight: 400,
-                  }}
+                  className="bg-[#E6E6E6] border-none rounded-[30px] block w-[180px] h-[50px] text-center text-black font-normal"
                 >
-                  <div style={{ marginTop: "4px" }}>Edit profile</div>
+                  <div className="mt-1">Edit profile</div>
                 </Link>
               )}
               <div
@@ -242,7 +157,7 @@ const Brand = ({ params }) => {
                   textAlign: "center",
                 }}
               >
-                <div style={{ marginTop: "4px" }}>SHARE</div>
+                <div className="mt-1">SHARE</div>
               </div>
             </div>
 
@@ -262,10 +177,11 @@ const Brand = ({ params }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
+                  <Image
                     src="/website.png"
-                    style={{ height: "30px", width: "30px" }}
                     alt="Website"
+                    height={30}
+                    width={30}
                   />
                 </a>
               )}
@@ -275,11 +191,7 @@ const Brand = ({ params }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
-                    src="/x.png"
-                    style={{ height: "30px", width: "30px" }}
-                    alt="Website"
-                  />
+                  <Image src="/x.png" alt="Twitter" height={30} width={30} />
                 </a>
               )}
               {brand?.instagram && (
@@ -288,10 +200,11 @@ const Brand = ({ params }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
+                  <Image
                     src="/insta.png"
-                    style={{ height: "30px", width: "30px" }}
-                    alt="Website"
+                    alt="Instagram"
+                    height={30}
+                    width={30}
                   />
                 </a>
               )}
@@ -301,10 +214,11 @@ const Brand = ({ params }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
+                  <Image
                     src="/facebook.png"
-                    style={{ height: "30px", width: "30px" }}
-                    alt="Website"
+                    alt="Facebook"
+                    height={30}
+                    width={30}
                   />
                 </a>
               )}
@@ -314,10 +228,11 @@ const Brand = ({ params }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img
+                  <Image
                     src="/discord.png"
-                    style={{ height: "30px", width: "30px" }}
-                    alt="Website"
+                    alt="Discord"
+                    height={30}
+                    width={30}
                   />
                 </a>
               )}
@@ -328,10 +243,11 @@ const Brand = ({ params }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
+                    <Image
                       src="/whatsapp.png"
-                      style={{ height: "30px", width: "30px" }}
                       alt="WhatsApp"
+                      height={30}
+                      width={30}
                     />
                   </a>
                 )}
@@ -342,10 +258,11 @@ const Brand = ({ params }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
+                    <Image
                       src="/youtube.png"
-                      style={{ height: "30px", width: "30px" }}
-                      alt="WhatsApp"
+                      alt="YouTube"
+                      height={30}
+                      width={30}
                     />
                   </a>
                 )}
@@ -356,10 +273,11 @@ const Brand = ({ params }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
+                    <Image
                       src="/telegram.png"
-                      style={{ height: "30px", width: "30px" }}
-                      alt="WhatsApp"
+                      alt="Telegram"
+                      height={30}
+                      width={30}
                     />
                   </a>
                 )}
@@ -370,28 +288,31 @@ const Brand = ({ params }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
+                    <Image
                       src="/linkedin.png"
-                      style={{ height: "30px", width: "30px" }}
-                      alt="WhatsApp"
+                      alt="LinkedIn"
+                      height={30}
+                      width={30}
                     />
                   </a>
                 )}
               {brand?.additional_link && brand.additional_link === "google" && (
                 <a href={brand.link} target="_blank" rel="noopener noreferrer">
-                  <img
+                  <Image
                     src="/google.png"
-                    style={{ height: "30px", width: "30px" }}
-                    alt="WhatsApp"
+                    alt="Google"
+                    height={30}
+                    width={30}
                   />
                 </a>
               )}
               {brand?.additional_link && brand.additional_link === "tiktok" && (
                 <a href={brand.link} target="_blank" rel="noopener noreferrer">
-                  <img
+                  <Image
                     src="/tiktok.png"
-                    style={{ height: "30px", width: "30px" }}
-                    alt="WhatsApp"
+                    alt="TikTok"
+                    height={30}
+                    width={30}
                   />
                 </a>
               )}
@@ -402,10 +323,11 @@ const Brand = ({ params }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
+                    <Image
                       src="/snapchat.png"
-                      style={{ height: "30px", width: "30px" }}
-                      alt="WhatsApp"
+                      alt="Snapchat Icon"
+                      height={30}
+                      width={30}
                     />
                   </a>
                 )}
@@ -416,10 +338,11 @@ const Brand = ({ params }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img
+                    <Image
                       src="/pinterest.png"
-                      style={{ height: "30px", width: "30px" }}
                       alt="WhatsApp"
+                      height={30}
+                      width={30}
                     />
                   </a>
                 )}
@@ -458,54 +381,7 @@ const Brand = ({ params }) => {
         <Footer />
       </div>
 
-      {loading && (
-        <div
-          style={{
-            // backgroundColor: "#222944E5",
-            display: "flex",
-            overflowY: "auto",
-            overflowX: "hidden",
-            position: "fixed",
-            inset: 0,
-            zIndex: 50,
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            maxHeight: "100%",
-          }}
-          id="popupmodal"
-        >
-          <div
-            style={{
-              position: "relative",
-              padding: "1rem",
-              width: "100%",
-              maxHeight: "100%",
-            }}
-          >
-            <div
-              style={{
-                position: "relative",
-                borderRadius: "0.5rem",
-                boxShadow: "0 1px 3px rgba(0, 0, 0, 0.1)",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  gap: "1rem",
-                }}
-              >
-                <img
-                  src="https://i.pinimg.com/originals/36/3c/2e/363c2ec45f7668e82807a0c053d1e1d0.gif"
-                  alt="Loading icon"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <LoaderAnimated loading={loading} />
     </>
   );
 };

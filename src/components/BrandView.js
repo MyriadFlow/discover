@@ -5,7 +5,6 @@ import { useAccount } from "wagmi";
 import MostLovedCard from "../mostLovedCard";
 import HotNftCard from "../hotNftCard";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const BrandView = ({ params, onEdit }) => {
   const brandName = params?.id

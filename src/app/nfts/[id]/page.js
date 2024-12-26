@@ -4,7 +4,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { Avatar } from "@readyplayerme/visage";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { ethers } from "ethers";
 import { abi } from "../../../components/abi/abi";
 import { useAccount, useChainId } from "wagmi";
