@@ -191,7 +191,7 @@ const Brand = ({ params }) => {
       </div>
 
       <div style={{ margin: "100px 100px" }}>
-        <div className="flex items-start flex-justify">
+        <div className="flex items-start justify-between">
           <div>
             <div className="font-bold text-black" style={{ fontSize: "40px" }}>
               {brand?.name}
